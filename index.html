@@ -5,116 +5,663 @@
   <title>Tyler Nicholas Group | Digital Holdings Group</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Tyler Nicholas Group is a digital holdings group building, owning, and operating a portfolio of online businesses across gaming, e-commerce, and foundations.">
-  <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #05060a;
+      --bg-alt: #0d1016;
+      --card: #10131b;
+      --accent: #2f7cff;
+      --accent-soft: rgba(47, 124, 255, 0.16);
+      --border-subtle: #1c2230;
+      --text: #f6f7fb;
+      --text-soft: #a5afc5;
+      --text-muted: #7b8498;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 24px 40px rgba(0, 0, 0, 0.35);
+      --shadow-subtle: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    * , *::before, *::after { box-sizing: border-box; }
+
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #141a2b 0, #05060a 55%);
+      color: var(--text);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section { padding: 4.5rem 0; }
+
+    .section-alt {
+      padding: 4.5rem 0;
+      background: radial-gradient(circle at top left, #131a28 0, #05060a 60%);
+    }
+
+    .section-header { margin-bottom: 2.5rem; }
+
+    .section-header h2 {
+      font-size: 2rem;
+      margin: 0 0 0.5rem;
+    }
+
+    .section-header p {
+      color: var(--text-soft);
+      max-width: 540px;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(5, 6, 10, 0.96), rgba(5, 6, 10, 0.88));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .logo-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), #7b5cff);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .logo-text {
+      font-weight: 600;
+      font-size: 0.98rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #e6ecff;
+    }
+
+    .site-nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .site-nav a {
+      text-decoration: none;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.18s ease, opacity 0.18s ease;
+    }
+
+    .site-nav a:hover { color: #ffffff; }
+
+    .nav-cta {
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: linear-gradient(135deg, rgba(47, 124, 255, 0.25), rgba(123, 92, 255, 0.25));
+      color: #f8f9ff;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      margin: 4px 0;
+      border-radius: 999px;
+      background: #e6ecff;
+    }
+
+    .hero {
+      padding: 4.5rem 0 3.5rem;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: 2.6rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 3vw, 2.9rem);
+      line-height: 1.15;
+      margin: 0 0 1rem;
+    }
+
+    .hero-subtitle {
+      color: var(--text-soft);
+      max-width: 540px;
+    }
+
+    .hero-actions {
+      margin-top: 1.8rem;
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-panel {
+      background: radial-gradient(circle at top, #283352 0, #111522 55%, #070910 100%);
+      border-radius: 26px;
+      padding: 1.6rem 1.6rem 1.4rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-stat-card {
+      border-radius: 18px;
+      padding: 1rem 1.1rem;
+      background: linear-gradient(135deg, rgba(47, 124, 255, 0.18), rgba(7, 9, 16, 0.9));
+      border: 1px solid rgba(123, 92, 255, 0.6);
+      margin-bottom: 1.2rem;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.17em;
+      color: #d6e2ff;
+      opacity: 0.9;
+    }
+
+    .stat-value {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin: 0.3rem 0;
+    }
+
+    .stat-note {
+      font-size: 0.88rem;
+      color: #dde5ff;
+    }
+
+    .hero-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .hero-mini-card {
+      border-radius: 14px;
+      padding: 0.7rem 0.8rem;
+      background: rgba(5, 7, 13, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .mini-label {
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .mini-value {
+      font-size: 0.92rem;
+      font-weight: 500;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1.4rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), #7b5cff);
+      color: #fff;
+      box-shadow: 0 16px 30px rgba(20, 70, 180, 0.55);
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 38px rgba(21, 72, 186, 0.7);
+    }
+
+    .btn.ghost {
+      background: rgba(7, 9, 16, 0.9);
+      border-color: rgba(255, 255, 255, 0.09);
+      color: var(--text-soft);
+    }
+
+    .btn.ghost:hover {
+      background: rgba(11, 15, 24, 0.95);
+      color: #ffffff;
+    }
+
+    .btn.full-width { width: 100%; }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.6rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius-xl);
+      padding: 1.3rem 1.4rem;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .card-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.18rem 0.7rem;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      border: 1px solid rgba(47, 124, 255, 0.5);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #d0deff;
+    }
+
+    .meta-list {
+      list-style: none;
+      margin: 0.8rem 0 0;
+      padding: 0;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .meta-list li { margin-bottom: 0.25rem; }
+
+    .meta-list span {
+      font-weight: 500;
+      color: #c2c9dd;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 2.4rem;
+      align-items: flex-start;
+    }
+
+    .highlight-column {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .highlight-item {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .highlight-item h4 {
+      margin: 0 0 0.4rem;
+      font-size: 0.98rem;
+    }
+
+    .highlight-item p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .pipeline-note {
+      margin-top: 1.7rem;
+      padding: 1rem 1.1rem;
+      border-radius: 16px;
+      border: 1px dashed rgba(255, 255, 255, 0.18);
+      background: rgba(5, 8, 16, 0.92);
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .site-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 1.8rem 0 2.2rem;
+      background: rgba(3, 5, 10, 0.98);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .footer-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.16s ease;
+    }
+
+    .footer-link:hover { color: #ffffff; }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.9rem;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .social-pill {
+      padding: 0.2rem 0.7rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      text-decoration: none;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    .social-pill:hover {
+      border-color: rgba(255, 255, 255, 0.17);
+      color: #ffffff;
+    }
+
+    .footer-copy { margin: 0; }
+
+    .cookie-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(20, 26, 46, 0.96), rgba(5, 6, 10, 0.98));
+      backdrop-filter: blur(18px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .cookie-overlay.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cookie-dialog {
+      max-width: 680px;
+      width: 100%;
+      background: #060814;
+      border-radius: 26px;
+      padding: 1.8rem 1.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+    }
+
+    .cookie-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .cookie-header h2 {
+      margin: 0;
+      font-size: 1.3rem;
+    }
+
+    .cookie-close {
+      border: none;
+      background: transparent;
+      color: #ffffff;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    .cookie-text {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: var(--text-soft);
+      font-size: 0.92rem;
+    }
+
+    .cookie-toggle-group {
+      margin-bottom: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .cookie-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.7rem 0.8rem;
+      border-radius: 18px;
+      background: rgba(10, 13, 24, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .cookie-toggle strong {
+      display: block;
+      font-size: 0.9rem;
+    }
+
+    .cookie-toggle p {
+      margin: 0.15rem 0 0;
+      font-size: 0.86rem;
+      color: var(--text-soft);
+    }
+
+    .badge {
+      padding: 0.15rem 0.6rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #dde5ff;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 20px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: #394055;
+      transition: 0.2s;
+      border-radius: 999px;
+    }
+
+    .slider::before {
+      position: absolute;
+      content: "";
+      height: 14px;
+      width: 14px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.2s;
+      border-radius: 50%;
+    }
+
+    .switch input:checked + .slider { background: var(--accent); }
+
+    .switch input:checked + .slider::before {
+      transform: translateX(18px);
+    }
+
+    .cookie-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .cookie-btn { flex: 1; }
+
+    .cookie-link-text {
+      margin: 0;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .cookie-link-text a { color: #d0deff; }
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    [data-reveal].revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner,
+      .split {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-panel {
+        order: -1;
+      }
+
+      .grid-3 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .site-nav {
+        position: absolute;
+        top: 56px;
+        right: 0;
+        left: 0;
+        background: rgba(5, 6, 10, 0.98);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        transform: translateY(-130%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+
+      .site-nav.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .site-nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.9rem 1.5rem 1.2rem;
+        gap: 0.8rem;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .cookie-dialog {
+        padding: 1.4rem 1.3rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- header/nav/footer/cookie -->
-  <!-- copy the shared HEADER + FOOTER + COOKIE block here --><!-- HEADER -->
-<header class="site-header">
-  <div class="container header-inner">
-    <div class="logo">
-      <span class="logo-mark">TN</span>
-      <span class="logo-text">Tyler Nicholas Group</span>
-    </div>
-
-    <button class="nav-toggle" aria-label="Toggle navigation">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav class="site-nav">
-      <ul>
-        <li><a href="index.html">Main</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="foundations.html">Our Foundations</a></li>
-        <li><a href="tyler.html">Who is Tyler Nicholas</a></li>
-        <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <div class="footer-links">
-      <div class="footer-col">
-        <a href="terms.html" class="footer-link">Web Terms Of Use</a>
-        <a href="privacy.html" class="footer-link">Web Privacy Policy</a>
-        <a href="cookies.html" class="footer-link">Web Cookie Policy</a>
-      </div>
-      <div class="footer-col">
-        <a href="slavery.html" class="footer-link">TNG Slavery Statement (Employee Rights)</a>
-        <a href="governance.html" class="footer-link">TNG Corporate Governance</a>
-        <a href="faq.html" class="footer-link">TNG Frequently Asked Questions</a>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="social-links">
-        <a href="https://www.instagram.com/tylernicholasgroup/" class="social-pill" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://x.com/tyler_n_group" class="social-pill" target="_blank" rel="noopener">X</a>
-        <a href="https://www.youtube.com/@TylerNicholasGroup" class="social-pill" target="_blank" rel="noopener">YouTube</a>
-        <a href="https://www.linkedin.com/company/tyler-nicholas-group/" class="social-pill" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
-      <div>
-        <p class="footer-copy">© 2025 Tyler Nicholas Group</p>
-        <p class="footer-copy">Email: <a href="mailto:tylernicholasgroup@gmail.com" class="footer-link">tylernicholasgroup@gmail.com</a></p>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<!-- COOKIE CONSENT OVERLAY -->
-<div class="cookie-overlay" id="cookieOverlay" aria-hidden="true">
-  <div class="cookie-dialog">
-    <div class="cookie-header">
-      <h2>Cookie & Privacy Preferences</h2>
-      <button class="cookie-close" aria-label="Close cookie banner">&times;</button>
-    </div>
-    <p class="cookie-text">
-      Tyler Nicholas Group uses cookies and similar technologies to operate this
-      website, understand usage, and improve the online experience. Some cookies
-      are essential, while others are optional and help us enhance performance and
-      analytics.
-    </p>
-
-    <div class="cookie-toggle-group">
-      <div class="cookie-toggle">
-        <div>
-          <strong>Essential Cookies</strong>
-          <p>Required for core site functionality. These cannot be disabled.</p>
-        </div>
-        <span class="badge">Always On</span>
-      </div>
-      <div class="cookie-toggle">
-        <div>
-          <strong>Performance & Analytics</strong>
-          <p>Help us understand how visitors use the site so we can improve it.</p>
-        </div>
-        <label class="switch">
-          <input type="checkbox" id="analyticsToggle" checked>
-          <span class="slider"></span>
-        </label>
-      </div>
-    </div>
-
-    <div class="cookie-actions">
-      <button class="btn ghost cookie-btn" id="cookieReject">Reject Non-Essential</button>
-      <button class="btn primary cookie-btn" id="cookieAccept">Accept All Cookies</button>
-    </div>
-
-    <p class="cookie-link-text">
-      For more information, please review our
-      <a href="privacy.html">Web Privacy Policy</a> and <a href="cookies.html">Web Cookie Policy</a>.
-    </p>
-  </div>
-</div>
-
-  <!-- START HEADER -->
+  <!-- HEADER -->
   <header class="site-header">
     <div class="container header-inner">
       <div class="logo">
@@ -137,7 +684,6 @@
       </nav>
     </div>
   </header>
-  <!-- END HEADER -->
 
   <main>
     <!-- HERO -->
@@ -186,7 +732,7 @@
       </div>
     </section>
 
-    <!-- QUICK OVERVIEW -->
+    <!-- OVERVIEW -->
     <section class="section section-alt" data-reveal>
       <div class="container split">
         <div>
@@ -209,27 +755,27 @@
             <h4>Professional Structure</h4>
             <p>
               The group is designed to operate like a corporate-grade parent company,
-              even at an early stage, with clear naming, responsibilities, and standards.
+              with clear roles, naming, and standards for each business.
             </p>
           </div>
           <div class="highlight-item">
             <h4>Future-Ready</h4>
             <p>
-              TNG is built for scale, with space for dozens of online businesses and
-              initiatives under one unified identity.
+              TNG is built to support dozens of online businesses and initiatives
+              under one unified identity over time.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SNAPSHOT OF KEY AREAS -->
+    <!-- KEY AREAS -->
     <section class="section" data-reveal>
       <div class="container">
         <div class="section-header">
           <h2>Key Areas Within the Group</h2>
           <p>
-            While TNG will expand over time, three core pillars define the group at this stage.
+            Three core pillars define the current portfolio, with additional initiatives planned.
           </p>
         </div>
 
@@ -238,33 +784,40 @@
             <div class="card-tag">Gaming & Virtual Ecosystems</div>
             <h3>Roblox Ventures</h3>
             <p>
-              Building structured, aviation-inspired experiences and future venture-style
-              support for Roblox creators.
+              Building aviation-inspired Roblox experiences and future venture-style
+              support for creators within the Roblox ecosystem.
             </p>
           </article>
           <article class="card" data-reveal>
             <div class="card-tag">E-commerce</div>
             <h3>Digital Commerce Brands</h3>
             <p>
-              AlignX and future online stores, focused on clean experiences and long-term,
-              brand-driven growth.
+              Stores such as AlignX, and future online brands, focused on clean
+              experiences and long-term brand-driven growth.
             </p>
           </article>
           <article class="card" data-reveal>
             <div class="card-tag">Foundations</div>
             <h3>Purpose-Led Initiatives</h3>
             <p>
-              The Nicholas Foundation Seychelles and a future Roblox venture foundation,
-              aligning business success with social impact.
+              The Nicholas Foundation Seychelles and a future Roblox venture foundation
+              align commercial success with community and social impact.
             </p>
           </article>
         </div>
+
+        <div class="pipeline-note">
+          <p>
+            <strong>Portfolio Vision:</strong> Tyler Nicholas Group is structured to gradually
+            expand into a multi-company digital portfolio, while maintaining professional
+            standards and governance at the group level.
+          </p>
+        </div>
       </div>
     </section>
-
   </main>
 
-  <!-- FOOTER + COOKIE OVERLAY -->
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-links">
@@ -289,7 +842,12 @@
         </div>
         <div>
           <p class="footer-copy">© 2025 Tyler Nicholas Group</p>
-          <p class="footer-copy">Email: <a href="mailto:tylernicholasgroup@gmail.com" class="footer-link">tylernicholasgroup@gmail.com</a></p>
+          <p class="footer-copy">
+            Email:
+            <a href="mailto:tylernicholasgroup@gmail.com" class="footer-link">
+              tylernicholasgroup@gmail.com
+            </a>
+          </p>
         </div>
       </div>
     </div>
@@ -341,6 +899,169 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.site-nav');
+
+    if (navToggle && nav) {
+      navToggle.addEventListener('click', () => {
+        nav.classList.toggle('open');
+      });
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const targetId = link.getAttribute('href').slice(1);
+        if (!targetId) return;
+        const target = document.getElementById(targetId);
+        if (!target) return;
+
+        e.preventDefault();
+        const headerOffset = 70;
+        const elementPosition = target.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+
+        nav.classList.remove('open');
+      });
+    });
+
+    const revealEls = document.querySelectorAll('[data-reveal]');
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      revealEls.forEach(el => revealObserver.observe(el));
+    } else {
+      revealEls.forEach(el => el.classList.add('revealed'));
+    }
+
+    const counters = document.querySelectorAll('[data-counter]');
+    if (counters.length) {
+      const runCounter = counter => {
+        const target = parseInt(counter.getAttribute('data-target'), 10) || 0;
+        let current = 0;
+        const duration = 800;
+        const start = performance.now();
+
+        const tick = now => {
+          const progress = Math.min((now - start) / duration, 1);
+          current = Math.floor(progress * target);
+          counter.textContent = current;
+          if (progress < 1) requestAnimationFrame(tick);
+          else counter.textContent = target;
+        };
+        requestAnimationFrame(tick);
+      };
+
+      const counterObserver = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              runCounter(entry.target);
+              counterObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.6 }
+      );
+
+      counters.forEach(c => counterObserver.observe(c));
+    }
+
+    const cookieOverlay = document.getElementById('cookieOverlay');
+    const btnAccept = document.getElementById('cookieAccept');
+    const btnReject = document.getElementById('cookieReject');
+    const btnClose = document.querySelector('.cookie-close');
+    const analyticsToggle = document.getElementById('analyticsToggle');
+
+    const COOKIE_KEY = 'tng_cookie_preferences';
+
+    function showCookieOverlay() {
+      if (!cookieOverlay) return;
+      cookieOverlay.classList.add('visible');
+      cookieOverlay.setAttribute('aria-hidden', 'false');
+    }
+
+    function hideCookieOverlay() {
+      if (!cookieOverlay) return;
+      cookieOverlay.classList.remove('visible');
+      cookieOverlay.setAttribute('aria-hidden', 'true');
+    }
+
+    function saveCookiePrefs(prefs) {
+      try {
+        localStorage.setItem(COOKIE_KEY, JSON.stringify(prefs));
+      } catch (_) {}
+    }
+
+    function getCookiePrefs() {
+      try {
+        const data = localStorage.getItem(COOKIE_KEY);
+        return data ? JSON.parse(data) : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    const existingPrefs = getCookiePrefs();
+    if (!existingPrefs) {
+      showCookieOverlay();
+    } else {
+      if (analyticsToggle && typeof existingPrefs.analytics === 'boolean') {
+        analyticsToggle.checked = existingPrefs.analytics;
+      }
+    }
+
+    if (btnAccept) {
+      btnAccept.addEventListener('click', () => {
+        const prefs = {
+          essential: true,
+          analytics: analyticsToggle ? analyticsToggle.checked : true,
+          timestamp: new Date().toISOString()
+        };
+        saveCookiePrefs(prefs);
+        hideCookieOverlay();
+      });
+    }
+
+    if (btnReject) {
+      btnReject.addEventListener('click', () => {
+        const prefs = {
+          essential: true,
+          analytics: false,
+          timestamp: new Date().toISOString()
+        };
+        if (analyticsToggle) analyticsToggle.checked = false;
+        saveCookiePrefs(prefs);
+        hideCookieOverlay();
+      });
+    }
+
+    if (btnClose) {
+      btnClose.addEventListener('click', () => {
+        const prefs = {
+          essential: true,
+          analytics: false,
+          timestamp: new Date().toISOString()
+        };
+        if (analyticsToggle) analyticsToggle.checked = false;
+        saveCookiePrefs(prefs);
+        hideCookieOverlay();
+      });
+    }
+  </script>
 </body>
 </html>
