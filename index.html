@@ -4,31 +4,33 @@
   <meta charset="UTF-8">
   <title>Tyler Nicholas Group | Digital Holdings Group</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Tyler Nicholas Group is a digital holdings group building, owning, and operating a portfolio of online businesses across gaming, e-commerce, and foundations.">
+  <meta name="description" content="Tyler Nicholas Group is a modern digital holdings group building and overseeing online businesses across gaming, e-commerce and foundations.">
+  <!-- Favicon using your logo -->
+  <link rel="icon" type="image/png" href="/image/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #ffffff;
-      --bg-alt: #f5f5f7;
-      --brand: #e30613; /* Virgin-style red */
-      --brand-dark: #b00410;
-      --text: #111111;
-      --text-soft: #4b4b55;
-      --border-subtle: #dddddf;
-      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.08);
-      --radius-lg: 18px;
-      --radius-pill: 999px;
+    :root{
+      --brand:#e30613;
+      --brand-dark:#b00410;
+      --bg:#ffffff;
+      --bg-soft:#fff5f5;
+      --text:#111111;
+      --text-soft:#4b4b55;
+      --border:#e2e2e6;
+      --radius-lg:20px;
+      --radius-pill:999px;
+      --shadow-soft:0 18px 40px rgba(0,0,0,0.08);
     }
-
-    *,:before,:after{box-sizing:border-box;}
+    *,*::before,*::after{box-sizing:border-box;}
     html,body{margin:0;padding:0;}
     body{
       font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
       background:var(--bg);
       color:var(--text);
       line-height:1.6;
+      scroll-behavior:smooth;
     }
     img{max-width:100%;display:block;}
 
@@ -39,61 +41,84 @@
       padding:0 1.5rem;
     }
 
+    /* Header / nav */
+
     .site-header{
       position:sticky;
       top:0;
-      z-index:50;
-      background:#ffffffeb;
+      z-index:40;
+      background:#ffffffee;
       backdrop-filter:blur(18px);
-      border-bottom:1px solid #eee;
+      border-bottom:1px solid #f0f0f2;
     }
-    .header-inner{
+    .header-top{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:0.85rem 0;
+      padding:0.7rem 0;
     }
-    .logo{
+    .menu-toggle{
       display:flex;
       align-items:center;
-      gap:0.55rem;
-    }
-    .logo-mark{
-      width:34px;
-      height:34px;
-      border-radius:14px;
-      background:var(--brand);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#fff;
-      font-weight:700;
-      font-size:0.95rem;
-      box-shadow:0 10px 22px rgba(227,6,19,0.45);
-    }
-    .logo-text{
-      font-weight:700;
-      font-size:1.02rem;
-      letter-spacing:0.06em;
+      gap:0.4rem;
+      border:none;
+      background:transparent;
+      color:var(--brand);
+      font-size:0.86rem;
+      letter-spacing:0.16em;
       text-transform:uppercase;
+      cursor:pointer;
     }
-    .site-nav ul{
-      list-style:none;
+    .menu-toggle span.bar{
+      display:block;
+      width:18px;
+      height:2px;
+      background:var(--brand);
+      border-radius:999px;
+      position:relative;
+    }
+    .menu-toggle span.bar::before,
+    .menu-toggle span.bar::after{
+      content:"";
+      position:absolute;
+      left:0;
+      width:100%;
+      height:2px;
+      background:var(--brand);
+      border-radius:999px;
+    }
+    .menu-toggle span.bar::before{top:-5px;}
+    .menu-toggle span.bar::after{top:5px;}
+
+    .logo-center{
       display:flex;
-      align-items:center;
-      gap:1.7rem;
-      margin:0;
-      padding:0;
+      justify-content:center;
+      flex:1;
     }
-    .site-nav a{
+    .logo-center img{
+      height:36px;
+      width:auto;
+    }
+
+    .header-nav{
+      border-top:1px solid #f0f0f2;
+    }
+    .nav-inner{
+      display:flex;
+      justify-content:center;
+      gap:2.5rem;
+      padding:0.55rem 0;
+    }
+    .nav-link{
       text-decoration:none;
       color:var(--text-soft);
-      font-size:0.9rem;
-      font-weight:500;
+      font-size:0.86rem;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
       position:relative;
-      padding-bottom:0.15rem;
+      padding-bottom:0.2rem;
     }
-    .site-nav a::after{
+    .nav-link::after{
       content:"";
       position:absolute;
       left:0;
@@ -103,93 +128,119 @@
       background:var(--brand);
       transition:width .2s ease;
     }
-    .site-nav a:hover::after{
+    .nav-link:hover::after{
       width:100%;
     }
-    .nav-cta{
-      padding:0.45rem 1rem;
-      border-radius:var(--radius-pill);
-      border:1px solid var(--brand);
-      color:var(--brand);
+
+    .nav-right-placeholder{
+      width:80px;
+      height:1px;
     }
 
-    .nav-toggle{
+    /* Mobile nav (simple overlay listing links) */
+
+    .mobile-nav{
+      position:fixed;
+      inset:0;
+      background:#ffffff;
+      padding:1.5rem;
+      z-index:50;
       display:none;
-      background:transparent;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .mobile-nav.open{display:flex;}
+    .mobile-nav-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:1.5rem;
+    }
+    .mobile-nav-header img{
+      height:32px;
+    }
+    .mobile-close{
       border:none;
-      padding:0;
+      background:transparent;
+      font-size:1.6rem;
       cursor:pointer;
     }
-    .nav-toggle span{
-      display:block;
-      width:20px;
-      height:2px;
-      margin:4px 0;
-      border-radius:999px;
-      background:#111;
+    .mobile-nav-links{
+      display:flex;
+      flex-direction:column;
+      gap:0.9rem;
+      margin-top:1rem;
+    }
+    .mobile-nav-links a{
+      text-decoration:none;
+      color:var(--text);
+      font-size:1rem;
+      font-weight:500;
     }
 
+    /* Hero */
+
     .hero{
-      padding:4.5rem 0 3.5rem;
-      background:linear-gradient(135deg,#ffffff 0,#fff5f5 30%,#ffecef 100%);
+      background:linear-gradient(135deg,var(--bg) 0,var(--bg-soft) 55%,#ffe5ea 100%);
+      padding:3.5rem 0 3rem;
     }
     .hero-inner{
       display:grid;
-      grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
-      gap:2.6rem;
+      grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+      gap:2.7rem;
       align-items:center;
     }
-    .eyebrow{
-      font-size:0.78rem;
+    .hero-eyebrow{
+      font-size:0.8rem;
       letter-spacing:0.18em;
       text-transform:uppercase;
       color:var(--brand);
       font-weight:600;
-      margin-bottom:0.8rem;
+      margin-bottom:0.7rem;
     }
     .hero-title{
-      font-size:clamp(2.3rem,3vw,3rem);
-      line-height:1.07;
-      margin:0 0 1.1rem;
+      font-size:clamp(2.4rem,3vw,3.1rem);
+      line-height:1.05;
+      margin:0 0 1rem;
     }
-    .hero-subtitle{
+    .hero-text{
       color:var(--text-soft);
-      max-width:520px;
+      max-width:540px;
+      margin-bottom:1.5rem;
     }
     .hero-actions{
-      margin-top:1.8rem;
       display:flex;
-      flex-wrap:wrap;
       gap:0.9rem;
+      flex-wrap:wrap;
     }
 
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:0.75rem 1.5rem;
       border-radius:var(--radius-pill);
+      padding:0.8rem 1.6rem;
       font-size:0.9rem;
       font-weight:600;
       border:1px solid transparent;
       text-decoration:none;
       cursor:pointer;
-      transition:transform .15s ease,box-shadow .15s ease,background .15s ease,border-color .15s ease,color .15s ease;
+      transition:background .15s ease,color .15s ease,box-shadow .15s ease,transform .15s ease,border-color .15s ease;
       white-space:nowrap;
     }
     .btn-primary{
       background:var(--brand);
       color:#fff;
-      box-shadow:0 16px 26px rgba(227,6,19,0.35);
+      box-shadow:0 14px 30px rgba(227,6,19,0.3);
     }
     .btn-primary:hover{
       background:var(--brand-dark);
       transform:translateY(-1px);
-      box-shadow:0 20px 32px rgba(176,4,16,0.45);
+      box-shadow:0 18px 36px rgba(176,4,16,0.4);
     }
     .btn-ghost{
       background:#fff;
-      border-color:#ddd;
+      border-color:#dddddf;
       color:var(--text-soft);
     }
     .btn-ghost:hover{
@@ -197,184 +248,253 @@
       color:var(--brand);
     }
 
-    .hero-panel{
+    .hero-right-visual{
       background:#fff;
       border-radius:24px;
+      border:1px solid #f0cdd4;
+      padding:1.4rem 1.6rem;
       box-shadow:var(--shadow-soft);
-      padding:1.6rem 1.6rem 1.3rem;
-      border:1px solid #f2f2f5;
     }
-    .hero-stat-card{
-      border-radius:18px;
-      padding:1rem 1.1rem;
-      background:linear-gradient(135deg,#ffe6ea,#ffffff);
-      border:1px solid #ffd0d9;
-      margin-bottom:1.2rem;
+    .hero-right-title{
+      font-size:1.05rem;
+      font-weight:600;
+      margin:0 0 0.4rem;
     }
-    .stat-label{
-      font-size:0.78rem;
-      text-transform:uppercase;
-      letter-spacing:0.16em;
-      color:#8a1a26;
-      margin-bottom:0.3rem;
-    }
-    .stat-value{
-      font-size:1.7rem;
-      font-weight:700;
-      margin:0;
-    }
-    .stat-note{
-      margin:0.25rem 0 0;
+    .hero-right-text{
       font-size:0.9rem;
       color:var(--text-soft);
+      margin:0 0 0.9rem;
     }
-    .hero-stat-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:0.75rem;
+    .hero-right-tag{
+      display:inline-block;
+      font-size:0.72rem;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:#8d1b25;
+      background:#ffe4ea;
+      padding:0.15rem 0.6rem;
+      border-radius:var(--radius-pill);
+      margin-bottom:0.4rem;
     }
-    .hero-mini-card{
-      border-radius:14px;
-      padding:0.7rem 0.8rem;
-      border:1px solid #eee;
+
+    /* Horizontal info banner (Current focus, etc.) */
+
+    .info-banner{
+      border-top:1px solid #f0cdd4;
+      border-bottom:1px solid #f0cdd4;
       background:#fff;
-      font-size:0.85rem;
     }
-    .mini-label{
+    .info-banner-inner{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      gap:1.5rem;
+      padding:1rem 1.5rem;
+      font-size:0.86rem;
+    }
+    .info-item{
+      min-width:130px;
+    }
+    .info-label{
       display:block;
       text-transform:uppercase;
       letter-spacing:0.16em;
-      font-size:0.68rem;
+      font-size:0.7rem;
       color:#999;
-      margin-bottom:0.2rem;
+      margin-bottom:0.15rem;
     }
-    .mini-value{
+    .info-value{
       font-weight:600;
       color:#222;
     }
 
+    /* Section base */
+
     .section{
-      padding:4rem 0;
-      background:#fff;
+      padding:3.5rem 0;
     }
-    .section-alt{
-      padding:4rem 0;
-      background:var(--bg-alt);
+    .section-soft{
+      background:#fff7f7;
+    }
+    .section-header{
+      text-align:center;
+      margin-bottom:2.3rem;
+    }
+    .section-title{
+      font-size:2rem;
+      margin:0 0 0.4rem;
+    }
+    .section-title span.dot{
+      color:var(--brand);
+    }
+    .section-subtitle{
+      margin:0;
+      color:var(--text-soft);
+      font-size:0.95rem;
     }
 
-    .grid-3{
+    /* “See what we’re made of” cards */
+
+    .companies-grid{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
       gap:1.6rem;
     }
-    .card{
+    .company-card{
       background:#fff;
-      border-radius:20px;
-      border:1px solid #eee;
-      padding:1.4rem 1.5rem;
-      box-shadow:0 10px 24px rgba(0,0,0,0.04);
+      border-radius:var(--radius-lg);
+      border:1px solid #f1d3d8;
+      padding:2rem 1.6rem 1.6rem;
+      box-shadow:0 14px 36px rgba(0,0,0,0.04);
+      text-align:center;
     }
-    .card-tag{
-      display:inline-flex;
-      padding:0.18rem 0.7rem;
-      border-radius:var(--radius-pill);
-      background:#ffe6ea;
-      color:#a01722;
-      font-size:0.72rem;
-      letter-spacing:0.13em;
-      text-transform:uppercase;
-      margin-bottom:0.4rem;
+    .company-logo-circle{
+      width:90px;
+      height:90px;
+      border-radius:50%;
+      border:2px solid var(--brand);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin:0 auto 1.1rem;
+      font-size:0.9rem;
+      color:var(--brand);
+      font-weight:600;
     }
-    .card h3{
-      margin:0 0 0.3rem;
+    .company-name{
+      margin:0 0 0.4rem;
+      font-weight:600;
+      font-size:1.05rem;
     }
-    .card p{
-      margin:0.2rem 0;
-      font-size:0.92rem;
-      color:var(--text-soft);
-    }
-
-    .split{
-      display:grid;
-      grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
-      gap:2.4rem;
-      align-items:flex-start;
-    }
-    .highlight-column{
-      display:grid;
-      gap:1rem;
-    }
-    .highlight-item{
-      border-radius:18px;
-      border:1px solid #eee;
-      background:#fff;
-      padding:1rem 1.1rem;
+    .company-desc{
+      margin:0 0 0.9rem;
       font-size:0.9rem;
       color:var(--text-soft);
     }
-    .highlight-item h4{
-      margin:0 0 0.25rem;
-      font-size:0.98rem;
-      color:#222;
+    .company-link{
+      display:inline-flex;
+      align-items:center;
+      gap:0.25rem;
+      font-size:0.86rem;
+      text-decoration:none;
+      color:var(--brand);
+      font-weight:500;
+    }
+    .company-link span.arrow{
+      font-size:1rem;
     }
 
+    .slider-dots{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:0.3rem;
+      margin-top:1.4rem;
+    }
+    .slider-dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      border:1px solid var(--brand);
+      background:transparent;
+    }
+    .slider-dot.active{
+      background:var(--brand);
+    }
+
+    /* Footer like Virgin */
+
     .site-footer{
-      border-top:1px solid #eee;
-      padding:1.75rem 0 2.2rem;
-      background:#fafafa;
-      font-size:0.82rem;
+      border-top:1px solid #f0f0f0;
+      padding:3rem 0 1.7rem;
+      background:#ffffff;
+      font-size:0.86rem;
       color:var(--text-soft);
       margin-top:2rem;
     }
-    .footer-inner{
-      display:flex;
-      flex-direction:column;
-      gap:1.4rem;
+    .footer-top{
+      display:grid;
+      grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+      gap:2rem;
+      align-items:flex-start;
+      margin-bottom:2rem;
     }
-    .footer-links{
+    .footer-logo-links{
       display:flex;
-      flex-wrap:wrap;
       gap:2.5rem;
+      align-items:flex-start;
+    }
+    .footer-logo-wrap img{
+      height:36px;
+      width:auto;
+    }
+    .footer-links-cols{
+      display:flex;
+      gap:2.5rem;
+      flex-wrap:wrap;
     }
     .footer-col{
       display:flex;
       flex-direction:column;
-      gap:0.3rem;
+      gap:0.35rem;
     }
     .footer-link{
-      color:var(--text-soft);
       text-decoration:none;
+      color:var(--text);
+      font-size:0.86rem;
     }
     .footer-link:hover{
       color:var(--brand);
     }
-    .footer-bottom{
+
+    .footer-quote{
+      text-align:right;
+      font-size:1rem;
+      line-height:1.7;
+      color:#111;
+    }
+    .footer-quote p{
+      margin:0 0 0.7rem;
+      font-style:italic;
+      font-weight:500;
+    }
+    .footer-quote span.author{
+      font-size:0.86rem;
+      color:var(--text-soft);
+    }
+
+    .footer-middle{
       display:flex;
-      flex-wrap:wrap;
-      justify-content:space-between;
-      gap:0.9rem;
-      align-items:center;
+      justify-content:center;
+      margin-bottom:1rem;
     }
     .social-links{
       display:flex;
-      flex-wrap:wrap;
-      gap:0.4rem;
+      gap:1.1rem;
+      font-size:1.2rem;
     }
-    .social-pill{
-      padding:0.25rem 0.75rem;
-      border-radius:var(--radius-pill);
-      border:1px solid #ddd;
+    .social-links a{
       text-decoration:none;
-      color:var(--text-soft);
-      font-size:0.78rem;
+      color:#000;
     }
-    .social-pill:hover{
-      border-color:var(--brand);
+    .social-links a:hover{
       color:var(--brand);
     }
-    .footer-copy{
-      margin:0;
+
+    .footer-bottom{
+      text-align:center;
+      font-size:0.8rem;
+      color:var(--text-soft);
     }
+    .footer-bottom a{
+      color:var(--text-soft);
+      text-decoration:none;
+    }
+    .footer-bottom a:hover{
+      color:var(--brand);
+    }
+
+    /* Cookie banner simple full screen */
 
     .cookie-overlay{
       position:fixed;
@@ -384,7 +504,7 @@
       align-items:center;
       justify-content:center;
       padding:1.5rem;
-      z-index:100;
+      z-index:60;
       opacity:0;
       pointer-events:none;
       transition:opacity .25s ease;
@@ -399,25 +519,23 @@
       background:#fff;
       border-radius:22px;
       padding:1.7rem 1.8rem 1.4rem;
-      box-shadow:0 22px 60px rgba(0,0,0,0.35);
+      box-shadow:0 22px 60px rgba(0,0,0,0.4);
     }
     .cookie-header{
       display:flex;
-      align-items:center;
       justify-content:space-between;
-      gap:1rem;
+      align-items:center;
       margin-bottom:0.7rem;
     }
     .cookie-header h2{
       margin:0;
-      font-size:1.25rem;
+      font-size:1.2rem;
     }
     .cookie-close{
       border:none;
       background:transparent;
-      cursor:pointer;
       font-size:1.5rem;
-      line-height:1;
+      cursor:pointer;
     }
     .cookie-text{
       margin:0 0 0.9rem;
@@ -429,23 +547,24 @@
       flex-wrap:wrap;
       gap:0.6rem;
       margin-top:0.75rem;
-      margin-bottom:0.5rem;
     }
     .cookie-btn{
       flex:1;
     }
     .cookie-note{
+      margin:0.5rem 0 0;
       font-size:0.8rem;
       color:var(--text-soft);
-      margin:0;
     }
     .cookie-note a{
       color:var(--brand);
     }
 
+    /* Simple reveal animation */
+
     [data-reveal]{
       opacity:0;
-      transform:translateY(18px);
+      transform:translateY(20px);
       transition:opacity .4s ease,transform .4s ease;
     }
     [data-reveal].revealed{
@@ -454,229 +573,244 @@
     }
 
     @media(max-width:900px){
-      .hero-inner,
-      .split{
-        grid-template-columns:minmax(0,1fr);
-      }
-      .hero-panel{
-        order:-1;
-      }
-      .grid-3{
-        grid-template-columns:minmax(0,1fr);
-      }
+      .hero-inner{grid-template-columns:minmax(0,1fr);}
+      .hero-right-visual{margin-top:1.6rem;}
+      .companies-grid{grid-template-columns:minmax(0,1fr);}
+      .footer-top{grid-template-columns:minmax(0,1fr);}
+      .footer-quote{text-align:left;}
+      .footer-logo-links{flex-direction:column;gap:1.2rem;}
     }
-    @media(max-width:760px){
-      .site-nav{
-        position:absolute;
-        top:56px;
-        left:0;
-        right:0;
-        background:#ffffff;
-        border-bottom:1px solid #eee;
-        transform:translateY(-130%);
-        opacity:0;
-        pointer-events:none;
-        transition:transform .2s ease,opacity .2s ease;
-      }
-      .site-nav.open{
-        transform:translateY(0);
-        opacity:1;
-        pointer-events:auto;
-      }
-      .site-nav ul{
-        flex-direction:column;
-        align-items:flex-start;
-        padding:0.9rem 1.5rem 1.2rem;
-        gap:0.7rem;
-      }
-      .nav-toggle{
-        display:inline-flex;
-        flex-direction:column;
-        justify-content:center;
-      }
-      .cookie-dialog{
-        padding:1.4rem 1.3rem;
-      }
+    @media(max-width:720px){
+      .info-banner-inner{flex-direction:column;align-items:flex-start;}
+      .nav-inner{display:none;} /* hide desktop row */
     }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="logo">
-        <span class="logo-mark">TN</span>
-        <span class="logo-text">Tyler Nicholas Group</span>
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <div>
+      <div class="mobile-nav-header">
+        <img src="/image/logo.png" alt="Tyler Nicholas Group logo">
+        <button class="mobile-close" aria-label="Close menu">&times;</button>
       </div>
-      <button class="nav-toggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
+      <div class="mobile-nav-links">
+        <a href="index.html">Main</a>
+        <a href="about.html">About Us</a>
+        <a href="foundations.html">Our Foundations</a>
+        <a href="tyler.html">Who is Tyler Nicholas</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-top">
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+        <span class="bar"></span>
+        <span>Menu</span>
       </button>
-      <nav class="site-nav">
-        <ul>
-          <li><a href="index.html">Main</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="foundations.html">Our Foundations</a></li>
-          <li><a href="tyler.html">Who is Tyler Nicholas</a></li>
-          <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
-        </ul>
-      </nav>
+      <div class="logo-center">
+        <a href="index.html">
+          <img src="/image/logo.png" alt="Tyler Nicholas Group">
+        </a>
+      </div>
+      <div class="nav-right-placeholder"></div>
+    </div>
+    <div class="header-nav">
+      <div class="container nav-inner">
+        <a href="index.html" class="nav-link">Companies</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="foundations.html" class="nav-link">Our Foundations</a>
+        <a href="tyler.html" class="nav-link">Founder</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
     </div>
   </header>
 
   <main>
+    <!-- HERO -->
     <section class="hero" data-reveal>
       <div class="container hero-inner">
         <div>
-          <p class="eyebrow">Digital Holdings Group</p>
-          <h1 class="hero-title">A corporate group building the online businesses of tomorrow.</h1>
-          <p class="hero-subtitle">
-            Tyler Nicholas Group is a modern digital holdings company overseeing a growing portfolio of ventures
-            across gaming, e-commerce, and foundations, all under one structured corporate identity.
+          <p class="hero-eyebrow">Digital Holdings Group</p>
+          <h1 class="hero-title">
+            A group of online businesses
+            built to feel as serious as the real world.
+          </h1>
+          <p class="hero-text">
+            Tyler Nicholas Group brings Roblox experiences, e-commerce brands and foundations
+            together under one structured corporate parent. Clear names, clear standards,
+            and a long-term plan for every business we create.
           </p>
           <div class="hero-actions">
-            <a href="about.html" class="btn btn-primary">Discover the Group</a>
-            <a href="foundations.html" class="btn btn-ghost">Explore Our Foundations</a>
+            <a href="about.html" class="btn btn-primary">Learn about the Group</a>
+            <a href="foundations.html" class="btn btn-ghost">See our Foundations</a>
           </div>
         </div>
-        <div class="hero-panel">
-          <div class="hero-stat-card">
-            <p class="stat-label">Current Focus Areas</p>
-            <p class="stat-value" data-counter data-target="3">0</p>
-            <p class="stat-note">Gaming • E-commerce • Foundations</p>
-          </div>
-          <div class="hero-stat-grid">
-            <div class="hero-mini-card">
-              <span class="mini-label">Model</span>
-              <span class="mini-value">Digital Holdings Group</span>
-            </div>
-            <div class="hero-mini-card">
-              <span class="mini-label">Stage</span>
-              <span class="mini-value">Early Growth</span>
-            </div>
-            <div class="hero-mini-card">
-              <span class="mini-label">Region</span>
-              <span class="mini-value">Global • Seychelles</span>
-            </div>
-            <div class="hero-mini-card">
-              <span class="mini-label">Founder</span>
-              <span class="mini-value">Tyler Nicholas</span>
-            </div>
-          </div>
+        <div class="hero-right-visual">
+          <span class="hero-right-tag">Our approach</span>
+          <h2 class="hero-right-title">One group. Many ventures. A single standard.</h2>
+          <p class="hero-right-text">
+            Instead of building isolated projects, we house every idea inside a single
+            corporate structure. That means shared governance, consistent brand quality
+            and a portfolio mindset from day one.
+          </p>
+          <p class="hero-right-text">
+            From Roblox airports to digital storefronts and social-impact foundations,
+            Tyler Nicholas Group is designed to feel like a modern version of the big
+            business groups we grew up admiring.
+          </p>
         </div>
       </div>
     </section>
 
-    <section class="section" data-reveal>
-      <div class="container split">
-        <div>
-          <div class="section-header">
-            <h2>What is Tyler Nicholas Group?</h2>
-            <p>
-              Tyler Nicholas Group (TNG) brings multiple online businesses together under one professional parent
-              company. Instead of treating each project as a one-off idea, TNG gives them structure, governance,
-              and a clear future.
-            </p>
-          </div>
-          <p>
-            Our ambition is to grow into a portfolio holding dozens of digital businesses: virtual aviation
-            experiences, curated e-commerce brands, and impact-focused foundations. Everything we build is designed
-            to feel intentional, long-term, and part of something bigger.
-          </p>
-          <p>
-            TNG acts like the “corporate layer” above each business, setting standards for quality, conduct, and the
-            way we show up online as a group.
-          </p>
+    <!-- HORIZONTAL INFO BANNER -->
+    <section class="info-banner" data-reveal>
+      <div class="container info-banner-inner">
+        <div class="info-item">
+          <span class="info-label">Current focus areas</span>
+          <span class="info-value">Gaming, E-commerce, Foundations</span>
         </div>
-        <div class="highlight-column">
-          <div class="highlight-item">
-            <h4>Structured Like a Group</h4>
-            <p>
-              We think in terms of a group of companies, not just standalone projects. Each brand has its own name
-              and audience, but sits within a single corporate family.
-            </p>
-          </div>
-          <div class="highlight-item">
-            <h4>Built for Scale</h4>
-            <p>
-              From the start, TNG is designed to scale into a multi-business portfolio with consistent standards,
-              shared services, and a clear identity.
-            </p>
-          </div>
+        <div class="info-item">
+          <span class="info-label">Model</span>
+          <span class="info-value">Digital Holdings Group</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Stage</span>
+          <span class="info-value">Early growth</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Region</span>
+          <span class="info-value">Global • Seychelles</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Founder</span>
+          <span class="info-value">Tyler Nicholas</span>
         </div>
       </div>
     </section>
 
-    <section class="section-alt" data-reveal>
+    <!-- SEE WHAT WE'RE MADE OF -->
+    <section class="section section-soft" data-reveal>
       <div class="container">
         <div class="section-header">
-          <h2>Initial Portfolio Pillars</h2>
-          <p>
-            We are starting with three clear pillars that define the first phase of the group. Over time, each pillar
-            will grow into multiple businesses and initiatives.
+          <h2 class="section-title">See what we’re made of<span class="dot">.</span></h2>
+          <p class="section-subtitle">
+            A first look at the businesses and initiatives that make up Tyler Nicholas Group today.
           </p>
         </div>
-        <div class="grid-3">
-          <article class="card" data-reveal>
-            <div class="card-tag">Gaming & Virtual Experiences</div>
-            <h3>Emirates Group Roblox</h3>
-            <p>
-              A Roblox-based ecosystem inspired by aviation and travel. Players experience virtual airports, airline
-              operations, and immersive roleplay, built with structure and quality in mind.
+
+        <div class="companies-grid">
+          <article class="company-card" data-reveal>
+            <div class="company-logo-circle">
+              Emirates<br>Group Roblox
+            </div>
+            <h3 class="company-name">Emirates Group Roblox</h3>
+            <p class="company-desc">
+              A virtual aviation ecosystem built on Roblox. Airports, airline operations
+              and immersive roleplay experiences, all designed with structure and realism
+              in mind.
             </p>
+            <a href="about.html" class="company-link">
+              Learn more
+              <span class="arrow">›</span>
+            </a>
           </article>
-          <article class="card" data-reveal>
-            <div class="card-tag">E-commerce</div>
-            <h3>AlignX</h3>
-            <p>
-              A Shopify brand created as part of TNG’s commerce pillar. AlignX focuses on curated digital-era products
-              and a clean customer journey, with room to expand into multiple product lines.
+
+          <article class="company-card" data-reveal>
+            <div class="company-logo-circle">
+              AlignX
+            </div>
+            <h3 class="company-name">AlignX</h3>
+            <p class="company-desc">
+              A Shopify-powered brand focused on clean, modern e-commerce. Curated
+              digital-era products, built under the same corporate standards as the rest
+              of the group.
             </p>
+            <a href="about.html" class="company-link">
+              Learn more
+              <span class="arrow">›</span>
+            </a>
           </article>
-          <article class="card" data-reveal>
-            <div class="card-tag">Foundations</div>
-            <h3>Purpose-Led Work</h3>
-            <p>
-              The Nicholas Foundation Seychelles and a future Roblox venture capital-style foundation bring social impact,
-              opportunity, and community support directly into the heart of the group’s strategy.
+
+          <article class="company-card" data-reveal>
+            <div class="company-logo-circle">
+              Foundations
+            </div>
+            <h3 class="company-name">Our Foundations</h3>
+            <p class="company-desc">
+              The Nicholas Foundation Seychelles and a future Roblox venture foundation
+              turn part of our focus into education, opportunity and support for the
+              communities around us.
             </p>
+            <a href="foundations.html" class="company-link">
+              Explore foundations
+              <span class="arrow">›</span>
+            </a>
           </article>
+        </div>
+
+        <div class="slider-dots">
+          <span class="slider-dot active"></span>
+          <span class="slider-dot"></span>
+          <span class="slider-dot"></span>
         </div>
       </div>
     </section>
-
   </main>
 
+  <!-- FOOTER -->
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-links">
-        <div class="footer-col">
-          <a href="terms.html" class="footer-link">Web Terms Of Use</a>
-          <a href="privacy.html" class="footer-link">Web Privacy Policy</a>
-          <a href="cookies.html" class="footer-link">Web Cookie Policy</a>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-logo-links">
+          <div class="footer-logo-wrap">
+            <img src="/image/logo.png" alt="Tyler Nicholas Group">
+          </div>
+          <div class="footer-links-cols">
+            <div class="footer-col">
+              <a href="contact.html" class="footer-link">Contact Tyler Nicholas Group</a>
+              <a href="terms.html" class="footer-link">Web Terms Of Use</a>
+              <a href="privacy.html" class="footer-link">Web Privacy Policy</a>
+              <a href="cookies.html" class="footer-link">Web Cookie Policy</a>
+            </div>
+            <div class="footer-col">
+              <a href="slavery.html" class="footer-link">TNG Slavery Statement (Employee Rights)</a>
+              <a href="governance.html" class="footer-link">TNG Corporate Governance</a>
+              <a href="faq.html" class="footer-link">TNG Group FAQs</a>
+            </div>
+          </div>
         </div>
-        <div class="footer-col">
-          <a href="slavery.html" class="footer-link">TNG Slavery Statement (Employee Rights)</a>
-          <a href="governance.html" class="footer-link">TNG Corporate Governance</a>
-          <a href="faq.html" class="footer-link">TNG Frequently Asked Questions</a>
+        <div class="footer-quote">
+          <p>
+            “Finding something frustrating and seeing an opportunity to make it better
+            is what entrepreneurship is all about.”
+          </p>
+          <span class="author">Richard Branson</span>
         </div>
       </div>
-      <div class="footer-bottom">
+
+      <div class="footer-middle">
         <div class="social-links">
-          <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" rel="noopener" class="social-pill">Instagram</a>
-          <a href="https://x.com/tyler_n_group" target="_blank" rel="noopener" class="social-pill">X</a>
-          <a href="https://www.youtube.com/@TylerNicholasGroup" target="_blank" rel="noopener" class="social-pill">YouTube</a>
-          <a href="https://www.linkedin.com/company/tyler-nicholas-group/" target="_blank" rel="noopener" class="social-pill">LinkedIn</a>
+          <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" rel="noopener" aria-label="Instagram"></a>
+          <a href="https://x.com/tyler_n_group" target="_blank" rel="noopener" aria-label="X (Twitter)"></a>
+          <a href="https://www.youtube.com/@TylerNicholasGroup" target="_blank" rel="noopener" aria-label="YouTube"></a>
+          <a href="https://www.linkedin.com/company/tyler-nicholas-group/" target="_blank" rel="noopener" aria-label="LinkedIn"></a>
         </div>
-        <div>
-          <p class="footer-copy">© 2025 Tyler Nicholas Group</p>
-          <p class="footer-copy">
-            Email:
-            <a href="mailto:tylernicholasgroup@gmail.com" class="footer-link">tylernicholasgroup@gmail.com</a>
-          </p>
-        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © 2025 Tyler Nicholas Group. All rights reserved.
+        &nbsp;•&nbsp;
+        Email:
+        <a href="mailto:tylernicholasgroup@gmail.com">tylernicholasgroup@gmail.com</a>
       </div>
     </div>
   </footer>
 
+  <!-- COOKIE OVERLAY -->
   <div class="cookie-overlay" id="cookieOverlay" aria-hidden="true">
     <div class="cookie-dialog">
       <div class="cookie-header">
@@ -684,15 +818,16 @@
         <button class="cookie-close" aria-label="Close cookie banner">&times;</button>
       </div>
       <p class="cookie-text">
-        Tyler Nicholas Group uses cookies to operate this website, understand usage patterns, and improve the online
-        experience. Some cookies are essential; others are optional and used for analytics and performance.
+        Tyler Nicholas Group uses cookies and similar technologies to operate this website, understand
+        how it is used and improve the experience over time. Some cookies are essential for the site
+        to work; others are optional and used for analytics.
       </p>
       <div class="cookie-actions">
-        <button class="btn btn-ghost cookie-btn" id="cookieReject">Reject Non-Essential</button>
-        <button class="btn btn-primary cookie-btn" id="cookieAccept">Accept All Cookies</button>
+        <button class="btn btn-ghost cookie-btn" id="cookieReject">Reject non-essential</button>
+        <button class="btn btn-primary cookie-btn" id="cookieAccept">Accept all cookies</button>
       </div>
       <p class="cookie-note">
-        You can learn more in our
+        You can read more in our
         <a href="privacy.html">Web Privacy Policy</a> and
         <a href="cookies.html">Web Cookie Policy</a>.
       </p>
@@ -700,14 +835,7 @@
   </div>
 
   <script>
-    const navToggle = document.querySelector('.nav-toggle');
-    const nav = document.querySelector('.site-nav');
-    if (navToggle && nav) {
-      navToggle.addEventListener('click', () => {
-        nav.classList.toggle('open');
-      });
-    }
-
+    // Reveal on scroll
     const revealEls = document.querySelectorAll('[data-reveal]');
     if ('IntersectionObserver' in window) {
       const obs = new IntersectionObserver(entries => {
@@ -723,88 +851,74 @@
       revealEls.forEach(el => el.classList.add('revealed'));
     }
 
-    const counters = document.querySelectorAll('[data-counter]');
-    if (counters.length && 'IntersectionObserver' in window) {
-      const runCounter = el => {
-        const target = parseInt(el.getAttribute('data-target'), 10) || 0;
-        let start = null;
-        const duration = 800;
-        function tick(ts) {
-          if (!start) start = ts;
-          const progress = Math.min((ts - start) / duration, 1);
-          const value = Math.floor(progress * target);
-          el.textContent = value;
-          if (progress < 1) requestAnimationFrame(tick);
-          else el.textContent = target;
-        }
-        requestAnimationFrame(tick);
-      };
-      const cObs = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            runCounter(entry.target);
-            cObs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.7 });
-      counters.forEach(c => cObs.observe(c));
-    }
+    // Mobile nav
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    const mobileClose = document.querySelector('.mobile-close');
 
+    if (menuToggle && mobileNav) {
+      menuToggle.addEventListener('click', () => {
+        mobileNav.classList.add('open');
+      });
+    }
+    if (mobileClose && mobileNav) {
+      mobileClose.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+      });
+    }
+    mobileNav?.addEventListener('click', e => {
+      if (e.target === mobileNav) mobileNav.classList.remove('open');
+    });
+
+    // Cookie overlay
     const cookieOverlay = document.getElementById('cookieOverlay');
-    const btnAccept = document.getElementById('cookieAccept');
-    const btnReject = document.getElementById('cookieReject');
-    const btnClose = document.querySelector('.cookie-close');
+    const cookieAccept = document.getElementById('cookieAccept');
+    const cookieReject = document.getElementById('cookieReject');
+    const cookieClose = document.querySelector('.cookie-close');
     const COOKIE_KEY = 'tng_cookie_prefs';
 
-    function showCookie() {
-      if (!cookieOverlay) return;
-      cookieOverlay.classList.add('visible');
-      cookieOverlay.setAttribute('aria-hidden', 'false');
-    }
-    function hideCookie() {
-      if (!cookieOverlay) return;
-      cookieOverlay.classList.remove('visible');
-      cookieOverlay.setAttribute('aria-hidden', 'true');
-    }
-    function savePrefs(acceptedAnalytics) {
-      try {
+    function saveCookiePrefs(analytics){
+      try{
         localStorage.setItem(COOKIE_KEY, JSON.stringify({
-          essential: true,
-          analytics: !!acceptedAnalytics,
-          ts: new Date().toISOString()
+          essential:true,
+          analytics:!!analytics,
+          ts:new Date().toISOString()
         }));
-      } catch (e) {}
+      }catch(e){}
     }
-    function loadPrefs() {
-      try {
+    function getCookiePrefs(){
+      try{
         const v = localStorage.getItem(COOKIE_KEY);
         return v ? JSON.parse(v) : null;
-      } catch (e) { return null; }
+      }catch(e){return null;}
+    }
+    function showCookie(){
+      if(!cookieOverlay) return;
+      cookieOverlay.classList.add('visible');
+      cookieOverlay.setAttribute('aria-hidden','false');
+    }
+    function hideCookie(){
+      if(!cookieOverlay) return;
+      cookieOverlay.classList.remove('visible');
+      cookieOverlay.setAttribute('aria-hidden','true');
     }
 
-    const existing = loadPrefs();
-    if (!existing) {
+    if(!getCookiePrefs()){
       showCookie();
     }
 
-    if (btnAccept) {
-      btnAccept.addEventListener('click', () => {
-        savePrefs(true);
-        hideCookie();
-      });
-    }
-    if (btnReject) {
-      btnReject.addEventListener('click', () => {
-        savePrefs(false);
-        hideCookie();
-      });
-    }
-    if (btnClose) {
-      btnClose.addEventListener('click', () => {
-        savePrefs(false);
-        hideCookie();
-      });
-    }
+    cookieAccept?.addEventListener('click', () => {
+      saveCookiePrefs(true);
+      hideCookie();
+    });
+    cookieReject?.addEventListener('click', () => {
+      saveCookiePrefs(false);
+      hideCookie();
+    });
+    cookieClose?.addEventListener('click', () => {
+      saveCookiePrefs(false);
+      hideCookie();
+    });
   </script>
 </body>
 </html>
