@@ -155,8 +155,7 @@
         #tng-application-form input[type="email"],
         #tng-application-form input[type="number"],
         #tng-application-form input[type="url"],
-        #tng-application-form textarea,
-        #tng-application-form input[type="file"] {
+        #tng-application-form textarea {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
@@ -261,7 +260,7 @@
             <h2 style="color: var(--tng-maroon); margin-top: 0; text-align: center;">TNG Group Job Application</h2>
             <p style="text-align: center; color: #555;">*Required fields are marked with an asterisk.</p>
             
-            <form id="tng-application-form" action="https://formspree.io/f/mjknoqyl" method="POST" enctype="multipart/form-data">
+            <form id="tng-application-form" action="https://formspree.io/f/mjknoqyl" method="POST">
                 
                 <h3 style="color: var(--tng-blue); border-bottom: 1px solid #eee; padding-bottom: 5px;">Role Details</h3>
                 <div style="margin-bottom: 15px;">
@@ -288,10 +287,10 @@
                 <h3 style="color: var(--tng-blue); border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 25px;">Documents & Experience</h3>
                 
                 <div style="margin-top: 15px;">
-                    <label for="cv-file" style="display: block; margin-bottom: 5px; font-weight: 600;">Attach CV/Resume (PDF/Image/Document) *</label>
-                    <input type="file" id="cv-file" name="CV_Resume_File" required accept=".pdf,.png,.jpg,.jpeg,.doc,.docx" style="margin-bottom: 15px;">
+                    <label for="cv-link" style="display: block; margin-bottom: 5px; font-weight: 600;">Link to CV/Resume/Portfolio (Google Drive, Dropbox, etc.) *</label>
+                    <input type="url" id="cv-link" name="CV_Resume_Link" required placeholder="Paste a public link to your CV/Resume/Portfolio here.">
                     
-                    <input type="url" name="Linkedln_Account" placeholder="LinkedIn Account Page (Optional - Recommended to have one)">
+                    <input type="url" name="Linkedln_Account" placeholder="LinkedIn Account Page (Optional - Recommended to have one)" style="margin-top: 15px;">
                 </div>
 
                 <div style="margin-top: 15px;">
