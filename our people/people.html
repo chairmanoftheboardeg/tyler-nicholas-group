@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our People | Tyler Nicholas Group (TNG)</title>
+
+    <link rel="icon" type="image/png" href="image/logo.png">
+
+    <style>
+        /* ==================== CORPORATE CSS (Reused from About) ==================== */
+        :root {
+            --tng-blue: #001F4C;
+            --tng-maroon: #A81F27;
+            --tng-silver: #C0C0C0;
+            --tng-light-gray: #f4f4f4;
+            --tng-text-dark: #333;
+            --tng-text-light: #ffffff;
+            --transition-speed: 0.8s ease-out;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--tng-text-dark);
+            background-color: var(--tng-light-gray);
+            line-height: 1.6;
+        }
+
+        /* === HEADER & NAVIGATION === */
+        header {
+            background-color: var(--tng-blue);
+            color: var(--tng-text-light);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--tng-silver);
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .logo:hover {
+            color: var(--tng-maroon);
+        }
+
+        nav a, .more-menu-toggle {
+            color: var(--tng-silver);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            font-size: 0.95em;
+            font-weight: 500;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            color: var(--tng-text-light);
+            background-color: rgba(168, 31, 39, 0.5); 
+        }
+
+        /* More Menu Dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--tng-blue);
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-top: 3px solid var(--tng-maroon);
+        }
+
+        .dropdown-content a {
+            color: var(--tng-silver);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            margin: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--tng-maroon);
+            color: var(--tng-text-light);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* === MAIN CONTENT LAYOUT === */
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--tng-blue), #002D62);
+            color: var(--tng-light-gray);
+            padding: 80px 40px;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 50px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            /* Animation Target */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity var(--transition-speed), transform var(--transition-speed);
+        }
+
+        .hero-section.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .content-section {
+            padding: 40px 0;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .content-section h2 {
+            font-size: 2em;
+            color: var(--tng-maroon);
+            margin-bottom: 30px;
+            border-bottom: 2px solid #ddd;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* === LEADERSHIP CARDS === */
+        .card-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .profile-card {
+            background-color: #fff;
+            width: calc(33% - 30px); /* 3 cards per row on large screens */
+            min-width: 280px;
+            border-radius: 8px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 20px;
+            border-top: 8px solid var(--tng-maroon);
+            transition: transform 0.3s ease-in-out;
+            
+            /* Animation Target */
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity var(--transition-speed), transform var(--transition-speed);
+        }
+        
+        .profile-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-card.revealed {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .card-photo-placeholder {
+            width: 100%;
+            height: 180px;
+            background-color: var(--tng-light-gray);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="40" r="15" fill="%23C0C0C0"/><rect x="25" y="65" width="50" height="20" rx="10" fill="%23C0C0C0"/></svg>');
+            background-repeat: no-repeat;
+            background-size: 40% 40%;
+            background-position: center center;
+            border-bottom: 3px solid var(--tng-blue);
+        }
+        
+        .profile-card h3 {
+            color: var(--tng-blue);
+            margin: 15px 0 5px;
+            font-size: 1.5em;
+        }
+        
+        .profile-card p {
+            color: var(--tng-maroon);
+            font-weight: 600;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+        }
+
+        .profile-card .bio {
+            padding: 0 20px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        /* === CORPORATE FOOTER === */
+        footer {
+            background-color: var(--tng-blue);
+            color: var(--tng-silver);
+            padding: 40px 0 0;
+            font-size: 0.85em;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            width: 28%;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h4 {
+            color: var(--tng-maroon);
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 5px;
+        }
+
+        .footer-section a {
+            color: var(--tng-silver);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--tng-text-light);
+        }
+        
+        .footer-section p {
+            margin-top: 0;
+        }
+
+        .footer-bottom {
+            background-color: #00122E; /* Darker Blue */
+            text-align: center;
+            padding: 15px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/about">About Us</a>
+                <a href="/companies">Our Companies</a>
+                <a href="/people" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Our People</a>
+                <a href="/governance">Governance</a>
+                <a href="/careers">Careers</a>
+                
+                <div class="dropdown">
+                    <button class="more-menu-toggle">More</button>
+                    <div class="dropdown-content">
+                        <a href="/governance/board">Board of Directors</a>
+                        <a href="/governance/code-of-conduct">Code of Conduct</a>
+                        <a href="/governance/reports">Financial Reporting</a>
+                        <a href="/contact/investors">Investor Relations</a>
+                        <a href="/contact/media">Media & Press</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section anim-target">
+            <h1>The Architects of TNG's Vision.</h1>
+            <p>Meet the executive and operational leadership responsible for driving our strategy, governance, and long-term value creation across all ventures.</p>
+        </section>
+
+        <section class="content-section">
+            <h2>TNG Core Executive Leadership</h2>
+            <div class="card-grid">
+                
+                <div class="profile-card anim-target">
+                    <div class="card-photo-placeholder"></div>
+                    <h3>[Name Placeholder]</h3>
+                    <p>Chairman of The Board / Founder</p>
+                    <div class="bio">
+                        <p>The Chairman provides strategic direction and high-level oversight, ensuring the Group's mission aligns with long-term stakeholder interests and corporate integrity.</p>
+                    </div>
+                </div>
+
+                <div class="profile-card anim-target" style="transition-delay: 0.1s;">
+                    <div class="card-photo-placeholder"></div>
+                    <h3>[Name Placeholder]</h3>
+                    <p>Chief Executive Officer (CEO)</p>
+                    <div class="bio">
+                        <p>Responsible for the Group's daily operations, strategic execution, and performance across all TNG Core and subsidiary units.</p>
+                    </div>
+                </div>
+
+                <div class="profile-card anim-target" style="transition-delay: 0.2s;">
+                    <div class="card-photo-placeholder"></div>
+                    <h3>[Name Placeholder]</h3>
+                    <p>Chief Financial Officer (CFO)</p>
+                    <div class="bio">
+                        <p>Manages TNG's consolidated financial reporting, capital allocation, and risk management across the entire portfolio.</p>
+                    </div>
+                </div>
+                
+                <div class="profile-card anim-target" style="transition-delay: 0.3s;">
+                    <div class="card-photo-placeholder"></div>
+                    <h3>[Name Placeholder]</h3>
+                    <p>Chief Technology Officer (CTO)</p>
+                    <div class="bio">
+                        <p>Drives the Group's technological strategy, overseeing shared infrastructure and promoting innovation across all subsidiaries.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section" style="margin-top: 50px;">
+            <h2>Leaders of Subsidiary Groups</h2>
+            <p style="max-width: 800px; margin: 0 auto 30px; color: #555;">These executives lead their specialized operational groups, ensuring market focus and competitive edge within their respective industries.</p>
+            <div class="card-grid">
+                
+                <div class="profile-card anim-target" style="border-top: 8px solid #005691;">
+                    <div class="card-photo-placeholder"></div>
+                    <h3>[Name Placeholder]</h3>
+                    <p style="color: #005691;">Head of TNG E-Commerce</p>
+                    <div class="bio">
+                        <p>Responsible for the growth and operational excellence of all TNG digital commerce platforms and retail ventures.</p>
+                    </div>
+                </div>
+
+                <div class="profile-card anim-target" style="transition-delay: 0.1s; border-top: 8px solid #4CAF50;">
+                    <div class="card-photo-placeholder"></div>
+                    <h3>[Name Placeholder]</h3>
+                    <p style="color: #4CAF50;">CEO of TNG Gaming Org</p>
+                    <div class="bio">
+                        <p>Oversees the development, launch, and management of the Group's intellectual property in the digital entertainment sector.</p>
+                    </div>
+                </div>
+                
+                <div class="profile-card anim-target" style="transition-delay: 0.2s; border-top: 8px solid #FF9800;">
+                    <div class="card-photo-placeholder"></div>
+                    <h3>[Name Placeholder]</h3>
+                    <p style="color: #FF9800;">Director of TNG Investment Board</p>
+                    <div class="bio">
+                        <p>Manages the Group's passive and strategic investments portfolio, seeking opportunities for diversification and high returns.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>TNG Global Headquarters</h4>
+                <p>Tyler Nicholas Group operates as a remote-first organization.</p>
+                <p>Official Headquarters & Group Communications:<br>
+                <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
+                <p>General Inquiries:<br>
+                <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="/about">About TNG</a>
+                <a href="/companies">Our Companies</a>
+                <a href="/people">Our People</a>
+                <a href="/governance">Governance</a>
+                <a href="/careers">Careers</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal & Policy</h4>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Use</a>
+                <a href="/governance/legal">Legal & Compliance</a>
+                <a href="/accessibility">Accessibility Statement</a>
+                <a href="/governance/reports">Financial Reports</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all elements designated for animation
+            const targets = document.querySelectorAll('.anim-target');
+
+            // Set the observer options
+            const options = {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            };
+
+            // Intersection Observer Callback
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add the 'revealed' class to trigger the CSS animation
+                        entry.target.classList.add('revealed');
+                        // Stop observing once it's revealed
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, options);
+
+            // Observe each target element
+            targets.forEach(target => {
+                observer.observe(target);
+            });
+        });
+    </script>
+
+</body>
+</html>
