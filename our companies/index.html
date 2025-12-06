@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Careers | Tyler Nicholas Group (TNG)</title>
+    <title>Our Companies | Tyler Nicholas Group (TNG)</title>
 
     <link rel="icon" type="image/png" href="image/logo.png">
 
     <style>
-        /* ==================== CORPORATE CSS (Reused) ==================== */
+        /* ==================== CORPORATE CSS (Reused from previous pages) ==================== */
         :root {
             --tng-blue: #001F4C;
             --tng-maroon: #A81F27;
@@ -37,7 +37,9 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
         }
+
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -45,12 +47,20 @@
             max-width: 1300px;
             margin: 0 auto;
         }
+
         .logo {
             font-size: 1.8em;
             font-weight: 700;
             color: var(--tng-silver);
             text-decoration: none;
+            letter-spacing: 1px;
+            transition: color 0.3s;
         }
+
+        .logo:hover {
+            color: var(--tng-maroon);
+        }
+
         nav a, .more-menu-toggle {
             color: var(--tng-silver);
             text-decoration: none;
@@ -58,134 +68,222 @@
             margin-left: 10px;
             font-size: 0.95em;
             font-weight: 500;
+            transition: color 0.3s, background-color 0.3s;
             border-radius: 4px;
         }
+
         nav a:hover {
             color: var(--tng-text-light);
             background-color: rgba(168, 31, 39, 0.5); 
         }
 
         /* More Menu Dropdown */
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-content { display: none; position: absolute; right: 0; background-color: var(--tng-blue); min-width: 200px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; border-top: 3px solid var(--tng-maroon); }
-        .dropdown-content a { color: var(--tng-silver); padding: 12px 16px; text-decoration: none; display: block; margin: 0; }
-        .dropdown-content a:hover { background-color: var(--tng-maroon); color: var(--tng-text-light); }
-        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--tng-blue);
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-top: 3px solid var(--tng-maroon);
+        }
+
+        .dropdown-content a {
+            color: var(--tng-silver);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            margin: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--tng-maroon);
+            color: var(--tng-text-light);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
 
         /* === MAIN CONTENT LAYOUT === */
-        main { max-width: 1100px; margin: 40px auto; padding: 20px; }
-        .hero-section { background: linear-gradient(135deg, var(--tng-blue), #002D62); color: var(--tng-light-gray); padding: 80px 40px; text-align: center; border-radius: 12px; margin-bottom: 50px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); opacity: 0; transform: translateY(20px); transition: opacity var(--transition-speed), transform var(--transition-speed); }
-        .hero-section.revealed { opacity: 1; transform: translateY(0); }
-        .content-section { padding: 40px 0; margin-bottom: 30px; text-align: center; }
-        .content-section h2 { font-size: 2em; color: var(--tng-maroon); margin-bottom: 30px; border-bottom: 2px solid #ddd; display: inline-block; padding-bottom: 5px; }
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
 
-        /* === WHY TNG SECTION === */
-        .benefits-grid { display: flex; justify-content: space-around; gap: 20px; margin: 30px 0; text-align: left; }
-        .benefit-card { flex: 1; padding: 25px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); border-top: 4px solid var(--tng-maroon); opacity: 0; transform: scale(0.95); transition: opacity var(--transition-speed), transform var(--transition-speed); }
-        .benefit-card.revealed { opacity: 1; transform: scale(1); }
-        .benefit-card h4 { color: var(--tng-blue); font-size: 1.2em; margin-top: 0; }
-        
-        /* === CURRENT OPENINGS SECTION === */
-        .openings-list { max-width: 800px; margin: 0 auto; text-align: left; }
-        .job-listing {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #fff;
-            padding: 20px 30px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            border-left: 5px solid var(--tng-blue);
-            transition: transform 0.3s, box-shadow 0.3s;
+        .hero-section {
+            background: linear-gradient(135deg, var(--tng-blue), #002D62);
+            color: var(--tng-light-gray);
+            padding: 80px 40px;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 50px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            /* Animation Target */
             opacity: 0;
-            transform: translateX(-20px);
+            transform: translateY(20px);
             transition: opacity var(--transition-speed), transform var(--transition-speed);
         }
-        .job-listing:hover { transform: translateX(0); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); }
-        .job-listing.revealed { opacity: 1; transform: translateX(0); }
-        .job-details h3 { margin: 0 0 5px 0; color: var(--tng-blue); font-size: 1.3em; }
-        .job-details p { margin: 0; color: #777; font-size: 0.9em; }
-        .apply-button {
+
+        .hero-section.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .content-section {
+            padding: 40px 0;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .content-section h2 {
+            font-size: 2em;
+            color: var(--tng-maroon);
+            margin-bottom: 30px;
+            border-bottom: 2px solid #ddd;
             display: inline-block;
-            background-color: var(--tng-maroon);
-            color: var(--tng-text-light) !important;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: background-color 0.3s;
-            cursor: pointer;
+            padding-bottom: 5px;
         }
-        .apply-button:hover { background-color: #8C1A21; }
 
-        /* === APPLICATION MODAL STYLES === */
-        #application-modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.7);
+        /* === COMPANY CARDS (Portfolio Cards) === */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
         }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 30px;
+
+        .company-card {
+            background-color: #fff;
             border-radius: 12px;
-            width: 90%;
-            max-width: 650px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            position: relative;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+            
+            /* Animation Target */
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity var(--transition-speed), transform var(--transition-speed);
         }
-        #close-modal {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            position: absolute;
-            right: 20px;
-            top: 10px;
+        
+        .company-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
         }
-        #tng-application-form input[type="text"], 
-        #tng-application-form input[type="email"],
-        #tng-application-form input[type="number"],
-        #tng-application-form input[type="url"],
-        #tng-application-form textarea,
-        #tng-application-form input[type="file"] {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box; /* Crucial for padding to work with 100% width */
-        }
-        #tng-application-form button[type="submit"] {
-            width: 100%;
-            background-color: var(--tng-blue);
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 4px;
-            font-size: 1.1em;
-            margin-top: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        #tng-application-form button[type="submit"]:hover { background-color: #002D62; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 
+        .company-card.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-header {
+            padding: 25px;
+            color: var(--tng-text-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .card-header h3 {
+            margin: 0;
+            font-size: 1.6em;
+            font-weight: 700;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .card-body p {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        .card-body a.cta-link {
+            display: inline-block;
+            color: var(--tng-blue);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid var(--tng-maroon);
+            padding-bottom: 3px;
+            transition: color 0.3s, border-color 0.3s;
+        }
+
+        .card-body a.cta-link:hover {
+            color: var(--tng-maroon);
+            border-bottom-color: var(--tng-blue);
+        }
+
+        /* Specific Color Themes for Companies */
+        .theme-ecommerce { background-color: #005691; border-top: 8px solid #005691; }
+        .theme-gaming { background-color: #4CAF50; border-top: 8px solid #4CAF50; }
+        .theme-investment { background-color: #FF9800; border-top: 8px solid #FF9800; }
+        
         /* === CORPORATE FOOTER === */
-        footer { background-color: var(--tng-blue); color: var(--tng-silver); padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px; }
-        .footer-content { display: flex; justify-content: space-between; max-width: 1300px; margin: 0 auto; padding: 0 40px 30px; flex-wrap: wrap; }
-        .footer-section { width: 28%; min-width: 250px; margin-bottom: 20px; }
-        .footer-section h4 { color: var(--tng-maroon); font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px; }
-        .footer-section a { color: var(--tng-silver); text-decoration: none; display: block; margin-bottom: 8px; }
-        .footer-bottom { background-color: #00122E; text-align: center; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        footer {
+            background-color: var(--tng-blue);
+            color: var(--tng-silver);
+            padding: 40px 0 0;
+            font-size: 0.85em;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            width: 28%;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h4 {
+            color: var(--tng-maroon);
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 5px;
+        }
+
+        .footer-section a {
+            color: var(--tng-silver);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--tng-text-light);
+        }
+        
+        .footer-section p {
+            margin-top: 0;
+        }
+
+        .footer-bottom {
+            background-color: #00122E; /* Darker Blue */
+            text-align: center;
+            padding: 15px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -196,10 +294,10 @@
             <nav>
                 <a href="/">Home</a>
                 <a href="/about">About Us</a>
-                <a href="/companies">Our Companies</a>
+                <a href="/companies" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Our Companies</a>
                 <a href="/people">Our People</a>
                 <a href="/governance">Governance</a>
-                <a href="/careers" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Careers</a>
+                <a href="/careers">Careers</a>
                 
                 <div class="dropdown">
                     <button class="more-menu-toggle">More</button>
@@ -217,99 +315,73 @@
 
     <main>
         <section class="hero-section anim-target">
-            <h1>Shape the Future with TNG.</h1>
-            <p>Join a remote-first, global team dedicated to building, investing in, and scaling high-impact digital ventures across all groups and subsidiaries.</p>
+            <h1>A Portfolio Built for Growth and Diversification.</h1>
+            <p>The Tyler Nicholas Group is strategically structured into high-growth operational ventures, unified by shared governance and advanced corporate services.</p>
         </section>
 
         <section class="content-section">
-            <h2>Why Work at Tyler Nicholas Group?</h2>
-            <div class="benefits-grid">
+            <h2>Our Operational Subsidiaries</h2>
+            <div class="portfolio-grid">
                 
-                <div class="benefit-card anim-target">
-                    <h4>Global Remote Culture</h4>
-                    <p>We are a highly distributed team, offering unparalleled flexibility and the opportunity to collaborate with talent from around the world.</p>
+                <div class="company-card anim-target">
+                    <div class="card-header theme-ecommerce">
+                        <h3>TNG E-Commerce</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Focuses on proprietary digital retail platforms, logistics optimization, and direct-to-consumer brand management across specialized niches.</p>
+                        <ul style="list-style: none; padding: 0; margin-top: 0; font-size: 0.9em; color: #777;">
+                            <li>**Verticals:** Digital Retail, Brand Licensing, Supply Chain</li>
+                            <li>**Status:** Established, High Growth</li>
+                        </ul>
+                        <a href="https://www.shopify.com/blog/best-ecommerce-sites" class="cta-link">Visit Company Website &rarr;</a>
+                    </div>
                 </div>
 
-                <div class="benefit-card anim-target" style="transition-delay: 0.1s;">
-                    <h4>Cross-Industry Impact</h4>
-                    <p>Contribute to diverse projects—from e-commerce platforms to global gaming initiatives and strategic investments—all under one umbrella.</p>
+                <div class="company-card anim-target" style="transition-delay: 0.1s;">
+                    <div class="card-header theme-gaming">
+                        <h3>TNG Gaming Organization</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Dedicated to the development and monetization of competitive digital entertainment experiences and intellectual property in the gaming space.</p>
+                        <ul style="list-style: none; padding: 0; margin-top: 0; font-size: 0.9em; color: #777;">
+                            <li>**Verticals:** Game Development, IP Management, Esports</li>
+                            <li>**Status:** Strategic Expansion</li>
+                        </ul>
+                        <a href="https://www.reddit.com/r/gaming/comments/1d22ln8/what_are_the_best_gaming_websites_now/" class="cta-link">Visit Company Website &rarr;</a>
+                    </div>
                 </div>
 
-                <div class="benefit-card anim-target" style="transition-delay: 0.2s;">
-                    <h4>Accelerated Professional Growth</h4>
-                    <p>TNG fosters an environment of continuous learning, professional development, and fast-tracked leadership opportunities.</p>
+                <div class="company-card anim-target" style="transition-delay: 0.2s;">
+                    <div class="card-header theme-investment">
+                        <h3>TNG Investment Board</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Manages the Group's passive capital and strategic ventures, targeting high-yield investments in disruptive technology and stable assets.</p>
+                        <ul style="list-style: none; padding: 0; margin-top: 0; font-size: 0.9em; color: #777;">
+                            <li>**Verticals:** Venture Capital, Asset Management, Real Estate</li>
+                            <li>**Status:** Capital Preservation</li>
+                        </ul>
+                        <a href="https://money.usnews.com/investing/articles/best-investment-websites-for-beginners" class="cta-link">View Investment Mandate &rarr;</a>
+                    </div>
+                </div>
+                
+                <div class="company-card anim-target" style="transition-delay: 0.3s; opacity: 0.7;">
+                    <div class="card-header" style="background-color: var(--tng-silver);">
+                        <h3 style="color: var(--tng-blue);">New Venture</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>TNG is continuously evaluating and establishing new operational groups in sectors that align with our long-term growth and synergistic objectives.</p>
+                        <ul style="list-style: none; padding: 0; margin-top: 0; font-size: 0.9em; color: #777;">
+                            <li>**Verticals:** Research & Development, Strategic M&A</li>
+                            <li>**Status:** Planning/Incubation</li>
+                        </ul>
+                        <a href="/contact/investors" class="cta-link">Inquire About Partnership &rarr;</a>
+                    </div>
                 </div>
 
             </div>
         </section>
-        
-        <section class="content-section" style="margin-top: 50px;">
-            <h2>Current Openings Across TNG Group</h2>
-            <p style="max-width: 800px; margin: 0 auto 30px; color: #555;">Select a role below to start your application. The Role ID is automatically assigned.</p>
-            
-            <div class="openings-list" id="job-listings-container">
-                </div>
-
-            <p style="text-align: center; margin-top: 30px; font-style: italic; color: #777;">Don't see a role that fits? Email us your CV for future consideration: <a href="mailto:careers@tylernicholasgroup.com" style="color: var(--tng-maroon); font-weight: 600;">careers@tylernicholasgroup.com</a></p>
-        </section>
-        
     </main>
-
-    <div id="application-modal">
-        <div class="modal-content">
-            <span id="close-modal">&times;</span>
-            <h2 style="color: var(--tng-maroon); margin-top: 0; text-align: center;">TNG Group Job Application</h2>
-            <p style="text-align: center; color: #555;">*Required fields are marked with an asterisk.</p>
-            
-            <form id="tng-application-form" action="[YOUR_FORMSPREE_CODE]" method="POST" enctype="multipart/form-data">
-                
-                <h3 style="color: var(--tng-blue); border-bottom: 1px solid #eee; padding-bottom: 5px;">Role Details</h3>
-                <div style="margin-bottom: 15px;">
-                    <label for="apply-role-title">Applying for Role:*</label>
-                    <input type="text" id="apply-role-title" name="Role_Title" readonly required style="font-weight: 600;">
-                    <input type="hidden" id="apply-role-id" name="Role_ID">
-                </div>
-
-                <h3 style="color: var(--tng-blue); border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 25px;">Contact Information</h3>
-                
-                <div class="form-grid">
-                    <input type="text" name="Full_Name" placeholder="Full Name *" required>
-                    <input type="email" name="_replyto" placeholder="Email for Acceptance Message *" required>
-                    <input type="text" name="Discord_Username" placeholder="Discord Username (e.g., user.name) *" required>
-                    <input type="text" name="Discord_ID" placeholder="Discord ID (Numbers Only) *" required>
-                    <input type="number" name="Age" placeholder="Age *" min="16" required>
-                    <input type="text" name="Country_of_Residence" placeholder="Country of Residence *" required>
-                </div>
-
-                <div style="margin-top: 15px;">
-                    <input type="text" name="Roblox_Username" id="roblox-user" placeholder="Roblox Username (Optional)" style="margin-bottom: 15px;">
-                </div>
-
-                <h3 style="color: var(--tng-blue); border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 25px;">Documents & Experience</h3>
-                
-                <div style="margin-top: 15px;">
-                    <label for="cv-file" style="display: block; margin-bottom: 5px; font-weight: 600;">Attach CV/Resume (PDF/Image/Document) *</label>
-                    <input type="file" id="cv-file" name="CV_Resume_File" required accept=".pdf,.png,.jpg,.jpeg,.doc,.docx" style="margin-bottom: 15px;">
-                    
-                    <input type="url" name="Linkedln_Account" placeholder="LinkedIn Account Page (Optional - Recommended to have one)">
-                </div>
-
-                <div style="margin-top: 15px;">
-                    <label for="why-apply" style="display: block; margin-bottom: 5px; font-weight: 600;">Why are you applying for this role? *</label>
-                    <textarea id="why-apply" name="Why_Are_You_Applying" rows="4" required placeholder="Tell us about your motivation..."></textarea>
-                    
-                    <label for="experience" style="display: block; margin-bottom: 5px; font-weight: 600; margin-top: 15px;">Do you have any experience in this field? *</label>
-                    <textarea id="experience" name="Experience_In_Field" rows="3" required placeholder="TNG does not require experience. We love to educate and let our staff learn new experiences."></textarea>
-                </div>
-                
-                <input type="hidden" name="_next" value="/careers/success.html">
-                <input type="hidden" name="_error" value="/careers/error.html">
-
-                <button type="submit">Submit Application</button>
-            </form>
-        </div>
-    </div>
-
 
     <footer>
         <div class="footer-content">
@@ -344,87 +416,33 @@
     </footer>
 
     <script>
-        // --- 1. SIMULATED JOB DATA ---
-        // HR team can reference this list to know what jobs exist.
-        const JOB_DATA = [
-            { id: '1A9F', title: 'Group Strategy Analyst', department: 'TNG Core', location: 'Remote, Global', requiredRoblox: false },
-            { id: '2B1E', title: 'Lead Full Stack Engineer', department: 'TNG E-Commerce', location: 'Remote, Global', requiredRoblox: false },
-            { id: '3C5G', title: 'Flight Operations Manager', department: 'TNG Flight Ops', location: 'Remote, Global', requiredRoblox: true },
-            { id: '4D8H', title: 'Senior Game Designer', department: 'TNG Gaming Organization', location: 'Remote, EMEA/APAC', requiredRoblox: false },
-            { id: '5E2J', title: 'Legal & Compliance Officer', department: 'TNG Core/Governance', location: 'Remote, Americas', requiredRoblox: false },
-        ];
-        
         document.addEventListener('DOMContentLoaded', function() {
-            // --- 2. Scroll Animation Setup ---
+            // Get all elements designated for animation
             const targets = document.querySelectorAll('.anim-target');
+
+            // Set the observer options
+            const options = {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            };
+
+            // Intersection Observer Callback
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
+                        // Add the 'revealed' class to trigger the CSS animation
                         entry.target.classList.add('revealed');
+                        // Stop observing once it's revealed
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1 });
-            targets.forEach(target => { observer.observe(target); });
-            
-            // --- 3. Job Listing Generation ---
-            const jobContainer = document.getElementById('job-listings-container');
-            jobContainer.innerHTML = ''; 
+            }, options);
 
-            JOB_DATA.forEach((job, index) => {
-                const listing = document.createElement('div');
-                listing.className = 'job-listing anim-target';
-                // Add a slight delay for staggered animation
-                listing.style.transitionDelay = `${index * 0.1}s`; 
-                listing.setAttribute('data-job-id', job.id);
-                listing.setAttribute('data-job-title', job.title);
-                
-                listing.innerHTML = `
-                    <div class="job-details">
-                        <h3>${job.title} (ID: ${job.id})</h3>
-                        <p>${job.department} - ${job.location}</p>
-                    </div>
-                    <a href="#" class="apply-button" data-job-id="${job.id}" data-job-title="${job.title}">Apply Now</a>
-                `;
-                jobContainer.appendChild(listing);
-                observer.observe(listing);
+            // Observe each target element
+            targets.forEach(target => {
+                observer.observe(target);
             });
-
-            // --- 4. Modal and Form Handling ---
-            const modal = document.getElementById('application-modal');
-            const closeModal = document.getElementById('close-modal');
-            const applyRoleTitle = document.getElementById('apply-role-title');
-            const applyRoleId = document.getElementById('apply-role-id');
-            const robloxInput = document.getElementById('roblox-user');
-
-            // Open Modal when "Apply Now" is clicked
-            document.body.addEventListener('click', function(e) {
-                if (e.target.classList.contains('apply-button')) {
-                    e.preventDefault();
-                    const jobTitle = e.target.getAttribute('data-job-title');
-                    const jobId = e.target.getAttribute('data-job-id');
-                    
-                    const jobDetails = JOB_DATA.find(j => j.id === jobId);
-
-                    applyRoleTitle.value = jobTitle;
-                    applyRoleId.value = jobId;
-                    
-                    // Conditionally set Roblox requirement
-                    if (jobDetails && jobDetails.requiredRoblox) {
-                        robloxInput.setAttribute('placeholder', 'Roblox Username (REQUIRED for Flight Operations)');
-                        robloxInput.required = true;
-                    } else {
-                        robloxInput.setAttribute('placeholder', 'Roblox Username (Optional)');
-                        robloxInput.required = false;
-                    }
-
-                    modal.style.display = 'block';
-                }
-            });
-
-            // Close Modal handlers
-            closeModal.onclick = () => { modal.style.display = 'none'; };
-            window.onclick = (e) => { if (e.target == modal) { modal.style.display = 'none'; } };
         });
     </script>
 
