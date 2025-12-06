@@ -4,19 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tyler Nicholas Group - Under Construction</title>
+    
+    <link rel="icon" type="image/png" href="images/logo.png">
+
     <style>
+        /* BASE STYLES */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f4f7f9;
             color: #333;
             text-align: center;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            overflow: hidden; /* Hide overflow during initial load/animation */
         }
 
+        /* 3. LOADING SCREEN STYLES AND ANIMATION */
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1f3a93; /* Match the corporate title color */
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease-out, visibility 1s ease-out;
+        }
+
+        .loader {
+            border: 8px solid #f3f3f3; /* Light border */
+            border-top: 8px solid #ffffff; /* White loading part */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1.5s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Hiding the loader after animation */
+        .hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* MAIN CONTENT STYLES */
         .container {
             flex-grow: 1;
             display: flex;
@@ -24,32 +65,61 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            opacity: 0; /* Start invisible for entrance animation */
+            transform: translateY(20px); /* Start slightly down for slide-up */
+            transition: opacity 1s ease-out 1s, transform 1s ease-out 1s; /* Delay entrance after loader hides */
+        }
+        
+        /* Entrance animation for main content */
+        .show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         header h1 {
-            color: #1f3a93; /* A professional blue color */
+            color: #1f3a93; /* Professional blue */
             margin-bottom: 5px;
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+
+        header h2 {
+            color: #555;
+            font-size: 1.2em;
+            font-weight: 300;
         }
 
         .content {
-            background-color: #fff;
-            padding: 40px 60px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
+            background-color: #ffffff;
+            padding: 50px 70px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
             width: 90%;
-            margin: 20px 0;
+            margin: 30px 0;
+            border-top: 4px solid #1f3a93; /* A corporate touch */
         }
 
         .content p {
-            font-size: 1.1em;
-            line-height: 1.6;
+            font-size: 1.2em;
+            line-height: 1.7;
+            margin-bottom: 20px;
         }
 
+        strong {
+            color: #1f3a93; /* Highlight key corporate messages */
+        }
+
+        /* 2. CONTACT EMAIL STYLING (Blue like the title) */
         .contact-email {
-            font-weight: bold;
-            color: #d9534f; /* A color to draw attention to the contact method */
+            font-weight: 600;
+            color: #1f3a93; 
             text-decoration: none;
+            transition: color 0.3s;
+        }
+        .contact-email:hover {
+            color: #0d2a6a; /* Darker blue on hover */
+            text-decoration: underline;
         }
 
         footer {
@@ -58,25 +128,35 @@
             background-color: #333;
             color: #fff;
             font-size: 0.9em;
-            margin-top: auto; /* Pushes the footer to the bottom */
+            margin-top: auto;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div id="loader-wrapper">
+        <div class="loader"></div>
+    </div>
+
+    <div class="container" id="main-content">
         <header>
             <h1>Tyler Nicholas Group</h1>
-            <h2>Holding Group Company</h2>
+            <h2>Global Holding Group Company</h2>
         </header>
 
         <div class="content">
-            <p><strong>Website Under Construction</strong></p>
-            <p>We are currently working hard to bring you a new and improved online experience.</p>
-            <p>All our services are temporarily **offline**.</p>
-            <p>For immediate assistance or urgent inquiries, please contact us directly:</p>
+            <p><strong>Website Under Development</strong></p>
             <p>
-                Email: <a href="mailto:support@tylernicholasgroup.com" class="contact-email">support@tylernicholasgroup.com</a>
+                The Tyler Nicholas Group is diligently working to launch a **robust digital platform** to better serve our stakeholders and showcase our diversified corporate portfolio. 
+            </p>
+            <p>
+                Please note that all primary business services are temporarily **offline** as we transition systems. We anticipate the launch of our new site shortly.
+            </p>
+            <p>
+                For immediate support, partnership inquiries, or urgent operational matters, please utilize the contact information below:
+            </p>
+            <p>
+                Email Support: <a href="mailto:support@tylernicholasgroup.com" class="contact-email">support@tylernicholasgroup.com</a>
             </p>
         </div>
     </div>
@@ -84,6 +164,28 @@
     <footer>
         &copy; 2025 Tyler Nicholas Group. All Rights Reserved.
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const loaderWrapper = document.getElementById('loader-wrapper');
+            const mainContent = document.getElementById('main-content');
+            
+            // Set the loading time (10 seconds as requested)
+            const loadingTime = 10000; // 10000 milliseconds = 10 seconds
+
+            setTimeout(function() {
+                // Hide the loader wrapper
+                loaderWrapper.classList.add('hidden');
+                
+                // Show the main content with the entrance animation
+                mainContent.classList.add('show');
+                
+                // Optional: Re-enable scrolling after the animation
+                document.body.style.overflow = 'auto';
+
+            }, loadingTime);
+        });
+    </script>
 
 </body>
 </html>
