@@ -4,495 +4,191 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our People | Tyler Nicholas Group (TNG)</title>
-
     <link rel="icon" type="image/png" href="image/logo.png">
-
-    <style>
-        /* ==================== CORPORATE CSS (Reusable Styles) ==================== */
-        :root {
-            --tng-blue: #001F4C;
-            --tng-maroon: #A81F27;
-            --tng-silver: #C0C0C0;
-            --tng-light-gray: #f4f4f4;
-            --tng-text-dark: #333;
-            --tng-text-light: #ffffff;
-            --transition-speed: 0.8s ease-out;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--tng-text-dark);
-            background-color: var(--tng-light-gray);
-            line-height: 1.6;
-        }
-
-        /* === HEADER & NAVIGATION === */
-        header {
-            background-color: var(--tng-blue);
-            color: var(--tng-text-light);
-            padding: 15px 40px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-        .logo {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: var(--tng-silver);
-            text-decoration: none;
-        }
-        nav a, .more-menu-toggle {
-            color: var(--tng-silver);
-            text-decoration: none;
-            padding: 10px 15px;
-            margin-left: 10px;
-            font-size: 0.95em;
-            font-weight: 500;
-            border-radius: 4px;
-        }
-        nav a:hover {
-            color: var(--tng-text-light);
-            background-color: rgba(168, 31, 39, 0.5); 
-        }
-
-        /* More Menu Dropdown */
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-content { display: none; position: absolute; right: 0; background-color: var(--tng-blue); min-width: 200px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; border-top: 3px solid var(--tng-maroon); }
-        .dropdown-content a { color: var(--tng-silver); padding: 12px 16px; text-decoration: none; display: block; margin: 0; }
-        .dropdown-content a:hover { background-color: var(--tng-maroon); color: var(--tng-text-light); }
-        .dropdown:hover .dropdown-content { display: block; }
-
-        /* === MAIN CONTENT LAYOUT === */
-        main { max-width: 1100px; margin: 40px auto; padding: 20px; }
-        .content-section { margin-bottom: 50px; padding-top: 20px; }
-        .content-section h2 { 
-            font-size: 2.2em; 
-            color: var(--tng-blue); 
-            margin-bottom: 30px; 
-            border-bottom: 3px solid var(--tng-maroon); 
-            padding-bottom: 10px;
-            display: block;
-            text-align: left;
-        }
-        .content-section h3 {
-            font-size: 1.5em;
-            color: var(--tng-maroon);
-            border-left: 5px solid var(--tng-maroon);
-            padding-left: 10px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-        }
-        
-        /* === PEOPLE CARD GRID === */
-        .people-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
-        }
-        .person-card {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid var(--tng-blue);
-        }
-        .person-card:hover { 
-            transform: translateY(-5px); 
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); 
-        }
-        .profile-pic {
-            width: 100%;
-            height: 250px; /* Standardized height */
-            object-fit: cover;
-            border-bottom: 3px solid var(--tng-maroon);
-        }
-        .card-info {
-            padding: 20px;
-        }
-        .card-info h4 {
-            color: var(--tng-blue);
-            font-size: 1.2em;
-            margin: 0 0 5px 0;
-        }
-        .card-info p {
-            color: #666;
-            font-size: 0.9em;
-            margin: 0;
-            font-weight: 500;
-        }
-        .vacant-link {
-            display: block;
-            margin-top: 15px;
-            padding: 10px 0;
-            background-color: var(--tng-maroon);
-            color: var(--tng-text-light);
-            text-decoration: none;
-            font-weight: 700;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        .vacant-link:hover {
-            background-color: #8C1A21;
-        }
-
-        /* === ORGANIZATIONAL CONNECTOR (NEW) === */
-        .org-connector {
-            text-align: center;
-            margin: 60px 0 20px;
-        }
-        .org-connector .line {
-            width: 2px;
-            height: 40px;
-            background-color: var(--tng-maroon);
-            margin: 0 auto;
-            position: relative;
-        }
-        .org-connector .line::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: -4px;
-            width: 0;
-            height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 8px solid var(--tng-maroon);
-        }
-        .org-connector p {
-            font-size: 1.1em;
-            font-style: italic;
-            color: var(--tng-blue);
-            font-weight: 600;
-            margin: 10px 0 0;
-        }
-
-        /* === CORPORATE FOOTER (Reused) === */
-        footer { background-color: var(--tng-blue); color: var(--tng-silver); padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px; }
-        .footer-content { display: flex; justify-content: space-between; max-width: 1300px; margin: 0 auto; padding: 0 40px 30px; flex-wrap: wrap; }
-        .footer-section { width: 28%; min-width: 250px; margin-bottom: 20px; }
-        .footer-section h4 { color: var(--tng-maroon); font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px; }
-        .footer-section a { color: var(--tng-silver); text-decoration: none; display: block; margin-bottom: 8px; }
-        .footer-bottom { background-color: #00122E; text-align: center; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-    </style>
-</head>
+    
+    </head>
 <body>
 
-    <header>
-        <div class="navbar">
-            <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
-            <nav>
-                <a href="/">Home</a>
-                <a href="/about">About Us</a>
-                <a href="/companies">Our Companies</a>
-                <a href="/people" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Our People</a>
-                <a href="/governance">Governance</a>
-                <a href="/careers">Careers</a>
-                
-                <div class="dropdown">
-                    <button class="more-menu-toggle">More</button>
-                    <div class="dropdown-content">
-                        <a href="/governance/board">Board of Directors</a>
-                        <a href="/governance/code-of-conduct">Code of Conduct</a>
-                        <a href="/governance/reports">Financial Reporting</a>
-                        <a href="/contact/investors">Investor Relations</a>
-                        <a href="/contact/media">Media & Press</a>
-                    </div>
-                </div>
-            </nav>
+    <div id="preloader">
+        <div class="loader-content">
+            <h2 id="loading-text">We are loading our latest update to these pages, please give a moment.</h2>
+            <div class="loader"></div>
         </div>
-    </header>
+        <div class="loader-buttons">
+            <a href="/">Home</a>
+            <a href="/careers">Careers</a>
+            <a href="/contact">Contact</a>
+        </div>
+    </div>
 
-    <main>
-        <h1>Group Leadership & Corporate Structure</h1>
-        <p style="font-size: 1.1em; max-width: 800px; margin-bottom: 40px;">
-            The Tyler Nicholas Group is governed by two layers of dedicated leadership: the TNG Core Executive Team overseeing the holding company, and specialized leadership for our portfolio entities.
-        </p>
-
-        <section class="content-section">
-            <h2>Tyler Nicholas Group (TNG) Leadership</h2>
-            
-            <h3>TNG Core Executive Leadership</h3>
-            <div class="people-grid">
-                
-                <div class="person-card">
-                    <img src="image/tyler-nicholas.png" alt="Profile of Tyler Nicholas" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Tyler Nicholas</h4>
-                        <p>Chairman Of The Board</p>
-                    </div>
-                </div>
-
-                <div class="person-card">
-                    <img src="image/apply.png" alt="Apply Now" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Chief Executive Officer</h4>
-                        <p>Vacant Position</p>
-                        <a href="/careers" class="vacant-link">Apply Now</a>
-                    </div>
-                </div>
-
-                <div class="person-card">
-                    <img src="image/william-cross.png" alt="Profile of William Cross" class="profile-pic">
-                    <div class="card-info">
-                        <h4>William Alexander Cross</h4>
-                        <p>Chief Human Resources Officer</p>
-                    </div>
-                </div>
-
-                <div class="person-card">
-                    <img src="image/angie-pittman.png" alt="Profile of Angie Pittman" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Angie Pittman</h4>
-                        <p>Chief Technology Officer</p>
-                    </div>
-                </div>
-
-                <div class="person-card">
-                    <img src="image/apply.png" alt="Apply Now" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Chief Financial Officer</h4>
-                        <p>Vacant Position</p>
-                        <a href="/careers" class="vacant-link">Apply Now</a>
-                    </div>
-                </div>
-
+    <div id="main-content-wrapper">
+        <header>
+            <div class="navbar">
+                <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
+                <nav>
+                    <a href="/">Home</a>
+                    <a href="/about">About Us</a>
+                    <a href="/companies">Our Companies</a>
+                    <a href="/people" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Our People</a>
+                    <a href="/governance">Governance</a>
+                    <a href="/careers">Careers</a>
+                </nav>
             </div>
+        </header>
+
+        <main>
+            <h1>Tyler Nicholas Group (TNG) Leadership</h1>
+            <p style="font-size: 1.1em; max-width: 800px; margin-bottom: 40px;">
+                The TNG Core Executive Team oversees the strategic direction, growth, and governance of the entire holding company and its diversified portfolio.
+            </p>
+
+            <section class="content-section">
+                <h3>TNG Core Executive Leadership</h3>
+                <div class="people-grid">
+                    
+                    <div class="person-card tng-pro">
+                        <div class="profile-header">
+                            <img src="image/tyler-nicholas.png" alt="Profile of Tyler Nicholas" class="profile-pic">
+                            <div class="header-text">
+                                <h4>Tyler Nicholas</h4>
+                                <p>Chairman Of The Board</p>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <p class="bio">Visionary founder driving global strategy and long-term innovation across all TNG entities, setting the core values and mission for the group.</p>
+                        </div>
+                        <div class="contact-info">
+                            <a href="mailto:tyler.n@tylernicholasgroup.com">tyler.n@tylernicholasgroup.com</a>
+                            <a href="https://linkedin.com/in/tylernicholas" target="_blank">LinkedIn Profile</a>
+                        </div>
+                    </div>
+
+                    <div class="person-card tng-pro vacant-card">
+                        <img src="image/apply.png" alt="Apply Now" class="profile-pic" style="width: 120px; height: 120px;">
+                        <div class="card-info" style="text-align: center;">
+                            <h4 style="font-size: 1.5em; margin-bottom: 10px;">Chief Executive Officer</h4>
+                            <p style="color: var(--tng-maroon); font-weight: 700;">VACANT POSITION</p>
+                            <p class="bio" style="font-size: 0.9em;">This pivotal role will lead TNG's day-to-day operations and execute the Board's strategic vision.</p>
+                        </div>
+                        <a href="/careers" class="vacant-link">Apply Now - View Job Description</a>
+                    </div>
+
+                    <div class="person-card tng-pro">
+                        <div class="profile-header">
+                            <img src="image/william-cross.png" alt="Profile of William Cross" class="profile-pic">
+                            <div class="header-text">
+                                <h4>William Alexander Cross</h4>
+                                <p>Chief Human Resources Officer</p>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <p class="bio">Oversees talent acquisition, legal compliance, and strategic human capital development, ensuring TNG remains a top global employer.</p>
+                        </div>
+                        <div class="contact-info">
+                            <a href="mailto:w.cross@tylernicholasgroup.com">w.cross@tylernicholasgroup.com</a>
+                            <a href="https://linkedin.com/in/williamacross" target="_blank">LinkedIn Profile</a>
+                        </div>
+                    </div>
+
+                    <div class="person-card tng-pro">
+                        <div class="profile-header">
+                            <img src="image/angie-pittman.png" alt="Profile of Angie Pittman" class="profile-pic">
+                            <div class="header-text">
+                                <h4>Angie Pittman</h4>
+                                <p>Chief Technology Officer</p>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <p class="bio">Leads TNG's digital transformation initiatives, ensuring the integration of cutting-edge technology and innovation across all subsidiaries.</p>
+                        </div>
+                        <div class="contact-info">
+                            <a href="mailto:a.pittman@tylernicholasgroup.com">a.pittman@tylernicholasgroup.com</a>
+                            <a href="https://linkedin.com/in/angiepittman" target="_blank">LinkedIn Profile</a>
+                        </div>
+                    </div>
+
+                    <div class="person-card tng-pro vacant-card">
+                        <img src="image/apply.png" alt="Apply Now" class="profile-pic" style="width: 120px; height: 120px;">
+                        <div class="card-info" style="text-align: center;">
+                            <h4 style="font-size: 1.5em; margin-bottom: 10px;">Chief Financial Officer</h4>
+                            <p style="color: var(--tng-maroon); font-weight: 700;">VACANT POSITION</p>
+                            <p class="bio" style="font-size: 0.9em;">Responsible for all group financial strategy, reporting, and investor relations. A critical, high-impact role.</p>
+                        </div>
+                        <a href="/careers" class="vacant-link">Apply Now - View Job Description</a>
+                    </div>
+
+                </div>
+            </section>
             
             <hr style="margin: 50px 0;">
 
-            <h3>TNG Subsidiary Leaders</h3>
-            <div class="people-grid">
-                
-                <div class="person-card">
-                    <img src="image/apply.png" alt="Apply Now" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Head Of TNG E-Commerce</h4>
-                        <p>Vacant Position</p>
-                        <a href="/careers" class="vacant-link">Apply Now</a>
+            <section class="content-section">
+                <h3>TNG Subsidiary Leaders</h3>
+                <p>These roles oversee our key business verticals. For the full Emirates Group Roblox leadership, please visit the dedicated page below.</p>
+                <div class="people-grid">
+                    
+                    <div class="person-card tng-pro vacant-card">
+                        <img src="image/apply.png" alt="Apply Now" class="profile-pic" style="width: 120px; height: 120px;">
+                        <div class="card-info" style="text-align: center;">
+                            <h4 style="font-size: 1.5em; margin-bottom: 10px;">Head Of TNG E-Commerce</h4>
+                            <p style="color: var(--tng-maroon); font-weight: 700;">VACANT POSITION</p>
+                            <p class="bio" style="font-size: 0.9em;">Will drive the strategic expansion and digital footprint of all group e-commerce initiatives.</p>
+                        </div>
+                        <a href="/careers" class="vacant-link">Apply Now - View Job Description</a>
+                    </div>
+
+                    <div class="person-card tng-pro vacant-card">
+                        <img src="image/apply.png" alt="Apply Now" class="profile-pic" style="width: 120px; height: 120px;">
+                        <div class="card-info" style="text-align: center;">
+                            <h4 style="font-size: 1.5em; margin-bottom: 10px;">CEO Of TNG Gaming Organizations</h4>
+                            <p style="color: var(--tng-maroon); font-weight: 700;">VACANT POSITION</p>
+                            <p class="bio" style="font-size: 0.9em;">Leads our entire interactive entertainment division, including the Emirates Group Roblox team.</p>
+                        </div>
+                        <a href="/careers" class="vacant-link">Apply Now - View Job Description</a>
+                    </div>
+
+                    <div class="person-card tng-pro vacant-card">
+                        <img src="image/apply.png" alt="Apply Now" class="profile-pic" style="width: 120px; height: 120px;">
+                        <div class="card-info" style="text-align: center;">
+                            <h4 style="font-size: 1.5em; margin-bottom: 10px;">Director Of TNG Investment Board</h4>
+                            <p style="color: var(--tng-maroon); font-weight: 700;">VACANT POSITION</p>
+                            <p class="bio" style="font-size: 0.9em;">Manages the strategic deployment of capital for new ventures and portfolio management.</p>
+                        </div>
+                        <a href="/careers" class="vacant-link">Apply Now - View Job Description</a>
                     </div>
                 </div>
 
-                <div class="person-card" id="tng-gaming-ceo">
-                    <img src="image/apply.png" alt="Apply Now" class="profile-pic">
-                    <div class="card-info">
-                        <h4>CEO Of TNG Gaming Organizations</h4>
-                        <p>Vacant Position</p>
-                        <a href="/careers" class="vacant-link">Apply Now</a>
-                    </div>
+                <div style="text-align: center; margin-top: 50px;">
+                    <a href="people/emirates-group-roblox.html" class="vacant-link" style="width: auto; padding: 15px 30px; border-radius: 8px;">
+                        View Emirates Group Roblox Leadership Team
+                    </a>
                 </div>
+            </section>
+        </main>
 
-                <div class="person-card">
-                    <img src="image/apply.png" alt="Apply Now" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Director Of TNG Investment Board</h4>
-                        <p>Vacant Position</p>
-                        <a href="/careers" class="vacant-link">Apply Now</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="org-connector">
-            <div class="line"></div>
-            <p>Direct oversight of the following subsidiary:</p>
-            <div class="line" style="height: 10px;"></div>
         </div>
 
-        <section class="content-section">
-            <h2 style="border-bottom-color: var(--tng-blue);">Emirates Group Roblox Leadership (TNG Gaming Organization Subsidiary)</h2>
+    <script>
+        const PRELOADER_DISPLAY_TIME = 15000; 
 
-            <h3>Board Of Directors</h3>
-            <div class="people-grid">
-                
-                <div class="person-card">
-                    <img src="image/tyler-nicholas.png" alt="Profile of Tyler Nicholas" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Tyler Nicholas</h4>
-                        <p>Owner & Founder</p>
-                    </div>
-                </div>
+        document.addEventListener('DOMContentLoaded', function() {
+            const preloader = document.getElementById('preloader');
+            const mainContentWrapper = document.getElementById('main-content-wrapper');
 
-                <div class="person-card">
-                    <img src="image/kareem-malhas.png" alt="Profile of Kareem Malhas" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Kareem Malhas</h4>
-                        <p>Chairman Of The Board</p>
-                    </div>
-                </div>
+            // Wait for 15 seconds
+            setTimeout(() => {
+                // 1. Start the preloader fade-out (CSS transition handles the 0.5s fade)
+                preloader.style.opacity = '0';
 
-                <div class="person-card">
-                    <img src="image/fishy-wishy.png" alt="Profile of Fishy Wishy" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Fishy Wishy</h4>
-                        <p>Vice Chairman Of The Board</p>
-                    </div>
-                </div>
-
-                <div class="person-card">
-                    <img src="image/remo-perissinotto.png" alt="Profile of Remo Perissinotto" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Remo Perissinotto</h4>
-                        <p>President & Chief Executive Officer</p>
-                    </div>
-                </div>
-
-                <div class="person-card">
-                    <img src="image/ash-khadija.png" alt="Profile of Ash Khadija" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Ash Khadija</h4>
-                        <p>Chairwoman Of Fly Dubai</p>
-                    </div>
-                </div>
-
-                <div class="person-card">
-                    <img src="image/ibaad-hassan.png" alt="Profile of Ibaad Hassan" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Ibaad Hassan</h4>
-                        <p>Chief Of Administration</p>
-                    </div>
-                </div>
-
-                <div class="person-card">
-                    <img src="image/apply.png" alt="Apply Now" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Executive Assistant</h4>
-                        <p>Vacant Position</p>
-                        <a href="/careers" class="vacant-link">Apply Now</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <hr style="margin: 50px 0;">
-
-            <h3>Office of the President & Chief Executive Officer</h3>
-            <div class="people-grid">
-                
-                <div class="person-card">
-                    <img src="image/william-cross.png" alt="Profile of William Cross" class="profile-pic">
-                    <div class="card-info">
-                        <h4>William Alexander Cross</h4>
-                        <p>Chief Human Resources & Legal Officer</p>
-                    </div>
-                </div>
-
-                <div class="person-card">
-                    <img src="image/apply.png" alt="Apply Now" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Chief Communications Officer</h4>
-                        <p>Vacant Position</p>
-                        <a href="/careers" class="vacant-link">Apply Now</a>
-                    </div>
-                </div>
-
-                <div class="person-card">
-                    <img src="image/kayden-pherson.png" alt="Profile of Kayden Pherson" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Kayden Pherson</h4>
-                        <p>Chief Strategy Officer</p>
-                    </div>
-                </div>
-
-                <div class="person-card">
-                    <img src="image/apply.png" alt="Apply Now" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Chief Financial Officer</h4>
-                        <p>Vacant Position</p>
-                        <a href="/careers" class="vacant-link">Apply Now</a>
-                    </div>
-                </div>
-
-                <div class="person-card">
-                    <img src="image/apply.png" alt="Apply Now" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Chief Safety & Compliance Officer</h4>
-                        <p>Vacant Position</p>
-                        <a href="/careers" class="vacant-link">Apply Now</a>
-                    </div>
-                </div>
-
-                <div class="person-card">
-                    <img src="image/marios-tassopoulos.png" alt="Profile of Marios Tassopoulos" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Marios Tassopoulos</h4>
-                        <p>Chief Technology Officer</p>
-                    </div>
-                </div>
-                
-                <div class="person-card">
-                    <img src="image/hani-muhammed.png" alt="Profile of Hani Muhammed" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Hani Muhammed</h4>
-                        <p>Chief Commercial & Marketing Officer</p>
-                    </div>
-                </div>
-
-                <div class="person-card">
-                    <img src="image/apply.png" alt="Apply Now" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Chief Operating Officer</h4>
-                        <p>Vacant Position</p>
-                        <a href="/careers" class="vacant-link">Apply Now</a>
-                    </div>
-                </div>
-
-                <div class="person-card">
-                    <img src="image/theodore-ryashchin.png" alt="Profile of Theodore Ryashchin" class="profile-pic">
-                    <div class="card-info">
-                        <h4>Theodore Ryashchin</h4>
-                        <p>Chief Training & Development Officer</p>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-        
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>TNG Global Headquarters</h4>
-                <p>Tyler Nicholas Group operates as a remote-first organization.</p>
-                <p>Official Headquarters & Group Communications:<br>
-                <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
-                <p>General Inquiries:<br>
-                <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="/about">About TNG</a>
-                <a href="/companies">Our Companies</a>
-                <a href="/people">Our People</a>
-                <a href="/governance">Governance</a>
-                <a href="/careers">Careers</a>
-            </div>
-            <div class="footer-section">
-                <h4>Legal & Policy</h4>
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/terms">Terms of Use</a>
-                <a href="/governance/legal">Legal & Compliance</a>
-                <a href="/accessibility">Accessibility Statement</a>
-                <a href="/governance/reports">Financial Reports</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
-        </div>
-    </footer>
-
+                // 2. After preloader is invisible, remove it from the DOM 
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    
+                    // 3. Reveal the main content wrapper (fade-in)
+                    mainContentWrapper.classList.add('loaded');
+                }, 500); 
+            }, PRELOADER_DISPLAY_TIME);
+        });
+    </script>
 </body>
 </html>
