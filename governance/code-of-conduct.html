@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code of Conduct | TNG Governance</title>
+    <link rel="icon" type="image/png" href="../image/logo.png">
+    
+    <style>
+        /* ==================== CORPORATE CSS (Re-used Styles) ==================== */
+        :root {
+            --tng-blue: #001F4C;
+            --tng-maroon: #A81F27;
+            --tng-silver: #C0C0C0;
+            --tng-light-gray: #f4f4f4;
+            --tng-text-dark: #333;
+            --tng-text-light: #ffffff;
+            --transition-speed: 0.5s ease-out;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--tng-text-dark);
+            background-color: var(--tng-light-gray);
+            line-height: 1.6;
+        }
+
+        /* === HEADER & NAVIGATION === */
+        header {
+            background-color: var(--tng-blue);
+            color: var(--tng-text-light);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--tng-silver);
+            text-decoration: none;
+        }
+        nav a {
+            color: var(--tng-silver);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            font-size: 0.95em;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            color: var(--tng-text-light);
+            background-color: rgba(168, 31, 39, 0.5); 
+        }
+
+        /* === MAIN CONTENT LAYOUT === */
+        main { max-width: 900px; margin: 40px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); }
+        .content-section { margin-bottom: 30px; }
+        h1 { 
+            font-size: 2.5em; 
+            color: var(--tng-blue); 
+            margin-bottom: 10px; 
+            border-bottom: 3px solid var(--tng-maroon); 
+            padding-bottom: 10px;
+        }
+        h2 {
+            font-size: 1.8em;
+            color: var(--tng-maroon);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        h3 {
+            font-size: 1.3em;
+            color: var(--tng-blue);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--tng-maroon);
+            padding-left: 10px;
+        }
+        p { margin-bottom: 15px; color: #444; }
+        ul { margin: 15px 0 15px 25px; color: #555; }
+        ul li { margin-bottom: 8px; }
+
+        /* === GOVERNANCE NAVIGATION === */
+        .governance-nav {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 2px solid var(--tng-maroon);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .governance-nav a {
+            color: var(--tng-blue);
+            text-decoration: none;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom 0.3s, color 0.3s;
+            font-weight: 600;
+        }
+        .governance-nav a:hover, .governance-nav a.active {
+            border-bottom: 2px solid var(--tng-maroon);
+            color: var(--tng-maroon);
+        }
+        
+        /* === CORPORATE FOOTER (Reused) === */
+        footer { background-color: var(--tng-blue); color: var(--tng-silver); padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px; }
+        .footer-content { display: flex; justify-content: space-between; max-width: 1300px; margin: 0 auto; padding: 0 40px 30px; flex-wrap: wrap; }
+        .footer-section { width: 28%; min-width: 250px; margin-bottom: 20px; }
+        .footer-section h4 { color: var(--tng-maroon); font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px; }
+        .footer-section a { color: var(--tng-silver); text-decoration: none; display: block; margin-bottom: 8px; }
+        .footer-bottom { background-color: #00122E; text-align: center; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
+            <nav>
+                <a href="../">Home</a>
+                <a href="../about">About Us</a>
+                <a href="../companies">Our Companies</a>
+                <a href="../people">Our People</a>
+                <a href="../governance" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Governance</a>
+                <a href="../careers">Careers</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="governance-nav">
+        <a href="../governance/board-of-directors.html">Board of Directors</a>
+        <a href="../governance/code-of-conduct.html" class="active">Code of Conduct</a>
+        <a href="../investor.html">Investor Relations</a>
+        <a href="../media-press.html">Media & Press</a>
+    </div>
+
+    <main>
+        <h1>Code of Conduct</h1>
+        <p>
+            The Tyler Nicholas Group is committed to the highest standards of ethics and integrity. This Code of Conduct provides a framework for how we work and interact with our employees, partners, investors, and the public.
+        </p>
+
+        <section class="content-section">
+            <h2>Our Core Values</h2>
+            <ul>
+                <li>**Integrity:** Always act honestly and ethically in all business dealings.</li>
+                <li>**Respect:** Treat all colleagues, partners, and customers with dignity and respect, fostering an inclusive environment.</li>
+                <li>**Accountability:** Take ownership of actions and decisions, upholding professional and fiduciary responsibilities.</li>
+                <li>**Innovation:** Encourage curiosity and actively seek improvements in our products, services, and processes.</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>Employee Responsibilities</h2>
+            <h3>Conflict of Interest</h3>
+            <p>Employees must avoid any situation where their personal interests conflict or appear to conflict with the interests of TNG. This includes gifts, outside employment, and financial dealings with competitors or suppliers.</p>
+
+            <h3>Confidential Information</h3>
+            <p>All non-public information about TNG, its subsidiaries, and its customers is confidential. Employees must protect this information and must not disclose it to unauthorized parties, especially when trading in our securities (Insider Trading).</p>
+
+            <h3>Non-Discrimination and Anti-Harassment</h3>
+            <p>TNG maintains a zero-tolerance policy for discrimination, bullying, and harassment based on any protected characteristic. We are dedicated to maintaining a professional and inclusive workplace.</p>
+        </section>
+
+        <section class="content-section">
+            <h2>Reporting and Enforcement</h2>
+            <h3>Reporting Violations</h3>
+            <p>Any employee, contractor, or stakeholder who suspects a violation of this Code should report it immediately to their manager, the Chief Human Resources Officer, or through the anonymous Ethics Hotline (details provided internally).</p>
+
+            <h3>Consequences</h3>
+            <p>Violations of the Code of Conduct will result in disciplinary action, up to and including termination of employment and, where warranted, legal action.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>TNG Global Headquarters</h4>
+                <p>Tyler Nicholas Group operates as a remote-first organization.</p>
+                <p>Official Headquarters & Group Communications:<br>
+                <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
+                <p>General Inquiries:<br>
+                <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="../about">About TNG</a>
+                <a href="../companies">Our Companies</a>
+                <a href="../people">Our People</a>
+                <a href="../governance">Governance</a>
+                <a href="../careers">Careers</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal & Policy</h4>
+                <a href="../privacy">Privacy Policy</a>
+                <a href="../terms">Terms of Use</a>
+                <a href="../governance/legal">Legal & Compliance</a>
+                <a href="../accessibility">Accessibility Statement</a>
+                <a href="../governance/reports">Financial Reports</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
+        </div>
+    </footer>
+</body>
+</html>
