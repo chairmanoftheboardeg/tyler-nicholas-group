@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Error | Tyler Nicholas Group (TNG)</title>
+
+    <link rel="icon" type="image/png" href="image/logo.png">
+
+    <style>
+        /* ==================== CORPORATE CSS (Reusable Styles) ==================== */
+        :root {
+            --tng-blue: #001F4C;
+            --tng-maroon: #A81F27;
+            --tng-silver: #C0C0C0;
+            --tng-light-gray: #f4f4f4;
+            --tng-text-dark: #333;
+            --tng-text-light: #ffffff;
+            --transition-speed: 0.8s ease-out;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--tng-text-dark);
+            background-color: var(--tng-light-gray);
+            line-height: 1.6;
+        }
+
+        /* === HEADER & NAVIGATION (Minimal for Error Page) === */
+        header {
+            background-color: var(--tng-blue);
+            color: var(--tng-text-light);
+            padding: 15px 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--tng-silver);
+            text-decoration: none;
+        }
+
+        /* ==================== PRELOADER/LOADING STYLES ==================== */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--tng-blue);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 1s ease-out; /* For fade out animation */
+        }
+        .loader-content {
+            text-align: center;
+            color: var(--tng-light-gray);
+        }
+        .loader-content h2 {
+            font-size: 2em;
+            font-weight: 500;
+            letter-spacing: 2px;
+            animation: pulse 1.5s infinite alternate; /* Loading animation */
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            100% { transform: scale(1.05); opacity: 1; }
+        }
+        
+        /* Initial state for main content wrapper */
+        #error-content-wrapper {
+            opacity: 0;
+            transition: opacity 1s ease-in; /* For beautiful fade-in of main content */
+            padding-top: 50px; /* Space from the fixed header */
+        }
+        #error-content-wrapper.loaded {
+            opacity: 1;
+        }
+
+        /* ==================== 404 ERROR CONTENT STYLES ==================== */
+        .error-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .error-code {
+            font-size: 8em;
+            font-weight: 800;
+            color: var(--tng-maroon);
+            margin-bottom: 0;
+            line-height: 1.1;
+        }
+        .error-text {
+            font-size: 2.5em;
+            color: var(--tng-blue);
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+        .apology-message {
+            background-color: #fff;
+            padding: 30px;
+            border: 1px solid var(--tng-silver);
+            border-left: 5px solid var(--tng-blue);
+            border-radius: 8px;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        /* Action Buttons */
+        .action-buttons a, .action-buttons button {
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 0 10px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        .action-buttons a.home-btn {
+            background-color: var(--tng-blue);
+            color: var(--tng-text-light);
+        }
+        .action-buttons a.home-btn:hover {
+            background-color: #002D62;
+            transform: translateY(-2px);
+        }
+        .action-buttons button.reload-btn {
+            background-color: var(--tng-maroon);
+            color: var(--tng-text-light);
+        }
+        .action-buttons button.reload-btn:hover {
+            background-color: #8C1A21;
+            transform: translateY(-2px);
+        }
+        .action-buttons a.contact-btn {
+            background-color: var(--tng-light-gray);
+            color: var(--tng-blue);
+            border: 1px solid var(--tng-blue);
+        }
+        .action-buttons a.contact-btn:hover {
+            background-color: var(--tng-silver);
+        }
+
+
+        /* === CORPORATE FOOTER (Reused) === */
+        footer { background-color: var(--tng-blue); color: var(--tng-silver); padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px; }
+        .footer-content { display: flex; justify-content: space-between; max-width: 1300px; margin: 0 auto; padding: 0 40px 30px; flex-wrap: wrap; }
+        .footer-section { width: 28%; min-width: 250px; margin-bottom: 20px; }
+        .footer-section h4 { color: var(--tng-maroon); font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px; }
+        .footer-section a { color: var(--tng-silver); text-decoration: none; display: block; margin-bottom: 8px; }
+        .footer-bottom { background-color: #00122E; text-align: center; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+</head>
+<body>
+
+    <div id="preloader">
+        <div class="loader-content">
+            <h2 id="loading-text">Loading...</h2>
+        </div>
+    </div>
+    
+    <div id="error-content-wrapper">
+        <header>
+            <div class="navbar">
+                <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
+            </div>
+        </header>
+
+        <main>
+            <div class="error-container">
+                <p class="error-code">404</p>
+                <h1 class="error-text">Page Cannot Be Found</h1>
+                
+                <div class="apology-message">
+                    <p style="font-weight: 600;">We apologize for the interruption.</p>
+                    <p>
+                        It seems the page you were looking for doesn't exist or has been moved. 
+                        Please connect with our **IT Department** using the link below to report this problem.
+                    </p>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="reload-btn" onclick="location.reload();">Reload Page</button>
+                    <a href="/" class="home-btn">Go to Home Page</a>
+                    <a href="/contact/itdep" class="contact-btn">Report a Problem (IT Dept)</a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>TNG Global Headquarters</h4>
+                    <p>Tyler Nicholas Group operates as a remote-first organization.</p>
+                    <p>Official Headquarters & Group Communications:<br>
+                    <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
+                    <p>General Inquiries:<br>
+                    <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="/about">About TNG</a>
+                    <a href="/companies">Our Companies</a>
+                    <a href="/people">Our People</a>
+                    <a href="/governance">Governance</a>
+                    <a href="/careers">Careers</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal & Policy</h4>
+                    <a href="/privacy">Privacy Policy</a>
+                    <a href="/terms">Terms of Use</a>
+                    <a href="/governance/legal">Legal & Compliance</a>
+                    <a href="/accessibility">Accessibility Statement</a>
+                    <a href="/governance/reports">Financial Reports</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Set the duration for the preloader (in milliseconds). 
+        // 20000ms = 20 seconds as requested.
+        const PRELOADER_DISPLAY_TIME = 20000; 
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const preloader = document.getElementById('preloader');
+            const mainContentWrapper = document.getElementById('error-content-wrapper');
+            const loadingText = document.getElementById('loading-text');
+
+            // --- Function to simulate the repeated "Loading..." text ---
+            let dotCount = 0;
+            const loadingInterval = setInterval(() => {
+                dotCount = (dotCount + 1) % 4; // Cycle 0, 1, 2, 3
+                loadingText.textContent = 'Loading' + '.'.repeat(dotCount);
+            }, 500); // Change text every half second
+
+            // --- Function to show main content after delay ---
+            setTimeout(() => {
+                // 1. Stop the loading text animation
+                clearInterval(loadingInterval);
+                
+                // 2. Start the preloader fade-out (CSS transition handles the 1s fade)
+                preloader.style.opacity = '0';
+
+                // 3. After preloader is invisible, remove it from the DOM 
+                // The 1000ms delay matches the transition: opacity 1s in the CSS
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    
+                    // 4. Reveal the main error content wrapper (fade-in)
+                    mainContentWrapper.classList.add('loaded');
+                }, 1000); 
+            }, PRELOADER_DISPLAY_TIME);
+        });
+    </script>
+
+</body>
+</html>
