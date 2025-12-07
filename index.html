@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | Tyler Nicholas Group (TNG)</title>
+    <title>Tyler Nicholas Group (TNG) | Global Digital Ventures</title>
 
     <link rel="icon" type="image/png" href="image/logo.png">
 
     <style>
-        /* ==================== CORPORATE CSS ==================== */
+        /* ==================== CORPORATE CSS (Reusable Styles) ==================== */
         :root {
             --tng-blue: #001F4C;
             --tng-maroon: #A81F27;
@@ -37,9 +37,7 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
         }
-
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -47,20 +45,12 @@
             max-width: 1300px;
             margin: 0 auto;
         }
-
         .logo {
             font-size: 1.8em;
             font-weight: 700;
             color: var(--tng-silver);
             text-decoration: none;
-            letter-spacing: 1px;
-            transition: color 0.3s;
         }
-
-        .logo:hover {
-            color: var(--tng-maroon);
-        }
-
         nav a, .more-menu-toggle {
             color: var(--tng-silver);
             text-decoration: none;
@@ -68,378 +58,315 @@
             margin-left: 10px;
             font-size: 0.95em;
             font-weight: 500;
-            transition: color 0.3s, background-color 0.3s;
             border-radius: 4px;
         }
-
         nav a:hover {
             color: var(--tng-text-light);
-            background-color: rgba(168, 31, 39, 0.5); /* TNG Maroon subtle hover */
+            background-color: rgba(168, 31, 39, 0.5); 
         }
 
         /* More Menu Dropdown */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-content { display: none; position: absolute; right: 0; background-color: var(--tng-blue); min-width: 200px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; border-top: 3px solid var(--tng-maroon); }
+        .dropdown-content a { color: var(--tng-silver); padding: 12px 16px; text-decoration: none; display: block; margin: 0; }
+        .dropdown-content a:hover { background-color: var(--tng-maroon); color: var(--tng-text-light); }
+        .dropdown:hover .dropdown-content { display: block; }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: var(--tng-blue);
-            min-width: 200px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-top: 3px solid var(--tng-maroon);
-        }
-
-        .dropdown-content a {
-            color: var(--tng-silver);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            margin: 0;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .dropdown-content a:hover {
-            background-color: var(--tng-maroon);
-            color: var(--tng-text-light);
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* === MAIN CONTENT LAYOUT === */
-        main {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-
-        .hero-section {
-            background: linear-gradient(135deg, var(--tng-blue), #002D62);
-            color: var(--tng-light-gray);
-            padding: 80px 40px;
-            text-align: center;
-            border-radius: 12px;
-            margin-bottom: 50px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            /* Animation Target */
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity var(--transition-speed), transform var(--transition-speed);
-        }
-
-        .hero-section.revealed {
+        /* ==================== PRELOADER STYLES (NEW) ==================== */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--tng-blue); /* TNG Blue background */
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             opacity: 1;
-            transform: translateY(0);
+            transition: opacity 1s ease-out; /* For fade out animation */
         }
-
-        .content-section {
-            padding: 40px 0;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 30px;
-            /* Animation Target */
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity var(--transition-speed), transform var(--transition-speed);
+        .loader-content {
+            text-align: center;
+            color: var(--tng-light-gray);
+        }
+        .loader-content img {
+            width: 80px; 
+            height: 80px;
+            margin-bottom: 20px;
+            animation: spin 1.5s linear infinite; /* Spinning Logo Animation */
+            transition: opacity 0.5s;
+        }
+        .loader-content h2 {
+            font-size: 2em;
+            font-weight: 500;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
-        .content-section.revealed {
+        /* Initial state for main content wrapper */
+        #main-content-wrapper {
+            opacity: 0;
+            transition: opacity 1s ease-in; /* For beautiful fade-in of main content */
+        }
+        #main-content-wrapper.loaded {
             opacity: 1;
-            transform: translateY(0);
         }
+        /* ================================================================ */
 
-        .content-section h2 {
-            font-size: 2em;
-            color: var(--tng-maroon);
-            margin-bottom: 20px;
+        /* === MAIN CONTENT LAYOUT === */
+        main { max-width: 1100px; margin: 40px auto; padding: 20px; }
+        .content-section { padding: 40px 0; margin-bottom: 50px; text-align: center; }
+        .content-section h2 { font-size: 2em; color: var(--tng-maroon); margin-bottom: 30px; border-bottom: 2px solid #ddd; display: inline-block; padding-bottom: 5px; }
+        
+        /* === HERO SECTION (Homepage Specific) === */
+        .hero-section {
+            background: linear-gradient(135deg, var(--tng-blue), #002D62);
+            color: var(--tng-text-light);
+            padding: 100px 40px;
             text-align: center;
+            border-radius: 12px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0; 
+            transform: translateY(20px); 
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out; 
         }
+        .hero-section.revealed { opacity: 1; transform: translateY(0); }
+        .hero-section h1 { font-size: 3.2em; margin-bottom: 10px; font-weight: 800; }
+        .hero-section p { font-size: 1.4em; font-weight: 300; max-width: 800px; margin: 20px auto 30px; }
+        .hero-cta {
+            display: inline-block;
+            background-color: var(--tng-maroon);
+            color: var(--tng-text-light);
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .hero-cta:hover { background-color: #8C1A21; transform: translateY(-2px); }
 
-        /* Values Grid */
-        .values-grid {
+        /* === CORE VALUES/BUSINESS SEGMENTS (Homepage Specific) === */
+        .segments-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
-            margin-top: 30px;
-            text-align: center;
+            margin-top: 40px;
+            text-align: left;
         }
-
-        .value-card {
+        .segment-card {
             background-color: #fff;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            border-top: 5px solid var(--tng-blue);
-            /* Animation Target (Staggered) */
+            border-left: 5px solid var(--tng-blue);
+            transition: transform 0.3s, box-shadow 0.3s;
             opacity: 0;
-            transform: scale(0.95);
+            transform: translateY(20px);
             transition: opacity var(--transition-speed), transform var(--transition-speed);
         }
+        .segment-card.revealed { opacity: 1; transform: translateY(0); }
+        .segment-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); }
+        .segment-card h3 { color: var(--tng-maroon); font-size: 1.5em; margin-top: 0; }
+        .segment-card p { color: #666; font-size: 0.95em; }
 
-        .value-card.revealed {
-             opacity: 1;
-            transform: scale(1);
-        }
-
-        .value-card h3 {
-            color: var(--tng-blue);
-            font-size: 1.25em;
-            margin-top: 15px;
-        }
-
-        /* === CORPORATE FOOTER === */
-        footer {
-            background-color: var(--tng-blue);
-            color: var(--tng-silver);
-            padding: 40px 0 0;
-            font-size: 0.85em;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .footer-content {
+        /* === CALL TO ACTION STRIP === */
+        .cta-strip {
+            background-color: var(--tng-maroon);
+            color: var(--tng-text-light);
+            padding: 40px;
+            border-radius: 8px;
             display: flex;
             justify-content: space-between;
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 40px 30px;
-            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 60px;
+            opacity: 0;
+            transform: scale(0.98);
+            transition: opacity var(--transition-speed), transform var(--transition-speed);
         }
-
-        .footer-section {
-            width: 28%;
-            min-width: 250px;
-            margin-bottom: 20px;
-        }
-
-        .footer-section h4 {
-            color: var(--tng-maroon);
-            font-size: 1.1em;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 5px;
-        }
-
-        .footer-section a {
-            color: var(--tng-silver);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 8px;
-            transition: color 0.3s;
-        }
-
-        .footer-section a:hover {
+        .cta-strip.revealed { opacity: 1; transform: scale(1); }
+        .cta-strip h3 { margin: 0; font-size: 1.8em; }
+        .cta-strip a {
+            background-color: var(--tng-blue);
             color: var(--tng-text-light);
-        }
-        
-        .footer-section p {
-            margin-top: 0;
-        }
-
-        .footer-bottom {
-            background-color: #00122E; /* Darker Blue */
-            text-align: center;
-            padding: 15px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Icons (Placeholder) */
-        .icon {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            margin-right: 5px;
-            background-color: var(--tng-maroon);
-            border-radius: 2px;
-        }
-        
-        .structure-list li {
-            font-weight: 500;
-            margin-bottom: 5px;
-            list-style-type: none;
-            padding-left: 0;
-        }
-        .structure-list .tier-1 {
-            color: var(--tng-maroon);
-            font-weight: 700;
-            margin-top: 15px;
-            text-decoration: underline;
-        }
-        .structure-list .tier-2 {
-            color: var(--tng-blue);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 4px;
             font-weight: 600;
+            transition: background-color 0.3s;
         }
-        .structure-list .tier-3 {
-            margin-left: 20px;
-            font-weight: 500;
-            list-style-type: circle;
-        }
+        .cta-strip a:hover { background-color: #002D62; }
+
+        /* === CORPORATE FOOTER (Reused) === */
+        footer { background-color: var(--tng-blue); color: var(--tng-silver); padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px; }
+        .footer-content { display: flex; justify-content: space-between; max-width: 1300px; margin: 0 auto; padding: 0 40px 30px; flex-wrap: wrap; }
+        .footer-section { width: 28%; min-width: 250px; margin-bottom: 20px; }
+        .footer-section h4 { color: var(--tng-maroon); font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px; }
+        .footer-section a { color: var(--tng-silver); text-decoration: none; display: block; margin-bottom: 8px; }
+        .footer-bottom { background-color: #00122E; text-align: center; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="navbar">
-            <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
-            <nav>
-                <a href="/">Home</a>
-                <a href="/about" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">About Us</a>
-                <a href="/companies">Our Companies</a>
-                <a href="/people">Our People</a>
-                <a href="/governance">Governance</a>
-                <a href="/careers">Careers</a>
-                
-                <div class="dropdown">
-                    <button class="more-menu-toggle">More</button>
-                    <div class="dropdown-content">
-                        <a href="/governance/board">Board of Directors</a>
-                        <a href="/governance/code-of-conduct">Code of Conduct</a>
-                        <a href="/governance/reports">Financial Reporting</a>
-                        <a href="/contact/investors">Investor Relations</a>
-                        <a href="/contact/media">Media & Press</a>
+    <div id="preloader">
+        <div class="loader-content">
+            <img src="image/logo.png" alt="TNG Logo Loading">
+            <h2>Welcome to Tyler Nicholas Group</h2>
+        </div>
+    </div>
+    
+    <div id="main-content-wrapper">
+        <header>
+            <div class="navbar">
+                <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
+                <nav>
+                    <a href="/" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Home</a>
+                    <a href="/about">About Us</a>
+                    <a href="/companies">Our Companies</a>
+                    <a href="/people">Our People</a>
+                    <a href="/governance">Governance</a>
+                    <a href="/careers">Careers</a>
+                    
+                    <div class="dropdown">
+                        <button class="more-menu-toggle">More</button>
+                        <div class="dropdown-content">
+                            <a href="/governance/board">Board of Directors</a>
+                            <a href="/governance/code-of-conduct">Code of Conduct</a>
+                            <a href="/governance/reports">Financial Reporting</a>
+                            <a href="/contact/investors">Investor Relations</a>
+                            <a href="/contact/media">Media & Press</a>
+                        </div>
                     </div>
-                </div>
-            </nav>
-        </div>
-    </header>
+                </nav>
+            </div>
+        </header>
 
-    <main>
-        <section class="hero-section anim-target">
-            <h1>Driving Value, Defining the Future.</h1>
-            <p>The Tyler Nicholas Group is a modern holding company focused on strategic growth and synergy across diverse, high-potential verticals.</p>
-        </section>
+        <main>
+            <section class="hero-section anim-target">
+                <h1>Building the Future. Scaling Digital Empires.</h1>
+                <p>The Tyler Nicholas Group is a diversified holding company focused on acquiring, incubating, and accelerating high-growth digital ventures across dynamic global markets.</p>
+                <a href="/about" class="hero-cta">Discover Our Vision</a>
+            </section>
 
-        <section class="content-section anim-target">
-            <h2>Our Foundation and Mission</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; text-align: left;">
-                <div>
-                    <h3 style="color: var(--tng-blue);">Corporate History</h3>
-                    <p>Founded on the principle of centralized governance and decentralized execution, TNG was established to bring synergistic leadership to a portfolio of rapidly scaling ventures. From our roots in e-commerce and digital entertainment, we quickly evolved into a diversified group, focused on long-term capital preservation and strategic market entry.</p>
-                </div>
-                <div>
-                    <h3 style="color: var(--tng-blue);">Our Core Mission</h3>
-                    <p>To cultivate exceptional value across our operating companies by providing strategic capital allocation, advanced shared services (Technology, Legal, Finance), and executive oversight. We empower our subsidiary leaders to innovate while ensuring structural stability and ethical compliance at the group level.</p>
-                </div>
-            </div>
-        </section>
+            <section class="content-section">
+                <h2>Our Global Purpose</h2>
+                <p style="max-width: 800px; margin: 0 auto; font-size: 1.1em; color: var(--tng-text-dark);">
+                    Our mission is simple: to **identify excellence** and provide the strategic capital, operational support, and technology required to transform potential into exponential market leadership. We operate with integrity, drive innovation, and prioritize long-term, sustainable value creation.
+                </p>
+            </section>
 
-        <section class="content-section anim-target">
-            <h2>TNG Core Values</h2>
-            <div class="values-grid">
-                <div class="value-card anim-target">
-                    <div class="icon"></div>
-                    <h3>Governance</h3>
-                    <p>Upholding the highest standards of transparency, accountability, and ethical conduct across every TNG entity.</p>
-                </div>
-                <div class="value-card anim-target" style="transition-delay: 0.1s;">
-                    <div class="icon"></div>
-                    <h3>Synergy</h3>
-                    <p>Fostering collaboration between our unique verticals to drive shared efficiencies and accelerate mutual growth.</p>
-                </div>
-                <div class="value-card anim-target" style="transition-delay: 0.2s;">
-                    <div class="icon"></div>
-                    <h3>Innovation</h3>
-                    <p>Committing to a culture that embraces change and invests in technology to define future market leadership.</p>
-                </div>
-                <div class="value-card anim-target" style="transition-delay: 0.3s;">
-                    <div class="icon"></div>
-                    <h3>Integrity</h3>
-                    <p>Maintaining honest and reliable practices in all external and internal dealings, ensuring stakeholder trust.</p>
-                </div>
-            </div>
-        </section>
+            <section class="content-section" style="background-color: #fff; padding: 50px 20px; border-radius: 12px;">
+                <h2>TNG Core Business Segments</h2>
+                
+                <div class="segments-grid">
+                    
+                    <div class="segment-card anim-target" style="transition-delay: 0s;">
+                        <h3>Digital Commerce & Ventures</h3>
+                        <p>Investing in and scaling next-generation e-commerce platforms, software, and online service providers that define their market niches.</p>
+                        <a href="/companies#ecommerce" style="color: var(--tng-maroon); text-decoration: none; font-weight: 600;">Learn More &rarr;</a>
+                    </div>
 
-        <section class="content-section anim-target" style="border-bottom: none;">
-            <h2>Organizational Structure</h2>
-            <p style="text-align: center;">The Tyler Nicholas Group operates with a clearly defined, top-down structure ensuring accountability and seamless resource allocation across all ventures.</p>
-            <div style="max-width: 400px; margin: 30px auto; text-align: left; padding: 20px; border: 1px solid #ccc; background-color: #fff; border-radius: 8px;">
-                <ul class="structure-list">
-                    <li class="tier-1">Chairman Of The Board / Board Of Directors (Oversight & Strategy)</li>
-                    <li class="tier-2">Chief Executive Officer (CEO) (Group Execution & Leadership)</li>
-                    <li class="tier-2">TNG Group Roles (Shared Corporate Services)
-                        <ul style="padding-left: 20px; margin-top: 5px;">
-                            <li class="tier-3">Chief Financial Officer (CFO)</li>
-                            <li class="tier-3">Chief Technology Officer (CTO)</li>
-                            <li class="tier-3">Chief Legal Counsel</li>
-                        </ul>
-                    </li>
-                    <li class="tier-2" style="margin-top: 15px;">All Subsidiary Groups (Operational Ventures)
-                        <ul style="padding-left: 20px; margin-top: 5px;">
-                            <li class="tier-3">TNG E-Commerce</li>
-                            <li class="tier-3">TNG Gaming Org</li>
-                            <li class="tier-3">TNG Investment Board</li>
-                            <li class="tier-3">[Other Subsidiary Group]</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </section>
-    </main>
+                    <div class="segment-card anim-target" style="transition-delay: 0.1s;">
+                        <h3>Interactive & Gaming Entertainment</h3>
+                        <p>Driving innovation within virtual world economies, focusing on high-retention gaming platforms and immersive digital experiences.</p>
+                        <a href="/companies#gaming" style="color: var(--tng-maroon); text-decoration: none; font-weight: 600;">Learn More &rarr;</a>
+                    </div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>TNG Global Headquarters</h4>
-                <p>Tyler Nicholas Group operates as a remote-first organization.</p>
-                <p>Official Headquarters & Group Communications:<br>
-                <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
-                <p>General Inquiries:<br>
-                <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
+                    <div class="segment-card anim-target" style="transition-delay: 0.2s;">
+                        <h3>Strategic Capital & Governance</h3>
+                        <p>Providing essential financial backing, robust corporate governance, and operational oversight for all portfolio entities.</p>
+                        <a href="/governance" style="color: var(--tng-maroon); text-decoration: none; font-weight: 600;">Explore Governance &rarr;</a>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="cta-strip anim-target">
+                <h3>Ready to join a global leader in digital ventures?</h3>
+                <a href="/careers">View Career Openings</a>
+            </section>
+            
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>TNG Global Headquarters</h4>
+                    <p>Tyler Nicholas Group operates as a remote-first organization.</p>
+                    <p>Official Headquarters & Group Communications:<br>
+                    <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
+                    <p>General Inquiries:<br>
+                    <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="/about">About TNG</a>
+                    <a href="/companies">Our Companies</a>
+                    <a href="/people">Our People</a>
+                    <a href="/governance">Governance</a>
+                    <a href="/careers">Careers</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal & Policy</h4>
+                    <a href="/privacy">Privacy Policy</a>
+                    <a href="/terms">Terms of Use</a>
+                    <a href="/governance/legal">Legal & Compliance</a>
+                    <a href="/accessibility">Accessibility Statement</a>
+                    <a href="/governance/reports">Financial Reports</a>
+                </div>
             </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="/about">About TNG</a>
-                <a href="/companies">Our Companies</a>
-                <a href="/people">Our People</a>
-                <a href="/governance">Governance</a>
-                <a href="/careers">Careers</a>
+            <div class="footer-bottom">
+                &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
             </div>
-            <div class="footer-section">
-                <h4>Legal & Policy</h4>
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/terms">Terms of Use</a>
-                <a href="/governance/legal">Legal & Compliance</a>
-                <a href="/accessibility">Accessibility Statement</a>
-                <a href="/governance/reports">Financial Reports</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <script>
+        // Set the duration for the preloader (in milliseconds). 
+        // 3000ms = 3 seconds (A good balance for usability)
+        // Set to 10000ms (10 seconds) if you prefer a very long loading time.
+        const PRELOADER_DISPLAY_TIME = 3000; 
+
         document.addEventListener('DOMContentLoaded', function() {
-            // Get all elements designated for animation
+            const preloader = document.getElementById('preloader');
+            const mainContentWrapper = document.getElementById('main-content-wrapper');
             const targets = document.querySelectorAll('.anim-target');
 
-            // Set the observer options
-            const options = {
-                root: null, // viewport
-                rootMargin: '0px',
-                threshold: 0.2 // Trigger when 20% of the element is visible
-            };
+            // --- Function to show main content and start animations ---
+            function showMainContent() {
+                // 1. Start the preloader fade-out (CSS transition handles the 1s fade)
+                preloader.style.opacity = '0';
 
-            // Intersection Observer Callback
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Add the 'revealed' class to trigger the CSS animation
-                        entry.target.classList.add('revealed');
-                        // Stop observing once it's revealed
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, options);
+                // 2. After preloader is invisible, remove it from the DOM 
+                // The 1000ms delay matches the transition: opacity 1s in the CSS
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    
+                    // 3. Reveal the main content wrapper (fade-in)
+                    mainContentWrapper.classList.add('loaded');
 
-            // Observe each target element
-            targets.forEach(target => {
-                observer.observe(target);
-            });
+                    // 4. Initialize Scroll Animation Setup for content sections
+                    const observer = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('revealed');
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.1 });
+                    targets.forEach(target => { observer.observe(target); });
+
+                }, 1000); 
+            }
+
+            // --- Delay the showMainContent function by the desired time ---
+            setTimeout(showMainContent, PRELOADER_DISPLAY_TIME);
         });
     </script>
 
