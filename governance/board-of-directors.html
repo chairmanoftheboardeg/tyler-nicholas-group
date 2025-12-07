@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board of Directors | TNG Governance</title>
+    <link rel="icon" type="image/png" href="../image/logo.png">
+    
+    <style>
+        /* ==================== CORPORATE CSS (Re-used Styles) ==================== */
+        :root {
+            --tng-blue: #001F4C;
+            --tng-maroon: #A81F27;
+            --tng-silver: #C0C0C0;
+            --tng-light-gray: #f4f4f4;
+            --tng-text-dark: #333;
+            --tng-text-light: #ffffff;
+            --transition-speed: 0.5s ease-out;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--tng-text-dark);
+            background-color: var(--tng-light-gray);
+            line-height: 1.6;
+        }
+
+        /* === HEADER & NAVIGATION === */
+        header {
+            background-color: var(--tng-blue);
+            color: var(--tng-text-light);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--tng-silver);
+            text-decoration: none;
+        }
+        nav a {
+            color: var(--tng-silver);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            font-size: 0.95em;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            color: var(--tng-text-light);
+            background-color: rgba(168, 31, 39, 0.5); 
+        }
+
+        /* === MAIN CONTENT LAYOUT === */
+        main { max-width: 1100px; margin: 40px auto; padding: 20px; }
+        .content-section { margin-bottom: 50px; padding-top: 20px; }
+        .content-section h2 { 
+            font-size: 2.2em; 
+            color: var(--tng-blue); 
+            margin-bottom: 30px; 
+            border-bottom: 3px solid var(--tng-maroon); 
+            padding-bottom: 10px;
+            display: block;
+            text-align: left;
+        }
+        .content-section h3 {
+            font-size: 1.5em;
+            color: var(--tng-maroon);
+            border-left: 5px solid var(--tng-maroon);
+            padding-left: 10px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        /* === GOVERNANCE NAVIGATION === */
+        .governance-nav {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 2px solid var(--tng-maroon);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .governance-nav a {
+            color: var(--tng-blue);
+            text-decoration: none;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom 0.3s, color 0.3s;
+            font-weight: 600;
+        }
+        .governance-nav a:hover, .governance-nav a.active {
+            border-bottom: 2px solid var(--tng-maroon);
+            color: var(--tng-maroon);
+        }
+
+        /* === PROFESSIONAL PROFILE CARD GRID (TNG) === */
+        .people-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .person-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border-top: 6px solid var(--tng-blue);
+            display: flex;
+            flex-direction: column;
+            min-height: 380px; 
+            transition: box-shadow 0.3s;
+        }
+        .person-card:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background-color: var(--tng-light-gray);
+            border-bottom: 1px solid #ddd;
+        }
+        .profile-pic {
+            width: 100px;
+            height: 100px; 
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header-text {
+            margin-left: 15px;
+            text-align: left;
+        }
+        .header-text h4 {
+            color: var(--tng-blue);
+            font-size: 1.4em;
+            margin: 0 0 5px 0;
+        }
+        .header-text p {
+            color: var(--tng-maroon);
+            font-size: 1em;
+            margin: 0;
+            font-weight: 600;
+        }
+        .card-info {
+            padding: 20px;
+            text-align: left;
+            flex-grow: 1; 
+        }
+        .card-info p.bio {
+            color: #555;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            max-height: 70px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        .card-info .committee-list {
+            list-style: disc;
+            margin-left: 20px;
+            padding: 0;
+            font-size: 0.9em;
+            color: #444;
+        }
+        .contact-info {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            background-color: var(--tng-light-gray);
+            display: flex;
+            justify-content: space-between;
+        }
+        .contact-info a {
+            font-size: 0.9em;
+            color: var(--tng-blue);
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 1px solid var(--tng-silver);
+            border-radius: 4px;
+            transition: background-color 0.2s, color 0.2s;
+            font-weight: 600;
+        }
+        .contact-info a:hover {
+            background-color: var(--tng-blue);
+            color: var(--tng-text-light);
+        }
+        .vacant-link {
+            display: block;
+            padding: 12px 0;
+            background-color: var(--tng-maroon);
+            color: var(--tng-text-light);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 0 0 12px 12px;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+        .vacant-card {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .vacant-card .profile-pic {
+            border-radius: 0;
+            box-shadow: none;
+        }
+        .vacant-card .card-info {
+             display: flex;
+             flex-direction: column;
+             justify-content: center;
+             align-items: center;
+             text-align: center;
+        }
+
+        /* === CORPORATE FOOTER (Reused) === */
+        footer { background-color: var(--tng-blue); color: var(--tng-silver); padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px; }
+        .footer-content { display: flex; justify-content: space-between; max-width: 1300px; margin: 0 auto; padding: 0 40px 30px; flex-wrap: wrap; }
+        .footer-section { width: 28%; min-width: 250px; margin-bottom: 20px; }
+        .footer-section h4 { color: var(--tng-maroon); font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px; }
+        .footer-section a { color: var(--tng-silver); text-decoration: none; display: block; margin-bottom: 8px; }
+        .footer-bottom { background-color: #00122E; text-align: center; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
+            <nav>
+                <a href="../">Home</a>
+                <a href="../about">About Us</a>
+                <a href="../companies">Our Companies</a>
+                <a href="../people">Our People</a>
+                <a href="../governance" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Governance</a>
+                <a href="../careers">Careers</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="governance-nav">
+        <a href="../governance/board-of-directors.html" class="active">Board of Directors</a>
+        <a href="../governance/code-of-conduct.html">Code of Conduct</a>
+        <a href="../investor.html">Investor Relations</a>
+        <a href="../media-press.html">Media & Press</a>
+    </div>
+
+    <main>
+        <h2>The TNG Board of Directors</h2>
+        <p style="font-size: 1.1em; max-width: 800px; margin-bottom: 40px;">
+            The Board provides strategic oversight and ensures the long-term success, integrity, and ethical conduct of the Tyler Nicholas Group across all subsidiaries.
+        </p>
+
+        <section class="content-section">
+            <h3>Executive Directors</h3>
+            <div class="people-grid">
+                
+                <div class="person-card">
+                    <div>
+                        <div class="profile-header">
+                            <img src="../image/tyler-nicholas.png" alt="Profile of Tyler Nicholas" class="profile-pic">
+                            <div class="header-text">
+                                <h4>Tyler Nicholas</h4>
+                                <p>Chairman & Executive Director</p>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <p class="bio">As founder, Mr. Nicholas sets the strategic vision and leads the Board in fostering innovation and global leadership within the TNG portfolio.</p>
+                            <ul class="committee-list">
+                                <li>**Committees:** Nominating & Governance (Chair)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="mailto:tyler.n@tylernicholasgroup.com">Email</a>
+                        <a href="https://linkedin.com/in/tylernicholas" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="person-card">
+                    <div>
+                        <div class="profile-header">
+                            <img src="../image/william-cross.png" alt="Profile of William Cross" class="profile-pic">
+                            <div class="header-text">
+                                <h4>William Alexander Cross</h4>
+                                <p>Executive Director, CHRO</p>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <p class="bio">Oversees human capital strategy, legal compliance, and organizational culture, aligning talent acquisition with TNG's long-term business goals.</p>
+                            <ul class="committee-list">
+                                <li>**Committees:** Compensation (Member)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="mailto:w.cross@tylernicholasgroup.com">Email</a>
+                        <a href="https://linkedin.com/in/williamacross" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="person-card">
+                    <div>
+                        <div class="profile-header">
+                            <img src="../image/angie-pittman.png" alt="Profile of Angie Pittman" class="profile-pic">
+                            <div class="header-text">
+                                <h4>Angie Pittman</h4>
+                                <p>Executive Director, CTO</p>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <p class="bio">Leads technology governance, cybersecurity, and digital infrastructure strategy, ensuring TNG maintains a competitive edge through innovation.</p>
+                            <ul class="committee-list">
+                                <li>**Committees:** Risk & Technology (Chair)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <a href="mailto:a.pittman@tylernicholasgroup.com">Email</a>
+                        <a href="https://linkedin.com/in/angiepittman" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3>Non-Executive Directors</h3>
+            <div class="people-grid">
+                
+                <div class="person-card vacant-card">
+                    <div>
+                        <div class="profile-header" style="justify-content: center; background-color: white;">
+                            <img src="../image/apply.png" alt="Apply Now" class="profile-pic" style="width: 120px; height: 120px;">
+                        </div>
+                        <div class="card-info" style="text-align: center;">
+                            <h4 style="font-size: 1.5em; margin-bottom: 10px;">Independent Non-Executive Director</h4>
+                            <p style="color: var(--tng-maroon); font-weight: 700;">VACANT POSITION</p>
+                            <p class="bio" style="font-size: 0.9em; text-align: center; max-height: none;">Seeking a qualified individual to ensure independent oversight of financial reporting and audit functions.</p>
+                            <ul class="committee-list">
+                                <li>**Target Committees:** Audit (Chair)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="../careers" class="vacant-link">View Board Requirements</a>
+                </div>
+
+                <div class="person-card vacant-card">
+                    <div>
+                        <div class="profile-header" style="justify-content: center; background-color: white;">
+                            <img src="../image/apply.png" alt="Apply Now" class="profile-pic" style="width: 120px; height: 120px;">
+                        </div>
+                        <div class="card-info" style="text-align: center;">
+                            <h4 style="font-size: 1.5em; margin-bottom: 10px;">Non-Executive Director</h4>
+                            <p style="color: var(--tng-maroon); font-weight: 700;">VACANT POSITION</p>
+                            <p class="bio" style="font-size: 0.9em; text-align: center; max-height: none;">A non-executive position focused on long-term strategy and compensation policy for the group's senior management.</p>
+                            <ul class="committee-list">
+                                <li>**Target Committees:** Compensation (Chair)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="../careers" class="vacant-link">View Board Requirements</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>TNG Global Headquarters</h4>
+                <p>Tyler Nicholas Group operates as a remote-first organization.</p>
+                <p>Official Headquarters & Group Communications:<br>
+                <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
+                <p>General Inquiries:<br>
+                <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="../about">About TNG</a>
+                <a href="../companies">Our Companies</a>
+                <a href="../people">Our People</a>
+                <a href="../governance">Governance</a>
+                <a href="../careers">Careers</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal & Policy</h4>
+                <a href="../privacy">Privacy Policy</a>
+                <a href="../terms">Terms of Use</a>
+                <a href="../governance/legal">Legal & Compliance</a>
+                <a href="../accessibility">Accessibility Statement</a>
+                <a href="../governance/reports">Financial Reports</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
+        </div>
+    </footer>
+</body>
+</html>
