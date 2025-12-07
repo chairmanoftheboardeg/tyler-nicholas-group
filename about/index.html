@@ -6,7 +6,7 @@
     <title>About Us | Tyler Nicholas Group (TNG)</title>
 
     <link rel="icon" type="image/png" href="image/logo.png">
-    
+
     <style>
         /* ==================== CORPORATE CSS ==================== */
         :root {
@@ -256,6 +256,28 @@
             background-color: var(--tng-maroon);
             border-radius: 2px;
         }
+        
+        .structure-list li {
+            font-weight: 500;
+            margin-bottom: 5px;
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .structure-list .tier-1 {
+            color: var(--tng-maroon);
+            font-weight: 700;
+            margin-top: 15px;
+            text-decoration: underline;
+        }
+        .structure-list .tier-2 {
+            color: var(--tng-blue);
+            font-weight: 600;
+        }
+        .structure-list .tier-3 {
+            margin-left: 20px;
+            font-weight: 500;
+            list-style-type: circle;
+        }
     </style>
 </head>
 <body>
@@ -333,17 +355,27 @@
 
         <section class="content-section anim-target" style="border-bottom: none;">
             <h2>Organizational Structure</h2>
-            <p style="text-align: center;">The Tyler Nicholas Group operates with a lean holding structure, providing direction and resources to fully autonomous operational subsidiaries. This model minimizes corporate overhead while maximizing specialized market focus.</p>
-            <div style="text-align: center; margin-top: 30px;">
-                <p style="font-style: italic; color: var(--tng-maroon); font-weight: 600;">Chairman & Board of Directors</p>
-                <p>↓</p>
-                <p style="font-weight: 700; color: var(--tng-blue);">Chief Executive Officer (CEO)</p>
-                <p>↓</p>
-                <p style="display: flex; justify-content: center; gap: 50px;">
-                    <span>Subsidiary A: E-Commerce</span>
-                    <span>Subsidiary B: Gaming Org</span>
-                    <span>Subsidiary C: Investment Board</span>
-                </p>
+            <p style="text-align: center;">The Tyler Nicholas Group operates with a clearly defined, top-down structure ensuring accountability and seamless resource allocation across all ventures.</p>
+            <div style="max-width: 400px; margin: 30px auto; text-align: left; padding: 20px; border: 1px solid #ccc; background-color: #fff; border-radius: 8px;">
+                <ul class="structure-list">
+                    <li class="tier-1">Chairman Of The Board / Board Of Directors (Oversight & Strategy)</li>
+                    <li class="tier-2">Chief Executive Officer (CEO) (Group Execution & Leadership)</li>
+                    <li class="tier-2">TNG Group Roles (Shared Corporate Services)
+                        <ul style="padding-left: 20px; margin-top: 5px;">
+                            <li class="tier-3">Chief Financial Officer (CFO)</li>
+                            <li class="tier-3">Chief Technology Officer (CTO)</li>
+                            <li class="tier-3">Chief Legal Counsel</li>
+                        </ul>
+                    </li>
+                    <li class="tier-2" style="margin-top: 15px;">All Subsidiary Groups (Operational Ventures)
+                        <ul style="padding-left: 20px; margin-top: 5px;">
+                            <li class="tier-3">TNG E-Commerce</li>
+                            <li class="tier-3">TNG Gaming Org</li>
+                            <li class="tier-3">TNG Investment Board</li>
+                            <li class="tier-3">[Other Subsidiary Group]</li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </section>
     </main>
@@ -352,9 +384,9 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h4>TNG Global Headquarters</h4>
-                <p>Tyler Nicholas Group<br>
-                Remote,<br>
-                Victoria, Seychelles</p>
+                <p>Tyler Nicholas Group operates as a remote-first organization.</p>
+                <p>Official Headquarters & Group Communications:<br>
+                <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
                 <p>General Inquiries:<br>
                 <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
             </div>
