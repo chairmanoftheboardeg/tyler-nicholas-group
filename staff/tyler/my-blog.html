@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog | Tyler Nicholas</title>
+    <link rel="icon" type="image/png" href="../../image/favicon.png">
+    
+    <style>
+        /* ==================== TYLER NICHOLAS PERSONAL PORTFOLIO STYLES (Reused) ==================== */
+        
+        /* --- Color Palette --- */
+        :root {
+            --aviation-blue: #00AEEF; 
+            --sky-white: #FFFFFF;
+            --navy-text: #001F4C; 
+            --light-gray-bg: #F8F9FA;
+            --transition-speed: 0.4s ease-in-out;
+            --link-blue: #007bff;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--navy-text);
+            background-color: var(--sky-white);
+            line-height: 1.6;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background-color: var(--sky-white);
+            border-bottom: 3px solid var(--aviation-blue);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--navy-text);
+            text-decoration: none;
+        }
+        nav {
+            display: flex;
+        }
+        nav a {
+            color: var(--navy-text);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            font-size: 1em;
+            font-weight: 500;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 4px;
+        }
+        nav a:hover, nav a.active {
+            color: var(--aviation-blue);
+        }
+        
+        /* --- Dropdown Menu (More) --- */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--sky-white);
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            right: 0;
+            border-radius: 4px;
+            border-top: 3px solid var(--aviation-blue);
+        }
+        .dropdown-content a {
+            color: var(--navy-text);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            margin: 0;
+            font-weight: 500;
+        }
+        .dropdown-content a:hover {
+            background-color: var(--light-gray-bg);
+            color: var(--aviation-blue);
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown > a {
+            background-color: var(--light-gray-bg);
+            border: 1px solid #ddd;
+            margin-left: 10px;
+        }
+
+        /* ==================== C. PAGE SPECIFIC CONTENT (BLOG GRID) ==================== */
+        main { 
+            max-width: 1000px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+        }
+
+        h1 {
+            font-size: 3em;
+            color: var(--navy-text);
+            border-bottom: 3px solid var(--aviation-blue);
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-post-card {
+            background-color: var(--light-gray-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+            position: relative;
+        }
+        .blog-post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 31, 76, 0.15);
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-content h2 {
+            font-size: 1.8em;
+            color: var(--navy-text);
+            margin-top: 0;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        
+        .card-content .post-meta {
+            font-size: 0.9em;
+            color: var(--aviation-blue);
+            font-weight: 500;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .card-content p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: var(--aviation-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .read-more:hover {
+            color: var(--navy-text);
+        }
+
+        .post-tag {
+            display: inline-block;
+            background-color: var(--sky-white);
+            color: var(--navy-text);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            margin-top: 10px;
+            border: 1px solid var(--aviation-blue);
+        }
+
+        /* --- Placeholder Image/Header for Post --- */
+        .card-header-placeholder {
+            height: 150px;
+            background: linear-gradient(135deg, var(--aviation-blue) 0%, #007bff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--sky-white);
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+        
+        /* ==================== D. FOOTER ==================== */
+        footer {
+            background-color: var(--navy-text);
+            color: var(--light-gray-bg);
+            padding: 40px 20px;
+            font-size: 0.9em;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .footer-social a {
+            color: var(--aviation-blue);
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-social a:hover {
+            color: var(--sky-white);
+        }
+        .footer-email {
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+        .footer-email a {
+            color: var(--aviation-blue);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-portfolio">
+        <header>
+            <div class="navbar">
+                <a href="index.html" class="logo">TYLER NICHOLAS</a>
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="about-me.html">About Me</a>
+                    <a href="my-projects.html">My Projects</a>
+                    <a href="my-cv.html">My CV</a>
+                    
+                    <div class="dropdown">
+                        <a href="#" style="margin-right: 0;" class="active">More ▼</a>
+                        <div class="dropdown-content">
+                            <a href="my-blog.html" class="active">My Blog</a>
+                            <a href="my-story.html">My Story</a>
+                            <a href="my-experiences.html">My Experiences</a>
+                            <a href="my-school.html">My School</a>
+                            <a href="social-links.html">Social Links</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <h1>My Blog: Insights, Technology, and Governance</h1>
+            <p style="font-size: 1.1em; max-width: 800px; margin-bottom: 50px;">
+                A place for my thoughts on technology integration, leadership challenges, aviation news, and strategic development across my various ventures.
+            </p>
+
+            <div class="blog-grid">
+
+                <div class="blog-post-card">
+                    <div class="card-header-placeholder">
+                        New Horizons in Digital Charity
+                    </div>
+                    <div class="card-content">
+                        <h2>Bridging the Digital Divide at FoodShare Seychelles</h2>
+                        <div class="post-meta">
+                            Posted: December 8, 2025 | Category: Technology & Community
+                        </div>
+                        <p>
+                            I'm excited to announce my new role as the Technology Coordinator at FoodShare Seychelles. My focus will be on leveraging digital solutions to streamline operations, enhance donor engagement, and maximize our community impact. Check out their mission at <a href="https://foodshare-seychelles.online" target="_blank" style="color: var(--navy-text);">foodshare-seychelles.online</a>.
+                        </p>
+                        <span class="post-tag">Non-Profit Tech</span>
+                        <span class="post-tag">Community Service</span>
+                        <span class="post-tag">Digital Strategy</span>
+                        <br>
+                        <a href="#" class="read-more" style="margin-top: 15px;">Read Full Post &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="blog-post-card">
+                    <div class="card-header-placeholder" style="background: linear-gradient(135deg, #4682B4 0%, #1E90FF 100%);">
+                        Aviation Insight
+                    </div>
+                    <div class="card-content">
+                        <h2>The Future of Long-Haul Flight: 777X vs A350</h2>
+                        <div class="post-meta">
+                            Posted: (Date TBD) | Category: Aviation & Technology
+                        </div>
+                        <p>
+                            A technical deep-dive into the design philosophy and economic impact of the next generation of wide-body commercial jets. Analyzing fuel efficiency, passenger experience, and route flexibility.
+                        </p>
+                        <span class="post-tag">Aerospace</span>
+                        <span class="post-tag">Boeing 777</span>
+                        <span class="post-tag">Engineering</span>
+                        <br>
+                        <a href="#" class="read-more" style="margin-top: 15px;">Read Full Post &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="blog-post-card">
+                    <div class="card-header-placeholder" style="background: linear-gradient(135deg, var(--navy-text) 0%, #3a4a6b 100%);">
+                        Corporate Strategy
+                    </div>
+                    <div class="card-content">
+                        <h2>Navigating Market Entry in Disruptive Sectors</h2>
+                        <div class="post-meta">
+                            Posted: (Date TBD) | Category: Business & Leadership
+                        </div>
+                        <p>
+                            An analysis of the key challenges and necessary agility required for TNG Group subsidiaries when entering markets dominated by rapidly evolving technology and changing consumer behavior.
+                        </p>
+                        <span class="post-tag">Strategy</span>
+                        <span class="tag">Business Modeling</span>
+                        <span class="post-tag">Leadership</span>
+                        <br>
+                        <a href="#" class="read-more" style="margin-top: 15px;">Read Full Post &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+            
+            <p style="text-align: center; margin-top: 50px; font-style: italic; color: #777;">
+                More entries are coming soon! Stay tuned for regular updates.
+            </p>
+
+        </main>
+
+        <footer>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/tyler-nicholas-62999534a" target="_blank">LinkedIn</a> |
+                <a href="https://www.instagram.com/t.nicholas25" target="_blank">Instagram</a> |
+                <a href="https://x.com/TylerNicholasSC" target="_blank">Twitter / X</a> |
+                <a href="https://wa.me/2482544788" target="_blank">WhatsApp</a> |
+                <a href="https://www.facebook.com/profile.php?id=61558803946306" target="_blank">Facebook</a>
+            </div>
+            <div class="footer-email">
+                Professional Contact: <a href="mailto:tyler@tylernicholasgroup.com">tyler@tylernicholasgroup.com</a>
+            </div>
+            <p>
+                &copy; 2025 Tyler Nicholas Professional Portfolio. All rights reserved.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
