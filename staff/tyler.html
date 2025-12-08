@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tyler Nicholas | Student, Aviator, Entrepreneur</title>
-    <link rel="icon" type="image/png" href="../image/favicon.png"> <style>
+    <link rel="icon" type="image/png" href="../image/favicon.png">
+    
+    <style>
         /* ==================== TYLER NICHOLAS PERSONAL PORTFOLIO STYLES ==================== */
         
         /* --- Color Palette --- */
@@ -14,6 +16,7 @@
             --navy-text: #001F4C; /* Dark professional text */
             --light-gray-bg: #F8F9FA;
             --transition-speed: 0.4s ease-in-out;
+            --link-blue: #007bff; /* Standard link blue */
         }
 
         body {
@@ -25,8 +28,8 @@
             line-height: 1.6;
         }
 
-        /* ==================== A. PRELOADER & ANIMATION ==================== */
-        #aviation-preloader {
+        /* ==================== A. PRELOADER & ANIMATION (New Design) ==================== */
+        #professional-preloader {
             position: fixed;
             top: 0;
             left: 0;
@@ -39,45 +42,53 @@
             justify-content: center;
             align-items: center;
             opacity: 1;
-            transition: opacity 1s var(--transition-speed);
+            transition: opacity 0.8s ease-out;
         }
 
-        /* --- Plane Animation --- */
-        .plane-container {
-            width: 100%;
-            height: 150px;
-            overflow: hidden;
+        .loader-container {
+            width: 100px;
+            height: 100px;
             position: relative;
             margin-bottom: 20px;
         }
-        .plane {
-            font-size: 5em;
-            color: var(--aviation-blue);
+
+        .loader {
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-top: 8px solid var(--aviation-blue);
+            border-radius: 50%;
+            width: 100%;
+            height: 100%;
+            animation: spin 2s linear infinite;
             position: absolute;
-            left: -10%; /* Start off-screen */
-            top: 50%;
-            transform: translateY(-50%);
-            animation: fly-across 5s linear forwards infinite;
-            /* Placeholder for an actual plane icon/SVG, using unicode ✈️ */
-            content: '✈️'; 
         }
 
-        @keyframes fly-across {
-            0% { left: -20%; }
-            100% { left: 120%; } /* End off-screen */
+        .loader-inner {
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 8px solid var(--aviation-blue);
+            border-radius: 50%;
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            animation: spin-reverse 1.5s linear infinite;
+            position: absolute;
         }
         
-        .loading-text {
+        .loader-text {
             color: var(--sky-white);
             font-size: 1.5em;
             font-weight: 300;
-            opacity: 0;
-            animation: fade-in-out 5s linear infinite;
+            margin-top: 20px;
         }
 
-        @keyframes fade-in-out {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes spin-reverse {
+            0% { transform: rotate(360deg); }
+            100% { transform: rotate(0deg); }
         }
 
         /* Hide content until loaded */
@@ -95,6 +106,9 @@
             border-bottom: 3px solid var(--aviation-blue);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         .navbar {
             display: flex;
@@ -126,7 +140,7 @@
             color: var(--aviation-blue);
         }
         
-        /* --- Dropdown Menu --- */
+        /* --- Dropdown Menu (More) --- */
         .dropdown {
             position: relative;
             display: inline-block;
@@ -148,6 +162,7 @@
             text-decoration: none;
             display: block;
             margin: 0;
+            font-weight: 500;
         }
         .dropdown-content a:hover {
             background-color: var(--light-gray-bg);
@@ -156,13 +171,41 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+        .dropdown > a {
+            /* Style for the "More" button */
+            background-color: var(--light-gray-bg);
+            border: 1px solid #ddd;
+            margin-left: 10px;
+        }
 
-        /* ==================== C. MAIN CONTENT ==================== */
+        /* ==================== C. MAIN CONTENT & BANNER ==================== */
         main { 
             max-width: 1000px; 
-            margin: 60px auto; 
+            margin: 40px auto; 
             padding: 0 20px; 
         }
+
+        /* --- Announcement Banner --- */
+        .announcement-banner {
+            background-color: var(--aviation-blue);
+            color: var(--sky-white);
+            padding: 15px 25px;
+            margin-bottom: 40px;
+            border-radius: 6px;
+            font-size: 1.1em;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .announcement-banner a {
+            color: var(--navy-text);
+            text-decoration: underline;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+        .announcement-banner a:hover {
+            color: var(--sky-white);
+        }
+
 
         /* --- Hero Section --- */
         .hero {
@@ -193,7 +236,7 @@
             box-shadow: 0 4px 15px rgba(0, 31, 76, 0.2);
             flex-shrink: 0;
         }
-        .hero-text a {
+        .hero-text a.cta-button {
             background-color: var(--aviation-blue);
             color: var(--sky-white);
             padding: 12px 25px;
@@ -201,73 +244,32 @@
             border-radius: 6px;
             font-weight: 600;
             transition: background-color 0.3s;
+            display: inline-block;
         }
-        .hero-text a:hover {
+        .hero-text a.cta-button:hover {
             background-color: #008CCF;
         }
 
-        /* --- Section Styling --- */
-        .section-box {
+        /* --- Section Styling (Content Placeholder) --- */
+        .content-placeholder {
+            min-height: 400px;
             background-color: var(--light-gray-bg);
             padding: 30px;
             border-radius: 8px;
-            margin-bottom: 40px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-        .section-box h2 {
-            font-size: 2em;
-            color: var(--navy-text);
-            border-bottom: 2px solid var(--aviation-blue);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        .section-box h3 {
-            color: var(--aviation-blue);
-            font-size: 1.2em;
-            margin-top: 15px;
-        }
-        .section-box ul {
-            list-style: none;
-            padding: 0;
-        }
-        .section-box ul li {
-            background-color: var(--sky-white);
-            padding: 15px;
-            margin-bottom: 10px;
-            border-left: 5px solid var(--aviation-blue);
-            border-radius: 4px;
-        }
-        .section-box ul li strong {
-            color: var(--navy-text);
-        }
-
-        /* --- Resume / CV Link Section --- */
-        .cv-link {
             text-align: center;
-            padding: 40px;
-            margin-bottom: 40px;
-            background-color: var(--navy-text);
-            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
-        .cv-link h2 {
-            color: var(--sky-white);
-            border-bottom: none;
+        .content-placeholder h2 {
+            color: var(--navy-text);
+            font-size: 2em;
             margin-bottom: 15px;
         }
-        .cv-link a {
-            background-color: var(--aviation-blue);
-            color: var(--sky-white);
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 1.1em;
-            transition: background-color 0.3s, transform 0.3s;
-            display: inline-block;
-        }
-        .cv-link a:hover {
-            background-color: #008CCF;
-            transform: scale(1.05);
+        .content-placeholder p {
+            max-width: 600px;
+            color: #555;
         }
 
         /* ==================== D. FOOTER ==================== */
@@ -277,6 +279,7 @@
             padding: 40px 20px;
             font-size: 0.9em;
             text-align: center;
+            margin-top: 50px;
         }
         .footer-social a {
             color: var(--aviation-blue);
@@ -299,30 +302,32 @@
 </head>
 <body>
 
-    <div id="aviation-preloader">
-        <div class="plane-container">
-            <span class="plane"></span>
+    <div id="professional-preloader">
+        <div class="loader-container">
+            <div class="loader"></div>
+            <div class="loader-inner"></div>
         </div>
-        <div class="loading-text">Preparing for takeoff...</div>
+        <div class="loader-text">Loading Tyler Nicholas Portfolio...</div>
     </div>
 
     <div id="main-portfolio">
         <header>
             <div class="navbar">
-                <a href="#home" class="logo">TYLER NICHOLAS</a>
+                <a href="tyler.html" class="logo">TYLER NICHOLAS</a>
                 <nav>
-                    <a href="#home" class="active">Home Page</a>
-                    <a href="#about">Learn More About Me</a>
-                    <a href="#projects">My Projects</a>
-                    <a href="#cv">My CV</a>
+                    <a href="tyler.html" class="active">Home</a>
+                    <a href="about-me.html">About Me</a>
+                    <a href="my-projects.html">My Projects</a>
+                    <a href="my-cv.html">My CV</a>
+                    
                     <div class="dropdown">
-                        <a href="#" style="margin-right: 0;">Social Links ▼</a>
+                        <a href="#" style="margin-right: 0;">More ▼</a>
                         <div class="dropdown-content">
-                            <a href="https://www.linkedin.com/in/tyler-nicholas-62999534a" target="_blank">LinkedIn</a>
-                            <a href="https://www.instagram.com/t.nicholas25" target="_blank">Instagram</a>
-                            <a href="https://x.com/TylerNicholasSC" target="_blank">Twitter / X</a>
-                            <a href="https://wa.me/2482544788" target="_blank">WhatsApp</a>
-                            <a href="https://www.facebook.com/profile.php?id=61558803946306" target="_blank">Facebook</a>
+                            <a href="my-blog.html">My Blog</a>
+                            <a href="my-story.html">My Story</a>
+                            <a href="my-experiences.html">My Experiences</a>
+                            <a href="my-school.html">My School</a>
+                            <a href="social-links.html">Social Links</a>
                         </div>
                     </div>
                 </nav>
@@ -330,57 +335,27 @@
         </header>
 
         <main>
+            <div class="announcement-banner">
+                Welcome to my personal website, please connect with me via <a href="https://www.linkedin.com/in/tyler-nicholas-62999534a" target="_blank">LinkedIn</a>.
+            </div>
+
             <section class="hero" id="home">
                 <img src="../image/tyler-nicholas.png" alt="Professional Profile Picture of Tyler Nicholas" class="profile-pic">
                 <div class="hero-text">
                     <h1>Tyler Nicholas</h1>
-                    <p>Student, Aspiring Commercial Pilot, and Technology Enthusiast</p>
-                    <p>Welcome to my professional portfolio.</p>
-                    <a href="#about">Explore My Ambitions</a>
+                    <p>Chairman of the Board, Aspiring Pilot, & STEM Student</p>
+                    <p style="font-size: 1em; color: var(--navy-text);">
+                        I am currently a 16-year-old student specializing in Mathematics and Physics-Chemistry, dedicated to advancing my corporate responsibilities alongside my ambition to pursue a career as a commercial pilot.
+                    </p>
+                    <a href="about-me.html" class="cta-button">Discover My Journey</a>
                 </div>
             </section>
 
-            <section class="section-box" id="about">
-                <h2>Education & Academics</h2>
+            <section class="content-placeholder">
+                <h2>Vision & Focus</h2>
                 <p>
-                    I am a dedicated 16-year-old student currently attending the **École Française Des Seychelles (EFS)**, simultaneously pursuing rigorous online coursework through the **CNED (Centre National d'Enseignement à Distance)**. 
+                    This space will feature dynamic content, recent blog posts, or current project updates. My focus remains balanced between academic rigor (EFS & CNED) and strategic corporate management within the Tyler Nicholas Group. Explore the navigation above to learn more about my personal story and professional goals.
                 </p>
-                <p>
-                    My academic path is strategically focused on developing a strong technical foundation, with specialty subjects chosen to align with my future goals in aviation and engineering.
-                </p>
-                
-                <h3>Key Specializations</h3>
-                <ul>
-                    <li><strong>Mathematics:</strong> Advanced study in calculus, algebra, and applied math—essential for flight planning and engineering principles.</li>
-                    <li><strong>Physics-Chemistry:</strong> Deep exploration of mechanics, thermodynamics, and aerodynamics, directly applicable to aircraft systems and performance.</li>
-                    <li><strong>English Language:</strong> Maintaining proficiency in international communication and technical documentation, a critical requirement for global aviation careers.</li>
-                </ul>
-            </section>
-
-            <section class="section-box">
-                <h2>Aviation Ambitions</h2>
-                <p>
-                    I am an unwavering aviation enthusiast with the professional goal of becoming a **Commercial Pilot**. The sky represents the ultimate challenge in precision, system management, and leadership.
-                </p>
-                
-                <h3>Key Areas of Passion</h3>
-                <ul>
-                    <li>
-                        <strong>Aspiring Commercial Pilot:</strong> My dedication is centered on mastering the complexities of modern air travel and safety protocols. I am actively researching flight schools and licensing pathways (ATPL).
-                    </li>
-                    <li>
-                        <strong>Boeing 777-300ER Specialist:</strong> I hold a deep fascination for the Boeing 777-300ER, appreciating its advanced avionics, robust engineering, and role as a powerhouse in long-haul passenger operations.
-                    </li>
-                    <li>
-                        <strong>Core Competencies:</strong> Beyond technical knowledge, my passion has instilled strong attributes in **risk assessment**, **systematic planning**, and **high-pressure decision-making**—skills highly valued across all industries.
-                    </li>
-                </ul>
-            </section>
-
-            <section class="cv-link" id="cv">
-                <h2>Ready to learn more?</h2>
-                <p style="color: var(--light-gray-bg); margin-bottom: 25px;">Download my curriculum vitae to explore my detailed experience, extracurricular achievements, and ongoing professional development.</p>
-                <a href="#">Download Full CV (PDF)</a>
             </section>
         </main>
 
@@ -402,21 +377,21 @@
     </div>
 
     <script>
-        const PRELOADER_DURATION = 5000; // 5 seconds
+        const PRELOADER_DURATION = 3500; // 3.5 seconds for spin duration
 
         document.addEventListener('DOMContentLoaded', function() {
-            const preloader = document.getElementById('aviation-preloader');
+            const preloader = document.getElementById('professional-preloader');
             const mainContent = document.getElementById('main-portfolio');
 
             setTimeout(() => {
                 // 1. Fade out the preloader
                 preloader.style.opacity = '0';
 
-                // 2. Wait for the fade-out transition (1 second in CSS)
+                // 2. Wait for the fade-out transition (0.8 seconds in CSS)
                 setTimeout(() => {
                     preloader.style.display = 'none';
                     mainContent.classList.add('loaded'); // 3. Reveal main content
-                }, 1000); 
+                }, 800); 
             }, PRELOADER_DURATION);
         });
     </script>
