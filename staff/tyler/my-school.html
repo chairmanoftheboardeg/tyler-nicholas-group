@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My School | Tyler Nicholas - École Française des Seychelles</title>
+    <link rel="icon" type="image/png" href="../../image/favicon.png">
+    
+    <style>
+        /* ==================== TYLER NICHOLAS PERSONAL PORTFOLIO STYLES (Reused) ==================== */
+        
+        /* --- Color Palette --- */
+        :root {
+            --aviation-blue: #00AEEF; 
+            --sky-white: #FFFFFF;
+            --navy-text: #001F4C; 
+            --light-gray-bg: #F8F9FA;
+            --transition-speed: 0.4s ease-in-out;
+            --link-blue: #007bff;
+            --france-blue: #0055A4; /* For EFS elements */
+            --france-red: #EF4135;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--navy-text);
+            background-color: var(--sky-white);
+            line-height: 1.6;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background-color: var(--sky-white);
+            border-bottom: 3px solid var(--aviation-blue);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--navy-text);
+            text-decoration: none;
+        }
+        nav {
+            display: flex;
+        }
+        nav a {
+            color: var(--navy-text);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            font-size: 1em;
+            font-weight: 500;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 4px;
+        }
+        nav a:hover, nav a.active {
+            color: var(--aviation-blue);
+        }
+        
+        /* --- Dropdown Menu (More) --- */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--sky-white);
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            right: 0;
+            border-radius: 4px;
+            border-top: 3px solid var(--aviation-blue);
+        }
+        .dropdown-content a {
+            color: var(--navy-text);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            margin: 0;
+            font-weight: 500;
+        }
+        .dropdown-content a:hover {
+            background-color: var(--light-gray-bg);
+            color: var(--aviation-blue);
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown > a {
+            background-color: var(--light-gray-bg);
+            border: 1px solid #ddd;
+            margin-left: 10px;
+        }
+
+        /* ==================== C. PAGE SPECIFIC CONTENT (SCHOOL) ==================== */
+        main { 
+            max-width: 900px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+        }
+
+        h1 {
+            font-size: 3em;
+            color: var(--navy-text);
+            border-bottom: 3px solid var(--aviation-blue);
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+        }
+
+        .school-info-box {
+            background-color: var(--light-gray-bg);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border-left: 5px solid var(--france-blue);
+        }
+        .school-info-box h2 {
+            font-size: 2em;
+            color: var(--france-blue);
+            margin-top: 0;
+        }
+        .school-info-box p {
+            font-size: 1.05em;
+            color: #555;
+        }
+        .school-info-box a {
+            color: var(--france-red);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .school-info-box a:hover {
+            text-decoration: underline;
+        }
+        
+        /* --- Personal Journey Section --- */
+        .personal-journey {
+            margin-top: 50px;
+        }
+        .personal-journey h2 {
+            font-size: 2.5em;
+            color: var(--navy-text);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .journey-segment {
+            background-color: var(--sky-white);
+            border: 1px solid #ddd;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .journey-segment h3 {
+            color: var(--aviation-blue);
+            font-size: 1.5em;
+            border-bottom: 2px solid var(--light-gray-bg);
+            padding-bottom: 10px;
+        }
+        .highlight {
+            font-weight: 700;
+            color: var(--navy-text);
+        }
+        .graduation-highlight {
+            background-color: var(--navy-text);
+            color: var(--sky-white);
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+        
+        .special-interest {
+            margin-top: 20px;
+            padding: 15px;
+            border-left: 4px solid var(--france-red);
+            background-color: #FFF2F2;
+            font-style: italic;
+        }
+
+        /* ==================== D. FOOTER ==================== */
+        footer {
+            background-color: var(--navy-text);
+            color: var(--light-gray-bg);
+            padding: 40px 20px;
+            font-size: 0.9em;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .footer-social a {
+            color: var(--aviation-blue);
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-social a:hover {
+            color: var(--sky-white);
+        }
+        .footer-email {
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+        .footer-email a {
+            color: var(--aviation-blue);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-portfolio">
+        <header>
+            <div class="navbar">
+                <a href="index.html" class="logo">TYLER NICHOLAS</a>
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="about-me.html">About Me</a>
+                    <a href="my-projects.html">My Projects</a>
+                    <a href="my-cv.html">My CV</a>
+                    
+                    <div class="dropdown">
+                        <a href="#" style="margin-right: 0;" class="active">More ▼</a>
+                        <div class="dropdown-content">
+                            <a href="my-blog.html">My Blog</a>
+                            <a href="my-story.html">My Story</a>
+                            <a href="my-experiences.html">My Experiences</a>
+                            <a href="my-school.html" class="active">My School</a>
+                            <a href="social-links.html">Social Links</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <h1>Academic Journey</h1>
+            
+            <section class="school-info-box">
+                <h2>École Française des Seychelles (EFS)</h2>
+                <p>
+                    The École Française des Seychelles is an **AEFE-accredited international school** offering the complete curriculum of the French National Education system. Located on Mahé, the school provides education from pre-primary through to high school (Lycée), culminating in the **French Baccalaureate**. This dual-language environment provides students with a globally recognized, rigorous academic foundation, fostering multilingualism and cultural openness vital for international careers.
+                </p>
+                <p>
+                    EFS is known for its strong emphasis on the sciences and humanities within the framework of the French system, equipping students with structured, analytical thinking skills.
+                </p>
+                <p>
+                    Official Website: <a href="https://ecole-francaise-seychelles.com/" target="_blank">ecole-francaise-seychelles.com</a>
+                </p>
+            </section>
+            
+            <section class="personal-journey">
+                <h2>My Time at EFS: A Long-Haul Flight</h2>
+
+                <div class="journey-segment">
+                    <h3>The Foundation of Growth</h3>
+                    <p>
+                        I have been a student at the École Française des Seychelles since the age of **4 years old**, marking nearly my entire life spent within the walls of this institution. It has been a long journey, filled with the inevitable highs and lows that come with navigating a rigorous international educational system. I have, through it all, encountered both challenging moments with lessons and the opportunity to meet truly **great people**—peers who have become lifelong friends.
+                    </p>
+                    <p>
+                        The experience has been one of collective growth; my **classmates and I** have been closely knit for years, developing not only academically but personally alongside one another. This deep sense of community has been one of the most valuable aspects of my time here.
+                    </p>
+                </div>
+
+                <div class="journey-segment">
+                    <h3>A Passion for the Technical</h3>
+                    <p>
+                        While traditional academic conformity has never been my primary suit, I have always gravitated fiercely toward my specialized subjects. I could easily **sit in a Physics class for hours** and not grow bored. This deep, enduring interest in **applied sciences**, particularly those subjects relating to the mechanics and dynamics of flight (Physics-Chemistry) and complex problem-solving (Mathematics), is where my academic passion truly lies.
+                    </p>
+                    <div class="special-interest">
+                        **Current Focus:** Specialized high school track in Mathematics and Physics-Chemistry, serving as the essential technical backbone for my aviation ambitions and corporate analytical roles.
+                    </div>
+                </div>
+
+                <div class="journey-segment">
+                    <h3>Looking Toward the Horizon</h3>
+                    <p>
+                        The final destination is now clearly in sight. If all academic milestones are met according to plan, my graduation from the high school level education at EFS is scheduled for the **6th month of 2027**. This pivotal moment will mark the end of one long chapter and the beginning of another, focusing entirely on professional flight training and global enterprise expansion.
+                    </p>
+                    <div class="graduation-highlight">
+                        Anticipated Graduation Date: June 2027
+                    </div>
+                </div>
+
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/tyler-nicholas-62999534a" target="_blank">LinkedIn</a> |
+                <a href="https://www.instagram.com/t.nicholas25" target="_blank">Instagram</a> |
+                <a href="https://x.com/TylerNicholasSC" target="_blank">Twitter / X</a> |
+                <a href="https://wa.me/2482544788" target="_blank">WhatsApp</a> |
+                <a href="https://www.facebook.com/profile.php?id=61558803946306" target="_blank">Facebook</a>
+            </div>
+            <div class="footer-email">
+                Professional Contact: <a href="mailto:tyler@tylernicholasgroup.com">tyler@tylernicholasgroup.com</a>
+            </div>
+            <p>
+                &copy; 2025 Tyler Nicholas Professional Portfolio. All rights reserved.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
