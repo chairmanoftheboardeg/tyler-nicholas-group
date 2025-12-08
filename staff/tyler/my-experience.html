@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Experiences | Tyler Nicholas - Career Timeline</title>
+    <link rel="icon" type="image/png" href="../../image/favicon.png">
+    
+    <style>
+        /* ==================== TYLER NICHOLAS PERSONAL PORTFOLIO STYLES (Reused) ==================== */
+        
+        /* --- Color Palette --- */
+        :root {
+            --aviation-blue: #00AEEF; 
+            --sky-white: #FFFFFF;
+            --navy-text: #001F4C; 
+            --light-gray-bg: #F8F9FA;
+            --transition-speed: 0.4s ease-in-out;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--navy-text);
+            background-color: var(--sky-white);
+            line-height: 1.6;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background-color: var(--sky-white);
+            border-bottom: 3px solid var(--aviation-blue);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--navy-text);
+            text-decoration: none;
+        }
+        nav {
+            display: flex;
+        }
+        nav a {
+            color: var(--navy-text);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            font-size: 1em;
+            font-weight: 500;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 4px;
+        }
+        nav a:hover, nav a.active {
+            color: var(--aviation-blue);
+        }
+        
+        /* --- Dropdown Menu (More) --- */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--sky-white);
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            right: 0;
+            border-radius: 4px;
+            border-top: 3px solid var(--aviation-blue);
+        }
+        .dropdown-content a {
+            color: var(--navy-text);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            margin: 0;
+            font-weight: 500;
+        }
+        .dropdown-content a:hover {
+            background-color: var(--light-gray-bg);
+            color: var(--aviation-blue);
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown > a {
+            background-color: var(--light-gray-bg);
+            border: 1px solid #ddd;
+            margin-left: 10px;
+        }
+
+        /* ==================== C. PAGE SPECIFIC CONTENT (TIMELINE) ==================== */
+        main { 
+            max-width: 900px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+        }
+
+        h1 {
+            font-size: 3em;
+            color: var(--navy-text);
+            border-bottom: 3px solid var(--aviation-blue);
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+        }
+
+        /* --- Timeline Container --- */
+        .timeline {
+            position: relative;
+            padding: 10px 0;
+        }
+        
+        /* The main vertical line */
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: var(--light-gray-bg);
+            top: 0;
+            bottom: 0;
+            left: 31px; /* Position line on the left */
+            margin-left: -3px;
+            z-index: -1;
+        }
+        
+        /* --- Timeline Item Styling --- */
+        .timeline-item {
+            padding: 10px 0 30px 70px; /* Space for the circle and content */
+            position: relative;
+            background-color: var(--sky-white);
+            border-left: 3px solid var(--aviation-blue); /* Section border */
+            margin-left: 3px;
+            padding-left: 30px;
+            margin-bottom: 25px;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 10px;
+            margin-bottom: 0;
+        }
+
+        /* The circle marker */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border: 3px solid var(--aviation-blue);
+            background-color: var(--sky-white);
+            top: 15px;
+            left: 20px; 
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item h2 {
+            font-size: 1.6em;
+            color: var(--navy-text);
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-item h3 {
+            font-size: 1.1em;
+            color: #555;
+            margin: 0 0 10px 0;
+            font-weight: 400;
+        }
+
+        .timeline-item .date-span {
+            font-size: 0.9em;
+            color: var(--aviation-blue);
+            font-weight: 500;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .role-type {
+            display: inline-block;
+            background-color: var(--navy-text);
+            color: var(--sky-white);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        /* --- CTA --- */
+        .cta-linkedin {
+            background-color: var(--light-gray-bg);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 50px;
+            border: 1px solid #ddd;
+        }
+        .cta-linkedin a {
+            background-color: #0A66C2; /* LinkedIn Blue */
+            color: var(--sky-white);
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            display: inline-block;
+            margin-top: 15px;
+        }
+        .cta-linkedin a:hover {
+            background-color: #074a8c;
+        }
+
+
+        /* ==================== D. FOOTER ==================== */
+        footer {
+            background-color: var(--navy-text);
+            color: var(--light-gray-bg);
+            padding: 40px 20px;
+            font-size: 0.9em;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .footer-social a {
+            color: var(--aviation-blue);
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-social a:hover {
+            color: var(--sky-white);
+        }
+        .footer-email {
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+        .footer-email a {
+            color: var(--aviation-blue);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-portfolio">
+        <header>
+            <div class="navbar">
+                <a href="index.html" class="logo">TYLER NICHOLAS</a>
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="about-me.html">About Me</a>
+                    <a href="my-projects.html">My Projects</a>
+                    <a href="my-cv.html">My CV</a>
+                    
+                    <div class="dropdown">
+                        <a href="#" style="margin-right: 0;" class="active">More ▼</a>
+                        <div class="dropdown-content">
+                            <a href="my-blog.html">My Blog</a>
+                            <a href="my-story.html">My Story</a>
+                            <a href="my-experiences.html" class="active">My Experiences</a>
+                            <a href="my-school.html">My School</a>
+                            <a href="social-links.html">Social Links</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <h1>Professional Experiences & Roles</h1>
+            <p style="font-size: 1.1em; max-width: 800px; margin-bottom: 50px;">
+                A chronological overview highlighting my leadership, technical, and aviation-focused roles. This timeline reflects my commitment to both corporate strategy and technical execution.
+            </p>
+
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <h2>Technology Coordinator</h2>
+                    <h3>FoodShare Seychelles</h3>
+                    <span class="date-span">Late 2025 – Present (Current)</span>
+                    <p>
+                        Managing and implementing digital infrastructure to optimize food distribution and community support operations for the non-profit organization. Focus on web development, data integrity, and digital outreach.
+                    </p>
+                    <span class="role-type">Non-Profit / IT</span>
+                </div>
+                
+                <div class="timeline-item">
+                    <h2>Chairman of the Board</h2>
+                    <h3>Tyler Nicholas Group</h3>
+                    <span class="date-span">Mid 2024 – Present (Current)</span>
+                    <p>
+                        Providing strategic direction, governance, and oversight for the entire portfolio of TNG subsidiaries, focusing on long-term growth, ethical business practices, and global expansion strategy.
+                    </p>
+                    <span class="role-type">Leadership / Strategy</span>
+                </div>
+
+                <div class="timeline-item">
+                    <h2>Owner & Founder (with Subsidiaries)</h2>
+                    <h3>Emirates Group Roblox</h3>
+                    <span class="date-span">Early 2024 – Present (Current)</span>
+                    <p>
+                        Establishing and managing a major virtual aviation and gaming enterprise, including the Emirates Group Aviation University (EGR), Emirates Airlines, and the investor community. Focus on realistic simulation and community leadership.
+                    </p>
+                    <span class="role-type">Virtual Enterprise / Aviation</span>
+                </div>
+                
+                <div class="timeline-item">
+                    <h2>Chief Executive Officer</h2>
+                    <h3>Tyler Nicholas Foundation</h3>
+                    <span class="date-span">Early 2024 – Present (Current)</span>
+                    <p>
+                        Directing the philanthropic mission and operations, overseeing community initiatives focused on youth leadership and STEM education.
+                    </p>
+                    <span class="role-type">Philanthropy / CEO</span>
+                </div>
+                
+                <div class="timeline-item">
+                    <h2>Owner & General Manager</h2>
+                    <h3>LumoraX</h3>
+                    <span class="date-span">2024 – Present (Current)</span>
+                    <p>
+                        Managing all aspects of the e-commerce retail brand, from digital marketing and inventory to logistics and customer experience.
+                    </p>
+                    <span class="role-type">E-Commerce / Operations</span>
+                </div>
+                
+                <div class="timeline-item">
+                    <h2>Web & Bot Developer</h2>
+                    <h3>Falcon LTD</h3>
+                    <span class="date-span">2023 – Present (Current)</span>
+                    <p>
+                        Responsible for the technical maintenance, feature development, and automation processes (bots) supporting the Falcon LTD online retail presence.
+                    </p>
+                    <span class="role-type">Development / E-Commerce</span>
+                </div>
+                
+                <div class="timeline-item">
+                    <h2>Guest Services Intern (International & Domestic Ops)</h2>
+                    <h3>Air Seychelles</h3>
+                    <span class="date-span">Summer 2023 (Internship)</span>
+                    <p>
+                        Hands-on experience supporting both international and domestic flight operations, gaining insights into passenger flow, regulatory compliance, and customer service standards in a major airline environment.
+                    </p>
+                    <span class="role-type">Aviation / Internship</span>
+                </div>
+                
+                <div class="timeline-item">
+                    <h2>Guest Services Intern (Domestic Ops)</h2>
+                    <h3>Air Seychelles</h3>
+                    <span class="date-span">Spring 2023 (Internship)</span>
+                    <p>
+                        Focused rotation within the domestic terminal, learning the specific challenges and procedures of short-haul, inter-island flight logistics and ground services.
+                    </p>
+                    <span class="role-type">Aviation / Internship</span>
+                </div>
+
+                <div class="timeline-item">
+                    <h2>Operations Control Center (OCC) Intern</h2>
+                    <h3>Air Seychelles</h3>
+                    <span class="date-span">Early 2023 (Internship)</span>
+                    <p>
+                        Invaluable exposure to the core nerve center of the airline, observing real-time decision-making regarding flight dispatch, crew scheduling, weather deviations, and overall operational safety and efficiency.
+                    </p>
+                    <span class="role-type">Aviation / Control Center</span>
+                </div>
+
+                <div class="timeline-item" style="border-left-color: #aaa;">
+                    <h2>Many More to Come</h2>
+                    <h3>Future Opportunities</h3>
+                    <span class="date-span">Ongoing</span>
+                    <p>
+                        My journey is ongoing. I am continually seeking challenging roles and learning opportunities that expand my knowledge in aviation, technology, and strategic leadership.
+                    </p>
+                    <span class="role-type">Future Focus</span>
+                </div>
+                
+            </div>
+
+            <div class="cta-linkedin">
+                <h3>For the Latest Updates</h3>
+                <p>
+                    This page lists highlights. For the most current, comprehensive, and detailed professional history, please view my profile on LinkedIn.
+                </p>
+                <a href="https://www.linkedin.com/in/tyler-nicholas-62999534a" target="_blank">View My LinkedIn Profile</a>
+            </div>
+            
+        </main>
+
+        <footer>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/tyler-nicholas-62999534a" target="_blank">LinkedIn</a> |
+                <a href="https://www.instagram.com/t.nicholas25" target="_blank">Instagram</a> |
+                <a href="https://x.com/TylerNicholasSC" target="_blank">Twitter / X</a> |
+                <a href="https://wa.me/2482544788" target="_blank">WhatsApp</a> |
+                <a href="https://www.facebook.com/profile.php?id=61558803946306" target="_blank">Facebook</a>
+            </div>
+            <div class="footer-email">
+                Professional Contact: <a href="mailto:tyler@tylernicholasgroup.com">tyler@tylernicholasgroup.com</a>
+            </div>
+            <p>
+                &copy; 2025 Tyler Nicholas Professional Portfolio. All rights reserved.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
