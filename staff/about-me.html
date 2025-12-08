@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Tyler Nicholas | My Journey</title>
+    <link rel="icon" type="image/png" href="../image/favicon.png">
+    
+    <style>
+        /* ==================== TYLER NICHOLAS PERSONAL PORTFOLIO STYLES (Reused) ==================== */
+        
+        /* --- Color Palette --- */
+        :root {
+            --aviation-blue: #00AEEF; 
+            --sky-white: #FFFFFF;
+            --navy-text: #001F4C; 
+            --light-gray-bg: #F8F9FA;
+            --transition-speed: 0.4s ease-in-out;
+            --link-blue: #007bff;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--navy-text);
+            background-color: var(--sky-white);
+            line-height: 1.6;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background-color: var(--sky-white);
+            border-bottom: 3px solid var(--aviation-blue);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--navy-text);
+            text-decoration: none;
+        }
+        nav {
+            display: flex;
+        }
+        nav a {
+            color: var(--navy-text);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            font-size: 1em;
+            font-weight: 500;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 4px;
+        }
+        nav a:hover, nav a.active {
+            color: var(--aviation-blue);
+        }
+        
+        /* --- Dropdown Menu (More) --- */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--sky-white);
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            right: 0;
+            border-radius: 4px;
+            border-top: 3px solid var(--aviation-blue);
+        }
+        .dropdown-content a {
+            color: var(--navy-text);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            margin: 0;
+            font-weight: 500;
+        }
+        .dropdown-content a:hover {
+            background-color: var(--light-gray-bg);
+            color: var(--aviation-blue);
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown > a {
+            background-color: var(--light-gray-bg);
+            border: 1px solid #ddd;
+            margin-left: 10px;
+        }
+
+        /* ==================== C. PAGE SPECIFIC CONTENT ==================== */
+        main { 
+            max-width: 1000px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+        }
+
+        h1 {
+            font-size: 3em;
+            color: var(--navy-text);
+            border-bottom: 3px solid var(--aviation-blue);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .profile-summary {
+            background-color: var(--light-gray-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .profile-summary img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--aviation-blue);
+            margin-bottom: 20px;
+        }
+        .profile-summary h2 {
+            font-size: 1.5em;
+            color: var(--navy-text);
+            margin: 0 0 5px 0;
+        }
+        .profile-summary p {
+            color: var(--aviation-blue);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        .summary-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-top: 20px;
+            border-top: 1px dashed #ccc;
+            padding-top: 15px;
+        }
+        .summary-list li {
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+        .summary-list li strong {
+            color: var(--aviation-blue);
+            margin-right: 5px;
+        }
+
+        .narrative-content h2 {
+            font-size: 2.2em;
+            color: var(--navy-text);
+            margin-top: 0;
+            border-left: 5px solid var(--aviation-blue);
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+        .narrative-content h3 {
+            color: var(--aviation-blue);
+            margin-top: 30px;
+            font-size: 1.5em;
+        }
+        .narrative-content p {
+            margin-bottom: 20px;
+        }
+        
+        /* --- Call to Action Box --- */
+        .cta-box {
+            background-color: var(--navy-text);
+            color: var(--sky-white);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .cta-box h3 {
+            color: var(--aviation-blue);
+            margin-top: 0;
+        }
+        .cta-box a {
+            background-color: var(--aviation-blue);
+            color: var(--sky-white);
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            display: inline-block;
+            margin-top: 15px;
+        }
+        .cta-box a:hover {
+            background-color: #008CCF;
+        }
+
+        /* ==================== D. FOOTER ==================== */
+        footer {
+            background-color: var(--navy-text);
+            color: var(--light-gray-bg);
+            padding: 40px 20px;
+            font-size: 0.9em;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .footer-social a {
+            color: var(--aviation-blue);
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-social a:hover {
+            color: var(--sky-white);
+        }
+        .footer-email {
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+        .footer-email a {
+            color: var(--aviation-blue);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-portfolio">
+        <header>
+            <div class="navbar">
+                <a href="tyler.html" class="logo">TYLER NICHOLAS</a>
+                <nav>
+                    <a href="tyler.html">Home</a>
+                    <a href="about-me.html" class="active">About Me</a>
+                    <a href="my-projects.html">My Projects</a>
+                    <a href="my-cv.html">My CV</a>
+                    
+                    <div class="dropdown">
+                        <a href="#" style="margin-right: 0;">More ▼</a>
+                        <div class="dropdown-content">
+                            <a href="my-blog.html">My Blog</a>
+                            <a href="my-story.html">My Story</a>
+                            <a href="my-experiences.html">My Experiences</a>
+                            <a href="my-school.html">My School</a>
+                            <a href="social-links.html">Social Links</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <h1>About Me: Bridging Academics, Aviation, and Enterprise</h1>
+
+            <div class="about-grid">
+                
+                <div class="profile-summary">
+                    <img src="../image/tyler-nicholas.png" alt="Profile Picture of Tyler Nicholas">
+                    <h2>Tyler Nicholas</h2>
+                    <p>Chairman | Aspiring Commercial Pilot | Student</p>
+                    
+                    <ul class="summary-list">
+                        <li><strong>Current School:</strong> École Française Des Seychelles (EFS)</li>
+                        <li><strong>Specialties:</strong> Maths, Physics-Chemistry, English</li>
+                        <li><strong>Passion:</strong> Aviation & Aerospace Technology</li>
+                        <li><strong>Focus Aircraft:</strong> Boeing 777-300ER</li>
+                        <li><strong>Corporate Role:</strong> Chairman of the Board, Tyler Nicholas Group</li>
+                    </ul>
+                </div>
+
+                <div class="narrative-content">
+                    <h2>My Professional Narrative</h2>
+                    <p>
+                        My journey is defined by a commitment to rigorous learning, strategic leadership, and the pursuit of complex technical challenges. At 16, I manage a demanding academic schedule while providing strategic guidance as Chairman of the Board for the Tyler Nicholas Group. This duality has cultivated a unique skill set balancing high-level organizational oversight with deep technical specialization.
+                    </p>
+
+                    <h3>The Aviation Mindset: Precision and System Mastery</h3>
+                    <p>
+                        Aviation is more than a passion; it is a philosophy. My ambition to become a commercial pilot stems from a profound respect for **systemic precision, risk management, and situational awareness**. My academic focus on **Mathematics and Physics-Chemistry** (via EFS and CNED) is specifically engineered to provide the technical foundation necessary for mastering advanced aerospace engineering and complex flight systems. The sheer operational complexity and global connectivity of the Boeing 777-300ER, in particular, represents the apex of this technical interest.
+                    </p>
+
+                    <h3>Leadership and Corporate Governance</h3>
+                    <p>
+                        As Chairman of the Tyler Nicholas Group, I prioritize the strategic direction and ethical governance of our subsidiaries. This role demands **decisive leadership**, **long-term vision**, and a focus on transparency and integrity. My experience in this capacity complements my technical education by forcing a holistic view of operations, economics, and human capital management.
+                    </p>
+                </div>
+            </div>
+
+            <div class="cta-box">
+                <h3>Want to Dive Deeper into My Achievements?</h3>
+                <p>Explore my academic record, project portfolio, and detailed professional history.</p>
+                <a href="my-cv.html">View My Full CV</a>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/tyler-nicholas-62999534a" target="_blank">LinkedIn</a> |
+                <a href="https://www.instagram.com/t.nicholas25" target="_blank">Instagram</a> |
+                <a href="https://x.com/TylerNicholasSC" target="_blank">Twitter / X</a> |
+                <a href="https://wa.me/2482544788" target="_blank">WhatsApp</a> |
+                <a href="https://www.facebook.com/profile.php?id=61558803946306" target="_blank">Facebook</a>
+            </div>
+            <div class="footer-email">
+                Professional Contact: <a href="mailto:tyler@tylernicholasgroup.com">tyler@tylernicholasgroup.com</a>
+            </div>
+            <p>
+                &copy; 2025 Tyler Nicholas Professional Portfolio. All rights reserved.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
