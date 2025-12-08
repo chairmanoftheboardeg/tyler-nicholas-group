@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects | Tyler Nicholas</title>
+    <link rel="icon" type="image/png" href="../../image/favicon.png">
+    
+    <style>
+        /* ==================== TYLER NICHOLAS PERSONAL PORTFOLIO STYLES (Reused) ==================== */
+        
+        /* --- Color Palette --- */
+        :root {
+            --aviation-blue: #00AEEF; 
+            --sky-white: #FFFFFF;
+            --navy-text: #001F4C; 
+            --light-gray-bg: #F8F9FA;
+            --transition-speed: 0.4s ease-in-out;
+            --link-blue: #007bff;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--navy-text);
+            background-color: var(--sky-white);
+            line-height: 1.6;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background-color: var(--sky-white);
+            border-bottom: 3px solid var(--aviation-blue);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--navy-text);
+            text-decoration: none;
+        }
+        nav {
+            display: flex;
+        }
+        nav a {
+            color: var(--navy-text);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            font-size: 1em;
+            font-weight: 500;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 4px;
+        }
+        nav a:hover, nav a.active {
+            color: var(--aviation-blue);
+        }
+        
+        /* --- Dropdown Menu (More) --- */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--sky-white);
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            right: 0;
+            border-radius: 4px;
+            border-top: 3px solid var(--aviation-blue);
+        }
+        .dropdown-content a {
+            color: var(--navy-text);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            margin: 0;
+            font-weight: 500;
+        }
+        .dropdown-content a:hover {
+            background-color: var(--light-gray-bg);
+            color: var(--aviation-blue);
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown > a {
+            background-color: var(--light-gray-bg);
+            border: 1px solid #ddd;
+            margin-left: 10px;
+        }
+
+        /* ==================== C. PAGE SPECIFIC CONTENT (LIST VIEW) ==================== */
+        main { 
+            max-width: 1000px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+        }
+
+        h1 {
+            font-size: 3em;
+            color: var(--navy-text);
+            border-bottom: 3px solid var(--aviation-blue);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* --- Project List Styling --- */
+        .project-category {
+            margin-bottom: 50px;
+        }
+        .project-category h2 {
+            font-size: 2.2em;
+            color: var(--navy-text);
+            border-left: 5px solid var(--aviation-blue);
+            padding-left: 15px;
+            margin-bottom: 25px;
+        }
+
+        .project-item {
+            display: block;
+            background-color: var(--sky-white);
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.3s, border-color 0.3s;
+            text-decoration: none; /* In case it becomes a link later */
+        }
+        .project-item:hover {
+            border-color: var(--aviation-blue);
+            box-shadow: 0 4px 15px rgba(0, 31, 76, 0.1);
+        }
+
+        .project-item h3 {
+            font-size: 1.5em;
+            color: var(--navy-text);
+            margin: 0 0 5px 0;
+        }
+        .project-item p {
+            font-size: 0.95em;
+            color: #555;
+            margin: 0 0 10px 0;
+        }
+        .project-item ul {
+            list-style: none;
+            padding-left: 15px;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        .tags {
+            margin-top: 10px;
+        }
+        .tag {
+            display: inline-block;
+            background-color: var(--light-gray-bg);
+            color: var(--aviation-blue);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-right: 8px;
+            margin-bottom: 5px;
+            border: 1px solid #C0E8FF;
+            font-weight: 500;
+        }
+        
+        /* --- Contact CTA --- */
+        .contact-cta {
+            background-color: var(--navy-text);
+            color: var(--sky-white);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .contact-cta h3 {
+            color: var(--aviation-blue);
+            margin-top: 0;
+        }
+        .contact-cta a {
+            background-color: var(--aviation-blue);
+            color: var(--sky-white);
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            display: inline-block;
+            margin-top: 15px;
+        }
+        .contact-cta a:hover {
+            background-color: #008CCF;
+        }
+
+
+        /* ==================== D. FOOTER ==================== */
+        footer {
+            background-color: var(--navy-text);
+            color: var(--light-gray-bg);
+            padding: 40px 20px;
+            font-size: 0.9em;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .footer-social a {
+            color: var(--aviation-blue);
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-social a:hover {
+            color: var(--sky-white);
+        }
+        .footer-email {
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+        .footer-email a {
+            color: var(--aviation-blue);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-portfolio">
+        <header>
+            <div class="navbar">
+                <a href="index.html" class="logo">TYLER NICHOLAS</a>
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="about-me.html">About Me</a>
+                    <a href="my-projects.html" class="active">My Projects</a>
+                    <a href="my-cv.html">My CV</a>
+                    
+                    <div class="dropdown">
+                        <a href="#" style="margin-right: 0;">More ▼</a>
+                        <div class="dropdown-content">
+                            <a href="my-blog.html">My Blog</a>
+                            <a href="my-story.html">My Story</a>
+                            <a href="my-experiences.html">My Experiences</a>
+                            <a href="my-school.html">My School</a>
+                            <a href="social-links.html">Social Links</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <h1>My Projects: A Portfolio of Enterprise and Innovation</h1>
+            <p style="font-size: 1.1em; max-width: 900px; margin-bottom: 40px;">
+                My projects reflect a wide spectrum of involvement, ranging from strategic corporate management and investment to aviation simulation and e-commerce development.
+            </p>
+
+            <section class="project-category">
+                <h2>Corporate Governance & Strategy</h2>
+                
+                <div class="project-item">
+                    <h3>Tyler Nicholas Group (TNG)</h3>
+                    <p>Chairman of the Board for the multinational holding group, overseeing strategic direction and governance across all subsidiaries.</p>
+                    <div class="tags">
+                        <span class="tag">Leadership</span>
+                        <span class="tag">Strategy</span>
+                        <span class="tag">Corporate Management</span>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <h3>Tyler Nicholas Group Alliance</h3>
+                    <p>Establishing and managing key strategic partnerships and alliances to expand TNG's global reach and operational efficiency.</p>
+                    <div class="tags">
+                        <span class="tag">Partnerships</span>
+                        <span class="tag">Business Development</span>
+                        <span class="tag">Networking</span>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <h3>TNG Investment Board</h3>
+                    <p>Directing the investment strategies and portfolio management for capital allocated across various sectors and ventures.</p>
+                    <div class="tags">
+                        <span class="tag">Finance</span>
+                        <span class="tag">Investment Strategy</span>
+                        <span class="tag">Risk Management</span>
+                    </div>
+                </div>
+
+            </section>
+            
+            <hr style="border: 0; height: 1px; background: #ddd; margin: 40px 0;">
+
+            <section class="project-category">
+                <h2>E-Commerce & Digital Retail</h2>
+                
+                <div class="project-item">
+                    <h3>TNG E-Commerce</h3>
+                    <p>The central digital infrastructure for TNG's online retail presence and direct-to-consumer sales channels.</p>
+                    <div class="tags">
+                        <span class="tag">E-Commerce Platform</span>
+                        <span class="tag">Digital Strategy</span>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <h3>Falcon LTD - Online Store</h3>
+                    <p>A specialized online retail brand operating under the TNG e-commerce umbrella.</p>
+                    <div class="tags">
+                        <span class="tag">Online Store</span>
+                        <span class="tag">Branding</span>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <h3>LumoraX - Online Store</h3>
+                    <p>Another distinct online retail property, managing product catalog and supply chain logistics.</p>
+                    <div class="tags">
+                        <span class="tag">Retail</span>
+                        <span class="tag">Logistics</span>
+                    </div>
+                </div>
+
+            </section>
+            
+            <hr style="border: 0; height: 1px; background: #ddd; margin: 40px 0;">
+
+            <section class="project-category">
+                <h2>Aviation & Gaming Simulation (Emirates Group Roblox)</h2>
+                
+                <div class="project-item">
+                    <h3>Emirates Group Aviation University (EGR)</h3>
+                    <p>Development and curriculum oversight for the virtual flight training and education program within the gaming platform.</p>
+                    <div class="tags">
+                        <span class="tag">Aviation Training</span>
+                        <span class="tag">Simulation</span>
+                        <span class="tag">Education</span>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <h3>Emirates Airlines (UNIFIED) PTFS & ROAV</h3>
+                    <p>Managing the core virtual airline operations, focusing on realism in flight planning, fleet management, and operational procedures across two simulation platforms.</p>
+                    <div class="tags">
+                        <span class="tag">Airline Operations</span>
+                        <span class="tag">Flight Simulation</span>
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                    <h3>Emirates Group Roblox Investors</h3>
+                    <p>Managing the investment community and economic model supporting the growth and development of the virtual group assets.</p>
+                    <div class="tags">
+                        <span class="tag">Virtual Economy</span>
+                        <span class="tag">Community Management</span>
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                    <h3>TNG Gaming Organization</h3>
+                    <p>The broader TNG initiative overseeing all ventures related to the gaming and virtual reality sectors.</p>
+                    <div class="tags">
+                        <span class="tag">E-Sports</span>
+                        <span class="tag">Virtual Reality</span>
+                    </div>
+                </div>
+
+            </section>
+
+            <hr style="border: 0; height: 1px; background: #ddd; margin: 40px 0;">
+            
+            <section class="project-category">
+                <h2>Development, Community, and Future Focus</h2>
+
+                <div class="project-item">
+                    <h3>Tyler Nicholas Foundation</h3>
+                    <p>The philanthropic arm dedicated to community outreach and supporting educational initiatives, particularly in STEM and youth leadership.</p>
+                    <div class="tags">
+                        <span class="tag">Philanthropy</span>
+                        <span class="tag">Community Outreach</span>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <h3>All About Aviation - Upcoming Website</h3>
+                    <p>Future project development: A dedicated resource website focused entirely on aviation news, technology, and career pathways.</p>
+                    <div class="tags">
+                        <span class="tag">Web Development</span>
+                        <span class="tag">Aviation Media</span>
+                        <span class="tag">Future Project</span>
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                    <h3>Personal/Business/Corporate Website Development</h3>
+                    <p>This is a core skill set. Contact me directly to view examples of my work in full-stack website development and bespoke corporate digital solutions.</p>
+                    <div class="tags">
+                        <span class="tag">Portfolio Site</span>
+                        <span class="tag">Full-Stack Dev</span>
+                        <span class="tag">Client Work</span>
+                    </div>
+                </div>
+
+                <div class="project-item" style="border-style: dashed; border-color: #aaa; background-color: #fafafa;">
+                    <p style="color: var(--navy-text); font-style: italic;">
+                        More projects are currently under development and will be added soon. Check back for updates on future TNG ventures and personal technical challenges.
+                    </p>
+                </div>
+            </section>
+
+            <div class="contact-cta">
+                <h3>Interested in Partnership or Investment?</h3>
+                <p>For detailed information on the Tyler Nicholas Group or any specific project, please reach out directly.</p>
+                <a href="mailto:tyler@tylernicholasgroup.com">Contact Tyler Nicholas</a>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/tyler-nicholas-62999534a" target="_blank">LinkedIn</a> |
+                <a href="https://www.instagram.com/t.nicholas25" target="_blank">Instagram</a> |
+                <a href="https://x.com/TylerNicholasSC" target="_blank">Twitter / X</a> |
+                <a href="https://wa.me/2482544788" target="_blank">WhatsApp</a> |
+                <a href="https://www.facebook.com/profile.php?id=61558803946306" target="_blank">Facebook</a>
+            </div>
+            <div class="footer-email">
+                Professional Contact: <a href="mailto:tyler@tylernicholasgroup.com">tyler@tylernicholasgroup.com</a>
+            </div>
+            <p>
+                &copy; 2025 Tyler Nicholas Professional Portfolio. All rights reserved.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
