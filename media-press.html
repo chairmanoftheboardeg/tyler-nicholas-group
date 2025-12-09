@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Media & Press | Tyler Nicholas Group (TNG)</title>
 
-    <link rel="icon" type="image/png" href="../image/logo.png">
+    <link rel="icon" type="image/png" href="/image/logo.png">
 
     <style>
         /* ==================== CORPORATE CSS (Reused) ==================== */
@@ -104,53 +104,7 @@
             padding-left: 15px;
         }
 
-        /* === ANNOUNCEMENT LIST === */
-        .announcement-list {
-            list-style: none;
-            padding: 0;
-        }
-        .announcement-list li {
-            background-color: var(--tng-white);
-            margin-bottom: 15px;
-            padding: 20px 30px;
-            border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 4px solid var(--tng-blue);
-            transition: border-left-color 0.3s, background-color 0.3s;
-        }
-        .announcement-list li:hover {
-            border-left-color: var(--tng-maroon);
-            background-color: #fcfcfc;
-        }
-        .announcement-details h3 {
-            margin: 0 0 5px 0;
-            color: var(--tng-blue);
-            font-size: 1.2em;
-        }
-        .announcement-details p {
-            margin: 0;
-            color: #777;
-            font-size: 0.9em;
-        }
-        .announcement-link {
-            display: inline-block;
-            color: var(--tng-maroon);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 8px 15px;
-            border: 1px solid var(--tng-maroon);
-            border-radius: 4px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .announcement-link:hover {
-            background-color: var(--tng-maroon);
-            color: var(--tng-text-light);
-        }
-
-        /* === SOCIAL GRID === */
+        /* === SOCIAL GRID (Adjusted to be primary content) === */
         .social-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -158,7 +112,7 @@
             margin-top: 40px;
         }
         .social-feed {
-            /* Placeholder styling for the embedded feed */
+            /* Styling for the embedded feed container */
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
@@ -192,7 +146,6 @@
         .btn-x { background-color: #1DA1F2; color: white; }
         .btn-linkedin { background-color: #0077B5; color: white; }
         .btn-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
-        .btn-discord { background-color: #5865F2; color: white; }
         
         /* Footer (Standard TNG) */
         footer { background-color: var(--tng-blue); color: var(--tng-silver); padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px; }
@@ -206,15 +159,6 @@
         @media (max-width: 900px) {
             .social-grid {
                 grid-template-columns: 1fr;
-            }
-            .announcement-list li {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .announcement-link {
-                margin-top: 15px;
-                width: 100%;
-                text-align: center;
             }
         }
     </style>
@@ -249,60 +193,23 @@
     <main>
         <section class="hero-media">
             <h1>TNG Communications Hub.</h1>
-            <p>This is the official source for all Tyler Nicholas Group press releases, corporate announcements, thought leadership content, and social media interactions.</p>
+            <p>Welcome to the official social and media presence for Tyler Nicholas Group. Follow our channels for real-time updates and strategic insights.</p>
         </section>
-
-        <section class="content-section">
-            <h2>Latest Corporate Announcements</h2>
-            
-            <ul class="announcement-list">
-                <li>
-                    <div class="announcement-details">
-                        <h3>TNG Announces Strategic Investment in New E-Commerce Venture</h3>
-                        <p>October 25, 2025 – TNG Core expands its digital portfolio with a focus on scalable logistics software.</p>
-                    </div>
-                    <a href="/press-releases/2025-10-25-ecommerce-investment.pdf" class="announcement-link" target="_blank">Read Release</a>
-                </li>
-                
-                <li>
-                    <div class="announcement-details">
-                        <h3>Tyler Nicholas Group Achieves Q3 Revenue Milestone</h3>
-                        <p>October 1, 2025 – Strong performance across all subsidiary groups driven by operational efficiency.</p>
-                    </div>
-                    <a href="/press-releases/2025-10-01-q3-results.pdf" class="announcement-link" target="_blank">Read Report</a>
-                </li>
-                
-                <li>
-                    <div class="announcement-details">
-                        <h3>New Code of Conduct Policy for Global Employees</h3>
-                        <p>September 15, 2025 – Ensuring ethical standards and integrity across all TNG operations.</p>
-                    </div>
-                    <a href="/governance/code-of-conduct.html" class="announcement-link">View Policy</a>
-                </li>
-            </ul>
-        </section>
-        
-        <hr>
         
         <section class="content-section">
             <h2>Social & Content Hub</h2>
-            <p style="text-align: center; max-width: 800px; margin: -20px auto 30px; color: #555;">Follow our channels for real-time updates, thought leadership articles, and employee highlights.</p>
+            <p style="text-align: center; max-width: 800px; margin: -20px auto 30px; color: #555;">Stay connected with TNG through our primary social channels for the latest news and updates.</p>
 
             <div class="social-grid">
                 
                 <div class="social-feed">
                     <h3 style="color: var(--tng-blue); margin-top: 0;">Official X (Twitter) Feed</h3>
-                    <p>
-                        **INSTRUCTION:** Paste your official X (Twitter) embedded timeline code here. You can generate this code on your X account's settings page.
-                        <br><br>
-                        The code should look something like this:
-                        <br>
-                        <code>
-                            &lt;a class="twitter-timeline" data-height="500" href="https://twitter.com/tyler_n_group?ref_src=twsrc%5Etfw"&gt;Tweets by tyler_n_group&lt;/a&gt; &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
-                        </code>
-                    </p>
-                    <p style="font-style: italic; color: var(--tng-maroon);">
-                        **Note:** The feed will not appear until you paste the actual embed code provided by X into this section.
+                    
+                    <a class="twitter-timeline" data-height="500" href="https://twitter.com/tyler_n_group?ref_src=twsrc%5Etfw">Tweets by tyler_n_group</a> 
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    
+                    <p style="font-style: italic; color: var(--tng-maroon); margin-top: 20px; font-size: 0.9em;">
+                        Note: The feed content loads dynamically from X and may require a moment to appear.
                     </p>
                 </div>
                 
@@ -320,13 +227,9 @@
                     <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="social-button btn-instagram">
                         <span style="margin-right: 10px;">&#x1F4F8;</span> View on Instagram
                     </a>
-
-                    <a href="https://discord.gg/YourTNGInvite" target="_blank" class="social-button btn-discord">
-                        <span style="margin-right: 10px;">&#9734;</span> Join our Discord Server
-                    </a>
                     
                     <div style="text-align: center; margin-top: 15px;">
-                        <p style="font-size: 0.9em; color: #777;">For press inquiries, email:<br>
+                        <p style="font-size: 0.9em; color: #777;">For press and media inquiries, email:<br>
                         <a href="mailto:media@tylernicholasgroup.com" style="color: var(--tng-maroon); font-weight: 600;">media@tylernicholasgroup.com</a></p>
                     </div>
 
