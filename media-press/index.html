@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media & Press | Tyler Nicholas Group (TNG)</title>
+
+    <link rel="icon" type="image/png" href="/image/logo.png">
+
+    <style>
+        /* ==================== CORPORATE CSS (Reused) ==================== */
+        :root {
+            --tng-blue: #001F4C;
+            --tng-maroon: #A81F27;
+            --tng-silver: #C0C0C0;
+            --tng-light-gray: #f4f4f4;
+            --tng-text-dark: #333;
+            --tng-text-light: #ffffff;
+            --transition-speed: 0.8s ease-out;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--tng-text-dark);
+            background-color: var(--tng-light-gray);
+            line-height: 1.6;
+        }
+
+        /* === HEADER & NAVIGATION === */
+        header {
+            background-color: var(--tng-blue);
+            color: var(--tng-text-light);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--tng-silver);
+            text-decoration: none;
+        }
+        nav a, .more-menu-toggle {
+            color: var(--tng-silver);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            font-size: 0.95em;
+            font-weight: 500;
+            border-radius: 4px;
+        }
+        nav a:hover {
+            color: var(--tng-text-light);
+            background-color: rgba(168, 31, 39, 0.5); 
+        }
+
+        /* More Menu Dropdown */
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-content { display: none; position: absolute; right: 0; background-color: var(--tng-blue); min-width: 200px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; border-top: 3px solid var(--tng-maroon); }
+        .dropdown-content a { color: var(--tng-silver); padding: 12px 16px; text-decoration: none; display: block; margin: 0; }
+        .dropdown-content a:hover { background-color: var(--tng-maroon); color: var(--tng-text-light); }
+        .dropdown:hover .dropdown-content { display: block; }
+        
+        /* === MAIN CONTENT LAYOUT === */
+        main { max-width: 1100px; margin: 40px auto; padding: 20px; }
+        
+        .hero-media { 
+            background: linear-gradient(135deg, var(--tng-maroon), #C04349); 
+            color: var(--tng-light-gray); 
+            padding: 60px 40px; 
+            text-align: center; 
+            border-radius: 12px; 
+            margin-bottom: 50px; 
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); 
+            border-bottom: 5px solid var(--tng-blue);
+        }
+        .hero-media h1 { 
+            font-size: 3em; 
+            margin-bottom: 5px; 
+            color: var(--tng-text-light);
+        }
+        .hero-media p { 
+            font-size: 1.2em; 
+            color: var(--tng-light-gray);
+        }
+
+        .content-section { padding: 40px 0; margin-bottom: 30px; }
+        .content-section h2 { 
+            font-size: 2.2em; 
+            color: var(--tng-blue); 
+            margin-bottom: 30px; 
+            border-left: 5px solid var(--tng-maroon); 
+            padding-left: 15px;
+        }
+
+        /* === ANNOUNCEMENT LIST === */
+        .announcement-list {
+            list-style: none;
+            padding: 0;
+        }
+        .announcement-list li {
+            background-color: var(--tng-white);
+            margin-bottom: 15px;
+            padding: 20px 30px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--tng-blue);
+            transition: border-left-color 0.3s, background-color 0.3s;
+        }
+        .announcement-list li:hover {
+            border-left-color: var(--tng-maroon);
+            background-color: #fcfcfc;
+        }
+        .announcement-details h3 {
+            margin: 0 0 5px 0;
+            color: var(--tng-blue);
+            font-size: 1.2em;
+        }
+        .announcement-details p {
+            margin: 0;
+            color: #777;
+            font-size: 0.9em;
+        }
+        .announcement-link {
+            display: inline-block;
+            color: var(--tng-maroon);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            border: 1px solid var(--tng-maroon);
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .announcement-link:hover {
+            background-color: var(--tng-maroon);
+            color: var(--tng-text-light);
+        }
+
+        /* === SOCIAL GRID === */
+        .social-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        .social-feed {
+            /* Placeholder styling for the embedded feed */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            min-height: 400px;
+        }
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px 0;
+        }
+        .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1em;
+            text-decoration: none;
+            transition: transform 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .social-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        
+        /* Specific Button Styles */
+        .btn-x { background-color: #1DA1F2; color: white; }
+        .btn-linkedin { background-color: #0077B5; color: white; }
+        .btn-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+        .btn-discord { background-color: #5865F2; color: white; }
+        
+        /* Footer (Standard TNG) */
+        footer { background-color: var(--tng-blue); color: var(--tng-silver); padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px; }
+        .footer-content { display: flex; justify-content: space-between; max-width: 1300px; margin: 0 auto; padding: 0 40px 30px; flex-wrap: wrap; }
+        .footer-section { width: 28%; min-width: 250px; margin-bottom: 20px; }
+        .footer-section h4 { color: var(--tng-maroon); font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px; }
+        .footer-section a { color: var(--tng-silver); text-decoration: none; display: block; margin-bottom: 8px; }
+        .footer-bottom { background-color: #00122E; text-align: center; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 900px) {
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+            .announcement-list li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .announcement-link {
+                margin-top: 15px;
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/about">About Us</a>
+                <a href="/companies">Our Companies</a>
+                <a href="/people">Our People</a>
+                <a href="/governance">Governance</a>
+                <a href="/careers">Careers</a>
+                
+                <div class="dropdown">
+                    <a href="/investors">Investors</a>
+                    <div class="dropdown-content">
+                        <a href="/governance/board-of-directors.html">Board of Directors</a>
+                        <a href="/governance/code-of-conduct">Code of Conduct</a>
+                        <a href="/governance/reports">Financial Reporting</a>
+                    </div>
+                </div>
+                
+                <a href="/media-press.html" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Media & Press</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-media">
+            <h1>TNG Communications Hub.</h1>
+            <p>This is the official source for all Tyler Nicholas Group press releases, corporate announcements, thought leadership content, and social media interactions.</p>
+        </section>
+
+        <section class="content-section">
+            <h2>Latest Corporate Announcements</h2>
+            
+            <ul class="announcement-list">
+                <li>
+                    <div class="announcement-details">
+                        <h3>TNG Announces Strategic Investment in New E-Commerce Venture</h3>
+                        <p>October 25, 2025 – TNG Core expands its digital portfolio with a focus on scalable logistics software.</p>
+                    </div>
+                    <a href="/press-releases/2025-10-25-ecommerce-investment.pdf" class="announcement-link" target="_blank">Read Release</a>
+                </li>
+                
+                <li>
+                    <div class="announcement-details">
+                        <h3>Tyler Nicholas Group Achieves Q3 Revenue Milestone</h3>
+                        <p>October 1, 2025 – Strong performance across all subsidiary groups driven by operational efficiency.</p>
+                    </div>
+                    <a href="/press-releases/2025-10-01-q3-results.pdf" class="announcement-link" target="_blank">Read Report</a>
+                </li>
+                
+                <li>
+                    <div class="announcement-details">
+                        <h3>New Code of Conduct Policy for Global Employees</h3>
+                        <p>September 15, 2025 – Ensuring ethical standards and integrity across all TNG operations.</p>
+                    </div>
+                    <a href="/governance/code-of-conduct.html" class="announcement-link">View Policy</a>
+                </li>
+            </ul>
+        </section>
+        
+        <hr>
+        
+        <section class="content-section">
+            <h2>Social & Content Hub</h2>
+            <p style="text-align: center; max-width: 800px; margin: -20px auto 30px; color: #555;">Follow our channels for real-time updates, thought leadership articles, and employee highlights.</p>
+
+            <div class="social-grid">
+                
+                <div class="social-feed">
+                    <h3 style="color: var(--tng-blue); margin-top: 0;">Official X (Twitter) Feed</h3>
+                    <p>
+                        **INSTRUCTION:** To make this feed dynamic, you must generate and paste your official X (Twitter) embedded timeline code below.
+                        <br><br>
+                        Example Placeholder Code:
+                        <br>
+                        <code>
+                            &lt;a class="twitter-timeline" href="https://twitter.com/YourTNGHandle?ref_src=twsrc%5Etfw"&gt;Tweets by YourTNGHandle&lt;/a&gt; &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+                        </code>
+                    </p>
+                    <p style="font-style: italic; color: var(--tng-maroon);">
+                        **Note:** This feed updates automatically once the official widget code is embedded.
+                    </p>
+                </div>
+                
+                <div class="social-buttons">
+                    <h3 style="color: var(--tng-blue); margin-top: 0;">Connect with TNG</h3>
+                    
+                    <a href="https://x.com/YourTNGHandle" target="_blank" class="social-button btn-x">
+                        <span style="margin-right: 10px;">&#x2716;</span> Follow us on X (Twitter)
+                    </a>
+                    
+                    <a href="https://www.linkedin.com/company/YourTNGCompany" target="_blank" class="social-button btn-linkedin">
+                        <span style="margin-right: 10px;">in</span> Connect on LinkedIn
+                    </a>
+                    
+                    <a href="https://www.instagram.com/YourTNGHandle" target="_blank" class="social-button btn-instagram">
+                        <span style="margin-right: 10px;">&#x1F4F8;</span> View on Instagram
+                    </a>
+
+                    <a href="https://discord.gg/YourTNGInvite" target="_blank" class="social-button btn-discord">
+                        <span style="margin-right: 10px;">&#9734;</span> Join our Discord Server
+                    </a>
+                    
+                    <div style="text-align: center; margin-top: 15px;">
+                        <p style="font-size: 0.9em; color: #777;">For press inquiries, email:<br>
+                        <a href="mailto:media@tylernicholasgroup.com" style="color: var(--tng-maroon); font-weight: 600;">media@tylernicholasgroup.com</a></p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>TNG Global Headquarters</h4>
+                <p>Tyler Nicholas Group operates as a remote-first organization.</p>
+                <p>Official Headquarters & Group Communications:<br>
+                <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
+                <p>General Inquiries:<br>
+                <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="/about">About TNG</a>
+                <a href="/companies">Our Companies</a>
+                <a href="/people">Our People</a>
+                <a href="/governance">Governance</a>
+                <a href="/careers">Careers</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal & Policy</h4>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Use</a>
+                <a href="/governance/legal">Legal & Compliance</a>
+                <a href="/accessibility">Accessibility Statement</a>
+                <a href="/governance/reports">Financial Reports</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
+        </div>
+    </footer>
+
+</body>
+</html>
