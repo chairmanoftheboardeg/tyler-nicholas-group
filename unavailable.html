@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unavailable | Tyler Nicholas - Under Development</title>
+    <link rel="icon" type="image/png" href="../../image/favicon.png">
+    
+    <style>
+        /* ==================== A. CORE THEME STYLES (Reused) ==================== */
+        :root {
+            --aviation-blue: #00AEEF; 
+            --sky-white: #FFFFFF;
+            --navy-text: #001F4C; 
+            --light-gray-bg: #F8F9FA;
+            --transition-speed: 0.4s ease-in-out;
+            --error-red: #DC3545;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--navy-text);
+            background-color: var(--sky-white);
+            line-height: 1.6;
+        }
+
+        /* --- Header & Navigation (Standard) --- */
+        header {
+            background-color: var(--sky-white);
+            border-bottom: 3px solid var(--aviation-blue);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--navy-text);
+            text-decoration: none;
+        }
+        nav {
+            display: flex;
+        }
+        nav a {
+            color: var(--navy-text);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            font-size: 1em;
+            font-weight: 500;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 4px;
+        }
+        nav a:hover {
+            color: var(--aviation-blue);
+        }
+        
+        /* --- Dropdown Menu (Standard) --- */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--sky-white);
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            right: 0;
+            border-radius: 4px;
+            border-top: 3px solid var(--aviation-blue);
+        }
+        .dropdown-content a {
+            color: var(--navy-text);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            margin: 0;
+            font-weight: 500;
+        }
+        .dropdown-content a:hover {
+            background-color: var(--light-gray-bg);
+            color: var(--aviation-blue);
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown > a {
+            background-color: var(--light-gray-bg);
+            border: 1px solid #ddd;
+            margin-left: 10px;
+        }
+
+        /* ==================== B. PAGE SPECIFIC CONTENT (UNAVAILABLE) ==================== */
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 100px); /* Adjust based on header/footer height */
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .status-code {
+            font-size: 5em;
+            font-weight: 700;
+            color: var(--aviation-blue);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        
+        .status-code span {
+            font-size: 0.3em;
+            display: block;
+            color: var(--navy-text);
+            margin-top: 10px;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: var(--navy-text);
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background-color: var(--navy-text);
+            color: var(--sky-white);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 10px;
+            border: 2px solid var(--navy-text);
+        }
+        .contact-button:hover {
+            background-color: var(--aviation-blue);
+            border-color: var(--aviation-blue);
+            transform: translateY(-2px);
+        }
+
+        .back-button {
+            display: inline-block;
+            color: var(--aviation-blue);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+        .back-button:hover {
+            text-decoration: underline;
+        }
+
+        /* ==================== C. LOADING OVERLAY STYLES ==================== */
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 31, 76, 0.95); /* Dark blue overlay */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            color: var(--sky-white);
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .spinner {
+            border: 6px solid rgba(255, 255, 255, 0.3);
+            border-top: 6px solid var(--aviation-blue);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #loading-overlay h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        #loading-overlay p {
+            font-size: 1em;
+            opacity: 0.8;
+        }
+
+        /* ==================== D. FOOTER (Standard) ==================== */
+        footer {
+            background-color: var(--navy-text);
+            color: var(--light-gray-bg);
+            padding: 40px 20px;
+            font-size: 0.9em;
+            text-align: center;
+            margin-top: 0; /* Important for full-page layout */
+        }
+        .footer-social a {
+            color: var(--aviation-blue);
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-social a:hover {
+            color: var(--sky-white);
+        }
+        .footer-email {
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+        .footer-email a {
+            color: var(--aviation-blue);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <h3>Attempting to Connect to Servers...</h3>
+        <p>We are fetching your request and validating the destination path.</p>
+    </div>
+
+    <div id="main-portfolio" style="display: none;">
+        <header>
+            <div class="navbar">
+                <a href="index.html" class="logo">TYLER NICHOLAS</a>
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="about-me.html">About Me</a>
+                    <a href="my-projects.html">My Projects</a>
+                    <a href="my-cv.html">My CV</a>
+                    
+                    <div class="dropdown">
+                        <a href="#">More ▼</a>
+                        <div class="dropdown-content">
+                            <a href="my-blog.html">My Blog</a>
+                            <a href="my-story.html">My Story</a>
+                            <a href="my-experiences.html">My Experiences</a>
+                            <a href="my-school.html">My School</a>
+                            <a href="social-links.html">Social Links</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <div class="status-code">
+                403
+                <span>Development Access Denied</span>
+            </div>
+            <h2>Page Under Active Development</h2>
+            <p>
+                The requested resource is part of an ongoing project and is **currently unavailable** to the public. We are actively working on this feature to ensure a seamless and high-quality experience upon release.
+            </p>
+            <p>
+                Thank you for your interest and patience. Please check back at a later date, or click the button below for immediate assistance.
+            </p>
+            
+            <a href="mailto:tyler@tylernicholasgroup.com?subject=IT%20Inquiry%20-%20Unavailable%20Page" class="contact-button">
+                Contact IT Support
+            </a>
+            
+            <a href="javascript:history.back()" class="back-button">
+                &larr; Return to Previous Page
+            </a>
+        </main>
+
+        <footer>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/tyler-nicholas-62999534a" target="_blank">LinkedIn</a> |
+                <a href="https://www.instagram.com/t.nicholas25" target="_blank">Instagram</a> |
+                <a href="https://x.com/TylerNicholasSC" target="_blank">Twitter / X</a> |
+                <a href="https://wa.me/2482544788" target="_blank">WhatsApp</a> |
+                <a href="https://www.facebook.com/profile.php?id=61558803946306" target="_blank">Facebook</a>
+            </div>
+            <div class="footer-email">
+                Professional Contact: <a href="mailto:tyler@tylernicholasgroup.com">tyler@tylernicholasgroup.com</a>
+            </div>
+            <p>
+                &copy; 2025 Tyler Nicholas Professional Portfolio. All rights reserved.
+            </p>
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const loadingOverlay = document.getElementById('loading-overlay');
+            const mainContent = document.getElementById('main-portfolio');
+            
+            // Set a delay (e.g., 2000 milliseconds = 2 seconds)
+            setTimeout(() => {
+                // Fade out the loading overlay
+                loadingOverlay.style.opacity = '0';
+                
+                // Wait for the fade out to finish (0.5s), then hide it and show main content
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                    mainContent.style.display = 'block';
+                }, 500); // Must match the CSS transition time
+                
+            }, 2000); // Loading duration
+        });
+    </script>
+</body>
+</html>
