@@ -85,98 +85,36 @@
         .benefit-card.revealed { opacity: 1; transform: scale(1); }
         .benefit-card h4 { color: var(--tng-blue); font-size: 1.2em; margin-top: 0; }
         
-        /* === CURRENT OPENINGS SECTION === */
-        .openings-list { max-width: 800px; margin: 0 auto; text-align: left; }
-        .job-listing {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #fff;
-            padding: 20px 30px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            border-left: 5px solid var(--tng-blue);
-            transition: transform 0.3s, box-shadow 0.3s;
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: opacity var(--transition-speed), transform var(--transition-speed);
-        }
-        .job-listing:hover { transform: translateX(0); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); }
-        .job-listing.revealed { opacity: 1; transform: translateX(0); }
-        .job-details h3 { margin: 0 0 5px 0; color: var(--tng-blue); font-size: 1.3em; }
-        .job-details p { margin: 0; color: #777; font-size: 0.9em; }
-        .apply-button {
-            display: inline-block;
-            background-color: var(--tng-maroon);
-            color: var(--tng-text-light) !important;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: background-color 0.3s;
-            cursor: pointer;
-        }
-        .apply-button:hover { background-color: #8C1A21; }
-
-        /* === APPLICATION MODAL STYLES === */
-        #application-modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.7);
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 30px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 650px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            position: relative;
-        }
-        #close-modal {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            position: absolute;
-            right: 20px;
-            top: 10px;
-        }
-        #tng-application-form input[type="text"], 
-        #tng-application-form input[type="email"],
-        #tng-application-form input[type="number"],
-        #tng-application-form input[type="url"],
-        #tng-application-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box; /* Crucial for padding to work with 100% width */
-        }
-        #tng-application-form button[type="submit"] {
-            width: 100%;
+        /* === NO OPENINGS BANNER (NEW STYLES) === */
+        .no-openings-banner {
             background-color: var(--tng-blue);
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 4px;
-            font-size: 1.1em;
-            margin-top: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            color: var(--tng-light-gray);
+            padding: 40px;
+            border-radius: 8px;
+            max-width: 800px;
+            margin: 40px auto;
+            text-align: center;
+            border-left: 5px solid var(--tng-maroon);
         }
-        #tng-application-form button[type="submit"]:hover { background-color: #002D62; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .no-openings-banner h3 {
+            color: var(--tng-light-gray);
+            font-size: 1.8em;
+            margin-top: 0;
+        }
+        .no-openings-banner p {
+            font-size: 1.1em;
+            color: var(--tng-silver);
+            line-height: 1.5;
+        }
+        .no-openings-banner a {
+            color: var(--tng-maroon);
+            font-weight: 700;
+            text-decoration: underline;
+            transition: color 0.3s;
+        }
+        .no-openings-banner a:hover {
+            color: var(--tng-silver);
+        }
 
         /* === CORPORATE FOOTER === */
         footer { background-color: var(--tng-blue); color: var(--tng-silver); padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px; }
@@ -244,71 +182,23 @@
         
         <section class="content-section" style="margin-top: 50px;">
             <h2>Current Openings Across TNG Group</h2>
-            <p style="max-width: 800px; margin: 0 auto 30px; color: #555;">Select a role below to start your application. The Role ID is automatically assigned.</p>
             
-            <div class="openings-list" id="job-listings-container">
-                </div>
-
-            <p style="text-align: center; margin-top: 30px; font-style: italic; color: #777;">Don't see a role that fits? Email us your CV for future consideration: <a href="mailto:careers@tylernicholasgroup.com" style="color: var(--tng-maroon); font-weight: 600;">careers@tylernicholasgroup.com</a></p>
-        </section>
+            <div class="no-openings-banner">
+                <h3>We are not currently displaying job opportunities.</h3>
+                <p>
+                    The Tyler Nicholas Group is currently operating with a full team and we are not actively hiring via this page. We appreciate your interest in joining our global corporate infrastructure.
+                </p>
+                <p>
+                    For future recommendations, please connect with us directly by sending your **CV/Resume** to our HR department: 
+                    <a href="mailto:tylernicholasgroup@gmail.com">tylernicholasgroup@gmail.com</a>
+                </p>
+                <p style="font-style: italic; margin-top: 20px; font-size: 0.9em; color: var(--tng-silver);">
+                    All applications submitted via email are reviewed for our talent database for future, unposted corporate roles and recommendations. Thank you.
+                </p>
+            </div>
+            </section>
         
     </main>
-
-    <div id="application-modal">
-        <div class="modal-content">
-            <span id="close-modal">&times;</span>
-            <h2 style="color: var(--tng-maroon); margin-top: 0; text-align: center;">TNG Group Job Application</h2>
-            <p style="text-align: center; color: #555;">*Required fields are marked with an asterisk.</p>
-            
-            <form id="tng-application-form" action="https://formspree.io/f/mjknoqyl" method="POST">
-                
-                <h3 style="color: var(--tng-blue); border-bottom: 1px solid #eee; padding-bottom: 5px;">Role Details</h3>
-                <div style="margin-bottom: 15px;">
-                    <label for="apply-role-title">Applying for Role:*</label>
-                    <input type="text" id="apply-role-title" name="Role_Title" readonly required style="font-weight: 600;">
-                    <input type="hidden" id="apply-role-id" name="Role_ID">
-                </div>
-
-                <h3 style="color: var(--tng-blue); border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 25px;">Contact Information</h3>
-                
-                <div class="form-grid">
-                    <input type="text" name="Full_Name" placeholder="Full Name *" required>
-                    <input type="email" name="_replyto" placeholder="Email for Acceptance Message *" required>
-                    <input type="text" name="Discord_Username" placeholder="Discord Username (e.g., user.name) *" required>
-                    <input type="text" name="Discord_ID" placeholder="Discord ID (Numbers Only) *" required>
-                    <input type="number" name="Age" placeholder="Age *" min="16" required>
-                    <input type="text" name="Country_of_Residence" placeholder="Country of Residence *" required>
-                </div>
-
-                <div style="margin-top: 15px;">
-                    <input type="text" name="Roblox_Username" id="roblox-user" placeholder="Roblox Username (Optional)" style="margin-bottom: 15px;">
-                </div>
-
-                <h3 style="color: var(--tng-blue); border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 25px;">Documents & Experience</h3>
-                
-                <div style="margin-top: 15px;">
-                    <label for="cv-link" style="display: block; margin-bottom: 5px; font-weight: 600;">Link to CV/Resume/Portfolio (Google Drive, Dropbox, etc.) *</label>
-                    <input type="url" id="cv-link" name="CV_Resume_Link" required placeholder="Paste a public link to your CV/Resume/Portfolio here.">
-                    
-                    <input type="url" name="Linkedln_Account" placeholder="LinkedIn Account Page (Optional - Recommended to have one)" style="margin-top: 15px;">
-                </div>
-
-                <div style="margin-top: 15px;">
-                    <label for="why-apply" style="display: block; margin-bottom: 5px; font-weight: 600;">Why are you applying for this role? *</label>
-                    <textarea id="why-apply" name="Why_Are_You_Applying" rows="4" required placeholder="Tell us about your motivation..."></textarea>
-                    
-                    <label for="experience" style="display: block; margin-bottom: 5px; font-weight: 600; margin-top: 15px;">Do you have any experience in this field? *</label>
-                    <textarea id="experience" name="Experience_In_Field" rows="3" required placeholder="TNG does not require experience. We love to educate and let our staff learn new experiences."></textarea>
-                </div>
-                
-                <input type="hidden" name="_next" value="/careers/success.html">
-                <input type="hidden" name="_error" value="/careers/error.html">
-
-                <button type="submit">Submit Application</button>
-            </form>
-        </div>
-    </div>
-
 
     <footer>
         <div class="footer-content">
@@ -343,18 +233,9 @@
     </footer>
 
     <script>
-        // --- 1. SIMULATED JOB DATA ---
-        // HR team can reference this list to know what jobs exist.
-        const JOB_DATA = [
-            { id: '1A9F', title: 'Group Strategy Analyst', department: 'TNG Core', location: 'Remote, Global', requiredRoblox: false },
-            { id: '2B1E', title: 'Lead Full Stack Engineer', department: 'TNG E-Commerce', location: 'Remote, Global', requiredRoblox: false },
-            { id: '3C5G', title: 'Flight Operations Manager', department: 'TNG Flight Ops', location: 'Remote, Global', requiredRoblox: true },
-            { id: '4D8H', title: 'Senior Game Designer', department: 'TNG Gaming Organization', location: 'Remote, EMEA/APAC', requiredRoblox: false },
-            { id: '5E2J', title: 'Legal & Compliance Officer', department: 'TNG Core/Governance', location: 'Remote, Americas', requiredRoblox: false },
-        ];
-        
         document.addEventListener('DOMContentLoaded', function() {
-            // --- 2. Scroll Animation Setup ---
+            // --- 1. Scroll Animation Setup ---
+            // Keeps the subtle entrance animation for the Hero and Benefit Cards
             const targets = document.querySelectorAll('.anim-target');
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -366,64 +247,7 @@
             }, { threshold: 0.1 });
             targets.forEach(target => { observer.observe(target); });
             
-            // --- 3. Job Listing Generation ---
-            const jobContainer = document.getElementById('job-listings-container');
-            jobContainer.innerHTML = ''; 
-
-            JOB_DATA.forEach((job, index) => {
-                const listing = document.createElement('div');
-                listing.className = 'job-listing anim-target';
-                // Add a slight delay for staggered animation
-                listing.style.transitionDelay = `${index * 0.1}s`; 
-                listing.setAttribute('data-job-id', job.id);
-                listing.setAttribute('data-job-title', job.title);
-                
-                listing.innerHTML = `
-                    <div class="job-details">
-                        <h3>${job.title} (ID: ${job.id})</h3>
-                        <p>${job.department} - ${job.location}</p>
-                    </div>
-                    <a href="#" class="apply-button" data-job-id="${job.id}" data-job-title="${job.title}">Apply Now</a>
-                `;
-                jobContainer.appendChild(listing);
-                observer.observe(listing);
-            });
-
-            // --- 4. Modal and Form Handling ---
-            const modal = document.getElementById('application-modal');
-            const closeModal = document.getElementById('close-modal');
-            const applyRoleTitle = document.getElementById('apply-role-title');
-            const applyRoleId = document.getElementById('apply-role-id');
-            const robloxInput = document.getElementById('roblox-user');
-
-            // Open Modal when "Apply Now" is clicked
-            document.body.addEventListener('click', function(e) {
-                if (e.target.classList.contains('apply-button')) {
-                    e.preventDefault();
-                    const jobTitle = e.target.getAttribute('data-job-title');
-                    const jobId = e.target.getAttribute('data-job-id');
-                    
-                    const jobDetails = JOB_DATA.find(j => j.id === jobId);
-
-                    applyRoleTitle.value = jobTitle;
-                    applyRoleId.value = jobId;
-                    
-                    // Conditionally set Roblox requirement
-                    if (jobDetails && jobDetails.requiredRoblox) {
-                        robloxInput.setAttribute('placeholder', 'Roblox Username (REQUIRED for Flight Operations)');
-                        robloxInput.required = true;
-                    } else {
-                        robloxInput.setAttribute('placeholder', 'Roblox Username (Optional)');
-                        robloxInput.required = false;
-                    }
-
-                    modal.style.display = 'block';
-                }
-            });
-
-            // Close Modal handlers
-            closeModal.onclick = () => { modal.style.display = 'none'; };
-            window.onclick = (e) => { if (e.target == modal) { modal.style.display = 'none'; } };
+            // NOTE: All job listing and modal handling logic has been removed.
         });
     </script>
 
