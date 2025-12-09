@@ -1,588 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our People | Tyler Nicholas Group (TNG)</title>
-    <link rel="icon" type="image/png" href="image/logo.png">
-    
-    <style>
-        /* ==================== CORPORATE CSS (Reusable Styles) ==================== */
-        :root {
-            --tng-blue: #001F4C;
-            --tng-maroon: #A81F27;
-            --tng-silver: #C0C0C0;
-            --tng-light-gray: #f4f4f4;
-            --tng-text-dark: #333;
-            --tng-text-light: #ffffff;
-            --transition-speed: 0.5s ease-out;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our People | Tyler Nicholas Group (TNG)</title>
+    <link rel="icon" type="image/png" href="image/logo.png">
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--tng-text-dark);
-            background-color: var(--tng-light-gray);
-            line-height: 1.6;
-        }
+    <style>
+        /* CSS Variables replaced with literal values on elements, kept here for reference only */
+        /* --tng-blue: #001F4C; --tng-maroon: #A81F27; --tng-silver: #C0C0C0; --tng-light-gray: #f4f4f4; */
 
-        /* === HEADER & NAVIGATION === */
-        header {
-            background-color: var(--tng-blue);
-            color: var(--tng-text-light);
-            padding: 15px 40px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-        .logo {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: var(--tng-silver);
-            text-decoration: none;
-        }
-        nav a {
-            color: var(--tng-silver);
-            text-decoration: none;
-            padding: 10px 15px;
-            margin-left: 10px;
-            font-size: 0.95em;
-            font-weight: 500;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        nav a:hover {
-            color: var(--tng-text-light);
-            background-color: rgba(168, 31, 39, 0.5); 
-        }
-
-        /* === PRELOADER STYLES === */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--tng-blue);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 1;
-            transition: opacity 1s ease-out;
-        }
-        .loader-content {
-            text-align: center;
-            color: var(--tng-light-gray);
-            margin-bottom: 50px;
-        }
-        .loader-content h2 {
-            font-size: 2em;
-            font-weight: 500;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
-        .loader {
-            width: 80px;
-            height: 80px;
-            border: 8px solid var(--tng-silver);
-            border-top-color: var(--tng-maroon);
-            border-radius: 50%;
-            animation: spin 1.5s infinite linear;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        .loader-buttons a {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 0 10px;
-            background-color: var(--tng-maroon);
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: background-color 0.3s;
-        }
-        .loader-buttons a:hover {
-            background-color: #8C1A21;
-        }
-        
-        /* Hide content until loaded */
-        #main-content-wrapper {
-            opacity: 0;
-            transition: opacity 1s ease-in;
-        }
-        #main-content-wrapper.loaded {
-            opacity: 1;
-        }
-
-        /* === MAIN CONTENT LAYOUT === */
-        main { max-width: 1100px; margin: 40px auto; padding: 20px; }
-        .content-section { margin-bottom: 50px; padding-top: 20px; }
-        .content-section h2 { 
-            font-size: 2.2em; 
-            color: var(--tng-blue); 
-            margin-bottom: 30px; 
-            border-bottom: 3px solid var(--tng-maroon); 
-            padding-bottom: 10px;
-            display: block;
-            text-align: left;
-        }
-        .content-section h3 {
-            font-size: 1.5em;
-            color: var(--tng-maroon);
-            border-left: 5px solid var(--tng-maroon);
-            padding-left: 10px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-        }
-        
-        /* === PROFESSIONAL PROFILE CARD GRID (TNG) - IMPROVED STYLING === */
-        .people-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
-        }
-        .person-card.tng-pro {
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-            border-top: 6px solid var(--tng-blue);
-            border-bottom: 6px solid var(--tng-maroon); /* Added accent line for visual completeness */
-            display: flex;
-            flex-direction: column;
-            min-height: 400px; 
-            transition: box-shadow 0.3s, transform 0.2s; /* Added transform for hover */
-        }
-        .person-card.tng-pro:hover {
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-            transform: translateY(-5px); /* Added slight lift on hover */
-        }
-        .profile-header {
-            display: flex;
-            align-items: center;
-            padding: 20px;
-            background-color: #ffffff; /* Explicitly set filled card header to white */
-            border-bottom: 1px solid #ddd;
-        }
-        .profile-pic {
-            width: 90px; /* Slightly reduced size for better visual balance */
-            height: 90px; 
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--tng-light-gray); /* Better border contrast */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .header-text {
-            margin-left: 15px;
-            text-align: left;
-        }
-        .header-text h4 {
-            color: var(--tng-blue);
-            font-size: 1.4em;
-            margin: 0 0 5px 0;
-        }
-        .header-text p {
-            color: var(--tng-maroon);
-            font-size: 1em;
-            margin: 0;
-            font-weight: 600;
-        }
-        .card-info {
-            padding: 20px;
-            text-align: left;
-            flex-grow: 1; 
-        }
-        .card-info p.bio {
-            color: #555;
-            font-size: 0.95em;
-            margin-bottom: 15px;
-            max-height: 70px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 3; /* Limit to 3 lines */
-            -webkit-box-orient: vertical;
-        }
-        .contact-info {
-            padding: 20px;
-            border-top: 1px solid #eee;
-            background-color: var(--tng-light-gray);
-            display: flex;
-            justify-content: space-between;
-        }
-        .contact-info a {
-            font-size: 0.9em;
-            color: var(--tng-blue);
-            text-decoration: none;
-            padding: 5px 10px;
-            border: 1px solid var(--tng-silver);
-            border-radius: 4px;
-            transition: background-color 0.2s, color 0.2s;
-            font-weight: 600;
-        }
-        .contact-info a:hover {
-            background-color: var(--tng-blue);
-            color: var(--tng-text-light);
-            text-decoration: none;
-        }
-        
-        /* Vacant Card Specific Styles - IMPROVED */
-        .person-card.tng-pro.vacant-card {
-            text-align: center;
-            border-top: 6px solid var(--tng-maroon); /* Highlight top with Maroon */
-            border-bottom: 6px solid var(--tng-blue); /* Highlight bottom with Blue */
-            justify-content: space-between; 
-        }
-        .vacant-card .profile-header {
-            background-color: var(--tng-blue); /* Solid Blue header for vacant call-to-action */
-            justify-content: center;
-            flex-direction: column; /* Stack image/text vertically */
-            padding: 30px 20px 20px 20px;
-        }
-        .vacant-card .profile-pic {
-            width: 70px;
-            height: 70px;
-            border-radius: 4px; /* Icon-like appearance */
-            border: none;
-            opacity: 0.9;
-            margin-bottom: 10px;
-        }
-        .vacant-card .header-text {
-            margin-left: 0;
-            text-align: center;
-        }
-        .vacant-card .header-text h4 {
-            color: var(--tng-text-light); /* White title */
-            font-size: 1.6em;
-            margin: 0;
-        }
-        .vacant-card .header-text p {
-            color: var(--tng-silver); /* Silver status text */
-            font-weight: 500;
-        }
-        .vacant-card .card-info {
-            text-align: center;
-        }
-        .vacant-card .card-info p.bio {
-            text-align: center;
-            -webkit-line-clamp: 4; /* Slightly increased bio space */
-        }
-
-        /* Apply Button Styling */
-        .vacant-link {
-            display: block;
-            padding: 15px 0; /* Increased padding */
-            background-color: var(--tng-maroon);
-            color: var(--tng-text-light);
-            text-decoration: none;
-            font-weight: 700;
-            border-radius: 0 0 12px 12px;
-            transition: background-color 0.3s;
-            text-align: center;
-        }
-        .vacant-link:hover {
-            background-color: #8C1A21;
-        }
-
-        /* Subsidiary Button Section */
-        .subsidiary-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            padding: 40px 0;
-        }
-        .subsidiary-buttons a {
-            display: inline-block;
-            padding: 15px 25px;
-            background-color: var(--tng-blue);
-            color: var(--tng-light-gray);
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.95em;
-            transition: background-color 0.3s, transform 0.2s;
-            max-width: 250px; /* Control the width of each button */
-            text-align: center;
-        }
-        .subsidiary-buttons a:hover {
-            background-color: var(--tng-maroon);
-            transform: translateY(-2px);
-        }
-
-        /* === CORPORATE FOOTER (Reused) === */
-        footer { background-color: var(--tng-blue); color: var(--tng-silver); padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px; }
-        .footer-content { display: flex; justify-content: space-between; max-width: 1300px; margin: 0 auto; padding: 0 40px 30px; flex-wrap: wrap; }
-        .footer-section { width: 28%; min-width: 250px; margin-bottom: 20px; }
-        .footer-section h4 { color: var(--tng-maroon); font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px; }
-        .footer-section a { color: var(--tng-silver); text-decoration: none; display: block; margin-bottom: 8px; }
-        .footer-bottom { background-color: #00122E; text-align: center; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-    </style>
+        /* === PRELOADER STYLES (Animations cannot be inline) === */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #001F4C; 
+            z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            opacity: 1; transition: opacity 1s ease-out;
+        }
+        .loader {
+            width: 80px; height: 80px; border: 8px solid #C0C0C0; border-top-color: #A81F27; 
+            border-radius: 50%; animation: spin 1.5s infinite linear;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        /* Hide content until loaded */
+        #main-content-wrapper {
+            opacity: 0; transition: opacity 1s ease-in;
+        }
+        #main-content-wrapper.loaded {
+            opacity: 1;
+        }
+        
+        /* === PROFESSIONAL PROFILE CARD GRID (Layout and Hovers cannot be inline) === */
+        .people-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 20px;
+        }
+        .person-card.tng-pro {
+            transition: box-shadow 0.3s, transform 0.2s; /* Transition must be in <style> */
+            display: flex; flex-direction: column; min-height: 400px; 
+            overflow: hidden; /* Necessary for border-radius on children */
+        }
+        .person-card.tng-pro:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); /* Hover must be in <style> */
+            transform: translateY(-5px); /* Hover must be in <style> */
+        }
+        .card-info p.bio {
+            overflow: hidden; text-overflow: ellipsis; display: -webkit-box;
+            -webkit-line-clamp: 3; -webkit-box-orient: vertical; /* Multi-line ellipsis must be in <style> */
+        }
+        .vacant-card .card-info p.bio {
+            -webkit-line-clamp: 4;
+        }
+        .subsidiary-buttons a:hover {
+            background-color: #A81F27;
+            transform: translateY(-2px);
+        }
+        /* Footer Layout */
+        .footer-content {
+            display: flex; justify-content: space-between; max-width: 1300px; margin: 0 auto; 
+            padding: 0 40px 30px; flex-wrap: wrap; 
+        }
+        .footer-section { width: 28%; min-width: 250px; margin-bottom: 20px; }
+    </style>
 </head>
-<body>
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; color: #333; background-color: #f4f4f4; line-height: 1.6;">
 
-    <div id="preloader">
-        <div class="loader-content">
-            <h2 id="loading-text">We are loading our latest update to these pages, please give a moment.</h2>
-            <div class="loader"></div>
-        </div>
-        <div class="loader-buttons">
-            <a href="/">Home</a>
-            <a href="/careers">Careers</a>
-            <a href="/contact">Contact</a>
-        </div>
-    </div>
+    <div id="preloader">
+        <div class="loader-content" style="text-align: center; color: #f4f4f4; margin-bottom: 50px;">
+            <h2 id="loading-text" style="font-size: 2em; font-weight: 500; letter-spacing: 1px; margin-bottom: 20px;">We are loading our latest update to these pages, please give a moment.</h2>
+            <div class="loader"></div>
+        </div>
+        <div class="loader-buttons">
+            <a href="/" style="display: inline-block; padding: 10px 20px; margin: 0 10px; background-color: #A81F27; color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: background-color 0.3s;">Home</a>
+            <a href="/careers" style="display: inline-block; padding: 10px 20px; margin: 0 10px; background-color: #A81F27; color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: background-color 0.3s;">Careers</a>
+            <a href="/contact" style="display: inline-block; padding: 10px 20px; margin: 0 10px; background-color: #A81F27; color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: background-color 0.3s;">Contact</a>
+        </div>
+    </div>
 
-    <div id="main-content-wrapper">
-        <header>
-            <div class="navbar">
-                <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
-                <nav>
-                    <a href="/">Home</a>
-                    <a href="/about">About Us</a>
-                    <a href="/companies">Our Companies</a>
-                    <a href="/people" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Our People</a>
-                    <a href="/governance">Governance</a>
-                    <a href="/careers">Careers</a>
-                </nav>
-            </div>
-        </header>
+    <div id="main-content-wrapper">
+        <header style="background-color: #001F4C; color: #ffffff; padding: 15px 40px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+            <div class="navbar" style="display: flex; justify-content: space-between; align-items: center; max-width: 1300px; margin: 0 auto;">
+                <a href="/" class="logo" style="font-size: 1.8em; font-weight: 700; color: #C0C0C0; text-decoration: none;">TYLER NICHOLAS GROUP</a>
+                <nav>
+                    <a href="/" style="color: #C0C0C0; text-decoration: none; padding: 10px 15px; margin-left: 10px; font-size: 0.95em; font-weight: 500; border-radius: 4px; transition: background-color 0.3s;">Home</a>
+                    <a href="/about" style="color: #C0C0C0; text-decoration: none; padding: 10px 15px; margin-left: 10px; font-size: 0.95em; font-weight: 500; border-radius: 4px; transition: background-color 0.3s;">About Us</a>
+                    <a href="/companies" style="color: #C0C0C0; text-decoration: none; padding: 10px 15px; margin-left: 10px; font-size: 0.95em; font-weight: 500; border-radius: 4px; transition: background-color 0.3s;">Our Companies</a>
+                    <a href="/people" style="color: #A81F27; border-bottom: 2px solid #A81F27; text-decoration: none; padding: 10px 15px; margin-left: 10px; font-size: 0.95em; font-weight: 500; border-radius: 4px; transition: background-color 0.3s;">Our People</a>
+                    <a href="/governance" style="color: #C0C0C0; text-decoration: none; padding: 10px 15px; margin-left: 10px; font-size: 0.95em; font-weight: 500; border-radius: 4px; transition: background-color 0.3s;">Governance</a>
+                    <a href="/careers" style="color: #C0C0C0; text-decoration: none; padding: 10px 15px; margin-left: 10px; font-size: 0.95em; font-weight: 500; border-radius: 4px; transition: background-color 0.3s;">Careers</a>
+                </nav>
+            </div>
+        </header>
 
-        <main>
-            <h1>Tyler Nicholas Group (TNG) Leadership</h1>
-            <p style="font-size: 1.1em; max-width: 800px; margin-bottom: 40px;">
-                The TNG Core Executive Team oversees the strategic direction, growth, and governance of the entire holding company and its diversified portfolio.
-            </p>
+        <main style="max-width: 1100px; margin: 40px auto; padding: 20px;">
+            <h1>Tyler Nicholas Group (TNG) Leadership</h1>
+            <p style="font-size: 1.1em; max-width: 800px; margin-bottom: 40px;">
+                The TNG Core Executive Team oversees the strategic direction, growth, and governance of the entire holding company and its diversified portfolio.
+            </p>
 
-            <section class="content-section">
-                <h3>TNG Core Executive Leadership</h3>
-                <div class="people-grid">
-                    
-                    <div class="person-card tng-pro">
-                        <div>
-                            <div class="profile-header">
-                                <img src="../image/tyler-nicholas.png" alt="Profile of Tyler Nicholas" class="profile-pic">
-                                <div class="header-text">
-                                    <h4>Tyler Nicholas</h4>
-                                    <p>Chairman Of The Board</p>
-                                </div>
-                            </div>
-                            <div class="card-info">
-                                <p class="bio">Visionary founder driving global strategy and long-term innovation across all TNG entities, setting the core values and mission for the group.</p>
-                            </div>
-                        </div>
-                        <div class="contact-info">
-                            <a href="mailto:tyler.n@tylernicholasgroup.com">Email</a>
-                            <a href="https://linkedin.com/in/tylernicholas" target="_blank">LinkedIn</a>
-                        </div>
-                    </div>
-
-                                        <div class="person-card tng-pro vacant-card">
-                         <div>
-                            <div class="profile-header">
-                                <img src="../image/apply.png" alt="Apply Now" class="profile-pic">
-                                <div class="header-text">
-                                    <h4>Chief Executive Officer</h4>
-                                    <p>VACANT POSITION</p>
-                                </div>
-                            </div>
-                            <div class="card-info">
-                                <p class="bio">This pivotal role will lead TNG's day-to-day operations and execute the Board's strategic vision.</p>
-                            </div>
-                        </div>
-                        <a href="/careers" class="vacant-link">View Job Description & Apply</a>
-                    </div>
-
-                    <div class="person-card tng-pro">
-                        <div>
-                            <div class="profile-header">
-                                <img src="image/william-cross.png" alt="Profile of William Cross" class="profile-pic">
-                                <div class="header-text">
-                                    <h4>William Alexander Cross</h4>
-                                    <p>Chief Human Resources Officer</p>
-                                </div>
-                            </div>
-                            <div class="card-info">
-                                <p class="bio">Oversees talent acquisition, legal compliance, and strategic human capital development, ensuring TNG remains a top global employer.</p>
-                            </div>
-                        </div>
-                        <div class="contact-info">
-                            <a href="mailto:williamalexandercross@outlook.com">Email</a>
-                            <a href="https://linkedin.com/in/williamacross" target="_blank">LinkedIn</a>
-                        </div>
-                    </div>
-
-                    <div class="person-card tng-pro">
-                        <div>
-                            <div class="profile-header">
-                                <img src="image/angie-pittman.png" alt="Profile of Angie Pittman" class="profile-pic">
-                                <div class="header-text">
-                                    <h4>Angie Pittman</h4>
-                                    <p>Chief Technology Officer</p>
-                                </div>
-                            </div>
-                            <div class="card-info">
-                                <p class="bio">Leads TNG's digital transformation initiatives, ensuring the integration of cutting-edge technology and innovation across all subsidiaries.</p>
-                            </div>
-                        </div>
-                        <div class="contact-info">
-                            <a href="mailto:angiepittman25@gmail.com">Email</a>
-                            <a href="https://linkedin.com/in/angiepittman" target="_blank">LinkedIn</a>
-                        </div>
-                    </div>
-
-                                        <div class="person-card tng-pro vacant-card">
-                         <div>
-                            <div class="profile-header">
-                                <img src="../image/apply.png" alt="Apply Now" class="profile-pic">
-                                <div class="header-text">
-                                    <h4>Chief Financial Officer</h4>
-                                    <p>VACANT POSITION</p>
-                                </div>
-                            </div>
-                            <div class="card-info">
-                                <p class="bio">Responsible for all group financial strategy, reporting, and investor relations. A critical, high-impact role.</p>
-                            </div>
-                        </div>
-                        <a href="/careers" class="vacant-link">View Job Description & Apply</a>
-                    </div>
-                </div>
-            </section>
-            
-            <hr style="margin: 50px 0;">
-
-                        <section class="content-section">
-                <h3>More TNG Executive Leaders</h3>
-                <div class="people-grid">
-
-                                        <div class="person-card tng-pro vacant-card">
-                         <div>
-                            <div class="profile-header">
-                                <img src="../image/apply.png" alt="Apply Now" class="profile-pic">
-                                <div class="header-text">
-                                    <h4>Director Of TNG E-Commerce</h4>
-                                    <p>VACANT POSITION</p>
-                                </div>
-                            </div>
-                            <div class="card-info">
-                                <p class="bio">Manage and Oversee TNG E-Commerce businesses.</p>
-                            </div>
-                        </div>
-                        <a href="/careers" class="vacant-link">View Job Description & Apply</a>
-                    </div>
-
-                    
-                                        <div class="person-card tng-pro vacant-card">
-                         <div>
-                            <div class="profile-header">
-                                <img src="../image/apply.png" alt="Apply Now" class="profile-pic">
-                                <div class="header-text">
-                                    <h4>Director Of TNG Gaming Organizations</h4>
-                                    <p>VACANT POSITION</p>
-                                </div>
-                            </div>
-                            <div class="card-info">
-                                <p class="bio">Manage and Oversee TNG Gaming Organizations.</p>
-                            </div>
-                        </div>
-                        <a href="/careers" class="vacant-link">View Job Description & Apply</a>
-                    </div>
-
-                                        <div class="person-card tng-pro vacant-card">
-                         <div>
-                            <div class="profile-header">
-                                <img src="../image/apply.png" alt="Apply Now" class="profile-pic">
-                                <div class="header-text">
-                                    <h4>Director Of TNG Investment Board</h4>
-                                    <p>VACANT POSITION</p>
-                                </div>
-                            </div>
-                            <div class="card-info">
-                                <p class="bio">Manage and Oversee TNG Investment Board</p>
-                            </div>
-                        </div>
-                        <a href="/careers" class="vacant-link">View Job Description & Apply</a>
-                    </div>
+            <section class="content-section" style="margin-bottom: 50px; padding-top: 20px;">
+                <h3 style="font-size: 1.5em; color: #A81F27; border-left: 5px solid #A81F27; padding-left: 10px; margin-top: 40px; margin-bottom: 20px;">TNG Core Executive Leadership</h3>
+                <div class="people-grid">
                     
+                    <div class="person-card tng-pro" style="background-color: #fff; border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); border-top: 6px solid #001F4C; border-bottom: 6px solid #A81F27;">
+                        <div>
+                            <div class="profile-header" style="display: flex; align-items: center; padding: 20px; background-color: #ffffff; border-bottom: 1px solid #ddd;">
+                                <img src="../image/tyler-nicholas.png" alt="Profile of Tyler Nicholas" class="profile-pic" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 4px solid #f4f4f4; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                                <div class="header-text" style="margin-left: 15px; text-align: left;">
+                                    <h4 style="color: #001F4C; font-size: 1.4em; margin: 0 0 5px 0;">Tyler Nicholas</h4>
+                                    <p style="color: #A81F27; font-size: 1em; margin: 0; font-weight: 600;">Chairman Of The Board</p>
+                                </div>
+                            </div>
+                            <div class="card-info" style="padding: 20px; text-align: left; flex-grow: 1;">
+                                <p class="bio" style="color: #555; font-size: 0.95em; margin-bottom: 15px; max-height: 70px;">Visionary founder driving global strategy and long-term innovation across all TNG entities, setting the core values and mission for the group.</p>
+                            </div>
+                        </div>
+                        <div class="contact-info" style="padding: 20px; border-top: 1px solid #eee; background-color: #f4f4f4; display: flex; justify-content: space-between;">
+                            <a href="mailto:tyler.n@tylernicholasgroup.com" style="font-size: 0.9em; color: #001F4C; text-decoration: none; padding: 5px 10px; border: 1px solid #C0C0C0; border-radius: 4px; transition: background-color 0.2s, color 0.2s; font-weight: 600;">Email</a>
+                            <a href="https://linkedin.com/in/tylernicholas" target="_blank" style="font-size: 0.9em; color: #001F4C; text-decoration: none; padding: 5px 10px; border: 1px solid #C0C0C0; border-radius: 4px; transition: background-color 0.2s, color 0.2s; font-weight: 600;">LinkedIn</a>
+                        </div>
+                    </div>
+
+                    <div class="person-card tng-pro vacant-card" style="text-align: center; border-top: 6px solid #A81F27; border-bottom: 6px solid #001F4C; background-color: #fff; border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); justify-content: space-between;">
+                        <div>
+                            <div class="profile-header" style="background-color: #001F4C; justify-content: center; flex-direction: column; padding: 30px 20px 20px 20px; display: flex; align-items: center; border-bottom: 1px solid #ddd;">
+                                <img src="../image/apply.png" alt="Apply Now" class="profile-pic" style="width: 70px; height: 70px; border-radius: 4px; border: none; opacity: 0.9; margin-bottom: 10px; object-fit: cover; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                                <div class="header-text" style="margin-left: 0; text-align: center;">
+                                    <h4 style="color: #ffffff; font-size: 1.6em; margin: 0;">Chief Executive Officer</h4>
+                                    <p style="color: #C0C0C0; font-weight: 500; font-size: 1em; margin: 0;">VACANT POSITION</p>
+                                </div>
+                            </div>
+                            <div class="card-info" style="text-align: center; padding: 20px; flex-grow: 1;">
+                                <p class="bio" style="text-align: center; color: #555; font-size: 0.95em; margin-bottom: 15px; max-height: 70px;">This pivotal role will lead TNG's day-to-day operations and execute the Board's strategic vision.</p>
+                            </div>
+                        </div>
+                        <a href="/careers" class="vacant-link" style="display: block; padding: 15px 0; background-color: #A81F27; color: #ffffff; text-decoration: none; font-weight: 700; border-radius: 0 0 12px 12px; transition: background-color 0.3s; text-align: center;">View Job Description & Apply</a>
+                    </div>
+
+                    <div class="person-card tng-pro" style="background-color: #fff; border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); border-top: 6px solid #001F4C; border-bottom: 6px solid #A81F27;">
+                        <div>
+                            <div class="profile-header" style="display: flex; align-items: center; padding: 20px; background-color: #ffffff; border-bottom: 1px solid #ddd;">
+                                <img src="image/william-cross.png" alt="Profile of William Cross" class="profile-pic" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 4px solid #f4f4f4; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                                <div class="header-text" style="margin-left: 15px; text-align: left;">
+                                    <h4 style="color: #001F4C; font-size: 1.4em; margin: 0 0 5px 0;">William Alexander Cross</h4>
+                                    <p style="color: #A81F27; font-size: 1em; margin: 0; font-weight: 600;">Chief Human Resources Officer</p>
+                                </div>
+                            </div>
+                            <div class="card-info" style="padding: 20px; text-align: left; flex-grow: 1;">
+                                <p class="bio" style="color: #555; font-size: 0.95em; margin-bottom: 15px; max-height: 70px;">Oversees talent acquisition, legal compliance, and strategic human capital development, ensuring TNG remains a top global employer.</p>
+                            </div>
+                        </div>
+                        <div class="contact-info" style="padding: 20px; border-top: 1px solid #eee; background-color: #f4f4f4; display: flex; justify-content: space-between;">
+                            <a href="mailto:williamalexandercross@outlook.com" style="font-size: 0.9em; color: #001F4C; text-decoration: none; padding: 5px 10px; border: 1px solid #C0C0C0; border-radius: 4px; transition: background-color 0.2s, color 0.2s; font-weight: 600;">Email</a>
+                            <a href="https://linkedin.com/in/williamacross" target="_blank" style="font-size: 0.9em; color: #001F4C; text-decoration: none; padding: 5px 10px; border: 1px solid #C0C0C0; border-radius: 4px; transition: background-color 0.2s, color 0.2s; font-weight: 600;">LinkedIn</a>
+                        </div>
+                    </div>
+
+                    <div class="person-card tng-pro" style="background-color: #fff; border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); border-top: 6px solid #001F4C; border-bottom: 6px solid #A81F27;">
+                        <div>
+                            <div class="profile-header" style="display: flex; align-items: center; padding: 20px; background-color: #ffffff; border-bottom: 1px solid #ddd;">
+                                <img src="image/angie-pittman.png" alt="Profile of Angie Pittman" class="profile-pic" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 4px solid #f4f4f4; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                                <div class="header-text" style="margin-left: 15px; text-align: left;">
+                                    <h4 style="color: #001F4C; font-size: 1.4em; margin: 0 0 5px 0;">Angie Pittman</h4>
+                                    <p style="color: #A81F27; font-size: 1em; margin: 0; font-weight: 600;">Chief Technology Officer</p>
+                                </div>
+                            </div>
+                            <div class="card-info" style="padding: 20px; text-align: left; flex-grow: 1;">
+                                <p class="bio" style="color: #555; font-size: 0.95em; margin-bottom: 15px; max-height: 70px;">Leads TNG's digital transformation initiatives, ensuring the integration of cutting-edge technology and innovation across all subsidiaries.</p>
+                            </div>
+                        </div>
+                        <div class="contact-info" style="padding: 20px; border-top: 1px solid #eee; background-color: #f4f4f4; display: flex; justify-content: space-between;">
+                            <a href="mailto:angiepittman25@gmail.com" style="font-size: 0.9em; color: #001F4C; text-decoration: none; padding: 5px 10px; border: 1px solid #C0C0C0; border-radius: 4px; transition: background-color 0.2s, color 0.2s; font-weight: 600;">Email</a>
+                            <a href="https://linkedin.com/in/angiepittman" target="_blank" style="font-size: 0.9em; color: #001F4C; text-decoration: none; padding: 5px 10px; border: 1px solid #C0C0C0; border-radius: 4px; transition: background-color 0.2s, color 0.2s; font-weight: 600;">LinkedIn</a>
+                        </div>
+                    </div>
+
+                    <div class="person-card tng-pro vacant-card" style="text-align: center; border-top: 6px solid #A81F27; border-bottom: 6px solid #001F4C; background-color: #fff; border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); justify-content: space-between;">
+                        <div>
+                            <div class="profile-header" style="background-color: #001F4C; justify-content: center; flex-direction: column; padding: 30px 20px 20px 20px; display: flex; align-items: center; border-bottom: 1px solid #ddd;">
+                                <img src="../image/apply.png" alt="Apply Now" class="profile-pic" style="width: 70px; height: 70px; border-radius: 4px; border: none; opacity: 0.9; margin-bottom: 10px; object-fit: cover; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                                <div class="header-text" style="margin-left: 0; text-align: center;">
+                                    <h4 style="color: #ffffff; font-size: 1.6em; margin: 0;">Chief Financial Officer</h4>
+                                    <p style="color: #C0C0C0; font-weight: 500; font-size: 1em; margin: 0;">VACANT POSITION</p>
+                                </div>
+                            </div>
+                            <div class="card-info" style="text-align: center; padding: 20px; flex-grow: 1;">
+                                <p class="bio" style="text-align: center; color: #555; font-size: 0.95em; margin-bottom: 15px; max-height: 70px;">Responsible for all group financial strategy, reporting, and investor relations. A critical, high-impact role.</p>
+                            </div>
+                        </div>
+                        <a href="/careers" class="vacant-link" style="display: block; padding: 15px 0; background-color: #A81F27; color: #ffffff; text-decoration: none; font-weight: 700; border-radius: 0 0 12px 12px; transition: background-color 0.3s; text-align: center;">View Job Description & Apply</a>
+                    </div>
                 </div>
-            </section>
+            </section>
+            
+            <hr style="margin: 50px 0;">
+
+            <section class="content-section" style="margin-bottom: 50px; padding-top: 20px;">
+                <h3 style="font-size: 1.5em; color: #A81F27; border-left: 5px solid #A81F27; padding-left: 10px; margin-top: 40px; margin-bottom: 20px;">More TNG Executive Leaders</h3>
+                <div class="people-grid">
+
+                    <div class="person-card tng-pro vacant-card" style="text-align: center; border-top: 6px solid #A81F27; border-bottom: 6px solid #001F4C; background-color: #fff; border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); justify-content: space-between;">
+                        <div>
+                            <div class="profile-header" style="background-color: #001F4C; justify-content: center; flex-direction: column; padding: 30px 20px 20px 20px; display: flex; align-items: center; border-bottom: 1px solid #ddd;">
+                                <img src="../image/apply.png" alt="Apply Now" class="profile-pic" style="width: 70px; height: 70px; border-radius: 4px; border: none; opacity: 0.9; margin-bottom: 10px; object-fit: cover; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                                <div class="header-text" style="margin-left: 0; text-align: center;">
+                                    <h4 style="color: #ffffff; font-size: 1.6em; margin: 0;">Director Of TNG E-Commerce</h4>
+                                    <p style="color: #C0C0C0; font-weight: 500; font-size: 1em; margin: 0;">VACANT POSITION</p>
+                                </div>
+                            </div>
+                            <div class="card-info" style="text-align: center; padding: 20px; flex-grow: 1;">
+                                <p class="bio" style="text-align: center; color: #555; font-size: 0.95em; margin-bottom: 15px; max-height: 70px;">Manage and Oversee TNG E-Commerce businesses.</p>
+                            </div>
+                        </div>
+                        <a href="/careers" class="vacant-link" style="display: block; padding: 15px 0; background-color: #A81F27; color: #ffffff; text-decoration: none; font-weight: 700; border-radius: 0 0 12px 12px; transition: background-color 0.3s; text-align: center;">View Job Description & Apply</a>
+                    </div>
+
+                    <div class="person-card tng-pro vacant-card" style="text-align: center; border-top: 6px solid #A81F27; border-bottom: 6px solid #001F4C; background-color: #fff; border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); justify-content: space-between;">
+                        <div>
+                            <div class="profile-header" style="background-color: #001F4C; justify-content: center; flex-direction: column; padding: 30px 20px 20px 20px; display: flex; align-items: center; border-bottom: 1px solid #ddd;">
+                                <img src="../image/apply.png" alt="Apply Now" class="profile-pic" style="width: 70px; height: 70px; border-radius: 4px; border: none; opacity: 0.9; margin-bottom: 10px; object-fit: cover; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                                <div class="header-text" style="margin-left: 0; text-align: center;">
+                                    <h4 style="color: #ffffff; font-size: 1.6em; margin: 0;">Director Of TNG Gaming Organizations</h4>
+                                    <p style="color: #C0C0C0; font-weight: 500; font-size: 1em; margin: 0;">VACANT POSITION</p>
+                                </div>
+                            </div>
+                            <div class="card-info" style="text-align: center; padding: 20px; flex-grow: 1;">
+                                <p class="bio" style="text-align: center; color: #555; font-size: 0.95em; margin-bottom: 15px; max-height: 70px;">Manage and Oversee TNG Gaming Organizations.</p>
+                            </div>
+                        </div>
+                        <a href="/careers" class="vacant-link" style="display: block; padding: 15px 0; background-color: #A81F27; color: #ffffff; text-decoration: none; font-weight: 700; border-radius: 0 0 12px 12px; transition: background-color 0.3s; text-align: center;">View Job Description & Apply</a>
+                    </div>
+
+                    <div class="person-card tng-pro vacant-card" style="text-align: center; border-top: 6px solid #A81F27; border-bottom: 6px solid #001F4C; background-color: #fff; border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); justify-content: space-between;">
+                        <div>
+                            <div class="profile-header" style="background-color: #001F4C; justify-content: center; flex-direction: column; padding: 30px 20px 20px 20px; display: flex; align-items: center; border-bottom: 1px solid #ddd;">
+                                <img src="../image/apply.png" alt="Apply Now" class="profile-pic" style="width: 70px; height: 70px; border-radius: 4px; border: none; opacity: 0.9; margin-bottom: 10px; object-fit: cover; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                                <div class="header-text" style="margin-left: 0; text-align: center;">
+                                    <h4 style="color: #ffffff; font-size: 1.6em; margin: 0;">Director Of TNG Investment Board</h4>
+                                    <p style="color: #C0C0C0; font-weight: 500; font-size: 1em; margin: 0;">VACANT POSITION</p>
+                                </div>
+                            </div>
+                            <div class="card-info" style="text-align: center; padding: 20px; flex-grow: 1;">
+                                <p class="bio" style="text-align: center; color: #555; font-size: 0.95em; margin-bottom: 15px; max-height: 70px;">Manage and Oversee TNG Investment Board</p>
+                            </div>
+                        </div>
+                        <a href="/careers" class="vacant-link" style="display: block; padding: 15px 0; background-color: #A81F27; color: #ffffff; text-decoration: none; font-weight: 700; border-radius: 0 0 12px 12px; transition: background-color 0.3s; text-align: center;">View Job Description & Apply</a>
+                    </div>
+                </div>
+            </section>
 
 
-          <section class="content-section" style="text-align: center;">
-                <h3>Subsidiary & Venture Leadership Teams</h3>
-                <p>Click below to view the dedicated leadership pages for our major subsidiary organizations.</p>
-                <div class="subsidiary-buttons">
-                    <a href="/people/falcon-ltd.html">Falcon LTD Leadership - TNG E-Commerce</a>
-                    <a href="/people/nicholas-foundation.html">The Nicholas Foundation Leadership - TNG Investment Board</a>
-                    <a href="/people/lumorax.html">LumoraX Leadership - TNG E-Commerce</a>
-                    <a href="/people/emirates-group-roblox.html">Emirates Group Roblox Leadership - TNG Gaming Organizations</a>
-                </div>
-            </section>
-        </main>
+            <section class="content-section" style="text-align: center; margin-bottom: 50px; padding-top: 20px;">
+                <h3 style="font-size: 1.5em; color: #A81F27; border-left: 5px solid #A81F27; padding-left: 10px; margin-top: 40px; margin-bottom: 20px; display: inline-block;">Subsidiary & Venture Leadership Teams</h3>
+                <p>Click below to view the dedicated leadership pages for our major subsidiary organizations.</p>
+                <div class="subsidiary-buttons" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; padding: 40px 0;">
+                    <a href="/people/falcon-ltd.html" style="display: inline-block; padding: 15px 25px; background-color: #001F4C; color: #f4f4f4; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 0.95em; transition: background-color 0.3s, transform 0.2s; max-width: 250px; text-align: center;">Falcon LTD Leadership - TNG E-Commerce</a>
+                    <a href="/people/nicholas-foundation.html" style="display: inline-block; padding: 15px 25px; background-color: #001F4C; color: #f4f4f4; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 0.95em; transition: background-color 0.3s, transform 0.2s; max-width: 250px; text-align: center;">The Nicholas Foundation Leadership - TNG Investment Board</a>
+                    <a href="/people/lumorax.html" style="display: inline-block; padding: 15px 25px; background-color: #001F4C; color: #f4f4f4; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 0.95em; transition: background-color 0.3s, transform 0.2s; max-width: 250px; text-align: center;">LumoraX Leadership - TNG E-Commerce</a>
+                    <a href="/people/emirates-group-roblox.html" style="display: inline-block; padding: 15px 25px; background-color: #001F4C; color: #f4f4f4; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 0.95em; transition: background-color 0.3s, transform 0.2s; max-width: 250px; text-align: center;">Emirates Group Roblox Leadership - TNG Gaming Organizations</a>
+                </div>
+            </section>
+        </main>
 
-        <footer>
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>TNG Global Headquarters</h4>
-                    <p>Tyler Nicholas Group operates as a remote-first organization.</p>
-                    <p>Official Headquarters & Group Communications:<br>
-                    <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
-                    <p>General Inquiries:<br>
-                    <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <a href="/about">About TNG</a>
-                    <a href="/companies">Our Companies</a>
-                    <a href="/people">Our People</a>
-                    <a href="/governance">Governance</a>
-                    <a href="/careers">Careers</a>
-                </div>
-                <div class="footer-section">
-                    <h4>Legal & Policy</h4>
-                    <a href="/privacy">Privacy Policy</a>
-                    <a href="/terms">Terms of Use</a>
-                    <a href="/governance/legal">Legal & Compliance</a>
-                    <a href="/accessibility">Accessibility Statement</a>
-                    <a href="/governance/reports">Financial Reports</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
-            </div>
-        </footer>
-    </div>
+        <footer style="background-color: #001F4C; color: #C0C0C0; padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px;">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 style="color: #A81F27; font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px;">TNG Global Headquarters</h4>
+                    <p>Tyler Nicholas Group operates as a remote-first organization.</p>
+                    <p>Official Headquarters & Group Communications:<br>
+                    <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: #A81F27; text-decoration: none; display: block; margin-bottom: 8px;">Official TNG Discord Server</a></p>
+                    <p>General Inquiries:<br>
+                    <a href="mailto:contact@tylernicholasgroup.com" style="color: #C0C0C0; text-decoration: none; display: block; margin-bottom: 8px;">contact@tylernicholasgroup.com</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4 style="color: #A81F27; font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px;">Quick Links</h4>
+                    <a href="/about" style="color: #C0C0C0; text-decoration: none; display: block; margin-bottom: 8px;">About TNG</a>
+                    <a href="/companies" style="color: #C0C0C0; text-decoration: none; display: block; margin-bottom: 8px;">Our Companies</a>
+                    <a href="/people" style="color: #C0C0C0; text-decoration: none; display: block; margin-bottom: 8px;">Our People</a>
+                    <a href="/governance" style="color: #C0C0C0; text-decoration: none; display: block; margin-bottom: 8px;">Governance</a>
+                    <a href="/careers" style="color: #C0C0C0; text-decoration: none; display: block; margin-bottom: 8px;">Careers</a>
+                </div>
+                <div class="footer-section">
+                    <h4 style="color: #A81F27; font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px;">Legal & Policy</h4>
+                    <a href="/privacy" style="color: #C0C0C0; text-decoration: none; display: block; margin-bottom: 8px;">Privacy Policy</a>
+                    <a href="/terms" style="color: #C0C0C0; text-decoration: none; display: block; margin-bottom: 8px;">Terms of Use</a>
+                    <a href="/governance/legal" style="color: #C0C0C0; text-decoration: none; display: block; margin-bottom: 8px;">Legal & Compliance</a>
+                    <a href="/accessibility" style="color: #C0C0C0; text-decoration: none; display: block; margin-bottom: 8px;">Accessibility Statement</a>
+                    <a href="/governance/reports" style="color: #C0C0C0; text-decoration: none; display: block; margin-bottom: 8px;">Financial Reports</a>
+                </div>
+            </div>
+            <div class="footer-bottom" style="background-color: #00122E; text-align: center; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
+            </div>
+        </footer>
+    </div>
 
-    <script>
-        const PRELOADER_DISPLAY_TIME = 15000; 
+    <script>
+        const PRELOADER_DISPLAY_TIME = 15000; 
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const preloader = document.getElementById('preloader');
-            const mainContentWrapper = document.getElementById('main-content-wrapper');
+        document.addEventListener('DOMContentLoaded', function() {
+            const preloader = document.getElementById('preloader');
+            const mainContentWrapper = document.getElementById('main-content-wrapper');
 
-            setTimeout(() => {
-                preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.opacity = '0';
 
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                    mainContentWrapper.classList.add('loaded');
-                }, 500); 
-            }, PRELOADER_DISPLAY_TIME);
-        });
-    </script>
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    mainContentWrapper.classList.add('loaded');
+                }, 500); 
+            }, PRELOADER_DISPLAY_TIME);
+        });
+    </script>
 </body>
 </html>
