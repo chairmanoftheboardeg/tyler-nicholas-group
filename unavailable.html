@@ -3,33 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unavailable | Tyler Nicholas - Under Development</title>
-    <link rel="icon" type="image/png" href="../../image/favicon.png">
-    
-    <style>
-        /* ==================== A. CORE THEME STYLES (Reused) ==================== */
+    <title>Unavailable | Tyler Nicholas Group - Under Development</title>
+    <link rel="icon" type="image/png" href="image/favicon.png"> <style>
+        /* ==================== A. TNG CORE CORPORATE STYLES ==================== */
         :root {
-            --aviation-blue: #00AEEF; 
-            --sky-white: #FFFFFF;
-            --navy-text: #001F4C; 
-            --light-gray-bg: #F8F9FA;
-            --transition-speed: 0.4s ease-in-out;
-            --error-red: #DC3545;
+            --tng-primary: #001F4C; /* Deep Navy Blue */
+            --tng-secondary: #FFD700; /* Gold/Yellow Accent */
+            --tng-text: #333; /* Dark Grey Text */
+            --tng-bg: #F8F9FA; /* Light Grey Background */
+            --tng-white: #FFFFFF;
         }
 
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            color: var(--navy-text);
-            background-color: var(--sky-white);
+            color: var(--tng-text);
+            background-color: var(--tng-white);
             line-height: 1.6;
         }
 
-        /* --- Header & Navigation (Standard) --- */
+        /* --- Header & Navigation (TNG Corporate) --- */
         header {
-            background-color: var(--sky-white);
-            border-bottom: 3px solid var(--aviation-blue);
+            background-color: var(--tng-white);
+            border-bottom: 3px solid var(--tng-primary);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             padding: 15px 40px;
             position: sticky;
@@ -46,70 +43,33 @@
         .logo {
             font-size: 1.8em;
             font-weight: 700;
-            color: var(--navy-text);
+            color: var(--tng-primary);
             text-decoration: none;
         }
-        nav {
-            display: flex;
+        .logo span {
+            color: var(--tng-secondary);
         }
         nav a {
-            color: var(--navy-text);
+            color: var(--tng-text);
             text-decoration: none;
             padding: 10px 15px;
             margin-left: 10px;
             font-size: 1em;
             font-weight: 500;
-            transition: color 0.3s, background-color 0.3s;
-            border-radius: 4px;
+            transition: color 0.3s, border-bottom 0.3s;
         }
-        nav a:hover {
-            color: var(--aviation-blue);
-        }
-        
-        /* --- Dropdown Menu (Standard) --- */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: var(--sky-white);
-            min-width: 160px;
-            box-shadow: 0 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            right: 0;
-            border-radius: 4px;
-            border-top: 3px solid var(--aviation-blue);
-        }
-        .dropdown-content a {
-            color: var(--navy-text);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            margin: 0;
-            font-weight: 500;
-        }
-        .dropdown-content a:hover {
-            background-color: var(--light-gray-bg);
-            color: var(--aviation-blue);
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        .dropdown > a {
-            background-color: var(--light-gray-bg);
-            border: 1px solid #ddd;
-            margin-left: 10px;
+        nav a:hover, nav a.active {
+            color: var(--tng-primary);
+            border-bottom: 2px solid var(--tng-secondary);
         }
 
-        /* ==================== B. PAGE SPECIFIC CONTENT (UNAVAILABLE) ==================== */
+        /* ==================== B. UNAVAILABLE CONTENT & STYLES ==================== */
         main {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: calc(100vh - 100px); /* Adjust based on header/footer height */
+            min-height: calc(100vh - 150px); /* Adjust based on header/footer height */
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
@@ -119,7 +79,7 @@
         .status-code {
             font-size: 5em;
             font-weight: 700;
-            color: var(--aviation-blue);
+            color: var(--tng-secondary);
             line-height: 1;
             margin-bottom: 10px;
         }
@@ -127,27 +87,27 @@
         .status-code span {
             font-size: 0.3em;
             display: block;
-            color: var(--navy-text);
+            color: var(--tng-primary);
             margin-top: 10px;
         }
 
         h2 {
             font-size: 2.5em;
-            color: var(--navy-text);
+            color: var(--tng-primary);
             margin-bottom: 15px;
         }
 
         p {
             font-size: 1.1em;
-            color: #555;
+            color: var(--tng-text);
             margin-bottom: 30px;
             max-width: 600px;
         }
 
         .contact-button {
             display: inline-block;
-            background-color: var(--navy-text);
-            color: var(--sky-white);
+            background-color: var(--tng-primary);
+            color: var(--tng-white);
             padding: 15px 30px;
             text-decoration: none;
             border-radius: 6px;
@@ -155,17 +115,18 @@
             font-size: 1.1em;
             transition: background-color 0.3s, transform 0.3s;
             margin-top: 10px;
-            border: 2px solid var(--navy-text);
+            border: 2px solid var(--tng-primary);
         }
         .contact-button:hover {
-            background-color: var(--aviation-blue);
-            border-color: var(--aviation-blue);
+            background-color: var(--tng-secondary);
+            border-color: var(--tng-secondary);
+            color: var(--tng-primary);
             transform: translateY(-2px);
         }
 
         .back-button {
             display: inline-block;
-            color: var(--aviation-blue);
+            color: var(--tng-primary);
             text-decoration: none;
             font-weight: 600;
             margin-top: 20px;
@@ -181,19 +142,19 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 31, 76, 0.95); /* Dark blue overlay */
+            background-color: var(--tng-primary); /* Deep Blue Overlay */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            color: var(--sky-white);
+            color: var(--tng-white);
             transition: opacity 0.5s ease-out;
         }
         
         .spinner {
             border: 6px solid rgba(255, 255, 255, 0.3);
-            border-top: 6px solid var(--aviation-blue);
+            border-top: 6px solid var(--tng-secondary); /* Gold Spinner */
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -217,30 +178,30 @@
             opacity: 0.8;
         }
 
-        /* ==================== D. FOOTER (Standard) ==================== */
+        /* ==================== D. FOOTER (TNG Corporate) ==================== */
         footer {
-            background-color: var(--navy-text);
-            color: var(--light-gray-bg);
+            background-color: var(--tng-primary);
+            color: var(--tng-bg);
             padding: 40px 20px;
             font-size: 0.9em;
             text-align: center;
-            margin-top: 0; /* Important for full-page layout */
+            margin-top: 0; 
         }
-        .footer-social a {
-            color: var(--aviation-blue);
+        .footer-links a {
+            color: var(--tng-secondary);
             margin: 0 10px;
             text-decoration: none;
             transition: color 0.3s;
         }
-        .footer-social a:hover {
-            color: var(--sky-white);
+        .footer-links a:hover {
+            color: var(--tng-white);
         }
         .footer-email {
             margin: 15px 0;
             font-size: 1.1em;
         }
         .footer-email a {
-            color: var(--aviation-blue);
+            color: var(--tng-secondary);
             text-decoration: none;
         }
     </style>
@@ -249,30 +210,20 @@
 
     <div id="loading-overlay">
         <div class="spinner"></div>
-        <h3>Attempting to Connect to Servers...</h3>
-        <p>We are fetching your request and validating the destination path.</p>
+        <h3>TNG System Check Initiated...</h3>
+        <p>Attempting to connect you back to our servers, we are fetching your requested resource.</p>
     </div>
 
-    <div id="main-portfolio" style="display: none;">
+    <div id="main-content" style="display: none;">
         <header>
             <div class="navbar">
-                <a href="index.html" class="logo">TYLER NICHOLAS</a>
+                <a href="index.html" class="logo">TYLER NICHOLAS <span>GROUP</span></a>
                 <nav>
                     <a href="index.html">Home</a>
-                    <a href="about-me.html">About Me</a>
-                    <a href="my-projects.html">My Projects</a>
-                    <a href="my-cv.html">My CV</a>
-                    
-                    <div class="dropdown">
-                        <a href="#">More ▼</a>
-                        <div class="dropdown-content">
-                            <a href="my-blog.html">My Blog</a>
-                            <a href="my-story.html">My Story</a>
-                            <a href="my-experiences.html">My Experiences</a>
-                            <a href="my-school.html">My School</a>
-                            <a href="social-links.html">Social Links</a>
-                        </div>
-                    </div>
+                    <a href="about.html">About TNG</a>
+                    <a href="portfolio.html">Portfolio</a>
+                    <a href="investors.html">Investors</a>
+                    <a href="contact.html">Contact</a>
                 </nav>
             </div>
         </header>
@@ -280,38 +231,36 @@
         <main>
             <div class="status-code">
                 403
-                <span>Development Access Denied</span>
+                <span>Restricted Access</span>
             </div>
-            <h2>Page Under Active Development</h2>
+            <h2>Resource Under Active Corporate Development</h2>
             <p>
-                The requested resource is part of an ongoing project and is **currently unavailable** to the public. We are actively working on this feature to ensure a seamless and high-quality experience upon release.
+                This feature or subsidiary page is currently in the **beta development phase** and is not yet available for public access. We are diligently working to finalize its integration into the **Tyler Nicholas Group** infrastructure.
             </p>
             <p>
-                Thank you for your interest and patience. Please check back at a later date, or click the button below for immediate assistance.
+                We apologize for the inconvenience and appreciate your interest. If you require immediate information, please use the corporate contact link below.
             </p>
             
-            <a href="mailto:tyler@tylernicholasgroup.com?subject=IT%20Inquiry%20-%20Unavailable%20Page" class="contact-button">
-                Contact IT Support
+            <a href="mailto:tyler@tylernicholasgroup.com?subject=TNG%20Website%20Inquiry%20-%20Unavailable%20Page" class="contact-button">
+                Contact TNG Support
             </a>
             
             <a href="javascript:history.back()" class="back-button">
-                &larr; Return to Previous Page
+                &larr; Return to TNG Home
             </a>
         </main>
 
         <footer>
-            <div class="footer-social">
-                <a href="https://www.linkedin.com/in/tyler-nicholas-62999534a" target="_blank">LinkedIn</a> |
-                <a href="https://www.instagram.com/t.nicholas25" target="_blank">Instagram</a> |
-                <a href="https://x.com/TylerNicholasSC" target="_blank">Twitter / X</a> |
-                <a href="https://wa.me/2482544788" target="_blank">WhatsApp</a> |
-                <a href="https://www.facebook.com/profile.php?id=61558803946306" target="_blank">Facebook</a>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a> |
+                <a href="#">Terms of Service</a> |
+                <a href="#">Investor Relations</a>
             </div>
             <div class="footer-email">
-                Professional Contact: <a href="mailto:tyler@tylernicholasgroup.com">tyler@tylernicholasgroup.com</a>
+                Corporate Contact: <a href="mailto:tyler@tylernicholasgroup.com">tyler@tylernicholasgroup.com</a>
             </div>
             <p>
-                &copy; 2025 Tyler Nicholas Professional Portfolio. All rights reserved.
+                &copy; 2025 Tyler Nicholas Group (TNG). All rights reserved.
             </p>
         </footer>
     </div>
@@ -319,7 +268,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const loadingOverlay = document.getElementById('loading-overlay');
-            const mainContent = document.getElementById('main-portfolio');
+            const mainContent = document.getElementById('main-content');
             
             // Set a delay (e.g., 2000 milliseconds = 2 seconds)
             setTimeout(() => {
