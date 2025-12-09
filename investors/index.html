@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Relations | Tyler Nicholas Group (TNG)</title>
+
+    <link rel="icon" type="image/png" href="../image/logo.png">
+
+    <style>
+        /* ==================== CORPORATE CSS (Reused) ==================== */
+        :root {
+            --tng-blue: #001F4C;
+            --tng-maroon: #A81F27;
+            --tng-silver: #C0C0C0;
+            --tng-light-gray: #f4f4f4;
+            --tng-text-dark: #333;
+            --tng-text-light: #ffffff;
+            --transition-speed: 0.8s ease-out;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--tng-text-dark);
+            background-color: var(--tng-light-gray);
+            line-height: 1.6;
+        }
+
+        /* === HEADER & NAVIGATION === */
+        header {
+            background-color: var(--tng-blue);
+            color: var(--tng-text-light);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--tng-silver);
+            text-decoration: none;
+        }
+        nav a, .more-menu-toggle {
+            color: var(--tng-silver);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            font-size: 0.95em;
+            font-weight: 500;
+            border-radius: 4px;
+        }
+        nav a:hover {
+            color: var(--tng-text-light);
+            background-color: rgba(168, 31, 39, 0.5); 
+        }
+
+        /* More Menu Dropdown */
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-content { display: none; position: absolute; right: 0; background-color: var(--tng-blue); min-width: 200px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; border-top: 3px solid var(--tng-maroon); }
+        .dropdown-content a { color: var(--tng-silver); padding: 12px 16px; text-decoration: none; display: block; margin: 0; }
+        .dropdown-content a:hover { background-color: var(--tng-maroon); color: var(--tng-text-light); }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        /* === MAIN CONTENT LAYOUT === */
+        main { max-width: 1100px; margin: 40px auto; padding: 20px; }
+        
+        .hero-investor { 
+            background: linear-gradient(135deg, var(--tng-blue), #002D62); 
+            color: var(--tng-light-gray); 
+            padding: 60px 40px; 
+            text-align: center; 
+            border-radius: 12px; 
+            margin-bottom: 50px; 
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); 
+            border-bottom: 5px solid var(--tng-maroon);
+        }
+        .hero-investor h1 { 
+            font-size: 3em; 
+            margin-bottom: 5px; 
+            color: var(--tng-silver);
+        }
+        .hero-investor p { 
+            font-size: 1.2em; 
+            color: var(--tng-light-gray);
+        }
+
+        .content-section { padding: 40px 0; margin-bottom: 30px; }
+        .content-section h2 { 
+            font-size: 2.2em; 
+            color: var(--tng-primary); 
+            margin-bottom: 30px; 
+            border-left: 5px solid var(--tng-maroon); 
+            padding-left: 15px;
+            color: var(--tng-blue);
+        }
+        
+        /* === KEY METRICS GRID === */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        .metric-card {
+            background-color: var(--tng-white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border-bottom: 4px solid var(--tng-maroon);
+        }
+        .metric-card h3 {
+            font-size: 1.1em;
+            color: #777;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+        }
+        .metric-card p {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--tng-blue);
+            margin: 0;
+        }
+
+        /* === DOCUMENTATION & CONTACT === */
+        .document-list {
+            list-style: none;
+            padding: 0;
+        }
+        .document-list li {
+            background-color: var(--tng-white);
+            margin-bottom: 12px;
+            padding: 15px 25px;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--tng-blue);
+        }
+        .document-list a {
+            color: var(--tng-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .document-list a:hover {
+            color: var(--tng-maroon);
+        }
+
+        .ir-contact-box {
+            background-color: var(--tng-light-gray);
+            border: 1px solid #ddd;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 50px;
+            text-align: center;
+        }
+        .ir-contact-box h3 {
+            color: var(--tng-maroon);
+            margin-top: 0;
+        }
+        .ir-contact-box a {
+            background-color: var(--tng-maroon);
+            color: var(--tng-text-light);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        .ir-contact-box a:hover {
+            background-color: #8C1A21;
+        }
+        
+        /* === CORPORATE FOOTER === */
+        footer { background-color: var(--tng-blue); color: var(--tng-silver); padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px; }
+        .footer-content { display: flex; justify-content: space-between; max-width: 1300px; margin: 0 auto; padding: 0 40px 30px; flex-wrap: wrap; }
+        .footer-section { width: 28%; min-width: 250px; margin-bottom: 20px; }
+        .footer-section h4 { color: var(--tng-maroon); font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px; }
+        .footer-section a { color: var(--tng-silver); text-decoration: none; display: block; margin-bottom: 8px; }
+        .footer-bottom { background-color: #00122E; text-align: center; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/about">About Us</a>
+                <a href="/companies">Our Companies</a>
+                <a href="/people">Our People</a>
+                <a href="/governance">Governance</a>
+                <a href="/careers">Careers</a>
+                
+                <div class="dropdown">
+                    <a href="/investors" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Investors</a>
+                    <div class="dropdown-content" style="min-width: 230px;">
+                        <a href="/governance/board-of-directors.html">Board of Directors</a>
+                        <a href="/governance/code-of-conduct">Code of Conduct</a>
+                        <a href="/governance/reports">Financial Reporting</a>
+                        <a href="/contact/media">Media & Press</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-investor">
+            <h1>Partnering for Growth.</h1>
+            <p>Welcome to the Investor Relations hub for Tyler Nicholas Group. Access key financial data, corporate governance documents, and strategic updates on our global portfolio.</p>
+        </section>
+
+        <section class="content-section">
+            <h2>Financial Highlights (Q3 2025)</h2>
+            <div class="metrics-grid">
+                
+                <div class="metric-card">
+                    <h3>Group Revenue</h3>
+                    <p>USD 1.2M+</p>
+                </div>
+
+                <div class="metric-card">
+                    <h3>Assets Under Management</h3>
+                    <p>USD 5.8M+</p>
+                </div>
+
+                <div class="metric-card">
+                    <h3>Projects Launched</h3>
+                    <p>15+</p>
+                </div>
+
+                <div class="metric-card">
+                    <h3>Market Focus</h3>
+                    <p>Digital & Aviation</p>
+                </div>
+
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>Key Documents & Reporting</h2>
+            <p style="text-align: center; max-width: 800px; margin: -20px auto 30px;">For the integrity of our investors, all documents are filed and digitally certified by the TNG Governance department.</p>
+            
+            <ul class="document-list">
+                <li>
+                    <span>2025 Q3 Financial Report Summary (PDF)</span>
+                    <a href="/governance/reports/TNG_Q3_2025_Summary.pdf" target="_blank">Download &rarr;</a>
+                </li>
+                <li>
+                    <span>Corporate Annual Report 2024 (PDF)</span>
+                    <a href="/governance/reports/TNG_Annual_Report_2024.pdf" target="_blank">Download &rarr;</a>
+                </li>
+                <li>
+                    <span>TNG Investor Presentation Deck (PDF)</span>
+                    <a href="/governance/reports/TNG_Investor_Presentation_2025.pdf" target="_blank">Download &rarr;</a>
+                </li>
+                <li>
+                    <span>Code of Conduct & Ethics (Link)</span>
+                    <a href="/governance/code-of-conduct" target="_blank">View Policy &rarr;</a>
+                </li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <div class="ir-contact-box">
+                <h3>Contact Our Investor Relations Team</h3>
+                <p>
+                    For detailed inquiries regarding financial statements, shareholder opportunities, or strategic partnerships, please contact our dedicated IR staff.
+                </p>
+                <a href="mailto:investors@tylernicholasgroup.com?subject=Investor%20Relations%20Inquiry%20from%20Website">
+                    Email IR Team
+                </a>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>TNG Global Headquarters</h4>
+                <p>Tyler Nicholas Group operates as a remote-first organization.</p>
+                <p>Official Headquarters & Group Communications:<br>
+                <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
+                <p>General Inquiries:<br>
+                <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="/about">About TNG</a>
+                <a href="/companies">Our Companies</a>
+                <a href="/people">Our People</a>
+                <a href="/governance">Governance</a>
+                <a href="/careers">Careers</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal & Policy</h4>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Use</a>
+                <a href="/governance/legal">Legal & Compliance</a>
+                <a href="/accessibility">Accessibility Statement</a>
+                <a href="/governance/reports">Financial Reports</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
+        </div>
+    </footer>
+
+</body>
+</html>
