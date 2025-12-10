@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Tyler Nicholas Group (TNG)</title>
+
+    <link rel="icon" type="image/png" href="./image/logo.png">
+
+    <style>
+        /* ==================== CORPORATE CSS (Reused) ==================== */
+        :root {
+            --tng-blue: #001F4C;
+            --tng-maroon: #A81F27;
+            --tng-silver: #C0C0C0;
+            --tng-light-gray: #f4f4f4;
+            --tng-text-dark: #333;
+            --tng-text-light: #ffffff;
+            --transition-speed: 0.8s ease-out;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--tng-text-dark);
+            background-color: var(--tng-light-gray);
+            line-height: 1.8; /* Increased line-height for legibility of legal text */
+        }
+
+        /* === HEADER & NAVIGATION === */
+        header {
+            background-color: var(--tng-blue);
+            color: var(--tng-text-light);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--tng-silver);
+            text-decoration: none;
+        }
+        nav a, .more-menu-toggle {
+            color: var(--tng-silver);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            font-size: 0.95em;
+            font-weight: 500;
+            border-radius: 4px;
+        }
+        nav a:hover {
+            color: var(--tng-text-light);
+            background-color: rgba(168, 31, 39, 0.5); 
+        }
+
+        /* More Menu Dropdown */
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-content { display: none; position: absolute; right: 0; background-color: var(--tng-blue); min-width: 200px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; border-top: 3px solid var(--tng-maroon); }
+        .dropdown-content a { color: var(--tng-silver); padding: 12px 16px; text-decoration: none; display: block; margin: 0; }
+        .dropdown-content a:hover { background-color: var(--tng-maroon); color: var(--tng-text-light); }
+        .dropdown:hover .dropdown-content { display: block; }
+        
+        /* === MAIN CONTENT LAYOUT === */
+        main { max-width: 900px; margin: 40px auto; padding: 20px; }
+        
+        .hero-privacy { 
+            background: linear-gradient(135deg, var(--tng-maroon), #C04349); 
+            color: var(--tng-light-gray); 
+            padding: 50px 40px; 
+            text-align: center; 
+            border-radius: 12px; 
+            margin-bottom: 50px; 
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); 
+            border-bottom: 5px solid var(--tng-blue);
+        }
+        .hero-privacy h1 { 
+            font-size: 3em; 
+            margin-bottom: 5px; 
+            color: var(--tng-text-light);
+        }
+        .hero-privacy p { 
+            font-size: 1.1em; 
+            color: var(--tng-light-gray);
+        }
+        
+        .legal-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-top: 5px solid var(--tng-blue);
+        }
+        .legal-content h2 {
+            color: var(--tng-maroon);
+            font-size: 1.8em;
+            margin-top: 30px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--tng-light-gray);
+        }
+        .legal-content h3 {
+            color: var(--tng-blue);
+            font-size: 1.4em;
+            margin-top: 25px;
+        }
+        .legal-content p {
+            margin-bottom: 1.5em;
+            font-size: 1.05em;
+        }
+        .legal-content ul {
+            padding-left: 20px;
+        }
+        .legal-content li {
+            margin-bottom: 10px;
+        }
+        .legal-content a {
+            color: var(--tng-maroon);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .legal-content a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer (Standard TNG) */
+        footer { background-color: var(--tng-blue); color: var(--tng-silver); padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px; }
+        .footer-content { display: flex; justify-content: space-between; max-width: 1300px; margin: 0 auto; padding: 0 40px 30px; flex-wrap: wrap; }
+        .footer-section { width: 28%; min-width: 250px; margin-bottom: 20px; }
+        .footer-section h4 { color: var(--tng-maroon); font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px; }
+        .footer-section a { color: var(--tng-silver); text-decoration: none; display: block; margin-bottom: 8px; }
+        .footer-bottom { background-color: #00122E; text-align: center; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
+            <nav>
+                <a href="./">Home</a>
+                <a href="./about">About Us</a>
+                <a href="./companies">Our Companies</a>
+                <a href="./people">Our People</a>
+                <a href="./governance">Governance</a>
+                <a href="./careers">Careers</a>
+                
+                <div class="dropdown">
+                    <a href="./investors">Investors</a>
+                    <div class="dropdown-content">
+                        <a href="./governance/board-of-directors.html">Board of Directors</a>
+                        <a href="./governance/code-of-conduct">Code of Conduct</a>
+                        <a href="./governance/reports">Financial Reporting</a>
+                    </div>
+                </div>
+                
+                <a href="./media-press.html">Media & Press</a>
+                <a href="./contact/">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-privacy">
+            <h1>Tyler Nicholas Group Privacy Policy</h1>
+            <p>Your privacy is important to us. This policy outlines how Tyler Nicholas Group (TNG) collects, uses, protects, and discloses information gathered from visitors and customers.</p>
+        </section>
+
+        <div class="legal-content">
+            <p>
+                **Last Updated: December 10, 2025**
+            </p>
+
+            <h2>1. Introduction</h2>
+            <p>
+                Tyler Nicholas Group, operating as TNG Core, its subsidiaries, and affiliates ("TNG," "we," "us," or "our") respects your privacy and is committed to protecting it through our compliance with this policy. This policy applies to information we collect:
+            </p>
+            <ul>
+                <li>On this Website and all TNG-branded digital properties.</li>
+                <li>In email, text, and other electronic messages between you and TNG.</li>
+                <li>Through interactions with our services.</li>
+            </ul>
+            <p>
+                By accessing or using our services, you agree to this Privacy Policy.
+            </p>
+
+            <h2>2. Information We Collect</h2>
+            <p>We collect several types of information from and about users of our Website and services, including:</p>
+            <h3>A. Personal Data</h3>
+            <p>
+                This includes information that can be used to identify you, such as name, email address, postal address, telephone number, and payment information. We only collect this when voluntarily provided, such as when you sign up for a newsletter or apply for a job.
+            </p>
+            <h3>B. Non-Personal Data</h3>
+            <p>
+                This includes usage details, IP addresses, browser information, and details collected through cookies and other tracking technologies. This helps us analyze trends and improve our digital offerings.
+            </p>
+
+            <h2>3. How We Use Your Information</h2>
+            <p>We use the information we collect for the following purposes:</p>
+            <ul>
+                <li>To present our Website and its contents to you.</li>
+                <li>To provide you with information, products, or services that you request from us.</li>
+                <li>To fulfill any other purpose for which you provide it.</li>
+                <li>For internal research and analytics to improve our services and marketing.</li>
+                <li>To notify you about changes to our Website or any products or services we offer or provide.</li>
+            </ul>
+
+            <h2>4. Disclosure of Your Information</h2>
+            <p>We may disclose personal data that we collect or you provide as described in this privacy policy:</p>
+            <ul>
+                <li>To our subsidiaries and affiliates.</li>
+                <li>To contractors, service providers, and other third parties we use to support our business (e.g., cloud hosting, analytics services).</li>
+                <li>To a buyer or other successor in the event of a merger, divestiture, restructuring, reorganization, dissolution, or other sale or transfer of some or all of TNG's assets.</li>
+                <li>To comply with any court order, law, or legal process, including to respond to any government or regulatory request.</li>
+            </ul>
+
+            <h2>5. Your Choices and Rights</h2>
+            <p>We strive to provide you with choices regarding the personal data you provide to us:</p>
+            <ul>
+                <li>**Tracking Technologies and Advertising:** You can set your browser to refuse all or some browser cookies, or to alert you when cookies are being sent.</li>
+                <li>**Accessing and Correcting Your Information:** You may send us an email at <a href="mailto:privacy@tylernicholasgroup.com">privacy@tylernicholasgroup.com</a> to request access to, correct, or delete any personal information that you have provided to us.</li>
+            </ul>
+            <p>
+                **GDPR and CCPA Rights:** Depending on your jurisdiction (e.g., EU, California), you may have specific rights, including the right to erasure, the right to restrict processing, and the right to data portability.
+            </p>
+
+            <h2>6. Data Security</h2>
+            <p>
+                We have implemented measures designed to secure your personal data from accidental loss and from unauthorized access, use, alteration, and disclosure. However, the transmission of information via the internet is not completely secure, and we cannot guarantee the security of your personal data transmitted to our Website.
+            </p>
+
+            <h2>7. Changes to Our Privacy Policy</h2>
+            <p>
+                It is our policy to post any changes we make to our Privacy Policy on this page. If we make material changes to how we treat our users' personal data, we will notify you through a notice on the Website homepage. The date the Privacy Policy was last revised is identified at the top of the page.
+            </p>
+
+            <h2>8. Contact Information</h2>
+            <p>
+                To ask questions or comment about this Privacy Policy and our privacy practices, contact us at:
+            </p>
+            <p>
+                **Privacy Officer**<br>
+                Tyler Nicholas Group<br>
+                Email: <a href="mailto:privacy@tylernicholasgroup.com">privacy@tylernicholasgroup.com</a>
+            </p>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>TNG Global Headquarters</h4>
+                <p>Tyler Nicholas Group operates as a remote-first organization.</p>
+                <p>Official Headquarters & Group Communications:<br>
+                <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
+                <p>General Inquiries:<br>
+                <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="./about">About TNG</a>
+                <a href="./companies">Our Companies</a>
+                <a href="./people">Our People</a>
+                <a href="./governance">Governance</a>
+                <a href="./careers">Careers</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal & Policy</h4>
+                <a href="./privacy.html">Privacy Policy</a>
+                <a href="./terms.html">Terms of Use</a>
+                <a href="./governance/legal.html">Legal & Compliance</a>
+                <a href="./accessibility.html">Accessibility Statement</a>
+                <a href="./governance/reports">Financial Reports</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
+        </div>
+    </footer>
+
+</body>
+</html>
