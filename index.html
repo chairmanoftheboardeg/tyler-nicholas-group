@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tyler Nicholas Group (TNG) | Global Digital Ventures</title>
 
-    <link rel="icon" type="image/png" href="image/logo.png">
+    <link rel="icon" type="image/png" href="..image/logo.png">
 
     <style>
         /* ==================== CORPORATE CSS (Reusable Styles) ==================== */
@@ -17,6 +17,7 @@
             --tng-text-dark: #333;
             --tng-text-light: #ffffff;
             --transition-speed: 0.8s ease-out;
+            --banner-height: 50px; /* Define banner height for positioning */
         }
 
         body {
@@ -34,9 +35,11 @@
             color: var(--tng-text-light);
             padding: 15px 40px;
             position: sticky;
-            top: 0;
+            top: var(--banner-height); /* Adjusted to sit below the announcement banner */
             z-index: 1000;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            /* Add transition for smooth movement if banner is hidden later */
+            transition: top 0.3s ease-in-out; 
         }
         .navbar {
             display: flex;
@@ -72,7 +75,55 @@
         .dropdown-content a:hover { background-color: var(--tng-maroon); color: var(--tng-text-light); }
         .dropdown:hover .dropdown-content { display: block; }
 
-        /* ==================== PRELOADER STYLES (NEW) ==================== */
+        /* ==================== ANNOUNCEMENT BANNER STYLES (NEW) ==================== */
+        #announcement-banner {
+            position: sticky;
+            top: 0; /* Always at the very top */
+            width: 100%;
+            height: var(--banner-height);
+            background-color: var(--tng-maroon); /* Use maroon for high visibility */
+            color: var(--tng-text-light);
+            z-index: 1001; /* Above the header */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 0.95em;
+            font-weight: 600;
+            overflow: hidden; /* Hide text overflow during transitions */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            /* Initial state off-screen */
+            transform: translateY(-100%); 
+            transition: transform 0.5s ease-out;
+        }
+        #announcement-banner.active {
+            transform: translateY(0); /* Slide down when active */
+        }
+        #announcement-banner p {
+            margin: 0;
+            padding: 0 10px;
+            max-width: 1200px;
+            /* Animation for the text change */
+            opacity: 0;
+            animation: text-fade-in 0.5s ease-in-out forwards;
+        }
+        #announcement-banner a {
+            color: var(--tng-silver);
+            text-decoration: underline;
+            margin-left: 5px;
+            transition: color 0.3s;
+        }
+        #announcement-banner a:hover {
+            color: #fff;
+        }
+
+        @keyframes text-fade-in {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        /* ========================================================================= */
+
+        /* === PRELOADER STYLES (Existing) === */
         #preloader {
             position: fixed;
             top: 0;
@@ -123,7 +174,7 @@
         .content-section { padding: 40px 0; margin-bottom: 50px; text-align: center; }
         .content-section h2 { font-size: 2em; color: var(--tng-maroon); margin-bottom: 30px; border-bottom: 2px solid #ddd; display: inline-block; padding-bottom: 5px; }
         
-        /* === HERO SECTION (Homepage Specific) === */
+        /* === HERO SECTION (Homepage Specific) - Animation Classes Kept === */
         .hero-section {
             background: linear-gradient(135deg, var(--tng-blue), #002D62);
             color: var(--tng-text-light);
@@ -152,7 +203,7 @@
         }
         .hero-cta:hover { background-color: #8C1A21; transform: translateY(-2px); }
 
-        /* === CORE VALUES/BUSINESS SEGMENTS (Homepage Specific) === */
+        /* === CORE VALUES/BUSINESS SEGMENTS (Homepage Specific) - Animation Classes Kept === */
         .segments-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -176,7 +227,7 @@
         .segment-card h3 { color: var(--tng-maroon); font-size: 1.5em; margin-top: 0; }
         .segment-card p { color: #666; font-size: 0.95em; }
 
-        /* === CALL TO ACTION STRIP === */
+        /* === CALL TO ACTION STRIP - Animation Classes Kept === */
         .cta-strip {
             background-color: var(--tng-maroon);
             color: var(--tng-text-light);
@@ -222,6 +273,11 @@
     </div>
     
     <div id="main-content-wrapper">
+        
+        <div id="announcement-banner">
+            <p id="announcement-text">Loading...</p> 
+        </div>
+
         <header>
             <div class="navbar">
                 <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
@@ -328,10 +384,39 @@
     </div>
 
     <script>
-        // Set the duration for the preloader (in milliseconds). 
-        // 3000ms = 3 seconds (A good balance for usability)
-        // Set to 10000ms (10 seconds) if you prefer a very long loading time.
         const PRELOADER_DISPLAY_TIME = 3000; 
+
+        // ANNOUNCEMENT MESSAGES
+        const announcements = [
+            `Please note our website is still in development, expect bugs and glitches. To help us help you, please report them if experienced to our IT Department (<a href="/contact/itdep">/contact/itdep</a>).`,
+            `We are hiring! Check out (<a href="/people">/people</a>) to find a role that interests you and apply today! We can't wait to see you join us, but be aware that all roles are voluntary. Thank you for your interest — Human Resources Department.`,
+        ];
+
+        let currentAnnouncementIndex = 0;
+        const announcementText = document.getElementById('announcement-text');
+        const announcementBanner = document.getElementById('announcement-banner');
+
+        function updateAnnouncementText() {
+            // 1. Temporarily hide/reset the animation
+            announcementText.style.animation = 'none';
+            announcementText.offsetHeight; /* Trigger reflow to restart animation */
+            
+            // 2. Update the text with the next message
+            announcementText.innerHTML = announcements[currentAnnouncementIndex];
+            
+            // 3. Restart the animation
+            announcementText.style.animation = 'text-fade-in 0.5s ease-in-out forwards';
+
+            // 4. Move to the next index (loop back to 0 if at the end)
+            currentAnnouncementIndex = (currentAnnouncementIndex + 1) % announcements.length;
+        }
+
+        function rotateAnnouncements() {
+            // Set the first message immediately
+            updateAnnouncementText(); 
+            // Then start the interval to rotate every 5 seconds (5000ms)
+            setInterval(updateAnnouncementText, 5000); 
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
             const preloader = document.getElementById('preloader');
@@ -342,16 +427,20 @@
             function showMainContent() {
                 // 1. Start the preloader fade-out (CSS transition handles the 1s fade)
                 preloader.style.opacity = '0';
+                
+                // 2. Start the announcement banner slide-down
+                announcementBanner.classList.add('active');
+                rotateAnnouncements();
 
-                // 2. After preloader is invisible, remove it from the DOM 
+                // 3. After preloader is invisible, remove it from the DOM 
                 // The 1000ms delay matches the transition: opacity 1s in the CSS
                 setTimeout(() => {
                     preloader.style.display = 'none';
                     
-                    // 3. Reveal the main content wrapper (fade-in)
+                    // 4. Reveal the main content wrapper (fade-in)
                     mainContentWrapper.classList.add('loaded');
 
-                    // 4. Initialize Scroll Animation Setup for content sections
+                    // 5. Initialize Scroll Animation Setup for content sections
                     const observer = new IntersectionObserver((entries, observer) => {
                         entries.forEach(entry => {
                             if (entry.isIntersecting) {
