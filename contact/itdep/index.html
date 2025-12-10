@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Department Contact | Tyler Nicholas Group (TNG)</title>
+
+    <link rel="icon" type="image/png" href="../../image/logo.png">
+
+    <style>
+        /* ==================== CORPORATE CSS (Reused) ==================== */
+        :root {
+            --tng-blue: #001F4C;
+            --tng-maroon: #A81F27;
+            --tng-silver: #C0C0C0;
+            --tng-light-gray: #f4f4f4;
+            --tng-text-dark: #333;
+            --tng-text-light: #ffffff;
+            --transition-speed: 0.8s ease-out;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--tng-text-dark);
+            background-color: var(--tng-light-gray);
+            line-height: 1.6;
+        }
+
+        /* === HEADER & NAVIGATION === */
+        header {
+            background-color: var(--tng-blue);
+            color: var(--tng-text-light);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--tng-silver);
+            text-decoration: none;
+        }
+        nav a, .more-menu-toggle {
+            color: var(--tng-silver);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            font-size: 0.95em;
+            font-weight: 500;
+            border-radius: 4px;
+        }
+        nav a:hover {
+            color: var(--tng-text-light);
+            background-color: rgba(168, 31, 39, 0.5); 
+        }
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-content { display: none; position: absolute; right: 0; background-color: var(--tng-blue); min-width: 200px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; border-top: 3px solid var(--tng-maroon); }
+        .dropdown-content a { color: var(--tng-silver); padding: 12px 16px; text-decoration: none; display: block; margin: 0; }
+        .dropdown-content a:hover { background-color: var(--tng-maroon); color: var(--tng-text-light); }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        /* === MAIN CONTENT LAYOUT === */
+        main { max-width: 900px; margin: 40px auto; padding: 20px; }
+        
+        .hero-itdep { 
+            background-color: var(--tng-blue);
+            color: var(--tng-light-gray); 
+            padding: 50px 40px; 
+            text-align: center; 
+            border-radius: 12px; 
+            margin-bottom: 50px; 
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); 
+            border-bottom: 5px solid var(--tng-maroon);
+        }
+        .hero-itdep h1 { 
+            font-size: 2.5em; 
+            margin-bottom: 5px; 
+            color: var(--tng-silver);
+        }
+        .hero-itdep p { 
+            font-size: 1.1em; 
+            color: var(--tng-light-gray);
+        }
+
+        .contact-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border-top: 5px solid var(--tng-maroon);
+        }
+        .contact-card h2 {
+            color: var(--tng-blue);
+            font-size: 1.8em;
+            margin-top: 0;
+            border-bottom: 2px solid var(--tng-light-gray);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .contact-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .contact-card li {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .contact-card li::before {
+            content: '💻'; /* PC Emoji */
+            position: absolute;
+            left: 0;
+            color: var(--tng-maroon);
+            font-size: 1.2em;
+        }
+        .contact-card a {
+            color: var(--tng-maroon);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer (Standard TNG) */
+        footer { background-color: var(--tng-blue); color: var(--tng-silver); padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px; }
+        .footer-content { display: flex; justify-content: space-between; max-width: 1300px; margin: 0 auto; padding: 0 40px 30px; flex-wrap: wrap; }
+        .footer-section { width: 28%; min-width: 250px; margin-bottom: 20px; }
+        .footer-section h4 { color: var(--tng-maroon); font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px; }
+        .footer-section a { color: var(--tng-silver); text-decoration: none; display: block; margin-bottom: 8px; }
+        .footer-bottom { background-color: #00122E; text-align: center; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
+            <nav>
+                <a href="../../">Home</a>
+                <a href="../../about">About Us</a>
+                <a href="../../companies">Our Companies</a>
+                <a href="../../people">Our People</a>
+                <a href="../../governance">Governance</a>
+                <a href="../../careers">Careers</a>
+                <div class="dropdown">
+                    <a href="../../investors">Investors</a>
+                    <div class="dropdown-content">
+                        <a href="../../governance/board-of-directors.html">Board of Directors</a>
+                        <a href="../../governance/code-of-conduct">Code of Conduct</a>
+                        <a href="../../governance/reports">Financial Reporting</a>
+                    </div>
+                </div>
+                <a href="../" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-itdep">
+            <h1>Technology & IT Support.</h1>
+            <p>Dedicated contact channels for TNG's internal IT support and external technology partnerships.</p>
+        </section>
+
+        <section class="contact-card">
+            <h2>IT Support (Internal Employees Only)</h2>
+            <p>For TNG employees experiencing technical issues, hardware problems, or requiring software access:</p>
+            <ul>
+                <li>**Help Desk:** Use the internal TNG ticketing system for fastest response.</li>
+                <li>**Urgent Support:** <a href="mailto:itsupport@tylernicholasgroup.com">itsupport@tylernicholasgroup.com</a></li>
+                <li>**Status Page:** <a href="#">TNG Internal IT Status</a> (Internal Link Only)</li>
+            </ul>
+        </section>
+
+        <section class="contact-card">
+            <h2>Technology Partnerships & Vendors</h2>
+            <p>For vendors, consultants, and potential technology partners outside of TNG:</p>
+            <ul>
+                <li>**General Technology Inquiries:** <a href="mailto:itvendor@tylernicholasgroup.com">itvendor@tylernicholasgroup.com</a></li>
+                <li>**Security & Compliance:** <a href="mailto:security@tylernicholasgroup.com">security@tylernicholasgroup.com</a></li>
+                <li>**TNG Main Contact Page:** <a href="../">Return to Main Contact Directory</a></li>
+            </ul>
+        </section>
+        
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>TNG Global Headquarters</h4>
+                <p>Tyler Nicholas Group operates as a remote-first organization.</p>
+                <p>Official Headquarters & Group Communications:<br>
+                <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
+                <p>General Inquiries:<br>
+                <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="../../about">About TNG</a>
+                <a href="../../companies">Our Companies</a>
+                <a href="../../people">Our People</a>
+                <a href="../../governance">Governance</a>
+                <a href="../../careers">Careers</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal & Policy</h4>
+                <a href="../../privacy">Privacy Policy</a>
+                <a href="../../terms">Terms of Use</a>
+                <a href="../../governance/legal">Legal & Compliance</a>
+                <a href="../../accessibility">Accessibility Statement</a>
+                <a href="../../governance/reports">Financial Reports</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
+        </div>
+    </footer>
+
+</body>
+</html>
