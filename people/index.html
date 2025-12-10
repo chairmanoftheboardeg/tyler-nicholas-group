@@ -111,7 +111,7 @@
         .footer-section a:hover { color: var(--tng-maroon); }
         .footer-bottom { background-color: #00091A; text-align: center; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
 
-        /* === LOADING SCREEN STYLES (NEW) === */
+        /* === LOADING SCREEN STYLES (SIMPLIFIED) === */
         #loading-screen {
             position: fixed;
             top: 0;
@@ -125,8 +125,8 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            opacity: 1; /* Start visible */
-            transition: opacity 1s ease-out; /* Fade out transition */
+            opacity: 1; 
+            transition: opacity 1s ease-out; 
         }
 
         #loading-bar-container {
@@ -140,36 +140,35 @@
             box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
         }
 
+        /* Pure CSS animation for the bar now */
         #loading-bar {
             height: 100%;
             width: 0%;
             background-color: var(--tng-maroon);
-            transition: width 1.5s ease-out; /* Smooth loading animation */
+            /* Add animation for a continuous visual cue */
+            animation: progress-slide 1.5s infinite alternate; 
         }
         
         #loading-message {
             font-size: 1.2em;
             margin: 20px;
             text-align: center;
-            opacity: 0; /* Starts hidden */
-            transition: opacity 0.5s ease-in-out;
+            opacity: 1; /* Always visible */
             max-width: 600px;
         }
-        /* Keyframes for text animation */
-        @keyframes fade-in {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fade-out {
-            0% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-20px); }
+
+        /* New Keyframes for simple repeating progress bar motion */
+        @keyframes progress-slide {
+            0% { width: 10%; }
+            100% { width: 90%; }
         }
     </style>
 </head>
-<body>
+<body onload="hideLoadingScreen()">
 
     <div id="loading-screen">
         <h2 id="loading-message">
+            Please wait while we load latest updates to this page, please be aware that some information might possibly be outdated, thank you for your understading.
         </h2>
         <div id="loading-bar-container">
             <div id="loading-bar"></div>
@@ -221,15 +220,6 @@
                 <p class="role-title">Chief Executive Officer (CEO)</p>
                 <p class="role-headline">Overall strategic vision and management of the Executive Team.</p>
                 <h3 class="position-name">CEO</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-                        <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Executive Vice President </p>
-                <p class="role-headline">Second in command to the Chief Executive Officer.</p>
-                <h3 class="position-name">EVP</h3>
                 <p class="vacant-post">Vacant Post</p>
                 <a href="./careers" class="apply-btn">Apply Now</a>
             </div>
@@ -620,65 +610,29 @@
     </footer>
 
     <script>
-        const messageText = "Please wait while we load latest updates to this page, please be aware that some information might possibly be outdated, thank you for your understading.";
-        const loadingMessage = document.getElementById('loading-message');
-        const loadingBar = document.getElementById('loading-bar');
         const loadingScreen = document.getElementById('loading-screen');
         const mainContent = document.getElementById('main-content');
-        let currentText = '';
-        let charIndex = 0;
-
-        // Function to "type" the message character by character
-        function typeMessage() {
-            if (charIndex < messageText.length) {
-                currentText += messageText.charAt(charIndex);
-                loadingMessage.innerHTML = currentText;
-                charIndex++;
-                loadingMessage.style.opacity = 1; // Ensure text is visible during typing
-                setTimeout(typeMessage, 30); // Typing speed
-            } else {
-                // Once typing is complete, wait a moment and start the load bar and animations
-                setTimeout(startLoadingProcess, 800);
-            }
-        }
-
-        // Simulates the loading bar and subsequent page display
-        function startLoadingProcess() {
-            // Start loading bar animation (CSS transition handles the visual progress)
-            loadingBar.style.width = '100%';
-
-            // Start message fade-out animation after the loading bar is almost done
-            setTimeout(() => {
-                loadingMessage.style.animation = 'fade-out 0.5s forwards'; // Apply fade-out
-            }, 1000); // 1.0 seconds, before the loading bar finishes
-
-            // After a total duration (must be longer than the loading bar's transition), hide the loading screen and show content
-            setTimeout(hideLoadingScreen, 2200); // Total wait time: 1500ms (bar) + buffer (700ms)
-        }
-
-        // Final step to transition to the main content
+        
+        // This function hides the loading screen and reveals content after a fixed delay.
         function hideLoadingScreen() {
-            // 1. Hide the loading screen with a fade effect
-            loadingScreen.style.opacity = 0;
-            
-            // 2. Show the main content
-            mainContent.style.opacity = 1;
-
-            // 3. Completely remove the loading screen from flow after the fade is done
+            // Wait 3000 milliseconds (3 seconds) for page resources to load and user to read the message.
             setTimeout(() => {
-                loadingScreen.style.display = 'none';
-                document.body.classList.remove('no-scroll'); // Re-enable scrolling if you added a lock
-            }, 1000); // Wait for the opacity transition (1s)
-        }
+                // Start the CSS opacity transition to hide the screen
+                loadingScreen.style.opacity = 0;
+                
+                // Show the main content simultaneously
+                mainContent.style.opacity = 1;
 
-        // Initial setup on body load
-        function loadPage() {
-            // First step: start the animated text
-            typeMessage();
+                // After the opacity transition finishes (1 second), completely remove the element
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 1000); 
+
+            }, 3000); 
         }
         
-        // Ensure loadPage is called when the body loads
-        // (The 'onload="loadPage()"' attribute on the <body> tag already does this, but keeping the function definition here for completeness)
+        // The body's 'onload' attribute now calls hideLoadingScreen()
+        // when the page structure and all assets (images, etc.) are finished loading.
     </script>
 
 </body>
