@@ -1,255 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Careers | Tyler Nicholas Group (TNG)</title>
-
-    <link rel="icon" type="image/png" href="../image/logo.png">
-
-    <style>
-        /* ==================== CORPORATE CSS (Reused) ==================== */
-        :root {
-            --tng-blue: #001F4C;
-            --tng-maroon: #A81F27;
-            --tng-silver: #C0C0C0;
-            --tng-light-gray: #f4f4f4;
-            --tng-text-dark: #333;
-            --tng-text-light: #ffffff;
-            --transition-speed: 0.8s ease-out;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--tng-text-dark);
-            background-color: var(--tng-light-gray);
-            line-height: 1.6;
-        }
-
-        /* === HEADER & NAVIGATION === */
-        header {
-            background-color: var(--tng-blue);
-            color: var(--tng-text-light);
-            padding: 15px 40px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-        .logo {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: var(--tng-silver);
-            text-decoration: none;
-        }
-        nav a, .more-menu-toggle {
-            color: var(--tng-silver);
-            text-decoration: none;
-            padding: 10px 15px;
-            margin-left: 10px;
-            font-size: 0.95em;
-            font-weight: 500;
-            border-radius: 4px;
-        }
-        nav a:hover {
-            color: var(--tng-text-light);
-            background-color: rgba(168, 31, 39, 0.5); 
-        }
-
-        /* More Menu Dropdown */
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-content { display: none; position: absolute; right: 0; background-color: var(--tng-blue); min-width: 200px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; border-top: 3px solid var(--tng-maroon); }
-        .dropdown-content a { color: var(--tng-silver); padding: 12px 16px; text-decoration: none; display: block; margin: 0; }
-        .dropdown-content a:hover { background-color: var(--tng-maroon); color: var(--tng-text-light); }
-        .dropdown:hover .dropdown-content { display: block; }
-
-        /* === MAIN CONTENT LAYOUT === */
-        main { max-width: 1100px; margin: 40px auto; padding: 20px; }
-        .hero-section { background: linear-gradient(135deg, var(--tng-blue), #002D62); color: var(--tng-light-gray); padding: 80px 40px; text-align: center; border-radius: 12px; margin-bottom: 50px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); opacity: 0; transform: translateY(20px); transition: opacity var(--transition-speed), transform var(--transition-speed); }
-        .hero-section.revealed { opacity: 1; transform: translateY(0); }
-        .content-section { padding: 40px 0; margin-bottom: 30px; text-align: center; }
-        .content-section h2 { font-size: 2em; color: var(--tng-maroon); margin-bottom: 30px; border-bottom: 2px solid #ddd; display: inline-block; padding-bottom: 5px; }
-
-        /* === WHY TNG SECTION === */
-        .benefits-grid { display: flex; justify-content: space-around; gap: 20px; margin: 30px 0; text-align: left; }
-        .benefit-card { flex: 1; padding: 25px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); border-top: 4px solid var(--tng-maroon); opacity: 0; transform: scale(0.95); transition: opacity var(--transition-speed), transform var(--transition-speed); }
-        .benefit-card.revealed { opacity: 1; transform: scale(1); }
-        .benefit-card h4 { color: var(--tng-blue); font-size: 1.2em; margin-top: 0; }
-        
-        /* === NO OPENINGS BANNER (NEW STYLES) === */
-        .no-openings-banner {
-            background-color: var(--tng-blue);
-            color: var(--tng-light-gray);
-            padding: 40px;
-            border-radius: 8px;
-            max-width: 800px;
-            margin: 40px auto;
-            text-align: center;
-            border-left: 5px solid var(--tng-maroon);
-        }
-        .no-openings-banner h3 {
-            color: var(--tng-light-gray);
-            font-size: 1.8em;
-            margin-top: 0;
-        }
-        .no-openings-banner p {
-            font-size: 1.1em;
-            color: var(--tng-silver);
-            line-height: 1.5;
-        }
-        .no-openings-banner a {
-            color: var(--tng-maroon);
-            font-weight: 700;
-            text-decoration: underline;
-            transition: color 0.3s;
-        }
-        .no-openings-banner a:hover {
-            color: var(--tng-silver);
-        }
-
-        /* === CORPORATE FOOTER === */
-        footer { background-color: var(--tng-blue); color: var(--tng-silver); padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px; }
-        .footer-content { display: flex; justify-content: space-between; max-width: 1300px; margin: 0 auto; padding: 0 40px 30px; flex-wrap: wrap; }
-        .footer-section { width: 28%; min-width: 250px; margin-bottom: 20px; }
-        .footer-section h4 { color: var(--tng-maroon); font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px; }
-        .footer-section a { color: var(--tng-silver); text-decoration: none; display: block; margin-bottom: 8px; }
-        .footer-bottom { background-color: #00122E; text-align: center; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Careers | Tyler Nicholas Group</title>
+  <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 </head>
-<body>
+<body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen" id="body">
 
-    <header>
-        <div class="navbar">
-            <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
-            <nav>
-                <a href="/">Home</a>
-                <a href="/about">About Us</a>
-                <a href="/companies">Our Companies</a>
-                <a href="/people">Our People</a>
-                <a href="/governance">Governance</a>
-                <a href="/careers" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Careers</a>
-                
-                <div class="dropdown">
-                    <button class="more-menu-toggle">More</button>
-                    <div class="dropdown-content">
-                        <a href="/governance/board-of-directors.html">Board of Directors</a>
-                        <a href="/governance/code-of-conduct">Code of Conduct</a>
-                        <a href="/governance/reports">Financial Reporting</a>
-                        <a href="/contact/investors">Investor Relations</a>
-                        <a href="/contact/media">Media & Press</a>
-                    </div>
+  <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
+
+  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md">
+    <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
+    <div class="hidden md:flex space-x-6 text-sm items-center">
+      <a href="../" class="hover:text-gray-300 transition-colors">Home</a>
+      <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
+      <a href="../companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
+      <a href="../people/" class="hover:text-gray-300 transition-colors">Our People</a>
+      <a href="../governance/" class="hover:text-gray-300 transition-colors">Governance</a>
+      <a href="#" class="hover:text-gray-300 border-b-2 border-[#a6192e] pb-1">Careers</a>
+      <a href="../contact/" class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors">More</a>
+    </div>
+  </nav>
+
+  <div class="bg-[#001f3f] text-white py-16 px-6 md:px-12 text-center">
+    <h1 class="text-3xl md:text-5xl font-bold mb-4">Join Our Network</h1>
+    <p class="text-gray-300 max-w-2xl mx-auto md:text-lg">Explore dynamic opportunities across the Tyler Nicholas Group and our global subsidiaries.</p>
+  </div>
+
+  <main class="flex-grow max-w-5xl mx-auto py-16 px-6 md:px-12 w-full">
+    <h2 class="text-2xl font-bold text-[#001f3f] mb-8 border-b-2 border-gray-200 pb-2">Open Positions</h2>
+    
+    <div id="jobs-container" class="space-y-6">
+       <p class="text-gray-500 italic">Loading open positions...</p>
+    </div>
+  </main>
+
+  <footer class="bg-[#001f3f] text-white py-12 px-6 md:px-12 mt-auto text-center md:text-left border-t border-blue-900">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center md:items-start">
+      <div class="flex flex-col items-center md:items-start">
+        <h3 class="font-bold text-lg mb-2 uppercase">Tyler Nicholas Group</h3>
+        <p class="text-sm text-gray-300 mb-4">A global holding company headquartered in the Seychelles.</p>
+        <div class="inline-block bg-white text-[#001f3f] px-3 py-1 rounded text-sm font-semibold shadow">Seychelles Local Time: <span id="seychelles-time">Loading...</span></div>
+      </div>
+      <div class="flex flex-col space-y-2 text-sm items-center">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Explore</h4>
+        <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
+        <a href="../companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
+        <a href="#" class="hover:text-gray-300 transition-colors">Careers</a>
+        <a href="../contact/" class="hover:text-gray-300 transition-colors">Contact Us</a>
+        <a href="https://tyler.tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="text-[#a6192e] font-bold hover:underline pt-2">Meet Tyler Nicholas →</a>
+      </div>
+      <div class="flex flex-col items-center md:items-end">
+         <div class="flex space-x-6 text-2xl text-[#00a8ff] mb-4">
+            <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/tyler_n_group" target="_blank" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" target="_blank" class="social-icon"><i class="fa-brands fa-whatsapp"></i></a>
+         </div>
+         <p class="text-sm mb-2">Contact: <a href="mailto:tylernicholasgroup@gmail.com" class="text-[#00a8ff] hover:underline">tylernicholasgroup@gmail.com</a></p>
+         <p class="text-xs text-gray-400">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function updateSeychellesTime() { const e = document.getElementById('seychelles-time'); if(e) e.innerText = new Date().toLocaleTimeString('en-US', { timeZone: 'Indian/Mahe', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }); }
+    setInterval(updateSeychellesTime, 1000); updateSeychellesTime();
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const checkSupabase = setInterval(async () => {
+        if (window.supabase) {
+          clearInterval(checkSupabase); 
+          const supabase = window.supabase.createClient('https://hicowukbjsbpuebquqbh.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0');
+          
+          // Announcement check
+          try {
+            const { data: annData, error: annError } = await supabase.from('announcements').select('*').eq('is_active', true).single();
+            if (annData && !annError) {
+              const bar = document.getElementById('announcement-bar');
+              bar.classList.remove('hidden'); 
+              bar.innerHTML = annData.link ? `<a href="${annData.link}" class="hover:underline block w-full py-1">${annData.message}</a>` : annData.message;
+            }
+          } catch (err) {}
+
+          // Job Postings check
+          try {
+            const { data: jobData, error: jobError } = await supabase.from('job_postings').select('*').eq('is_active', true);
+            const container = document.getElementById('jobs-container');
+            if (jobError || !jobData || jobData.length === 0) {
+              container.innerHTML = `<p class="text-gray-500 italic">There are currently no open positions. Please check back later.</p>`;
+              return;
+            }
+            container.innerHTML = ''; 
+            jobData.forEach(job => {
+              const linkHTML = job.external_link ? `<a href="${job.external_link}" target="_blank" class="bg-[#a6192e] text-white px-4 py-2 rounded font-semibold hover:bg-red-800 text-sm">Apply Here</a>` : `<a href="../contact" class="bg-[#001f3f] text-white px-4 py-2 rounded font-semibold hover:bg-blue-900 text-sm">Contact Us to Apply</a>`;
+              container.innerHTML += `
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#001f3f] flex flex-col md:flex-row justify-between items-start md:items-center">
+                  <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-bold text-gray-900">${job.title}</h3>
+                    <p class="text-[#a6192e] font-semibold text-sm mb-2">${job.company} &bull; ${job.location || 'Remote'} &bull; ${job.employment_type || 'Full-Time'}</p>
+                    <p class="text-gray-600 text-sm max-w-2xl">${job.description}</p>
+                  </div>
+                  <div>${linkHTML}</div>
                 </div>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <section class="hero-section anim-target">
-            <h1>Shape the Future with TNG.</h1>
-            <p>Join a remote-first, global team dedicated to building, investing in, and scaling high-impact digital ventures across all groups and subsidiaries.</p>
-        </section>
-
-        <section class="content-section">
-            <h2>Why Work at Tyler Nicholas Group?</h2>
-            <div class="benefits-grid">
-                
-                <div class="benefit-card anim-target">
-                    <h4>Global Remote Culture</h4>
-                    <p>We are a highly distributed team, offering unparalleled flexibility and the opportunity to collaborate with talent from around the world.</p>
-                </div>
-
-                <div class="benefit-card anim-target" style="transition-delay: 0.1s;">
-                    <h4>Cross-Industry Impact</h4>
-                    <p>Contribute to diverse projects—from e-commerce platforms to global gaming initiatives and strategic investments—all under one umbrella.</p>
-                </div>
-
-                <div class="benefit-card anim-target" style="transition-delay: 0.2s;">
-                    <h4>Accelerated Professional Growth</h4>
-                    <p>TNG fosters an environment of continuous learning, professional development, and fast-tracked leadership opportunities.</p>
-                </div>
-
-            </div>
-        </section>
-        
-        <section class="content-section" style="margin-top: 50px;">
-            <h2>Current Openings Across TNG Group</h2>
-            
-            <div class="no-openings-banner">
-                <h3>We are not currently displaying job opportunities.</h3>
-                <p>
-                    The Tyler Nicholas Group is currently operating with a full team and we are not actively hiring via this page. We appreciate your interest in joining our global corporate infrastructure.
-                </p>
-                <p>
-                    For future recommendations, please connect with us directly by sending your **CV/Resume** to our HR department: 
-                    <a href="mailto:tylernicholasgroup@gmail.com">tylernicholasgroup@gmail.com</a>
-                </p>
-                <p style="font-style: italic; margin-top: 20px; font-size: 0.9em; color: var(--tng-silver);">
-                    All applications submitted via email are reviewed for our talent database for future, unposted corporate roles and recommendations. Thank you.
-                </p>
-            </div>
-            </section>
-        
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>TNG Global Headquarters</h4>
-                <p>Tyler Nicholas Group operates as a remote-first organization.</p>
-                <p>Official Headquarters & Group Communications:<br>
-                <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
-                <p>General Inquiries:<br>
-                <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="/about">About TNG</a>
-                <a href="/companies">Our Companies</a>
-                <a href="/people">Our People</a>
-                <a href="/governance">Governance</a>
-                <a href="/careers">Careers</a>
-            </div>
-            <div class="footer-section">
-                <h4>Legal & Policy</h4>
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/terms">Terms of Use</a>
-                <a href="/governance/legal">Legal & Compliance</a>
-                <a href="/accessibility">Accessibility Statement</a>
-                <a href="/governance/reports">Financial Reports</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
-        </div>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- 1. Scroll Animation Setup ---
-            // Keeps the subtle entrance animation for the Hero and Benefit Cards
-            const targets = document.querySelectorAll('.anim-target');
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-            targets.forEach(target => { observer.observe(target); });
-            
-            // NOTE: All job listing and modal handling logic has been removed.
-        });
-    </script>
-
+              `;
+            });
+          } catch (err) {
+             document.getElementById('jobs-container').innerHTML = `<p class="text-red-500">Failed to load careers.</p>`;
+          }
+        }
+      }, 100);
+    });
+  </script>
 </body>
 </html>
