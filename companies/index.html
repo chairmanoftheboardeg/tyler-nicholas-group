@@ -1,450 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Companies | Tyler Nicholas Group (TNG)</title>
-
-    <link rel="icon" type="image/png" href="../image/logo.png">
-
-    <style>
-        /* ==================== CORPORATE CSS (Reused from previous pages) ==================== */
-        :root {
-            --tng-blue: #001F4C;
-            --tng-maroon: #A81F27;
-            --tng-silver: #C0C0C0;
-            --tng-light-gray: #f4f4f4;
-            --tng-text-dark: #333;
-            --tng-text-light: #ffffff;
-            --transition-speed: 0.8s ease-out;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--tng-text-dark);
-            background-color: var(--tng-light-gray);
-            line-height: 1.6;
-        }
-
-        /* === HEADER & NAVIGATION === */
-        header {
-            background-color: var(--tng-blue);
-            color: var(--tng-text-light);
-            padding: 15px 40px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: var(--tng-silver);
-            text-decoration: none;
-            letter-spacing: 1px;
-            transition: color 0.3s;
-        }
-
-        .logo:hover {
-            color: var(--tng-maroon);
-        }
-
-        nav a, .more-menu-toggle {
-            color: var(--tng-silver);
-            text-decoration: none;
-            padding: 10px 15px;
-            margin-left: 10px;
-            font-size: 0.95em;
-            font-weight: 500;
-            transition: color 0.3s, background-color 0.3s;
-            border-radius: 4px;
-        }
-
-        nav a:hover {
-            color: var(--tng-text-light);
-            background-color: rgba(168, 31, 39, 0.5); 
-        }
-
-        /* More Menu Dropdown */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: var(--tng-blue);
-            min-width: 200px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-top: 3px solid var(--tng-maroon);
-        }
-
-        .dropdown-content a {
-            color: var(--tng-silver);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            margin: 0;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .dropdown-content a:hover {
-            background-color: var(--tng-maroon);
-            color: var(--tng-text-light);
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* === MAIN CONTENT LAYOUT === */
-        main {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-
-        .hero-section {
-            background: linear-gradient(135deg, var(--tng-blue), #002D62);
-            color: var(--tng-light-gray);
-            padding: 80px 40px;
-            text-align: center;
-            border-radius: 12px;
-            margin-bottom: 50px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            /* Animation Target */
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity var(--transition-speed), transform var(--transition-speed);
-        }
-
-        .hero-section.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .content-section {
-            padding: 40px 0;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .content-section h2 {
-            font-size: 2em;
-            color: var(--tng-maroon);
-            margin-bottom: 30px;
-            border-bottom: 2px solid #ddd;
-            display: inline-block;
-            padding-bottom: 5px;
-        }
-
-        /* === COMPANY CARDS (Portfolio Cards) === */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .company-card {
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            text-align: left;
-            transition: transform 0.3s, box-shadow 0.3s;
-            
-            /* Animation Target */
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity var(--transition-speed), transform var(--transition-speed);
-        }
-        
-        .company-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        .company-card.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .card-header {
-            padding: 25px;
-            color: var(--tng-text-light);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .card-header h3 {
-            margin: 0;
-            font-size: 1.6em;
-            font-weight: 700;
-        }
-        
-        .card-body {
-            padding: 25px;
-        }
-        
-        .card-body p {
-            font-size: 0.95em;
-            color: #555;
-            margin-bottom: 20px;
-        }
-        
-        .card-body a.cta-link {
-            display: inline-block;
-            color: var(--tng-blue);
-            text-decoration: none;
-            font-weight: 600;
-            border-bottom: 2px solid var(--tng-maroon);
-            padding-bottom: 3px;
-            transition: color 0.3s, border-color 0.3s;
-        }
-
-        .card-body a.cta-link:hover {
-            color: var(--tng-maroon);
-            border-bottom-color: var(--tng-blue);
-        }
-
-        /* Specific Color Themes for Companies */
-        .theme-ecommerce { background-color: #005691; border-top: 8px solid #005691; }
-        .theme-gaming { background-color: #4CAF50; border-top: 8px solid #4CAF50; }
-        .theme-investment { background-color: #FF9800; border-top: 8px solid #FF9800; }
-        
-        /* === CORPORATE FOOTER === */
-        footer {
-            background-color: var(--tng-blue);
-            color: var(--tng-silver);
-            padding: 40px 0 0;
-            font-size: 0.85em;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
-            margin-top: 50px;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 40px 30px;
-            flex-wrap: wrap;
-        }
-
-        .footer-section {
-            width: 28%;
-            min-width: 250px;
-            margin-bottom: 20px;
-        }
-
-        .footer-section h4 {
-            color: var(--tng-maroon);
-            font-size: 1.1em;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 5px;
-        }
-
-        .footer-section a {
-            color: var(--tng-silver);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 8px;
-            transition: color 0.3s;
-        }
-
-        .footer-section a:hover {
-            color: var(--tng-text-light);
-        }
-        
-        .footer-section p {
-            margin-top: 0;
-        }
-
-        .footer-bottom {
-            background-color: #00122E; /* Darker Blue */
-            text-align: center;
-            padding: 15px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Companies | Tyler Nicholas Group</title>
+  <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
+  
+  <script src="https://cdn.tailwindcss.com" defer></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="../style.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 </head>
-<body>
+<body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen overflow-hidden" id="body">
 
-    <header>
-        <div class="navbar">
-            <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
-            <nav>
-                <a href="/">Home</a>
-                <a href="/about">About Us</a>
-                <a href="/companies" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Our Companies</a>
-                <a href="/people">Our People</a>
-                <a href="/governance">Governance</a>
-                <a href="/careers">Careers</a>
-                
-                <div class="dropdown">
-                    <button class="more-menu-toggle">More</button>
-                    <div class="dropdown-content">
-                        <a href="/governance/board-of-directors.html">Board of Directors</a>
-                        <a href="/governance/code-of-conduct">Code of Conduct</a>
-                        <a href="/governance/reports">Financial Reporting</a>
-                        <a href="/contact/investors">Investor Relations</a>
-                        <a href="/contact/media">Media & Press</a>
-                    </div>
-                </div>
-            </nav>
+  <div id="loading-screen" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#001f3f] text-white">
+    <div class="loader-spinner"></div>
+    <h2 class="text-xl md:text-2xl font-bold tracking-widest uppercase mb-2">Tyler Nicholas Group</h2>
+    <p class="text-sm text-gray-400 italic">By Tyler Nicholas</p>
+  </div>
+
+  <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
+
+  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md">
+    <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
+    <div class="hidden md:flex space-x-6 text-sm items-center">
+      <a href="../" class="hover:text-gray-300 transition-colors">Home</a>
+      <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
+      <a href="#" class="hover:text-gray-300 border-b-2 border-[#a6192e] pb-1">Our Companies</a>
+      <a href="../people/" class="hover:text-gray-300 transition-colors">Our People</a>
+      <a href="../governance/" class="hover:text-gray-300 transition-colors">Governance</a>
+      <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
+      <a href="../contact/" class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors">More</a>
+    </div>
+  </nav>
+
+  <div class="bg-[#001f3f] text-white py-16 px-6 md:px-12 text-center">
+    <h1 class="text-3xl md:text-5xl font-bold mb-4">Our Companies</h1>
+    <p class="text-gray-300 max-w-2xl mx-auto md:text-lg">
+      A diverse portfolio of scalable ventures, non-profit foundations, and innovative digital services operating both globally and locally.
+    </p>
+  </div>
+
+  <main class="flex-grow max-w-7xl mx-auto py-16 px-6 md:px-12 w-full">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <div class="bg-white rounded-xl shadow-md p-8 border-t-4 border-[#001f3f] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col h-full">
+        <h3 class="text-2xl font-bold text-[#001f3f] mb-3">Tyler Nicholas Foundation</h3>
+        <p class="text-gray-600 flex-grow mb-6 text-sm leading-relaxed">
+          The philanthropic arm of TNG, dedicated to community empowerment, educational advancement, and sustainable development initiatives globally and within the Seychelles.
+        </p>
+        <a href="https://foundation.tylernicholasgroup.com" target="_blank" class="inline-block bg-[#a6192e] text-white px-4 py-2 rounded font-semibold hover:bg-red-800 transition-colors text-center w-full mt-auto">
+          Visit Website
+        </a>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-md p-8 border-t-4 border-[#001f3f] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col h-full">
+        <h3 class="text-2xl font-bold text-[#001f3f] mb-3">BlueWave Digital</h3>
+        <p class="text-gray-600 flex-grow mb-6 text-sm leading-relaxed">
+          A premier digital agency specializing in cutting-edge web development, targeted marketing campaigns, and robust IT infrastructure solutions for modern online businesses.
+        </p>
+        <a href="https://bluewave-digital.tylernicholasgroup.com" target="_blank" class="inline-block bg-[#a6192e] text-white px-4 py-2 rounded font-semibold hover:bg-red-800 transition-colors text-center w-full mt-auto">
+          Visit Website
+        </a>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-md p-8 border-t-4 border-[#001f3f] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col h-full">
+        <h3 class="text-2xl font-bold text-[#001f3f] mb-3">FoodShare Seychelles</h3>
+        <p class="text-gray-600 flex-grow mb-6 text-sm leading-relaxed">
+          A vital local initiative focused on enhancing food security and efficient distribution, connecting essential resources to communities in need across the Seychelles.
+        </p>
+        <a href="https://foodshare-seychelles.online" target="_blank" class="inline-block bg-[#a6192e] text-white px-4 py-2 rounded font-semibold hover:bg-red-800 transition-colors text-center w-full mt-auto">
+          Visit Website
+        </a>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-md p-8 border-t-4 border-[#001f3f] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col h-full">
+        <h3 class="text-2xl font-bold text-[#001f3f] mb-3">Emirates Group Roblox</h3>
+        <p class="text-gray-600 flex-grow mb-6 text-sm leading-relaxed">
+          A leading virtual aviation and corporate simulation experience. Setting the standard for online roleplay communities with structured operations and dedicated training programs.
+        </p>
+        <div class="space-y-3 mt-auto">
+          <a href="https://emiratesgrouproblox.link" target="_blank" class="block bg-[#001f3f] text-white px-4 py-2 rounded font-semibold hover:bg-blue-900 transition-colors text-center w-full text-sm">
+            Main Portal
+          </a>
+          <a href="https://university.emiratesgrouproblox.link" target="_blank" class="block bg-gray-100 text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors text-center w-full border border-gray-300 text-sm">
+            EGR's Aviation University
+          </a>
         </div>
-    </header>
+      </div>
 
-    <main>
-        <section class="hero-section anim-target">
-            <h1>A Portfolio Built for Growth and Diversification.</h1>
-            <p>The Tyler Nicholas Group is strategically structured into high-growth operational ventures, unified by shared governance and advanced corporate services.</p>
-        </section>
+      <div class="bg-white rounded-xl shadow-md p-8 border-t-4 border-[#001f3f] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col h-full">
+        <h3 class="text-2xl font-bold text-[#001f3f] mb-3">Air Seychelles Roblox</h3>
+        <p class="text-gray-600 flex-grow mb-6 text-sm leading-relaxed">
+          A highly detailed virtual airline bringing the spirit of the Seychelles to the digital skies. Features comprehensive flight operations, integrated live booking platforms, staff dashboards, and real-time flight information.
+        </p>
+        <a href="https://airseychelles-roblox.tylernicholasgroup.com" target="_blank" class="inline-block bg-[#a6192e] text-white px-4 py-2 rounded font-semibold hover:bg-red-800 transition-colors text-center w-full mt-auto">
+          Visit Website
+        </a>
+      </div>
 
-        <section class="content-section">
-            <h2>Our Operational Subsidiaries</h2>
-            <div class="portfolio-grid">
-                
-                <div class="company-card anim-target">
-                    <div class="card-header theme-ecommerce">
-                        <h3>TNG E-Commerce</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>Focuses on proprietary digital retail platforms, logistics optimization, and direct-to-consumer brand management across specialized niches.</p>
-                        <ul style="list-style: none; padding: 0; margin-top: 0; font-size: 0.9em; color: #777;">
-                            <li>**Verticals:** Digital Retail, Brand Licensing, Supply Chain</li>
-                            <li>**Status:** Established, High Growth</li>
-                        </ul>
-                        <a href="https://www.shopify.com/blog/best-ecommerce-sites" class="cta-link">Visit Company Website &rarr;</a>
-                    </div>
-                </div>
+      <div class="bg-white rounded-xl shadow-md p-8 border-t-4 border-[#001f3f] hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col h-full">
+        <h3 class="text-2xl font-bold text-[#001f3f] mb-3">Falcon LTF</h3>
+        <p class="text-gray-600 flex-grow mb-6 text-sm leading-relaxed">
+          A digital storefront and specialized service provider offering secure, high-quality digital assets, tools, and infrastructure solutions for creators and developers.
+        </p>
+        <a href="https://payhip.com/FalconLtd" target="_blank" class="inline-block bg-[#a6192e] text-white px-4 py-2 rounded font-semibold hover:bg-red-800 transition-colors text-center w-full mt-auto">
+          Visit Website
+        </a>
+      </div>
 
-                <div class="company-card anim-target" style="transition-delay: 0.1s;">
-                    <div class="card-header theme-gaming">
-                        <h3>TNG Gaming Organization</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>Dedicated to the development and monetization of competitive digital entertainment experiences and intellectual property in the gaming space.</p>
-                        <ul style="list-style: none; padding: 0; margin-top: 0; font-size: 0.9em; color: #777;">
-                            <li>**Verticals:** Game Development, IP Management, Esports</li>
-                            <li>**Status:** Strategic Expansion</li>
-                        </ul>
-                        <a href="https://www.reddit.com/r/gaming/comments/1d22ln8/what_are_the_best_gaming_websites_now/" class="cta-link">Visit Company Website &rarr;</a>
-                    </div>
-                </div>
+    </div>
+  </main>
 
-                <div class="company-card anim-target" style="transition-delay: 0.2s;">
-                    <div class="card-header theme-investment">
-                        <h3>TNG Investment Board</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>Manages the Group's passive capital and strategic ventures, targeting high-yield investments in disruptive technology and stable assets.</p>
-                        <ul style="list-style: none; padding: 0; margin-top: 0; font-size: 0.9em; color: #777;">
-                            <li>**Verticals:** Venture Capital, Asset Management, Real Estate</li>
-                            <li>**Status:** Capital Preservation</li>
-                        </ul>
-                        <a href="https://money.usnews.com/investing/articles/best-investment-websites-for-beginners" class="cta-link">View Investment Mandate &rarr;</a>
-                    </div>
-                </div>
-                
-                <div class="company-card anim-target" style="transition-delay: 0.3s; opacity: 0.7;">
-                    <div class="card-header" style="background-color: var(--tng-silver);">
-                        <h3 style="color: var(--tng-blue);">New Venture</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>TNG is continuously evaluating and establishing new operational groups in sectors that align with our long-term growth and synergistic objectives.</p>
-                        <ul style="list-style: none; padding: 0; margin-top: 0; font-size: 0.9em; color: #777;">
-                            <li>**Verticals:** Research & Development, Strategic M&A</li>
-                            <li>**Status:** Planning/Incubation</li>
-                        </ul>
-                        <a href="/contact/investors" class="cta-link">Inquire About Partnership &rarr;</a>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>TNG Global Headquarters</h4>
-                <p>Tyler Nicholas Group operates as a remote-first organization.</p>
-                <p>Official Headquarters & Group Communications:<br>
-                <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
-                <p>General Inquiries:<br>
-                <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="/about">About TNG</a>
-                <a href="/companies">Our Companies</a>
-                <a href="/people">Our People</a>
-                <a href="/governance">Governance</a>
-                <a href="/careers">Careers</a>
-            </div>
-            <div class="footer-section">
-                <h4>Legal & Policy</h4>
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/terms">Terms of Use</a>
-                <a href="/governance/legal">Legal & Compliance</a>
-                <a href="/accessibility">Accessibility Statement</a>
-                <a href="/governance/reports">Financial Reports</a>
-            </div>
+  <footer class="bg-[#001f3f] text-white py-12 px-6 md:px-12 mt-auto text-center md:text-left border-t border-blue-900">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center md:items-start">
+      
+      <div class="flex flex-col items-center md:items-start">
+        <h3 class="font-bold text-lg mb-2 uppercase">Tyler Nicholas Group</h3>
+        <p class="text-sm text-gray-300 mb-4">A global holding company headquartered in the Seychelles.</p>
+        <div class="inline-block bg-white text-[#001f3f] px-3 py-1 rounded text-sm font-semibold shadow">
+          Seychelles Local Time: <span id="seychelles-time">Loading...</span>
         </div>
-        <div class="footer-bottom">
-            &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
-        </div>
-    </footer>
+      </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get all elements designated for animation
-            const targets = document.querySelectorAll('.anim-target');
+      <div class="flex flex-col space-y-2 text-sm items-center">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Explore</h4>
+        <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
+        <a href="#" class="hover:text-gray-300 transition-colors">Our Companies</a>
+        <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
+        <a href="../contact/" class="hover:text-gray-300 transition-colors">Contact Us</a>
+        <a href="https://tyler.tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="text-[#a6192e] font-bold hover:underline pt-2">
+          Meet Tyler Nicholas →
+        </a>
+      </div>
 
-            // Set the observer options
-            const options = {
-                root: null, // viewport
-                rootMargin: '0px',
-                threshold: 0.1 // Trigger when 10% of the element is visible
-            };
+      <div class="flex flex-col items-center md:items-end">
+         <div class="flex space-x-6 text-2xl text-[#00a8ff] mb-4">
+            <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/tyler_n_group" target="_blank" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" target="_blank" class="social-icon"><i class="fa-brands fa-whatsapp"></i></a>
+         </div>
+         <p class="text-sm mb-2">Contact: <a href="mailto:tylernicholasgroup@gmail.com" class="text-[#00a8ff] hover:underline">tylernicholasgroup@gmail.com</a></p>
+         <p class="text-xs text-gray-400">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
+      </div>
 
-            // Intersection Observer Callback
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Add the 'revealed' class to trigger the CSS animation
-                        entry.target.classList.add('revealed');
-                        // Stop observing once it's revealed
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, options);
+    </div>
+  </footer>
 
-            // Observe each target element
-            targets.forEach(target => {
-                observer.observe(target);
-            });
-        });
-    </script>
+  <script>
+    // 1. BULLETPROOF LOADING SCREEN FIX
+    setTimeout(() => {
+      const loader = document.getElementById('loading-screen');
+      const body = document.getElementById('body');
+      
+      if (loader) {
+        loader.style.opacity = '0';
+        loader.style.visibility = 'hidden';
+        setTimeout(() => loader.remove(), 500);
+      }
+      if (body) {
+        body.classList.remove('overflow-hidden');
+      }
+    }, 1500);
 
+    // 2. Seychelles Live Clock Logic
+    function updateSeychellesTime() {
+      const timeElement = document.getElementById('seychelles-time');
+      if (!timeElement) return;
+      const options = { 
+        timeZone: 'Indian/Mahe', 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit',
+        hour12: true 
+      };
+      timeElement.innerText = new Date().toLocaleTimeString('en-US', options);
+    }
+    setInterval(updateSeychellesTime, 1000);
+    updateSeychellesTime();
+
+    // 3. Proper Supabase Connection for Announcement Bar
+    document.addEventListener("DOMContentLoaded", () => {
+      const checkSupabase = setInterval(async () => {
+        if (window.supabase) {
+          clearInterval(checkSupabase); 
+          
+          const supabaseUrl = 'https://hicowukbjsbpuebquqbh.supabase.co';
+          const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0';
+          const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+          try {
+            const { data, error } = await supabase
+              .from('announcements')
+              .select('*')
+              .eq('is_active', true)
+              .single();
+
+            if (error && error.code !== 'PGRST116') {
+              console.error("Supabase Error:", error.message);
+              return;
+            }
+
+            if (data) {
+              const bar = document.getElementById('announcement-bar');
+              bar.classList.remove('hidden'); 
+              
+              if (data.link) {
+                bar.innerHTML = `<a href="${data.link}" class="hover:underline block w-full py-1">${data.message}</a>`;
+              } else {
+                bar.innerText = data.message;
+              }
+            }
+          } catch (err) {
+            console.error("Connection error fetching announcement:", err);
+          }
+        }
+      }, 100);
+    });
+  </script>
 </body>
 </html>
