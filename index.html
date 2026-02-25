@@ -1,235 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maintenance | Tyler Nicholas Group (TNG)</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tyler Nicholas Group | Driving Value, Defining the Future</title>
+  <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <link rel="icon" type="image/png" href="../image/logo.png">
-
-    <style>
-        /* ==================== CORPORATE CSS ==================== */
-        :root {
-            --tng-blue: #001F4C;
-            --tng-maroon: #A81F27;
-            --tng-silver: #C0C0C0;
-            --tng-light-gray: #f4f4f4;
-            --tng-text-dark: #333;
-            --tng-text-light: #ffffff;
-            --transition-speed: 0.8s ease-out;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--tng-text-dark);
-            background-color: var(--tng-light-gray);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* === HEADER === */
-        header {
-            background-color: var(--tng-blue);
-            color: var(--tng-text-light);
-            padding: 20px 40px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .logo {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: var(--tng-silver);
-            text-decoration: none;
-            letter-spacing: 2px;
-        }
-
-        /* === PRELOADER === */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--tng-blue);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 1;
-            transition: opacity 1s ease-out;
-        }
-        .loader-content { text-align: center; color: var(--tng-light-gray); }
-        .loader-content img {
-            width: 80px; height: 80px; margin-bottom: 20px;
-            animation: spin 1.5s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        #main-content-wrapper {
-            opacity: 0;
-            transition: opacity 1s ease-in;
-            flex: 1;
-        }
-        #main-content-wrapper.loaded { opacity: 1; }
-
-        /* === MAINTENANCE CONTENT === */
-        main {
-            max-width: 800px;
-            margin: 60px auto;
-            padding: 40px;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            text-align: center;
-            border-top: 6px solid var(--tng-maroon);
-        }
-
-        .status-badge {
-            background: var(--tng-maroon);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: 700;
-            text-transform: uppercase;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        h1 { color: var(--tng-blue); font-size: 2.2em; margin-bottom: 10px; }
-        .notice-text { font-size: 1.1em; color: #555; margin-bottom: 40px; }
-
-        /* === DIRECTORY STYLES === */
-        .directory-container {
-            text-align: left;
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid #eee;
-        }
-        .directory-container h2 {
-            font-size: 1.2em;
-            color: var(--tng-blue);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .dir-link {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px;
-            background: var(--tng-light-gray);
-            margin-bottom: 15px;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: transform 0.2s, background 0.2s;
-            border-left: 4px solid var(--tng-blue);
-        }
-        .dir-link:hover {
-            transform: translateX(5px);
-            background: #e9ecef;
-        }
-        .dir-info h3 { margin: 0; font-size: 1.1em; color: var(--tng-maroon); }
-        .dir-info p { margin: 0; font-size: 0.85em; color: #666; }
-        .external-icon { color: var(--tng-blue); font-weight: bold; }
-
-        /* === FOOTER === */
-        footer {
-            background-color: var(--tng-blue);
-            color: var(--tng-silver);
-            text-align: center;
-            padding: 30px;
-            font-size: 0.85em;
-        }
-        footer a { color: var(--tng-maroon); text-decoration: none; font-weight: bold; }
-    </style>
+  <style>
+    /* Custom fade-out class for the loading screen */
+    .fade-out {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    }
+  </style>
 </head>
-<body>
+<body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen overflow-hidden" id="body">
 
-    <div id="preloader">
-        <div class="loader-content">
-            <img src="image/logo.png" alt="TNG Logo">
-            <h2>Tyler Nicholas Group</h2>
+  <div id="loading-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-[#001f3f]">
+    <img 
+      src="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" 
+      alt="TNG Logo" 
+      class="w-48 md:w-64 animate-pulse duration-1000"
+    />
+  </div>
+
+  <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4"></div>
+
+  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center">
+    <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
+    <div class="hidden md:flex space-x-6 text-sm items-center">
+      <a href="index.html" class="hover:text-gray-300 border-b-2 border-[#a6192e] pb-1">Home</a>
+      <a href="about.html" class="hover:text-gray-300">About Us</a>
+      <a href="companies.html" class="hover:text-gray-300">Our Companies</a>
+      <a href="people.html" class="hover:text-gray-300">Our People</a>
+      <a href="governance.html" class="hover:text-gray-300">Governance</a>
+      <a href="careers.html" class="hover:text-gray-300">Careers</a>
+      <a href="contact.html" class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors">More</a>
+    </div>
+  </nav>
+
+  <main class="flex-grow flex flex-col items-center pt-12 px-4 md:px-0">
+    <div class="bg-[#001f3f] text-white w-full max-w-5xl rounded-xl p-10 md:p-20 text-center shadow-lg">
+      <h1 class="text-3xl md:text-5xl font-bold mb-6">Driving Value, Defining the Future.</h1>
+      <p class="text-sm md:text-lg max-w-3xl mx-auto text-gray-200">
+        The Tyler Nicholas Group is a modern holding company focused on strategic growth and synergy across diverse, high-potential verticals.
+      </p>
+    </div>
+
+    <div class="mt-16 w-full max-w-5xl px-4 text-center">
+      <h2 class="text-[#a6192e] text-2xl md:text-4xl font-bold mb-8">Our Foundation and Mission</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
+        <div>
+          <h3 class="font-bold text-[#001f3f] text-xl mb-4">Corporate History</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Founded on the principle of centralized governance and decentralized execution, TNG was established to bring synergistic leadership to a portfolio of rapidly scaling ventures.
+          </p>
         </div>
+        <div>
+          <h3 class="font-bold text-[#001f3f] text-xl mb-4">Our Core Mission</h3>
+          <p class="text-gray-700 leading-relaxed">
+            To cultivate exceptional value across our operating companies by providing strategic capital allocation, advanced shared services, and executive oversight.
+          </p>
+        </div>
+      </div>
     </div>
+  </main>
+
+  <footer class="bg-[#001f3f] text-white py-10 px-6 md:px-12 mt-20">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <div>
+        <h3 class="font-bold text-lg mb-4 uppercase">Tyler Nicholas Group</h3>
+        <p class="text-sm text-gray-300 mb-2">A global holding company headquartered in the Seychelles.</p>
+        <div class="mt-4 inline-block bg-white text-[#001f3f] px-3 py-1 rounded text-sm font-semibold shadow">
+          Seychelles Local Time: <span id="seychelles-time">Loading...</span>
+        </div>
+      </div>
+
+      <div class="flex flex-col space-y-2 text-sm">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Explore</h4>
+        <a href="about.html" class="hover:text-gray-300 transition-colors">About Us</a>
+        <a href="companies.html" class="hover:text-gray-300 transition-colors">Our Companies</a>
+        <a href="careers.html" class="hover:text-gray-300 transition-colors">Careers</a>
+        <a href="contact.html" class="hover:text-gray-300 transition-colors">Contact Us</a>
+        <a href="https://tyler.tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="text-[#a6192e] font-bold hover:underline pt-2">
+          Meet Tyler Nicholas →
+        </a>
+      </div>
+
+      <div>
+         <h4 class="font-bold text-lg mb-4 text-[#a6192e]">Connect With Us</h4>
+         <div class="flex space-x-4">
+            <a href="https://x.com/tyler_n_group" target="_blank" rel="noopener noreferrer" class="hover:opacity-75 transition-opacity">X (Twitter)</a>
+            <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" rel="noopener noreferrer" class="hover:opacity-75 transition-opacity">Instagram</a>
+            <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" rel="noopener noreferrer" class="hover:opacity-75 transition-opacity">LinkedIn</a>
+         </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    // 1. Loading Screen Logic
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('loading-screen');
+        const body = document.getElementById('body');
+        loader.classList.add('fade-out');
+        body.classList.remove('overflow-hidden'); // Allow scrolling again
+        
+        // Remove from DOM after fade completes
+        setTimeout(() => loader.remove(), 500); 
+      }, 2500); // 2.5 seconds
+    });
+
+    // 2. Seychelles Live Clock Logic
+    function updateSeychellesTime() {
+      const timeElement = document.getElementById('seychelles-time');
+      const options = { 
+        timeZone: 'Indian/Mahe', 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit',
+        hour12: true 
+      };
+      timeElement.innerText = new Date().toLocaleTimeString('en-US', options);
+    }
+    setInterval(updateSeychellesTime, 1000);
+    updateSeychellesTime(); // Call immediately on load
+
+    // 3. Supabase Integration for Announcement Bar
+    const supabaseUrl = 'https://hicowukbjsbpuebquqbh.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    async function fetchAnnouncement() {
+      const { data, error } = await supabase
+        .from('announcements')
+        .select('*')
+        .eq('is_active', true)
+        .single();
+
+      if (data) {
+        const bar = document.getElementById('announcement-bar');
+        bar.classList.remove('hidden'); // Show the bar
+        
+        if (data.link) {
+          bar.innerHTML = `<a href="${data.link}" class="hover:underline block w-full">${data.message}</a>`;
+        } else {
+          bar.innerText = data.message;
+        }
+      }
+    }
     
-    <div id="main-content-wrapper">
-        <header>
-            <a href="#" class="logo">TYLER NICHOLAS GROUP</a>
-        </header>
-
-        <main>
-            <div class="status-badge">System Update in Progress</div>
-            <h1>Website Under Renovation</h1>
-            <p class="notice-text">
-                We are currently upgrading our digital infrastructure to better serve our global ventures. 
-                We thank you for your patience and apologize for any inconvenience this may cause.
-            </p>
-
-            <div class="directory-container">
-                <h2>Operational Directory</h2>
-                
-                <a href="https://bluewave-digital.tylernicholasgroup.com" class="dir-link">
-                    <div class="dir-info">
-                        <h3>BlueWave Digital</h3>
-                        <p>TNG Business Division - Digital Solutions</p>
-                    </div>
-                    <span class="external-icon">Visit &rarr;</span>
-                </a>
-
-                <a href="https://emiratesgrouproblox.link" class="dir-link">
-                    <div class="dir-info">
-                        <h3>Emirates Group Roblox</h3>
-                        <p>TNG Gaming & Interactive Entertainment Organization</p>
-                    </div>
-                    <span class="external-icon">Visit &rarr;</span>
-                </a>
-
-                <a href="https://www.foodshare-seychelles.online" class="dir-link">
-                    <div class="dir-info">
-                        <h3>FoodShare Seychelles</h3>
-                        <p>TNG Foundation</p>
-                    </div>
-                    <span class="external-icon">Visit &rarr;</span>
-                </a>
-            </div>
-        </main>
-
-        <footer>
-            <p>If you require assistance, please contact our Group Administration:</p>
-            <p><a href="mailto:tylernicholasgroup@gmail.com">tylernicholasgroup@gmail.com</a></p>
-            <div style="margin-top:20px; opacity: 0.6;">
-                &copy; 2026 Tyler Nicholas Group. All Rights Reserved.
-            </div>
-        </footer>
-    </div>
-
-    <script>
-        const PRELOADER_DISPLAY_TIME = 2500; 
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const preloader = document.getElementById('preloader');
-            const mainContentWrapper = document.getElementById('main-content-wrapper');
-
-            function showMainContent() {
-                preloader.style.opacity = '0';
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                    mainContentWrapper.classList.add('loaded');
-                }, 1000); 
-            }
-
-            setTimeout(showMainContent, PRELOADER_DISPLAY_TIME);
-        });
-    </script>
+    // Fetch immediately
+    fetchAnnouncement();
+  </script>
 </body>
 </html>
