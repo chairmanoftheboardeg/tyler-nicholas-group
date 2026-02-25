@@ -6,12 +6,10 @@
   <title>Tyler Nicholas Group | Driving Value, Defining the Future</title>
   <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
   
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.tailwindcss.com" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 
   <style>
-    /* Smooth corporate breathing animation for the logo */
     @keyframes subtle-breathe {
       0%, 100% { transform: scale(1); opacity: 1; }
       50% { transform: scale(1.05); opacity: 0.8; }
@@ -23,7 +21,7 @@
 </head>
 <body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen overflow-hidden" id="body">
 
-  <div id="loading-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-[#001f3f]" style="transition: opacity 0.8s ease, visibility 0.8s ease;">
+  <div id="loading-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-[#001f3f]" style="transition: opacity 0.5s ease, visibility 0.5s ease;">
     <img 
       src="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" 
       alt="TNG Logo" 
@@ -109,25 +107,26 @@
   </footer>
 
   <script>
-    // 1. Reliable Loading Screen Logic
-    document.addEventListener("DOMContentLoaded", () => {
+    // 1. BULLETPROOF LOADING SCREEN FIX
+    // This runs immediately and guarantees the loader dies after 1.5s, no matter what.
+    setTimeout(() => {
       const loader = document.getElementById('loading-screen');
       const body = document.getElementById('body');
       
-      // Force a 1.5-second corporate loading animation, then fade out
-      setTimeout(() => {
+      if (loader) {
         loader.style.opacity = '0';
         loader.style.visibility = 'hidden';
+        setTimeout(() => loader.remove(), 500); // Remove from DOM after fade
+      }
+      if (body) {
         body.classList.remove('overflow-hidden'); // Re-enable scrolling
-        
-        // Remove from DOM completely after fade finishes
-        setTimeout(() => loader.remove(), 800); 
-      }, 1500);
-    });
+      }
+    }, 1500);
 
     // 2. Seychelles Live Clock Logic
     function updateSeychellesTime() {
       const timeElement = document.getElementById('seychelles-time');
+      if (!timeElement) return;
       const options = { 
         timeZone: 'Indian/Mahe', 
         hour: '2-digit', 
@@ -141,34 +140,36 @@
     updateSeychellesTime();
 
     // 3. Supabase Integration for Announcement Bar
-    const supabaseUrl = 'https://hicowukbjsbpuebquqbh.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0';
-    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+    // Wrapping in an interval to ensure Supabase is loaded since we added 'defer' to the script
+    const initSupabase = setInterval(async () => {
+      if (window.supabase) {
+        clearInterval(initSupabase);
+        const supabaseUrl = 'https://hicowukbjsbpuebquqbh.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0';
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-    async function fetchAnnouncement() {
-      try {
-        const { data, error } = await supabase
-          .from('announcements')
-          .select('*')
-          .eq('is_active', true)
-          .single();
+        try {
+          const { data, error } = await supabase
+            .from('announcements')
+            .select('*')
+            .eq('is_active', true)
+            .single();
 
-        if (data && !error) {
-          const bar = document.getElementById('announcement-bar');
-          bar.classList.remove('hidden');
-          
-          if (data.link) {
-            bar.innerHTML = `<a href="${data.link}" class="hover:underline block w-full">${data.message}</a>`;
-          } else {
-            bar.innerText = data.message;
+          if (data && !error) {
+            const bar = document.getElementById('announcement-bar');
+            bar.classList.remove('hidden');
+            
+            if (data.link) {
+              bar.innerHTML = `<a href="${data.link}" class="hover:underline block w-full">${data.message}</a>`;
+            } else {
+              bar.innerText = data.message;
+            }
           }
+        } catch (err) {
+          console.error("No active announcements or error fetching:", err);
         }
-      } catch (err) {
-        console.error("No active announcements or error fetching:", err);
       }
-    }
-    
-    fetchAnnouncement();
+    }, 100); // Check every 100ms if Supabase is ready
   </script>
 </body>
 </html>
