@@ -1,275 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Directory | Tyler Nicholas Group (TNG)</title>
-
-    <link rel="icon" type="image/png" href="../image/logo.png">
-
-    <style>
-        /* Reusing Contact CSS for consistency */
-        :root {
-            --tng-blue: #001F4C;
-            --tng-maroon: #A81F27;
-            --tng-silver: #C0C0C0;
-            --tng-light-gray: #f4f4f4;
-            --tng-text-dark: #333;
-            --tng-text-light: #ffffff;
-            --transition-speed: 0.8s ease-out;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--tng-text-dark);
-            background-color: var(--tng-light-gray);
-            line-height: 1.6;
-        }
-
-        /* === HEADER & NAVIGATION === */
-        header {
-            background-color: var(--tng-blue);
-            color: var(--tng-text-light);
-            padding: 15px 40px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-        .logo {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: var(--tng-silver);
-            text-decoration: none;
-        }
-        nav a, .more-menu-toggle {
-            color: var(--tng-silver);
-            text-decoration: none;
-            padding: 10px 15px;
-            margin-left: 10px;
-            font-size: 0.95em;
-            font-weight: 500;
-            border-radius: 4px;
-        }
-        nav a:hover {
-            color: var(--tng-text-light);
-            background-color: rgba(168, 31, 39, 0.5); 
-        }
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-content { display: none; position: absolute; right: 0; background-color: var(--tng-blue); min-width: 200px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; border-top: 3px solid var(--tng-maroon); }
-        .dropdown-content a { color: var(--tng-silver); padding: 12px 16px; text-decoration: none; display: block; margin: 0; }
-        .dropdown-content a:hover { background-color: var(--tng-maroon); color: var(--tng-text-light); }
-        .dropdown:hover .dropdown-content { display: block; }
-
-        /* === MAIN CONTENT LAYOUT === */
-        main { max-width: 1000px; margin: 40px auto; padding: 20px; }
-        
-        .hero-contact { 
-            background: linear-gradient(135deg, var(--tng-blue), #002D62); 
-            color: var(--tng-light-gray); 
-            padding: 60px 40px; 
-            text-align: center; 
-            border-radius: 12px; 
-            margin-bottom: 50px; 
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); 
-            border-bottom: 5px solid var(--tng-maroon);
-        }
-        .hero-contact h1 { 
-            font-size: 3em; 
-            margin-bottom: 5px; 
-            color: var(--tng-silver);
-        }
-        .hero-contact p { 
-            font-size: 1.2em; 
-            color: var(--tng-light-gray);
-        }
-
-        .general-contact {
-            text-align: center;
-            padding: 20px;
-            margin-bottom: 40px;
-            border-bottom: 2px solid #ddd;
-        }
-        .general-contact h2 {
-            color: var(--tng-maroon);
-        }
-        .general-contact a {
-            font-size: 1.3em;
-            font-weight: 700;
-            color: var(--tng-blue);
-            text-decoration: none;
-        }
-        .general-contact a:hover {
-            text-decoration: underline;
-        }
-
-        /* Directory Grid */
-        .directory-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .directory-card {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            border-top: 5px solid var(--tng-maroon);
-        }
-        .directory-card h3 {
-            color: var(--tng-blue);
-            font-size: 1.6em;
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
-        .directory-card p {
-            color: #555;
-            min-height: 45px; /* Ensures consistent height */
-        }
-        .directory-card a {
-            display: inline-block;
-            background-color: var(--tng-maroon);
-            color: var(--tng-text-light);
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 600;
-            margin-top: 15px;
-            transition: background-color 0.3s;
-        }
-        .directory-card a:hover {
-            background-color: #8C1A21;
-        }
-
-        /* Footer (Standard TNG) */
-        footer { background-color: var(--tng-blue); color: var(--tng-silver); padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px; }
-        .footer-content { display: flex; justify-content: space-between; max-width: 1300px; margin: 0 auto; padding: 0 40px 30px; flex-wrap: wrap; }
-        .footer-section { width: 28%; min-width: 250px; margin-bottom: 20px; }
-        .footer-section h4 { color: var(--tng-maroon); font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px; }
-        .footer-section a { color: var(--tng-silver); text-decoration: none; display: block; margin-bottom: 8px; }
-        .footer-bottom { background-color: #00122E; text-align: center; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Tyler Nicholas Group</title>
+  <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 </head>
-<body>
+<body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen" id="body">
 
-    <header>
-        <div class="navbar">
-            <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
-            <nav>
-                <a href="../">Home</a>
-                <a href="../about">About Us</a>
-                <a href="../companies">Our Companies</a>
-                <a href="../people">Our People</a>
-                <a href="../governance">Governance</a>
-                <a href="../careers">Careers</a>
-                <div class="dropdown">
-                    <a href="../investors">Investors</a>
-                    <div class="dropdown-content">
-                        <a href="../governance/board-of-directors.html">Board of Directors</a>
-                        <a href="../governance/code-of-conduct">Code of Conduct</a>
-                        <a href="../governance/reports">Financial Reporting</a>
-                    </div>
-                </div>
-                <a href="./" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Contact</a>
-            </nav>
+  <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
+
+  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md">
+    <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
+    <div class="hidden md:flex space-x-6 text-sm items-center">
+      <a href="../" class="hover:text-gray-300 transition-colors">Home</a>
+      <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
+      <a href="../companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
+      <a href="../people/" class="hover:text-gray-300 transition-colors">Our People</a>
+      <a href="../governance/" class="hover:text-gray-300 transition-colors">Governance</a>
+      <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
+      <a href="#" class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold transition-colors border-2 border-white">Contact</a>
+    </div>
+  </nav>
+
+  <div class="bg-[#001f3f] text-white py-16 px-6 md:px-12 text-center">
+    <h1 class="text-3xl md:text-5xl font-bold mb-4">Contact Us</h1>
+    <p class="text-gray-300 max-w-2xl mx-auto md:text-lg">Get in touch with the Tyler Nicholas Group for corporate inquiries, partnerships, or support.</p>
+  </div>
+
+  <main class="flex-grow max-w-3xl mx-auto py-16 px-6 md:px-12 w-full">
+    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-[#a6192e]">
+      
+      <div id="form-success" class="hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6" role="alert">
+        <strong class="font-bold">Message Sent!</strong>
+        <span class="block sm:inline"> We have received your inquiry and will be in touch shortly.</span>
+      </div>
+
+      <form id="contact-form" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Full Name</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[#001f3f]" id="name" type="text" required>
+          </div>
+          <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email Address</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[#001f3f]" id="email" type="email" required>
+          </div>
         </div>
-    </header>
-
-    <main>
-        <section class="hero-contact">
-            <h1>TNG Contact Directory</h1>
-            <p>Please select the area below that best matches your inquiry to ensure your message reaches the appropriate team quickly.</p>
-        </section>
-
-        <section class="general-contact">
-            <h2>General & Corporate Inquiries</h2>
-            <p>For all non-specialized questions, vendor pitches, or general administrative matters:</p>
-            <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a>
-        </section>
-
-        <section class="directory-grid">
-            
-            <div class="directory-card">
-                <h3>Investors & Finance</h3>
-                <p>Inquiries regarding financial reporting, shareholder questions, and investor relations.</p>
-                <a href="./investors/">Go to Investor Contact</a>
-            </div>
-
-            <div class="directory-card">
-                <h3>Media & Press</h3>
-                <p>For press releases, media requests, interviews, and public communication inquiries.</p>
-                <a href="./media/">Go to Media Contact</a>
-            </div>
-
-            <div class="directory-card">
-                <h3>Careers & HR</h3>
-                <p>Questions about job openings, applications, employee benefits, and HR policies.</p>
-                <a href="./hr/">Go to HR Contact</a>
-            </div>
-
-            <div class="directory-card">
-                <h3>IT & Technology</h3>
-                <p>For external technology partners, vendors, and security compliance inquiries.</p>
-                <a href="./itdep/">Go to IT Contact</a>
-            </div>
-
-            <div class="directory-card">
-                <h3>Legal & Compliance</h3>
-                <p>Inquiries concerning corporate compliance, policy, and legal matters.</p>
-                <a href="../governance/legal.html">Go to Legal</a>
-            </div>
-
-            <div class="directory-card">
-                <h3>Product/Service Feedback</h3>
-                <p>Send feedback directly to the TNG Core leadership team.</p>
-                <a href="mailto:feedback@tylernicholasgroup.com">Email Feedback</a>
-            </div>
-
-        </section>
-        
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>TNG Global Headquarters</h4>
-                <p>Tyler Nicholas Group operates as a remote-first organization.</p>
-                <p>Official Headquarters & Group Communications:<br>
-                <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
-                <p>General Inquiries:<br>
-                <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="../about">About TNG</a>
-                <a href="../companies">Our Companies</a>
-                <a href="../people">Our People</a>
-                <a href="../governance">Governance</a>
-                <a href="../careers">Careers</a>
-            </div>
-            <div class="footer-section">
-                <h4>Legal & Policy</h4>
-                <a href="../privacy">Privacy Policy</a>
-                <a href="../terms">Terms of Use</a>
-                <a href="../governance/legal">Legal & Compliance</a>
-                <a href="../accessibility">Accessibility Statement</a>
-                <a href="../governance/reports">Financial Reports</a>
-            </div>
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="subject">Subject</label>
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[#001f3f]" id="subject" type="text" required>
         </div>
-        <div class="footer-bottom">
-            &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="message">Message</label>
+          <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[#001f3f] h-32" id="message" required></textarea>
         </div>
-    </footer>
+        <button class="bg-[#001f3f] hover:bg-blue-900 text-white font-bold py-3 px-6 rounded w-full transition-colors" type="submit" id="submit-btn">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </main>
 
+  <footer class="bg-[#001f3f] text-white py-12 px-6 md:px-12 mt-auto text-center md:text-left border-t border-blue-900">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center md:items-start">
+      <div class="flex flex-col items-center md:items-start">
+        <h3 class="font-bold text-lg mb-2 uppercase">Tyler Nicholas Group</h3>
+        <p class="text-sm text-gray-300 mb-4">A global holding company headquartered in the Seychelles.</p>
+        <div class="inline-block bg-white text-[#001f3f] px-3 py-1 rounded text-sm font-semibold shadow">Seychelles Local Time: <span id="seychelles-time">Loading...</span></div>
+      </div>
+      <div class="flex flex-col space-y-2 text-sm items-center">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Explore</h4>
+        <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
+        <a href="../companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
+        <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
+        <a href="#" class="hover:text-gray-300 transition-colors">Contact Us</a>
+        <a href="https://tyler.tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="text-[#a6192e] font-bold hover:underline pt-2">Meet Tyler Nicholas →</a>
+      </div>
+      <div class="flex flex-col items-center md:items-end">
+         <div class="flex space-x-6 text-2xl text-[#00a8ff] mb-4">
+            <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/tyler_n_group" target="_blank" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" target="_blank" class="social-icon"><i class="fa-brands fa-whatsapp"></i></a>
+         </div>
+         <p class="text-sm mb-2">Contact: <a href="mailto:tylernicholasgroup@gmail.com" class="text-[#00a8ff] hover:underline">tylernicholasgroup@gmail.com</a></p>
+         <p class="text-xs text-gray-400">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function updateSeychellesTime() { const e = document.getElementById('seychelles-time'); if(e) e.innerText = new Date().toLocaleTimeString('en-US', { timeZone: 'Indian/Mahe', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }); }
+    setInterval(updateSeychellesTime, 1000); updateSeychellesTime();
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Supabase Announcement Bar
+      const checkSupabase = setInterval(async () => {
+        if (window.supabase) {
+          clearInterval(checkSupabase); 
+          const supabase = window.supabase.createClient('https://hicowukbjsbpuebquqbh.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0');
+          try {
+            const { data, error } = await supabase.from('announcements').select('*').eq('is_active', true).single();
+            if (data && !error) {
+              const bar = document.getElementById('announcement-bar');
+              bar.classList.remove('hidden'); 
+              bar.innerHTML = data.link ? `<a href="${data.link}" class="hover:underline block w-full py-1">${data.message}</a>` : data.message;
+            }
+          } catch (err) {}
+
+          // 2. Contact Form Submission Logic
+          const form = document.getElementById('contact-form');
+          form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            btn.innerText = "Sending..."; btn.disabled = true;
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            const { data, error } = await supabase.from('contact_submissions').insert([{ name, email, subject, message }]);
+
+            if (error) {
+              alert("Error sending message. Please try again.");
+              btn.innerText = "Send Message"; btn.disabled = false;
+            } else {
+              form.classList.add('hidden');
+              document.getElementById('form-success').classList.remove('hidden');
+            }
+          });
+        }
+      }, 100);
+    });
+  </script>
 </body>
 </html>
