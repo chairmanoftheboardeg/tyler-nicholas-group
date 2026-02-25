@@ -6,27 +6,20 @@
   <title>Tyler Nicholas Group | Driving Value, Defining the Future</title>
   <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
   
-  <script src="https://cdn.tailwindcss.com" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="style.css">
+  
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-
-  <style>
-    @keyframes subtle-breathe {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.05); opacity: 0.8; }
-    }
-    .corporate-load {
-      animation: subtle-breathe 2s ease-in-out infinite;
-    }
-  </style>
 </head>
 <body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen overflow-hidden" id="body">
 
-  <div id="loading-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-[#001f3f]" style="transition: opacity 0.5s ease, visibility 0.5s ease;">
-    <img 
-      src="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" 
-      alt="TNG Logo" 
-      class="w-48 md:w-64 corporate-load"
-    />
+  <div id="loading-screen" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#001f3f] text-white">
+    <div class="loader-spinner"></div>
+    <h2 class="text-xl md:text-2xl font-bold tracking-widest uppercase mb-2">Tyler Nicholas Group</h2>
+    <p class="text-sm text-gray-400 italic">By Tyler Nicholas</p>
   </div>
 
   <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
@@ -72,18 +65,18 @@
     </div>
   </main>
 
-  <footer class="bg-[#001f3f] text-white py-10 px-6 md:px-12 mt-20">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+  <footer class="bg-[#001f3f] text-white py-12 px-6 md:px-12 mt-20 text-center md:text-left">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center md:items-start">
       
-      <div>
-        <h3 class="font-bold text-lg mb-4 uppercase">Tyler Nicholas Group</h3>
-        <p class="text-sm text-gray-300 mb-2">A global holding company headquartered in the Seychelles.</p>
-        <div class="mt-4 inline-block bg-white text-[#001f3f] px-3 py-1 rounded text-sm font-semibold shadow">
+      <div class="flex flex-col items-center md:items-start">
+        <h3 class="font-bold text-lg mb-2 uppercase">Tyler Nicholas Group</h3>
+        <p class="text-sm text-gray-300 mb-4">A global holding company headquartered in the Seychelles.</p>
+        <div class="inline-block bg-white text-[#001f3f] px-3 py-1 rounded text-sm font-semibold shadow">
           Seychelles Local Time: <span id="seychelles-time">Loading...</span>
         </div>
       </div>
 
-      <div class="flex flex-col space-y-2 text-sm">
+      <div class="flex flex-col space-y-2 text-sm items-center">
         <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Explore</h4>
         <a href="about/" class="hover:text-gray-300 transition-colors">About Us</a>
         <a href="companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
@@ -94,36 +87,38 @@
         </a>
       </div>
 
-      <div>
-         <h4 class="font-bold text-lg mb-4 text-[#a6192e]">Connect With Us</h4>
-         <div class="flex space-x-4">
-            <a href="https://x.com/tyler_n_group" target="_blank" rel="noopener noreferrer" class="hover:opacity-75 transition-opacity">X (Twitter)</a>
-            <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" rel="noopener noreferrer" class="hover:opacity-75 transition-opacity">Instagram</a>
-            <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" rel="noopener noreferrer" class="hover:opacity-75 transition-opacity">LinkedIn</a>
+      <div class="flex flex-col items-center md:items-end">
+         <div class="flex space-x-6 text-2xl text-[#00a8ff] mb-4">
+            <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/tyler_n_group" target="_blank" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" target="_blank" class="social-icon"><i class="fa-brands fa-whatsapp"></i></a>
          </div>
+         <p class="text-sm mb-2">Contact: <a href="mailto:tylernicholasgroup@gmail.com" class="text-[#00a8ff] hover:underline">tylernicholasgroup@gmail.com</a></p>
+         <p class="text-xs text-gray-400">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
       </div>
 
     </div>
   </footer>
 
   <script>
-    // 1. BULLETPROOF LOADING SCREEN FIX
-    // This runs immediately and guarantees the loader dies after 1.5s, no matter what.
-    setTimeout(() => {
-      const loader = document.getElementById('loading-screen');
-      const body = document.getElementById('body');
-      
-      if (loader) {
-        loader.style.opacity = '0';
-        loader.style.visibility = 'hidden';
-        setTimeout(() => loader.remove(), 500); // Remove from DOM after fade
-      }
-      if (body) {
-        body.classList.remove('overflow-hidden'); // Re-enable scrolling
-      }
-    }, 1500);
+    // 1. Un-stuckable Loading Screen
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        const loader = document.getElementById('loading-screen');
+        const body = document.getElementById('body');
+        
+        if (loader) {
+          loader.classList.add('fade-out');
+          setTimeout(() => loader.remove(), 600); // Wait for CSS transition to finish
+        }
+        if (body) {
+          body.classList.remove('overflow-hidden'); // Re-enable scroll
+        }
+      }, 1500); // 1.5 seconds loading time
+    });
 
-    // 2. Seychelles Live Clock Logic
+    // 2. Seychelles Live Clock
     function updateSeychellesTime() {
       const timeElement = document.getElementById('seychelles-time');
       if (!timeElement) return;
@@ -139,17 +134,16 @@
     setInterval(updateSeychellesTime, 1000);
     updateSeychellesTime();
 
-    // 3. Supabase Integration for Announcement Bar
-    // Wrapping in an interval to ensure Supabase is loaded since we added 'defer' to the script
+    // 3. Supabase Announcement Bar Logic
     const initSupabase = setInterval(async () => {
       if (window.supabase) {
         clearInterval(initSupabase);
         const supabaseUrl = 'https://hicowukbjsbpuebquqbh.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0';
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
         try {
-          const { data, error } = await supabase
+          const { data, error } = await supabaseClient
             .from('announcements')
             .select('*')
             .eq('is_active', true)
@@ -160,16 +154,16 @@
             bar.classList.remove('hidden');
             
             if (data.link) {
-              bar.innerHTML = `<a href="${data.link}" class="hover:underline block w-full">${data.message}</a>`;
+              bar.innerHTML = `<a href="${data.link}" class="hover:underline block w-full py-1">${data.message}</a>`;
             } else {
               bar.innerText = data.message;
             }
           }
         } catch (err) {
-          console.error("No active announcements or error fetching:", err);
+          console.error("No active announcements.");
         }
       }
-    }, 100); // Check every 100ms if Supabase is ready
+    }, 100); 
   </script>
 </body>
 </html>
