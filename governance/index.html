@@ -5,11 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Governance | Tyler Nicholas Group</title>
   <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
-  <script src="https://cdn.tailwindcss.com" defer></script>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 </head>
 <body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen" id="body">
+
+  <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
 
   <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md">
     <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
@@ -29,26 +34,88 @@
     <p class="text-gray-300 max-w-2xl mx-auto md:text-lg">Maintaining structural integrity, accountability, and ethical standards across our global portfolio.</p>
   </div>
 
-  <main class="flex-grow max-w-5xl mx-auto py-16 px-6 md:px-12 w-full">
-    <div class="bg-white p-10 rounded-xl shadow-md border-t-4 border-[#a6192e]">
-      <h2 class="text-2xl font-bold text-[#001f3f] mb-4">Centralized Oversight, Decentralized Execution</h2>
-      <p class="text-gray-700 leading-relaxed mb-8">At Tyler Nicholas Group, we believe in empowering our subsidiaries to operate with agility while maintaining strict compliance and strategic alignment at the holding company level. TNG provides the structural foundation—handling legal compliance, capital allocation, and top-tier security—allowing our individual companies to focus solely on growth and service execution.</p>
+  <main class="flex-grow max-w-5xl mx-auto py-16 px-6 md:px-12 w-full space-y-12">
+    
+    <div class="bg-white p-10 rounded-xl shadow-md border-t-4 border-[#001f3f]">
+      <h2 class="text-2xl font-bold text-[#001f3f] mb-8 text-center border-b pb-4">Pillars of TNG Governance</h2>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-        <div>
-          <h3 class="text-lg font-bold text-[#001f3f] mb-2"><i class="fa-solid fa-scale-balanced text-[#a6192e] mr-2"></i> Compliance & Ethics</h3>
-          <p class="text-sm text-gray-600">We operate under a rigorous ethical framework ensuring all ventures, from digital storefronts to non-profit foundations, meet international legal and regulatory standards.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center md:text-left">
+          <i class="fa-solid fa-users-viewfinder text-4xl text-[#a6192e] mb-4"></i>
+          <h3 class="text-lg font-bold text-[#001f3f] mb-2">Board Executive Oversight</h3>
+          <p class="text-sm text-gray-600">Ensuring strategic alignment, robust risk management, and operational excellence at the highest level of leadership across all subsidiaries.</p>
         </div>
-        <div>
-          <h3 class="text-lg font-bold text-[#001f3f] mb-2"><i class="fa-solid fa-shield-halved text-[#a6192e] mr-2"></i> Data & Security</h3>
-          <p class="text-sm text-gray-600">Centralized IT governance ensures robust data protection and infrastructure resilience across all platforms and user databases.</p>
+        
+        <div class="text-center md:text-left">
+          <i class="fa-solid fa-scale-balanced text-4xl text-[#a6192e] mb-4"></i>
+          <h3 class="text-lg font-bold text-[#001f3f] mb-2">Policies & Ethical Compliance</h3>
+          <p class="text-sm text-gray-600">Strict adherence to international laws, local regulations, and our own rigorous corporate policies designed to protect our stakeholders and users.</p>
+        </div>
+        
+        <div class="text-center md:text-left">
+          <i class="fa-solid fa-file-invoice-dollar text-4xl text-[#a6192e] mb-4"></i>
+          <h3 class="text-lg font-bold text-[#001f3f] mb-2">Financial & Regulatory Reporting</h3>
+          <p class="text-sm text-gray-600">Maintaining absolute transparency, accuracy, and accountability in all financial disclosures, audits, and corporate records.</p>
         </div>
       </div>
     </div>
+
+    <div class="bg-gray-100 p-10 rounded-xl shadow-inner border-l-4 border-[#a6192e]">
+      <h2 class="text-2xl font-bold text-[#a6192e] mb-4">Ethics & Integrity</h2>
+      <p class="text-gray-700 leading-relaxed mb-4">At the Tyler Nicholas Group, integrity isn't just a policy—it is the foundation of our entire operation. As a holding company managing a diverse array of businesses, from non-profits to digital storefronts, we recognize our responsibility to act with unwavering honesty and transparency.</p>
+      <p class="text-gray-700 leading-relaxed">We expect every executive, employee, and partner to uphold the highest ethical standards, ensuring that our growth is always aligned with fair business practices, community respect, and absolute accountability.</p>
+    </div>
+
   </main>
 
   <footer class="bg-[#001f3f] text-white py-12 px-6 md:px-12 mt-auto text-center md:text-left border-t border-blue-900">
-      <p class="text-xs text-gray-400 mt-4">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center md:items-start">
+      <div class="flex flex-col items-center md:items-start">
+        <h3 class="font-bold text-lg mb-2 uppercase">Tyler Nicholas Group</h3>
+        <p class="text-sm text-gray-300 mb-4">A global holding company headquartered in the Seychelles.</p>
+        <div class="inline-block bg-white text-[#001f3f] px-3 py-1 rounded text-sm font-semibold shadow">Seychelles Local Time: <span id="seychelles-time">Loading...</span></div>
+      </div>
+      <div class="flex flex-col space-y-2 text-sm items-center">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Explore</h4>
+        <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
+        <a href="../companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
+        <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
+        <a href="../contact/" class="hover:text-gray-300 transition-colors">Contact Us</a>
+        <a href="https://tyler.tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="text-[#a6192e] font-bold hover:underline pt-2">Meet Tyler Nicholas →</a>
+      </div>
+      <div class="flex flex-col items-center md:items-end">
+         <div class="flex space-x-6 text-2xl text-[#00a8ff] mb-4">
+            <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/tyler_n_group" target="_blank" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" target="_blank" class="social-icon"><i class="fa-brands fa-whatsapp"></i></a>
+         </div>
+         <p class="text-sm mb-2">Contact: <a href="mailto:tylernicholasgroup@gmail.com" class="text-[#00a8ff] hover:underline">tylernicholasgroup@gmail.com</a></p>
+         <p class="text-xs text-gray-400">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    function updateSeychellesTime() { const e = document.getElementById('seychelles-time'); if(e) e.innerText = new Date().toLocaleTimeString('en-US', { timeZone: 'Indian/Mahe', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }); }
+    setInterval(updateSeychellesTime, 1000); updateSeychellesTime();
+    
+    document.addEventListener("DOMContentLoaded", () => {
+      const checkSupabase = setInterval(async () => {
+        if (window.supabase) {
+          clearInterval(checkSupabase); 
+          const supabase = window.supabase.createClient('https://hicowukbjsbpuebquqbh.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0');
+          try {
+            const { data, error } = await supabase.from('announcements').select('*').eq('is_active', true).single();
+            if (data && !error) {
+              const bar = document.getElementById('announcement-bar');
+              bar.classList.remove('hidden'); 
+              bar.innerHTML = data.link ? `<a href="${data.link}" class="hover:underline block w-full py-1">${data.message}</a>` : data.message;
+            }
+          } catch (err) {}
+        }
+      }, 100);
+    });
+  </script>
 </body>
 </html>
