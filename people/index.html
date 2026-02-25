@@ -1,639 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our People & Leadership | Tyler Nicholas Group (TNG)</title>
-
-    <link rel="icon" type="image/png" href="../image/logo.png">
-
-    <style>
-        /* ==================== CORPORATE CSS (Reused) ==================== */
-        :root {
-            --tng-blue: #001F4C;
-            --tng-maroon: #A81F27;
-            --tng-silver: #C0C0C0;
-            --tng-light-gray: #f4f4f4;
-            --tng-text-dark: #333;
-            --tng-text-light: #ffffff;
-            --transition-speed: 0.8s ease-out;
-            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            --pfp-size: 100px;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--tng-text-dark);
-            background-color: var(--tng-light-gray);
-            line-height: 1.6;
-        }
-
-        /* === HEADER & NAVIGATION === */
-        header {
-            background-color: var(--tng-blue);
-            color: var(--tng-text-light);
-            padding: 15px 40px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-        .logo {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: var(--tng-silver);
-            text-decoration: none;
-        }
-        nav a, .more-menu-toggle {
-            color: var(--tng-silver);
-            text-decoration: none;
-            padding: 10px 15px;
-            margin-left: 10px;
-            font-size: 0.95em;
-            font-weight: 500;
-            border-radius: 4px;
-        }
-        nav a:hover {
-            color: var(--tng-text-light);
-            background-color: rgba(168, 31, 39, 0.5); 
-        }
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-content { display: none; position: absolute; right: 0; background-color: var(--tng-blue); min-width: 200px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; border-top: 3px solid var(--tng-maroon); }
-        .dropdown-content a { color: var(--tng-silver); padding: 12px 16px; text-decoration: none; display: block; margin: 0; }
-        .dropdown-content a:hover { background-color: var(--tng-maroon); color: var(--tng-text-light); }
-        .dropdown:hover .dropdown-content { display: block; }
-
-        /* === MAIN CONTENT STYLING (For loaded state) === */
-        main { max-width: 1300px; margin: 40px auto; padding: 20px; opacity: 0; transition: opacity 0.5s; }
-        
-        /* === PROFILE CARD STYLING (Same as before) === */
-        .hero-people { background: linear-gradient(135deg, var(--tng-maroon), #C04349); color: var(--tng-light-gray); padding: 60px 40px; text-align: center; border-radius: 12px; margin-bottom: 50px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); border-bottom: 5px solid var(--tng-blue); }
-        .hero-people h1 { font-size: 3em; margin-bottom: 5px; color: var(--tng-text-light); }
-        .hero-people p { font-size: 1.2em; color: var(--tng-light-gray); }
-        .section-header { color: var(--tng-blue); font-size: 2.5em; font-weight: 700; margin: 50px 0 20px; text-align: center; border-bottom: 3px solid var(--tng-maroon); padding-bottom: 10px; }
-        .leadership-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 50px; }
-        .profile-card { background-color: white; padding: 25px; border-radius: 10px; box-shadow: var(--card-shadow); text-align: center; transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; align-items: center; border-top: 5px solid var(--tng-blue); }
-        .profile-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
-        .pfp { width: var(--pfp-size); height: var(--pfp-size); border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 4px solid var(--tng-maroon); box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
-        .role-title { font-size: 1.1em; color: var(--tng-maroon); font-weight: 700; margin-bottom: 5px; }
-        .role-headline { font-size: 0.9em; color: #777; margin-bottom: 15px; min-height: 40px; }
-        .position-name { font-size: 1.6em; color: var(--tng-blue); font-weight: 900; margin-bottom: 10px; line-height: 1.2; }
-        .person-name, .vacant-post { font-size: 1.3em; font-weight: 600; color: var(--tng-text-dark); margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--tng-light-gray); width: 100%; }
-        .vacant-post { color: #CC0000; font-style: italic; }
-        .primary-responsibilities { margin-top: 15px; text-align: left; padding: 10px; background-color: var(--tng-light-gray); border-radius: 5px; font-size: 0.85em; color: #555; }
-        .primary-responsibilities strong { display: block; margin-bottom: 5px; color: var(--tng-blue); }
-        .apply-btn { display: inline-block; background-color: var(--tng-maroon); color: var(--tng-text-light); padding: 10px 25px; text-decoration: none; border-radius: 5px; font-weight: 700; margin-top: 20px; transition: background-color 0.3s; }
-        .apply-btn:hover { background-color: var(--tng-blue); }
-        .multi-person-role { text-align: center; margin-bottom: 50px; padding: 30px; background-color: #e6e6fa; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); border: 3px solid var(--tng-blue); }
-        .multi-person-role .role-title, .multi-person-role .position-name { color: var(--tng-blue); }
-        .multi-person-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 25px; }
-        .multi-person-card { background-color: white; padding: 20px; border-radius: 8px; box-shadow: var(--card-shadow); border-top: 4px solid var(--tng-maroon); }
-        .subsidiary-links { text-align: center; margin-top: 60px; padding: 30px; background-color: var(--tng-blue); border-radius: 10px; box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1); }
-        .subsidiary-links h2 { color: var(--tng-maroon); margin-top: 0; font-size: 2em; }
-        .subsidiary-links p { color: var(--tng-silver); margin-bottom: 25px; }
-        .subsidiary-link-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .subsidiary-link-grid a { background-color: var(--tng-maroon); color: var(--tng-text-light); padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: 600; transition: background-color 0.3s; }
-        .subsidiary-link-grid a:hover { background-color: #8C1A21; }
-        footer { background-color: #00122E; color: var(--tng-silver); padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px; }
-        .footer-content { display: flex; justify-content: space-between; max-width: 1300px; margin: 0 auto; padding: 0 40px 30px; flex-wrap: wrap; }
-        .footer-section { width: 28%; min-width: 250px; margin-bottom: 20px; }
-        .footer-section h4 { color: var(--tng-maroon); font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px; }
-        .footer-section a { color: var(--tng-silver); text-decoration: none; display: block; margin-bottom: 8px; }
-        .footer-section a:hover { color: var(--tng-maroon); }
-        .footer-bottom { background-color: #00091A; text-align: center; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-
-        /* === LOADING SCREEN STYLES (SIMPLIFIED) === */
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--tng-blue);
-            color: var(--tng-light-gray);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 1; 
-            transition: opacity 1s ease-out; 
-        }
-
-        #loading-bar-container {
-            width: 80%;
-            max-width: 400px;
-            height: 10px;
-            background-color: #333;
-            border-radius: 5px;
-            margin-top: 30px;
-            overflow: hidden;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
-        }
-
-        /* Pure CSS animation for the bar now */
-        #loading-bar {
-            height: 100%;
-            width: 0%;
-            background-color: var(--tng-maroon);
-            /* Add animation for a continuous visual cue */
-            animation: progress-slide 1.5s infinite alternate; 
-        }
-        
-        #loading-message {
-            font-size: 1.2em;
-            margin: 20px;
-            text-align: center;
-            opacity: 1; /* Always visible */
-            max-width: 600px;
-        }
-
-        /* New Keyframes for simple repeating progress bar motion */
-        @keyframes progress-slide {
-            0% { width: 10%; }
-            100% { width: 90%; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our People | Tyler Nicholas Group</title>
+  <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
+  <script src="https://cdn.tailwindcss.com" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 </head>
-<body onload="hideLoadingScreen()">
+<body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen" id="body">
 
-    <div id="loading-screen">
-        <h2 id="loading-message">
-            Please wait while we load latest updates to this page, please be aware that some information might possibly be outdated, thank you for your understading.
-        </h2>
-        <div id="loading-bar-container">
-            <div id="loading-bar"></div>
-        </div>
+  <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
+
+  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md">
+    <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
+    <div class="hidden md:flex space-x-6 text-sm items-center">
+      <a href="../" class="hover:text-gray-300 transition-colors">Home</a>
+      <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
+      <a href="../companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
+      <a href="#" class="hover:text-gray-300 border-b-2 border-[#a6192e] pb-1">Our People</a>
+      <a href="../governance/" class="hover:text-gray-300 transition-colors">Governance</a>
+      <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
+      <a href="../contact/" class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors">More</a>
     </div>
+  </nav>
 
-    <header>
-        <div class="navbar">
-            <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
-            <nav>
-                <a href="./">Home</a>
-                <a href="./about">About Us</a>
-                <a href="./companies">Our Companies</a>
-                <a href="./governance">Governance</a>
-                <div class="dropdown">
-                    <a href="./people" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Our People</a>
-                    <div class="dropdown-content">
-                        <a href="./careers">Careers</a>
-                        <a href="./governance/board-of-directors.html">Board of Directors</a>
-                        <a href="./governance/code-of-conduct.html">Code of Conduct</a>
-                    </div>
-                </div>
-                <a href="./investors">Investors</a>
-                <a href="./media-press.html">Media & Press</a>
-                <a href="./contact/">Contact</a>
-            </nav>
+  <div class="bg-[#001f3f] text-white py-16 px-6 md:px-12 text-center">
+    <h1 class="text-3xl md:text-5xl font-bold mb-4">Our Leadership</h1>
+    <p class="text-gray-300 max-w-2xl mx-auto md:text-lg">The visionary executives and dedicated heads of departments driving the Tyler Nicholas Group forward.</p>
+  </div>
+
+  <main class="flex-grow max-w-7xl mx-auto py-16 px-6 md:px-12 w-full">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      
+      <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow">
+        <div class="bg-[#001f3f] h-24 w-full"></div>
+        <div class="flex justify-center -mt-12">
+          <div class="h-24 w-24 bg-white rounded-full border-4 border-white flex items-center justify-center text-[#a6192e] text-4xl shadow-sm">
+            <i class="fa-solid fa-user-tie"></i>
+          </div>
         </div>
-    </header>
-
-    <main id="main-content">
-        <section class="hero-people">
-            <h1>Our Global Leadership Team</h1>
-            <p>Meet the visionary leaders and dedicated volunteers who drive the strategy, operations, and growth of Tyler Nicholas Group Core.</p>
-        </section>
-
-        <h2 class="section-header">I. Core Executive Leadership</h2>
-        <div class="leadership-grid">
-
-            <div class="profile-card">
-                <img src="../image/tyler-nicholas.png" alt="Profile Picture of Tyler Nicholas" class="pfp">
-                <p class="role-title">Chairman Of The Board</p>
-                <p class="role-headline">Highest strategic governance and accountability.</p>
-                <h3 class="position-name">Chairman</h3>
-                <p class="person-name">Tyler Nicholas</p>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Chief Executive Officer (CEO)</p>
-                <p class="role-headline">Overall strategic vision and management of the Executive Team.</p>
-                <h3 class="position-name">CEO</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Chief Operating Officer (COO)</p>
-                <p class="role-headline">Manages day-to-day operations, internal systems, and efficiency.</p>
-                <h3 class="position-name">COO</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Chief Financial Officer (CFO)</p>
-                <p class="role-headline">Financial planning, reporting, and capital allocation strategy.</p>
-                <h3 class="position-name">CFO</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/william-cross.png" alt="Profile Picture of William Alexander Cross" class="pfp">
-                <p class="role-title">Chief Human Resources & Legal Officer (CHRLO)</p>
-                <p class="role-headline">Organizational structure, volunteer engagement, and culture.</p>
-                <h3 class="position-name">CHRLO</h3>
-                <p class="person-name">William Alexander Cross</p>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/angie-pittman.png" alt="Profile Picture of Angie Pittman" class="pfp">
-                <p class="role-title">Chief Technology Officer (CTO)</p>
-                <p class="role-headline">Group-level IT infrastructure, digital strategy, and shared tech services.</p>
-                <h3 class="position-name">CTO</h3>
-                <p class="person-name">Angie Pittman</p>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Chief Commercial & Marketing Officer (CCMO)</p>
-                <p class="role-headline">Group-level brand consistency, PR, and commercial strategy.</p>
-                <h3 class="position-name">CCMO</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Chief Company Liaison Officer (CCLO)</p>
-                <p class="role-headline">Manages synergy and compliance between the Core Group and its Subsidiaries/Directors.</p>
-                <h3 class="position-name">CCLO</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-[#001f3f]">Tyler Nicholas</h3>
+          <p class="text-[#a6192e] font-semibold text-sm mb-1">Founder & CEO</p>
+          <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">Tyler Nicholas Group</p>
+          <p class="text-gray-600 text-sm leading-relaxed">Providing strategic oversight and visionary leadership across the entire portfolio of TNG subsidiaries globally.</p>
         </div>
+      </div>
 
-        <h2 class="section-header">II. Strategic Vertical Directors</h2>
-        <div class="leadership-grid">
-            
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Director Of TNG E-Commerce</p>
-                <p class="role-headline">Strategy and performance oversight for all E-comm subsidiaries.</p>
-                <h3 class="position-name">Director of E-Commerce</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Director Of TNG Digital Entertainment</p>
-                <p class="role-headline">Strategy and performance oversight for all Gaming/Digital Entertainment subsidiaries.</p>
-                <h3 class="position-name">Director of Digital Entertainment</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Director Of TNG Investment Board</p>
-                <p class="role-headline">Management of internal/external investment opportunities and portfolio performance.</p>
-                <h3 class="position-name">Director of Investment Board</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
+      <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow">
+        <div class="bg-[#001f3f] h-24 w-full"></div>
+        <div class="flex justify-center -mt-12">
+          <div class="h-24 w-24 bg-white rounded-full border-4 border-white flex items-center justify-center text-gray-400 text-4xl shadow-sm">
+            <i class="fa-solid fa-user"></i>
+          </div>
         </div>
-
-        <h2 class="section-header">III. Core Support & Specialization</h2>
-        <div class="leadership-grid">
-            
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Head of Legal & Compliance (HLC)</p>
-                <p class="role-headline">Ensures all group activities meet ethical and legal compliance standards.</p>
-                <h3 class="position-name">Head of Legal & Compliance</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Head of Corporate Communications</p>
-                <p class="role-headline">Executes PR and communication strategies; manages external messaging.</p>
-                <h3 class="position-name">Head of Corporate Comms</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Head of Shared Services</p>
-                <p class="role-headline">Manages the implementation and optimization of TNG's centralized shared services.</p>
-                <h3 class="position-name">Head of Shared Services</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Project Manager, Strategic Initiatives</p>
-                <p class="role-headline">Leads and coordinates specific cross-vertical projects and new market entries.</p>
-                <h3 class="position-name">Project Manager</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Risk & Audit Committee Member</p>
-                <p class="role-headline">Supports the Board/CFO in financial and operational oversight.</p>
-                <h3 class="position-name">Risk & Audit Member</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">TNG Director of Innovation Labs</p>
-                <p class="role-headline">Identifies and tests new technologies and market concepts for future growth.</p>
-                <h3 class="position-name">Director of Innovation Labs</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-[#001f3f]">Executive Name</h3>
+          <p class="text-[#a6192e] font-semibold text-sm mb-1">Head of Digital Operations</p>
+          <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">BlueWave Digital</p>
+          <p class="text-gray-600 text-sm leading-relaxed">Overseeing technological infrastructure, web development frameworks, and daily digital operations.</p>
         </div>
+      </div>
 
-        <h2 class="section-header">Core Support Volunteer Positions</h2>
-        <div class="leadership-grid">
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Financial Analyst Volunteer</p>
-                <p class="role-headline">Assists in data collection, financial modeling, and preparing simple budget reports.</p>
-                <h3 class="position-name">Financial Analyst</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <div class="primary-responsibilities">
-                    <strong>Supporting Leader:</strong> CFO / Investment Board Director
-                </div>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Corporate Compliance Assistant</p>
-                <p class="role-headline">Helps track regulatory changes, organize compliance documents, and update ethics training materials.</p>
-                <h3 class="position-name">Compliance Assistant</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <div class="primary-responsibilities">
-                    <strong>Supporting Leader:</strong> Head of Legal & Compliance
-                </div>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">HR Onboarding & Records Specialist</p>
-                <p class="role-headline">Manages the intake process for new volunteers, maintains personnel records, and tracks volunteer hours.</p>
-                <h3 class="position-name">HR Specialist</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <div class="primary-responsibilities">
-                    <strong>Supporting Leader:</strong> CHRO
-                </div>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Executive Administrative Aide</p>
-                <p class="role-headline">Manages shared calendars, organizes group meetings, takes meeting minutes, and handles basic correspondence.</p>
-                <h3 class="position-name">Executive Admin Aide</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <div class="primary-responsibilities">
-                    <strong>Supporting Leader:</strong> CEO / COO
-                </div>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Internal Communications Coordinator</p>
-                <p class="role-headline">Drafts and organizes internal newsletters, manages the internal communication platform (e.g., Slack channels).</p>
-                <h3 class="position-name">Internal Comms Coor.</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <div class="primary-responsibilities">
-                    <strong>Supporting Leader:</strong> CHRO / COO
-                </div>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Social Media Content Creator</p>
-                <p class="role-headline">Designs graphics, writes short copy, and schedules posts for LinkedIn and X (Twitter).</p>
-                <h3 class="position-name">Social Media Creator</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <div class="primary-responsibilities">
-                    <strong>Supporting Leader:</strong> CCMO / Head of Comms
-                </div>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Market Research Analyst</p>
-                <p class="role-headline">Conducts research on new market trends, competitor analysis, and vertical opportunities.</p>
-                <h3 class="position-name">Market Research Analyst</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <div class="primary-responsibilities">
-                    <strong>Supporting Leader:</strong> CCMO / Project Manager
-                </div>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Web & Digital Assistant</p>
-                <p class="role-headline">Manages content updates for the TNG website, checks for broken links, and monitors basic site performance.</p>
-                <h3 class="position-name">Web & Digital Assistant</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <div class="primary-responsibilities">
-                    <strong>Supporting Leader:</strong> CTO / Head of Comms
-                </div>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Public Relations (PR) Writer</p>
-                <p class="role-headline">Drafts basic press release content and assists in compiling media lists.</p>
-                <h3 class="position-name">PR Writer</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <div class="primary-responsibilities">
-                    <strong>Supporting Leader:</strong> Head of Corporate Communications
-                </div>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">E-commerce Operations Assistant</p>
-                <p class="role-headline">Gathers performance data (sales, traffic), helps organize shared vendor lists, and documents best practices.</p>
-                <h3 class="position-name">E-comm Operations Asst.</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <div class="primary-responsibilities">
-                    <strong>Supporting Leader:</strong> Director of E-Commerce
-                </div>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Digital Gaming / Tech Scout</p>
-                <p class="role-headline">Identifies emerging platforms, tracks successful digital IP, and monitors trends.</p>
-                <h3 class="position-name">Digital Tech Scout</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <div class="primary-responsibilities">
-                    <strong>Supporting Leader:</strong> Director of Digital Entertainment
-                </div>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Investment Portfolio Data Clerk</p>
-                <p class="role-headline">Organizes and updates investment proposal files and tracks KPIs for portfolio companies.</p>
-                <h3 class="position-name">Investment Data Clerk</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <div class="primary-responsibilities">
-                    <strong>Supporting Leader:</strong> Director of Investment Board
-                </div>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-            
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">Innovation & Tech Documentation Specialist</p>
-                <p class="role-headline">Documents new technology findings, creates simple workflow charts, and organizes the shared knowledge base.</p>
-                <h3 class="position-name">Innovation Doc Specialist</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <div class="primary-responsibilities">
-                    <strong>Supporting Leader:</strong> Director of Innovation Labs
-                </div>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
-
-            <div class="profile-card">
-                <img src="../image/apply.png" alt="Vacant Position" class="pfp">
-                <p class="role-title">TNG Help Desk Support</p>
-                <p class="role-headline">First point of contact for internal volunteer inquiries regarding shared software, documents, or general process questions.</p>
-                <h3 class="position-name">Help Desk Support</h3>
-                <p class="vacant-post">Vacant Post</p>
-                <div class="primary-responsibilities">
-                    <strong>Supporting Leader:</strong> CTO / Head of Shared Services
-                </div>
-                <a href="./careers" class="apply-btn">Apply Now</a>
-            </div>
+      <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow">
+        <div class="bg-[#001f3f] h-24 w-full"></div>
+        <div class="flex justify-center -mt-12">
+          <div class="h-24 w-24 bg-white rounded-full border-4 border-white flex items-center justify-center text-gray-400 text-4xl shadow-sm">
+            <i class="fa-solid fa-user"></i>
+          </div>
         </div>
-
-        <div class="multi-person-role">
-            <p class="role-title">Organizational Support Volunteer</p>
-            <h3 class="position-name">Flexible Operational Relief Team (Multi-Person)</h3>
-            <p class="role-headline" style="min-height: auto;">Deployed by the Chief Operating Officer (COO) or Executive Admin Aide to assist with urgent, non-specialized tasks across any department. This role is highly flexible.</p>
-            
-            <div class="primary-responsibilities" style="text-align: center;">
-                <strong>Primary Function:</strong> Fills sudden gaps in administrative or basic operational needs.
-            </div>
-
-            <div class="multi-person-grid">
-                <div class="multi-person-card" style="background-color: #f7f7f7;">
-                    <img src="../image/apply.png" alt="Vacant Position" class="pfp" style="width: 80px; height: 80px; border: 4px solid #CC0000;">
-                    <p style="font-weight: 600; color: #CC0000;">Vacant Slot</p>
-                    <p style="font-size: 0.85em; color: #555;">(Immediate Relief)</p>
-                </div>
-                
-                <div class="multi-person-card" style="background-color: #f7f7f7;">
-                    <img src="../image/apply.png" alt="Vacant Position" class="pfp" style="width: 80px; height: 80px; border: 4px solid #CC0000;">
-                    <p style="font-weight: 600; color: #CC0000;">Vacant Slot</p>
-                    <p style="font-size: 0.85em; color: #555;">(Mid-Term Cover)</p>
-                </div>
-
-                <div class="multi-person-card" style="background-color: #f7f7f7;">
-                    <img src="../image/apply.png" alt="Vacant Position" class="pfp" style="width: 80px; height: 80px; border: 4px solid #CC0000;">
-                    <p style="font-weight: 600; color: #CC0000;">Vacant Slot</p>
-                    <p style="font-size: 0.85em; color: #555;">(Project Support)</p>
-                </div>
-
-                <a href="./careers" class="apply-btn" style="grid-column: 1 / -1; width: max-content; justify-self: center;">Apply to Volunteer</a>
-            </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-[#001f3f]">Executive Name</h3>
+          <p class="text-[#a6192e] font-semibold text-sm mb-1">Director of Aviation Systems</p>
+          <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">Air Seychelles Roblox</p>
+          <p class="text-gray-600 text-sm leading-relaxed">Directing flight operations, staff coordination, and virtual infrastructure for our leading aviation networks.</p>
         </div>
+      </div>
 
-        <div class="subsidiary-links">
-            <h2>Our Subsidiaries & Brands</h2>
-            <p>Explore the leadership structures of our various corporate entities and initiatives.</p>
-            <div class="subsidiary-link-grid">
-                <a href="#">TNG E-Commerce Directors</a>
-                <a href="#">TNG Digital Entertainment Board</a>
-                <a href="#">TNG Labs Directors</a>
-            </div>
-        </div>
-    </main>
+    </div>
+  </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>About TNG</h4>
-                <a href="./about">Our Story</a>
-                <a href="./governance">Governance & Ethics</a>
-                <a href="./media-press.html">Media Inquiries</a>
-                <a href="./careers">Careers</a>
-            </div>
-            <div class="footer-section">
-                <h4>Connect</h4>
-                <a href="./contact">Contact Information</a>
-                <a href="#" target="_blank">LinkedIn</a>
-                <a href="#" target="_blank">X (Twitter)</a>
-                <a href="#" target="_blank">Facebook</a>
-            </div>
-            <div class="footer-section">
-                <h4>Legal & Policy</h4>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Use</a>
-                <a href="./governance/code-of-conduct.html">Code of Conduct</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2025 Tyler Nicholas Group (TNG). All Rights Reserved.
-        </div>
-    </footer>
+  <footer class="bg-[#001f3f] text-white py-12 px-6 md:px-12 mt-auto text-center md:text-left border-t border-blue-900">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center md:items-start">
+      <div class="flex flex-col items-center md:items-start">
+        <h3 class="font-bold text-lg mb-2 uppercase">Tyler Nicholas Group</h3>
+        <p class="text-sm text-gray-300 mb-4">A global holding company headquartered in the Seychelles.</p>
+        <div class="inline-block bg-white text-[#001f3f] px-3 py-1 rounded text-sm font-semibold shadow">Seychelles Local Time: <span id="seychelles-time">Loading...</span></div>
+      </div>
+      <div class="flex flex-col space-y-2 text-sm items-center">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Explore</h4>
+        <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
+        <a href="../companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
+        <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
+        <a href="../contact/" class="hover:text-gray-300 transition-colors">Contact Us</a>
+      </div>
+      <div class="flex flex-col items-center md:items-end">
+         <div class="flex space-x-6 text-2xl text-[#00a8ff] mb-4">
+            <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
+         </div>
+         <p class="text-sm mb-2">Contact: <a href="mailto:tylernicholasgroup@gmail.com" class="text-[#00a8ff] hover:underline">tylernicholasgroup@gmail.com</a></p>
+         <p class="text-xs text-gray-400">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
 
-    <script>
-        const loadingScreen = document.getElementById('loading-screen');
-        const mainContent = document.getElementById('main-content');
-        
-        // This function hides the loading screen and reveals content after a fixed delay.
-        function hideLoadingScreen() {
-            // Wait 3000 milliseconds (3 seconds) for page resources to load and user to read the message.
-            setTimeout(() => {
-                // Start the CSS opacity transition to hide the screen
-                loadingScreen.style.opacity = 0;
-                
-                // Show the main content simultaneously
-                mainContent.style.opacity = 1;
-
-                // After the opacity transition finishes (1 second), completely remove the element
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                }, 1000); 
-
-            }, 3000); 
-        }
-        
-        // The body's 'onload' attribute now calls hideLoadingScreen()
-        // when the page structure and all assets (images, etc.) are finished loading.
-    </script>
-
+  <script>
+    function updateSeychellesTime() { const e = document.getElementById('seychelles-time'); if(e) e.innerText = new Date().toLocaleTimeString('en-US', { timeZone: 'Indian/Mahe', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }); }
+    setInterval(updateSeychellesTime, 1000); updateSeychellesTime();
+  </script>
 </body>
 </html>
