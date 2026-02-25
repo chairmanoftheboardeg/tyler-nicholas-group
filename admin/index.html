@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TNG Admin Dashboard</title>
+  <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
+  
+  <style>
+    body { opacity: 0; visibility: hidden; }
+  </style>
+  <script>
+    window.addEventListener('load', function() {
+      document.body.style.transition = 'opacity 0.2s ease-in';
+      document.body.style.opacity = '1';
+      document.body.style.visibility = 'visible';
+    });
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+</head>
+<body class="bg-gray-100 font-sans text-gray-900 min-h-screen">
+
+  <div id="login-screen" class="min-h-screen flex items-center justify-center bg-[#001f3f]">
+    <div class="bg-white p-10 rounded-xl shadow-2xl w-full max-w-md">
+      <div class="text-center mb-8">
+        <img src="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" alt="TNG Logo" class="w-24 mx-auto mb-4">
+        <h2 class="text-2xl font-bold text-[#001f3f]">Admin Access</h2>
+      </div>
+      <form id="login-form" class="space-y-6">
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2">Admin Email</label>
+          <input type="email" id="email" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#a6192e]" required>
+        </div>
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+          <input type="password" id="password" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#a6192e]" required>
+        </div>
+        <p id="login-error" class="text-red-500 text-sm hidden"></p>
+        <button type="submit" id="login-btn" class="w-full bg-[#a6192e] hover:bg-red-800 text-white font-bold py-3 rounded transition-colors">Log In</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="dashboard-screen" class="hidden flex flex-col min-h-screen">
+    
+    <nav class="bg-[#001f3f] text-white py-4 px-6 flex justify-between items-center shadow-md">
+      <div class="font-bold text-xl tracking-wider">TNG Admin Dashboard</div>
+      <button id="logout-btn" class="bg-white text-[#001f3f] px-4 py-2 rounded text-sm font-bold hover:bg-gray-200">Log Out</button>
+    </nav>
+
+    <main class="flex-grow p-8 max-w-6xl mx-auto w-full space-y-12">
+      
+      <section>
+        <h2 class="text-2xl font-bold text-[#001f3f] mb-6 border-b pb-2">Recent Contact Inquiries</h2>
+        <div class="bg-white rounded-xl shadow overflow-hidden">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-gray-200 text-gray-700 text-sm uppercase">
+                <th class="py-3 px-4 font-semibold">Date</th>
+                <th class="py-3 px-4 font-semibold">Name</th>
+                <th class="py-3 px-4 font-semibold">Email</th>
+                <th class="py-3 px-4 font-semibold">Subject</th>
+                <th class="py-3 px-4 font-semibold">Message</th>
+              </tr>
+            </thead>
+            <tbody id="contacts-table-body" class="text-sm">
+              <tr><td colspan="5" class="py-4 px-4 text-center text-gray-500">Loading messages...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      </main>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const checkSupabase = setInterval(() => {
+        if (window.supabase) {
+          clearInterval(checkSupabase); 
+          
+          const supabaseUrl = 'https://hicowukbjsbpuebquqbh.supabase.co';
+          const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0';
+          const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+          const loginScreen = document.getElementById('login-screen');
+          const dashboardScreen = document.getElementById('dashboard-screen');
+          
+          // Check if already logged in
+          supabase.auth.getSession().then(({ data: { session } }) => {
+            if (session) { loadDashboard(); }
+          });
+
+          // Login Form Handling
+          document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('login-btn');
+            const errorMsg = document.getElementById('login-error');
+            
+            btn.innerText = "Authenticating...";
+            errorMsg.classList.add('hidden');
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+            if (error) {
+              errorMsg.innerText = error.message;
+              errorMsg.classList.remove('hidden');
+              btn.innerText = "Log In";
+            } else {
+              loadDashboard();
+            }
+          });
+
+          // Logout Handling
+          document.getElementById('logout-btn').addEventListener('click', async () => {
+            await supabase.auth.signOut();
+            dashboardScreen.classList.add('hidden');
+            loginScreen.classList.remove('hidden');
+          });
+
+          // Load Data
+          async function loadDashboard() {
+            loginScreen.classList.add('hidden');
+            dashboardScreen.classList.remove('hidden');
+
+            // Fetch Contacts
+            const { data, error } = await supabase.from('contact_submissions').select('*').order('created_at', { ascending: false });
+            const tbody = document.getElementById('contacts-table-body');
+            
+            if (error) {
+              tbody.innerHTML = `<tr><td colspan="5" class="py-4 px-4 text-center text-red-500">Error loading data.</td></tr>`;
+              return;
+            }
+
+            if (data.length === 0) {
+              tbody.innerHTML = `<tr><td colspan="5" class="py-4 px-4 text-center text-gray-500">No messages found.</td></tr>`;
+              return;
+            }
+
+            tbody.innerHTML = '';
+            data.forEach(msg => {
+              const date = new Date(msg.created_at).toLocaleDateString();
+              tbody.innerHTML += `
+                <tr class="border-b hover:bg-gray-50">
+                  <td class="py-3 px-4 whitespace-nowrap">${date}</td>
+                  <td class="py-3 px-4 font-semibold">${msg.name}</td>
+                  <td class="py-3 px-4 text-blue-600"><a href="mailto:${msg.email}">${msg.email}</a></td>
+                  <td class="py-3 px-4">${msg.subject}</td>
+                  <td class="py-3 px-4 text-gray-600 max-w-xs truncate" title="${msg.message}">${msg.message}</td>
+                </tr>
+              `;
+            });
+          }
+        }
+      }, 100);
+    });
+  </script>
+</body>
+</html>
