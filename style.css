@@ -1,0 +1,39 @@
+/* style.css */
+
+/* --- Custom Loader Animation --- */
+.loader-spinner {
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top: 4px solid #a6192e; /* TNG Crimson */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* --- Loader Fade Out --- */
+.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+}
+
+/* --- Global Tweaks --- */
+html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+/* Social Icon Hover Effects */
+.social-icon {
+  transition: color 0.3s ease;
+}
+.social-icon:hover {
+  color: #a6192e; /* Changes from light blue to TNG Crimson on hover */
+}
