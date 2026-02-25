@@ -1,417 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Governance | Tyler Nicholas Group (TNG)</title>
-
-    <link rel="icon" type="image/png" href="../image/logo.png">
-
-    <style>
-        /* ==================== CORPORATE CSS (Reused) ==================== */
-        :root {
-            --tng-blue: #001F4C;
-            --tng-maroon: #A81F27;
-            --tng-silver: #C0C0C0;
-            --tng-light-gray: #f4f4f4;
-            --tng-text-dark: #333;
-            --tng-text-light: #ffffff;
-            --transition-speed: 0.8s ease-out;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--tng-text-dark);
-            background-color: var(--tng-light-gray);
-            line-height: 1.6;
-        }
-
-        /* === HEADER & NAVIGATION === */
-        header {
-            background-color: var(--tng-blue);
-            color: var(--tng-text-light);
-            padding: 15px 40px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: var(--tng-silver);
-            text-decoration: none;
-            letter-spacing: 1px;
-            transition: color 0.3s;
-        }
-
-        .logo:hover {
-            color: var(--tng-maroon);
-        }
-
-        nav a, .more-menu-toggle {
-            color: var(--tng-silver);
-            text-decoration: none;
-            padding: 10px 15px;
-            margin-left: 10px;
-            font-size: 0.95em;
-            font-weight: 500;
-            transition: color 0.3s, background-color 0.3s;
-            border-radius: 4px;
-        }
-
-        nav a:hover {
-            color: var(--tng-text-light);
-            background-color: rgba(168, 31, 39, 0.5); 
-        }
-
-        /* More Menu Dropdown */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: var(--tng-blue);
-            min-width: 200px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-top: 3px solid var(--tng-maroon);
-        }
-
-        .dropdown-content a {
-            color: var(--tng-silver);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            margin: 0;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .dropdown-content a:hover {
-            background-color: var(--tng-maroon);
-            color: var(--tng-text-light);
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* === MAIN CONTENT LAYOUT === */
-        main {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-
-        .hero-section {
-            background: linear-gradient(135deg, var(--tng-blue), #002D62);
-            color: var(--tng-light-gray);
-            padding: 80px 40px;
-            text-align: center;
-            border-radius: 12px;
-            margin-bottom: 50px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            /* Animation Target */
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity var(--transition-speed), transform var(--transition-speed);
-        }
-
-        .hero-section.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .content-section {
-            padding: 40px 0;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .content-section h2 {
-            font-size: 2em;
-            color: var(--tng-maroon);
-            margin-bottom: 30px;
-            border-bottom: 2px solid #ddd;
-            display: inline-block;
-            padding-bottom: 5px;
-        }
-        
-        /* === GOVERNANCE TILES === */
-        .governance-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .gov-tile {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            border-left: 5px solid var(--tng-blue);
-            text-align: left;
-            transition: transform 0.3s, box-shadow 0.3s;
-            
-            /* Animation Target */
-            opacity: 0;
-            transform: scale(0.98);
-            transition: opacity var(--transition-speed), transform var(--transition-speed);
-        }
-        
-        .gov-tile:hover {
-            transform: scale(1.01);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .gov-tile.revealed {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .gov-tile h3 {
-            color: var(--tng-blue);
-            margin-top: 0;
-            font-size: 1.4em;
-            border-bottom: 1px solid var(--tng-light-gray);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-
-        .gov-tile p {
-            font-size: 0.95em;
-            color: #555;
-        }
-        
-        .gov-tile ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .gov-tile ul li {
-            margin-bottom: 10px;
-            font-weight: 500;
-        }
-        
-        .gov-tile a {
-            color: var(--tng-maroon);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-        
-        .gov-tile a:hover {
-            color: var(--tng-blue);
-        }
-
-        /* === CORPORATE FOOTER === */
-        footer {
-            background-color: var(--tng-blue);
-            color: var(--tng-silver);
-            padding: 40px 0 0;
-            font-size: 0.85em;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
-            margin-top: 50px;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 40px 30px;
-            flex-wrap: wrap;
-        }
-
-        .footer-section {
-            width: 28%;
-            min-width: 250px;
-            margin-bottom: 20px;
-        }
-
-        .footer-section h4 {
-            color: var(--tng-maroon);
-            font-size: 1.1em;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 5px;
-        }
-
-        .footer-section a {
-            color: var(--tng-silver);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 8px;
-            transition: color 0.3s;
-        }
-
-        .footer-section a:hover {
-            color: var(--tng-text-light);
-        }
-        
-        .footer-section p {
-            margin-top: 0;
-        }
-
-        .footer-bottom {
-            background-color: #00122E; /* Darker Blue */
-            text-align: center;
-            padding: 15px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Governance | Tyler Nicholas Group</title>
+  <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
+  <script src="https://cdn.tailwindcss.com" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../style.css">
 </head>
-<body>
+<body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen" id="body">
 
-    <header>
-        <div class="navbar">
-            <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
-            <nav>
-                <a href="/">Home</a>
-                <a href="/about">About Us</a>
-                <a href="/companies">Our Companies</a>
-                <a href="/people">Our People</a>
-                <a href="/governance" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Governance</a>
-                <a href="/careers">Careers</a>
-                
-                <div class="dropdown">
-                    <button class="more-menu-toggle">More</button>
-                    <div class="dropdown-content">
-                        <a href="/governance/board-of-directors.html">Board of Directors</a>
-                        <a href="/governance/code-of-conduct">Code of Conduct</a>
-                        <a href="/governance/reports">Financial Reporting</a>
-                        <a href="/contact/investors">Investor Relations</a>
-                        <a href="/contact/media">Media & Press</a>
-                    </div>
-                </div>
-            </nav>
+  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md">
+    <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
+    <div class="hidden md:flex space-x-6 text-sm items-center">
+      <a href="../" class="hover:text-gray-300 transition-colors">Home</a>
+      <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
+      <a href="../companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
+      <a href="../people/" class="hover:text-gray-300 transition-colors">Our People</a>
+      <a href="#" class="hover:text-gray-300 border-b-2 border-[#a6192e] pb-1">Governance</a>
+      <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
+      <a href="../contact/" class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors">More</a>
+    </div>
+  </nav>
+
+  <div class="bg-[#001f3f] text-white py-16 px-6 md:px-12 text-center">
+    <h1 class="text-3xl md:text-5xl font-bold mb-4">Corporate Governance</h1>
+    <p class="text-gray-300 max-w-2xl mx-auto md:text-lg">Maintaining structural integrity, accountability, and ethical standards across our global portfolio.</p>
+  </div>
+
+  <main class="flex-grow max-w-5xl mx-auto py-16 px-6 md:px-12 w-full">
+    <div class="bg-white p-10 rounded-xl shadow-md border-t-4 border-[#a6192e]">
+      <h2 class="text-2xl font-bold text-[#001f3f] mb-4">Centralized Oversight, Decentralized Execution</h2>
+      <p class="text-gray-700 leading-relaxed mb-8">At Tyler Nicholas Group, we believe in empowering our subsidiaries to operate with agility while maintaining strict compliance and strategic alignment at the holding company level. TNG provides the structural foundation—handling legal compliance, capital allocation, and top-tier security—allowing our individual companies to focus solely on growth and service execution.</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+        <div>
+          <h3 class="text-lg font-bold text-[#001f3f] mb-2"><i class="fa-solid fa-scale-balanced text-[#a6192e] mr-2"></i> Compliance & Ethics</h3>
+          <p class="text-sm text-gray-600">We operate under a rigorous ethical framework ensuring all ventures, from digital storefronts to non-profit foundations, meet international legal and regulatory standards.</p>
         </div>
-    </header>
-
-    <main>
-        <section class="hero-section anim-target">
-            <h1>Commitment to Ethical Leadership and Compliance.</h1>
-            <p>Our governance framework ensures accountability, transparency, and the highest standards of integrity in all TNG operations worldwide.</p>
-        </section>
-
-        <section class="content-section">
-            <h2>Pillars of TNG Governance</h2>
-            <div class="governance-grid">
-                
-                <div class="gov-tile anim-target">
-                    <h3>Board and Executive Oversight</h3>
-                    <p>The Board of Directors is responsible for the overall strategic direction and supervision of the Group's management, ensuring our actions align with stakeholder interests.</p>
-                    <ul>
-                        <li><a href="/governance/board">View Board of Directors Mandate &rarr;</a></li>
-                        <li><a href="/people">Meet Our Leadership Team &rarr;</a></li>
-                    </ul>
-                </div>
-
-                <div class="gov-tile anim-target" style="transition-delay: 0.1s;">
-                    <h3>Policies and Ethical Compliance</h3>
-                    <p>We maintain a rigorous set of policies to enforce ethical behavior, legal compliance, and a workplace free of conflict of interest.</p>
-                    <ul>
-                        <li><a href="/governance/code-of-conduct">Download Code of Conduct &rarr;</a></li>
-                        <li><a href="/privacy">Read Privacy Policy &rarr;</a></li>
-                    </ul>
-                </div>
-
-                <div class="gov-tile anim-target" style="transition-delay: 0.2s;">
-                    <h3>Financial and Regulatory Reporting</h3>
-                    <p>TNG is committed to timely and accurate public disclosure of our financial performance and regulatory compliance status.</p>
-                    <ul>
-                        <li><a href="/governance/reports">Access Financial Reports (PDF) &rarr;</a></li>
-                        <li><a href="/contact/investors">Investor Relations Contact &rarr;</a></li>
-                    </ul>
-                </div>
-
-            </div>
-        </section>
-        
-        <section class="content-section" style="margin-top: 50px;">
-            <h2>Ethics & Integrity Hotline</h2>
-            <p style="max-width: 800px; margin: 0 auto 30px; color: #555;">TNG maintains a confidential reporting channel for all stakeholders to report potential violations of our Code of Conduct, legal non-compliance, or unethical behavior without fear of retaliation.</p>
-            <div style="background-color: #fff; padding: 30px; border-radius: 8px; max-width: 500px; margin: 0 auto; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);">
-                <h3 style="color: var(--tng-maroon); margin-top: 0;">Report a Concern</h3>
-                <p>Hotline Email: <a href="mailto:ethics@tylernicholasgroup.com" style="color: var(--tng-blue);">ethics@tylernicholasgroup.com</a></p>
-                <p>All submissions are treated confidentially.</p>
-            </div>
-        </section>
-        
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>TNG Global Headquarters</h4>
-                <p>Tyler Nicholas Group operates as a remote-first organization.</p>
-                <p>Official Headquarters & Group Communications:<br>
-                <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
-                <p>General Inquiries:<br>
-                <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="/about">About TNG</a>
-                <a href="/companies">Our Companies</a>
-                <a href="/people">Our People</a>
-                <a href="/governance">Governance</a>
-                <a href="/careers">Careers</a>
-            </div>
-            <div class="footer-section">
-                <h4>Legal & Policy</h4>
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/terms">Terms of Use</a>
-                <a href="/governance/legal">Legal & Compliance</a>
-                <a href="/accessibility">Accessibility Statement</a>
-                <a href="/governance/reports">Financial Reports</a>
-            </div>
+        <div>
+          <h3 class="text-lg font-bold text-[#001f3f] mb-2"><i class="fa-solid fa-shield-halved text-[#a6192e] mr-2"></i> Data & Security</h3>
+          <p class="text-sm text-gray-600">Centralized IT governance ensures robust data protection and infrastructure resilience across all platforms and user databases.</p>
         </div>
-        <div class="footer-bottom">
-            &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
-        </div>
-    </footer>
+      </div>
+    </div>
+  </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const targets = document.querySelectorAll('.anim-target');
-            const options = {
-                root: null, 
-                rootMargin: '0px',
-                threshold: 0.1 
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, options);
-
-            targets.forEach(target => {
-                observer.observe(target);
-            });
-        });
-    </script>
-
+  <footer class="bg-[#001f3f] text-white py-12 px-6 md:px-12 mt-auto text-center md:text-left border-t border-blue-900">
+      <p class="text-xs text-gray-400 mt-4">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
+  </footer>
 </body>
 </html>
