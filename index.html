@@ -11,36 +11,38 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
-    /* Custom fade-out class for the loading screen */
-    .fade-out {
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    /* Smooth corporate breathing animation for the logo */
+    @keyframes subtle-breathe {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+    }
+    .corporate-load {
+      animation: subtle-breathe 2s ease-in-out infinite;
     }
   </style>
 </head>
 <body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen overflow-hidden" id="body">
 
-  <div id="loading-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-[#001f3f]">
+  <div id="loading-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-[#001f3f]" style="transition: opacity 0.8s ease, visibility 0.8s ease;">
     <img 
       src="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" 
       alt="TNG Logo" 
-      class="w-48 md:w-64 animate-pulse duration-1000"
+      class="w-48 md:w-64 corporate-load"
     />
   </div>
 
-  <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4"></div>
+  <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
 
-  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center">
+  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md">
     <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
     <div class="hidden md:flex space-x-6 text-sm items-center">
-      <a href="index.html" class="hover:text-gray-300 border-b-2 border-[#a6192e] pb-1">Home</a>
-      <a href="about.html" class="hover:text-gray-300">About Us</a>
-      <a href="companies.html" class="hover:text-gray-300">Our Companies</a>
-      <a href="people.html" class="hover:text-gray-300">Our People</a>
-      <a href="governance.html" class="hover:text-gray-300">Governance</a>
-      <a href="careers.html" class="hover:text-gray-300">Careers</a>
-      <a href="contact.html" class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors">More</a>
+      <a href="/" class="hover:text-gray-300 border-b-2 border-[#a6192e] pb-1">Home</a>
+      <a href="about/" class="hover:text-gray-300 transition-colors">About Us</a>
+      <a href="companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
+      <a href="people/" class="hover:text-gray-300 transition-colors">Our People</a>
+      <a href="governance/" class="hover:text-gray-300 transition-colors">Governance</a>
+      <a href="careers/" class="hover:text-gray-300 transition-colors">Careers</a>
+      <a href="contact/" class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors">More</a>
     </div>
   </nav>
 
@@ -85,10 +87,10 @@
 
       <div class="flex flex-col space-y-2 text-sm">
         <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Explore</h4>
-        <a href="about.html" class="hover:text-gray-300 transition-colors">About Us</a>
-        <a href="companies.html" class="hover:text-gray-300 transition-colors">Our Companies</a>
-        <a href="careers.html" class="hover:text-gray-300 transition-colors">Careers</a>
-        <a href="contact.html" class="hover:text-gray-300 transition-colors">Contact Us</a>
+        <a href="about/" class="hover:text-gray-300 transition-colors">About Us</a>
+        <a href="companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
+        <a href="careers/" class="hover:text-gray-300 transition-colors">Careers</a>
+        <a href="contact/" class="hover:text-gray-300 transition-colors">Contact Us</a>
         <a href="https://tyler.tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="text-[#a6192e] font-bold hover:underline pt-2">
           Meet Tyler Nicholas →
         </a>
@@ -107,17 +109,20 @@
   </footer>
 
   <script>
-    // 1. Loading Screen Logic
-    window.addEventListener('load', () => {
+    // 1. Reliable Loading Screen Logic
+    document.addEventListener("DOMContentLoaded", () => {
+      const loader = document.getElementById('loading-screen');
+      const body = document.getElementById('body');
+      
+      // Force a 1.5-second corporate loading animation, then fade out
       setTimeout(() => {
-        const loader = document.getElementById('loading-screen');
-        const body = document.getElementById('body');
-        loader.classList.add('fade-out');
-        body.classList.remove('overflow-hidden'); // Allow scrolling again
+        loader.style.opacity = '0';
+        loader.style.visibility = 'hidden';
+        body.classList.remove('overflow-hidden'); // Re-enable scrolling
         
-        // Remove from DOM after fade completes
-        setTimeout(() => loader.remove(), 500); 
-      }, 2500); // 2.5 seconds
+        // Remove from DOM completely after fade finishes
+        setTimeout(() => loader.remove(), 800); 
+      }, 1500);
     });
 
     // 2. Seychelles Live Clock Logic
@@ -133,7 +138,7 @@
       timeElement.innerText = new Date().toLocaleTimeString('en-US', options);
     }
     setInterval(updateSeychellesTime, 1000);
-    updateSeychellesTime(); // Call immediately on load
+    updateSeychellesTime();
 
     // 3. Supabase Integration for Announcement Bar
     const supabaseUrl = 'https://hicowukbjsbpuebquqbh.supabase.co';
@@ -141,25 +146,28 @@
     const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
     async function fetchAnnouncement() {
-      const { data, error } = await supabase
-        .from('announcements')
-        .select('*')
-        .eq('is_active', true)
-        .single();
+      try {
+        const { data, error } = await supabase
+          .from('announcements')
+          .select('*')
+          .eq('is_active', true)
+          .single();
 
-      if (data) {
-        const bar = document.getElementById('announcement-bar');
-        bar.classList.remove('hidden'); // Show the bar
-        
-        if (data.link) {
-          bar.innerHTML = `<a href="${data.link}" class="hover:underline block w-full">${data.message}</a>`;
-        } else {
-          bar.innerText = data.message;
+        if (data && !error) {
+          const bar = document.getElementById('announcement-bar');
+          bar.classList.remove('hidden');
+          
+          if (data.link) {
+            bar.innerHTML = `<a href="${data.link}" class="hover:underline block w-full">${data.message}</a>`;
+          } else {
+            bar.innerText = data.message;
+          }
         }
+      } catch (err) {
+        console.error("No active announcements or error fetching:", err);
       }
     }
     
-    // Fetch immediately
     fetchAnnouncement();
   </script>
 </body>
