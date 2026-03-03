@@ -18,8 +18,7 @@
   </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="../style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 </head>
@@ -27,8 +26,13 @@
 
   <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
 
-  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md">
+  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md relative z-50">
     <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
+    
+    <a href="../sitemap/" class="md:hidden bg-white text-[#001f3f] px-4 py-2 rounded text-sm font-bold shadow hover:bg-gray-200 transition-colors flex items-center">
+      <i class="fa-solid fa-list mr-2"></i> Menu
+    </a>
+
     <div class="hidden md:flex space-x-6 text-sm items-center">
       <a href="../" class="hover:text-gray-300 transition-colors">Home</a>
       <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
@@ -36,7 +40,19 @@
       <a href="#" class="hover:text-gray-300 border-b-2 border-[#a6192e] pb-1">Our People</a>
       <a href="../governance/" class="hover:text-gray-300 transition-colors">Governance</a>
       <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
-      <a href="../contact/" class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors">More</a>
+      
+      <div class="relative group">
+        <button class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors flex items-center cursor-pointer">
+          More <i class="fa-solid fa-chevron-down ml-2 text-[10px]"></i>
+        </button>
+        <div class="absolute right-0 mt-2 w-56 bg-white text-gray-900 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden">
+          <a href="../contact/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b font-semibold">Contact & FAQ</a>
+          <a href="../news/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">News & Press Releases</a>
+          <a href="../trust-security/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Trust & Security</a>
+          <a href="../status/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Live System Status</a>
+          <a href="../alumni/" class="block px-4 py-3 hover:bg-gray-100 text-sm">Corporate Alumni Network</a>
+        </div>
+      </div>
     </div>
   </nav>
 
@@ -45,192 +61,314 @@
     <p class="text-gray-300 max-w-2xl mx-auto md:text-lg">The visionary executives and dedicated heads of departments driving the Tyler Nicholas Group forward.</p>
   </div>
 
-  <main class="flex-grow max-w-7xl mx-auto py-16 px-6 md:px-12 w-full">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-      
-      <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow">
-        <div class="bg-[#001f3f] h-24 w-full"></div>
-        <div class="flex justify-center -mt-12">
-          <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Tyler Nicholas" class="h-24 w-24 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-[#001f3f]">Tyler Nicholas</h3>
-          <p class="text-[#a6192e] font-semibold text-sm mb-1">Chairman of The Board</p>
-          <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">Tyler Nicholas Group</p>
-          <p class="text-gray-600 text-sm leading-relaxed">Providing strategic oversight and visionary leadership across the entire portfolio of TNG subsidiaries globally.</p>
+  <main class="flex-grow max-w-7xl mx-auto py-16 px-6 md:px-12 w-full space-y-20">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-bold text-[#001f3f] mb-4">A Global Force of Talent</h2>
+        <p class="text-gray-600 leading-relaxed mb-4">Our greatest asset is our people. The Tyler Nicholas Group brings together a diverse, global network of visionary developers, strategic operators, and passionate creatives.</p>
+        <p class="text-gray-600 leading-relaxed">By fostering an inclusive and highly dynamic culture across all of our subsidiaries, we turn unique, diverse perspectives into industry-defining innovations.</p>
+      </div>
+      <div class="bg-white p-8 rounded-xl shadow-lg border-l-4 border-[#a6192e] relative overflow-hidden">
+        <i class="fa-solid fa-users absolute -right-6 -bottom-6 text-8xl text-gray-50 opacity-50 pointer-events-none"></i>
+        <div class="relative z-10">
+          <h3 class="text-xl font-bold text-[#001f3f] mb-3">A Message From Human Resources</h3>
+          <p class="text-gray-700 italic text-sm md:text-base leading-relaxed mb-4">"At the Tyler Nicholas Group, we believe that true leadership is defined by passion, not just a paycheck. Whether you join us in a top-tier executive capacity or as a dedicated, unpaid volunteer for one of our foundational subsidiaries, you are becoming part of a global family. We offer an unparalleled environment to hone your skills, build your professional network, and shape the digital frontier. Your time here is an investment in your future—come build something extraordinary with us."</p>
+          <a href="../careers/" class="text-[#a6192e] font-bold text-sm hover:underline flex items-center">View Open Roles <i class="fa-solid fa-arrow-right ml-2"></i></a>
         </div>
       </div>
-
-      <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow">
-        <div class="bg-[#001f3f] h-24 w-full"></div>
-        <div class="flex justify-center -mt-12">
-          <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Executive Name" class="h-24 w-24 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-[#001f3f]">Kareem Malhas</h3>
-          <p class="text-[#a6192e] font-semibold text-sm mb-1">Chairman of The Board</p>
-          <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">Emirates Group Roblox</p>
-          <p class="text-gray-600 text-sm leading-relaxed">Oversees governance, executive accountability, and long-term organizational integrity.</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow">
-        <div class="bg-[#001f3f] h-24 w-full"></div>
-        <div class="flex justify-center -mt-12">
-          <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Executive Name" class="h-24 w-24 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-[#001f3f]">Dearen Porice</h3>
-          <p class="text-[#a6192e] font-semibold text-sm mb-1">Founder & General Manager</p>
-          <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">BlueWave Digital</p>
-          <p class="text-gray-600 text-sm leading-relaxed">Leading the entire daily operations of BlueWave-Digital.</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow">
-        <div class="bg-[#001f3f] h-24 w-full"></div>
-        <div class="flex justify-center -mt-12">
-          <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Executive Name" class="h-24 w-24 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-[#001f3f]">Fishy Wishy</h3>
-          <p class="text-[#a6192e] font-semibold text-sm mb-1">Vice Chairman of The Board</p>
-          <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">Emirates Group Roblox</p>
-          <p class="text-gray-600 text-sm leading-relaxed">Supports board leadership while promoting unity, continuity, and organizational values.</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow">
-        <div class="bg-[#001f3f] h-24 w-full"></div>
-        <div class="flex justify-center -mt-12">
-          <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Executive Name" class="h-24 w-24 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-[#001f3f]">Remo Perissinotto</h3>
-          <p class="text-[#a6192e] font-semibold text-sm mb-1">President & Executive Director</p>
-          <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">Emirates Group Roblox</p>
-          <p class="text-gray-600 text-sm leading-relaxed">Leads daily operations and executes the group’s strategic vision across all divisions.</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow">
-        <div class="bg-[#001f3f] h-24 w-full"></div>
-        <div class="flex justify-center -mt-12">
-          <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Executive Name" class="h-24 w-24 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-[#001f3f]">Ibaad Hassan</h3>
-          <p class="text-[#a6192e] font-semibold text-sm mb-1">Vice President</p>
-          <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">Emirates Group Roblox</p>
-          <p class="text-gray-600 text-sm leading-relaxed">Supports executive leadership by ensuring efficient operations and professional standards.</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow">
-        <div class="bg-[#001f3f] h-24 w-full"></div>
-        <div class="flex justify-center -mt-12">
-          <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Executive Name" class="h-24 w-24 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-[#001f3f]">Daniel Thompson</h3>
-          <p class="text-[#a6192e] font-semibold text-sm mb-1">Chief Executive Officer</p>
-          <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">Emirates Group Roblox</p>
-          <p class="text-gray-600 text-sm leading-relaxed">Leads overall strategy, direction, and performance of Emirates Group Roblox.</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow">
-        <div class="bg-[#001f3f] h-24 w-full"></div>
-        <div class="flex justify-center -mt-12">
-          <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Executive Name" class="h-24 w-24 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-[#001f3f]">Kayden Pherson</h3>
-          <p class="text-[#a6192e] font-semibold text-sm mb-1">Chief Operating & Financial Officer</p>
-          <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">Emirates Group Roblox</p>
-          <p class="text-gray-600 text-sm leading-relaxed">Oversees operational execution and ensures organizational efficiency.</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow">
-        <div class="bg-[#001f3f] h-24 w-full"></div>
-        <div class="flex justify-center -mt-12">
-          <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Executive Name" class="h-24 w-24 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-[#001f3f]">William Alexander Cross</h3>
-          <p class="text-[#a6192e] font-semibold text-sm mb-1">Chief Human Resources & Legal Officer</p>
-          <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">Emirates Group Roblox</p>
-          <p class="text-gray-600 text-sm leading-relaxed">Leads HR and legal compliance to maintain standards, performance, and professionalism.</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow">
-        <div class="bg-[#001f3f] h-24 w-full"></div>
-        <div class="flex justify-center -mt-12">
-          <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Executive Name" class="h-24 w-24 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-[#001f3f]">Hani Muhammed</h3>
-          <p class="text-[#a6192e] font-semibold text-sm mb-1">Chief Commercial & Marketing Officer</p>
-          <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">Emirates Group Roblox</p>
-          <p class="text-gray-600 text-sm leading-relaxed">Leads branding, marketing, and partnerships to grow community presence.</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow">
-        <div class="bg-[#001f3f] h-24 w-full"></div>
-        <div class="flex justify-center -mt-12">
-          <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Executive Name" class="h-24 w-24 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-[#001f3f]">Roman Gajdos</h3>
-          <p class="text-[#a6192e] font-semibold text-sm mb-1">Chief of Staff</p>
-          <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">Emirates Group Roblox</p>
-          <p class="text-gray-600 text-sm leading-relaxed">Coordinates executive operations and ensures strategic priorities are delivered effectively.</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow">
-        <div class="bg-[#001f3f] h-24 w-full"></div>
-        <div class="flex justify-center -mt-12">
-          <img src="https://img.freepik.com/premium-vector/pretty-young-business-boss-woman-vector-silhouette_1273985-2602.jpg?w=360" alt="Executive Name" class="h-24 w-24 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-[#001f3f]">Ash Khadija</h3>
-          <p class="text-[#a6192e] font-semibold text-sm mb-1">Former President</p>
-          <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">Fly Dubai Roblox</p>
-          <p class="text-gray-600 text-sm leading-relaxed">Orchestrating executive operations and delivering strategic priorities with institutional precision.</p>
-        </div>
-      </div>
-
     </div>
+
+    <hr class="border-gray-200">
+
+    <div>
+      <div class="mb-10 border-b-2 border-gray-200 pb-4">
+        <h2 class="text-3xl font-bold text-[#001f3f]">The Executive Board</h2>
+        <p class="text-gray-600 mt-2">The highest level of governance shaping our global strategy.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        
+        <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
+          <div class="bg-[#001f3f] h-24 w-full"></div>
+          <div class="flex justify-center -mt-12 relative">
+            <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Tyler Nicholas" class="h-24 w-24 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-xl font-bold text-[#001f3f]">Tyler Nicholas</h3>
+            <p class="text-[#a6192e] font-semibold text-sm mb-1">Chairman of The Board</p>
+            <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">Tyler Nicholas Group</p>
+            <p class="text-gray-600 text-sm leading-relaxed flex-grow">Providing strategic oversight and visionary leadership across the entire portfolio of TNG subsidiaries globally.</p>
+            <div class="mt-6 pt-4 border-t border-gray-100 flex justify-center space-x-4">
+              <a href="404.html" class="text-gray-400 hover:text-[#0a66c2] transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
+              <a href="404.html" class="text-gray-400 hover:text-[#001f3f] transition-colors"><i class="fa-solid fa-globe text-xl"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
+          <div class="bg-[#001f3f] h-24 w-full"></div>
+          <div class="flex justify-center -mt-12 relative">
+            <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Kareem Malhas" class="h-24 w-24 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-xl font-bold text-[#001f3f]">Kareem Malhas</h3>
+            <p class="text-[#a6192e] font-semibold text-sm mb-1">Chairman of The Board</p>
+            <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">Emirates Group Roblox</p>
+            <p class="text-gray-600 text-sm leading-relaxed flex-grow">Oversees governance, executive accountability, and long-term organizational integrity.</p>
+            <div class="mt-6 pt-4 border-t border-gray-100 flex justify-center space-x-4">
+              <a href="404.html" class="text-gray-400 hover:text-[#0a66c2] transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
+              <a href="404.html" class="text-gray-400 hover:text-[#001f3f] transition-colors"><i class="fa-solid fa-globe text-xl"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
+          <div class="bg-[#001f3f] h-24 w-full"></div>
+          <div class="flex justify-center -mt-12 relative">
+            <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Fishy Wishy" class="h-24 w-24 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-xl font-bold text-[#001f3f]">Fishy Wishy</h3>
+            <p class="text-[#a6192e] font-semibold text-sm mb-1">Vice Chairman of The Board</p>
+            <p class="text-gray-500 text-xs uppercase tracking-wide mb-4">Emirates Group Roblox</p>
+            <p class="text-gray-600 text-sm leading-relaxed flex-grow">Supports board leadership while promoting unity, continuity, and organizational values.</p>
+            <div class="mt-6 pt-4 border-t border-gray-100 flex justify-center space-x-4">
+              <a href="404.html" class="text-gray-400 hover:text-[#0a66c2] transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
+              <a href="404.html" class="text-gray-400 hover:text-[#001f3f] transition-colors"><i class="fa-solid fa-globe text-xl"></i></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+      <div class="mb-10 border-b-2 border-gray-200 pb-4">
+        <h2 class="text-3xl font-bold text-[#001f3f]">Subsidiary Leadership</h2>
+        <p class="text-gray-600 mt-2">The operational masters executing our vision on the ground.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
+          <div class="bg-[#001f3f] h-20 w-full"></div>
+          <div class="flex justify-center -mt-10 relative">
+            <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Dearen Porice" class="h-20 w-20 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-[#001f3f]">Dearen Porice</h3>
+            <p class="text-[#a6192e] font-semibold text-xs mb-1">Founder & General Manager</p>
+            <p class="text-gray-500 text-[10px] uppercase tracking-wide mb-3">BlueWave Digital</p>
+            <p class="text-gray-600 text-xs leading-relaxed flex-grow">Leading the entire daily operations of BlueWave Digital.</p>
+            <div class="mt-4 pt-3 border-t border-gray-100 flex justify-center space-x-4">
+              <a href="404.html" class="text-gray-400 hover:text-[#0a66c2] transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
+              <a href="404.html" class="text-gray-400 hover:text-[#001f3f] transition-colors"><i class="fa-solid fa-globe text-lg"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
+          <div class="bg-[#001f3f] h-20 w-full"></div>
+          <div class="flex justify-center -mt-10 relative">
+            <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Remo Perissinotto" class="h-20 w-20 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-[#001f3f]">Remo Perissinotto</h3>
+            <p class="text-[#a6192e] font-semibold text-xs mb-1">President & Exec Director</p>
+            <p class="text-gray-500 text-[10px] uppercase tracking-wide mb-3">Emirates Group Roblox</p>
+            <p class="text-gray-600 text-xs leading-relaxed flex-grow">Leads daily operations and executes strategic vision across all divisions.</p>
+            <div class="mt-4 pt-3 border-t border-gray-100 flex justify-center space-x-4">
+              <a href="404.html" class="text-gray-400 hover:text-[#0a66c2] transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
+              <a href="404.html" class="text-gray-400 hover:text-[#001f3f] transition-colors"><i class="fa-solid fa-globe text-lg"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
+          <div class="bg-[#001f3f] h-20 w-full"></div>
+          <div class="flex justify-center -mt-10 relative">
+            <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Ibaad Hassan" class="h-20 w-20 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-[#001f3f]">Ibaad Hassan</h3>
+            <p class="text-[#a6192e] font-semibold text-xs mb-1">Vice President</p>
+            <p class="text-gray-500 text-[10px] uppercase tracking-wide mb-3">Emirates Group Roblox</p>
+            <p class="text-gray-600 text-xs leading-relaxed flex-grow">Supports executive leadership by ensuring efficient operations and standards.</p>
+            <div class="mt-4 pt-3 border-t border-gray-100 flex justify-center space-x-4">
+              <a href="404.html" class="text-gray-400 hover:text-[#0a66c2] transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
+              <a href="404.html" class="text-gray-400 hover:text-[#001f3f] transition-colors"><i class="fa-solid fa-globe text-lg"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
+          <div class="bg-[#001f3f] h-20 w-full"></div>
+          <div class="flex justify-center -mt-10 relative">
+            <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Daniel Thompson" class="h-20 w-20 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-[#001f3f]">Daniel Thompson</h3>
+            <p class="text-[#a6192e] font-semibold text-xs mb-1">Chief Executive Officer</p>
+            <p class="text-gray-500 text-[10px] uppercase tracking-wide mb-3">Emirates Group Roblox</p>
+            <p class="text-gray-600 text-xs leading-relaxed flex-grow">Leads overall strategy, direction, and performance of the organization.</p>
+            <div class="mt-4 pt-3 border-t border-gray-100 flex justify-center space-x-4">
+              <a href="404.html" class="text-gray-400 hover:text-[#0a66c2] transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
+              <a href="404.html" class="text-gray-400 hover:text-[#001f3f] transition-colors"><i class="fa-solid fa-globe text-lg"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
+          <div class="bg-[#001f3f] h-20 w-full"></div>
+          <div class="flex justify-center -mt-10 relative">
+            <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Kayden Pherson" class="h-20 w-20 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-[#001f3f]">Kayden Pherson</h3>
+            <p class="text-[#a6192e] font-semibold text-xs mb-1">Chief Operating & Financial Officer</p>
+            <p class="text-gray-500 text-[10px] uppercase tracking-wide mb-3">Emirates Group Roblox</p>
+            <p class="text-gray-600 text-xs leading-relaxed flex-grow">Oversees operational execution and ensures overarching organizational efficiency.</p>
+            <div class="mt-4 pt-3 border-t border-gray-100 flex justify-center space-x-4">
+              <a href="404.html" class="text-gray-400 hover:text-[#0a66c2] transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
+              <a href="404.html" class="text-gray-400 hover:text-[#001f3f] transition-colors"><i class="fa-solid fa-globe text-lg"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
+          <div class="bg-[#001f3f] h-20 w-full"></div>
+          <div class="flex justify-center -mt-10 relative">
+            <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="William Alexander Cross" class="h-20 w-20 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-[#001f3f]">William Alexander Cross</h3>
+            <p class="text-[#a6192e] font-semibold text-xs mb-1">Chief HR & Legal Officer</p>
+            <p class="text-gray-500 text-[10px] uppercase tracking-wide mb-3">Emirates Group Roblox</p>
+            <p class="text-gray-600 text-xs leading-relaxed flex-grow">Leads HR and legal compliance to maintain standards and professionalism.</p>
+            <div class="mt-4 pt-3 border-t border-gray-100 flex justify-center space-x-4">
+              <a href="404.html" class="text-gray-400 hover:text-[#0a66c2] transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
+              <a href="404.html" class="text-gray-400 hover:text-[#001f3f] transition-colors"><i class="fa-solid fa-globe text-lg"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
+          <div class="bg-[#001f3f] h-20 w-full"></div>
+          <div class="flex justify-center -mt-10 relative">
+            <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Hani Muhammed" class="h-20 w-20 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-[#001f3f]">Hani Muhammed</h3>
+            <p class="text-[#a6192e] font-semibold text-xs mb-1">Chief Commercial & Marketing</p>
+            <p class="text-gray-500 text-[10px] uppercase tracking-wide mb-3">Emirates Group Roblox</p>
+            <p class="text-gray-600 text-xs leading-relaxed flex-grow">Leads branding, marketing, and dynamic partnerships to grow presence.</p>
+            <div class="mt-4 pt-3 border-t border-gray-100 flex justify-center space-x-4">
+              <a href="404.html" class="text-gray-400 hover:text-[#0a66c2] transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
+              <a href="404.html" class="text-gray-400 hover:text-[#001f3f] transition-colors"><i class="fa-solid fa-globe text-lg"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden text-center border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
+          <div class="bg-[#001f3f] h-20 w-full"></div>
+          <div class="flex justify-center -mt-10 relative">
+            <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Roman Gajdos" class="h-20 w-20 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm">
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-[#001f3f]">Roman Gajdos</h3>
+            <p class="text-[#a6192e] font-semibold text-xs mb-1">Chief of Staff</p>
+            <p class="text-gray-500 text-[10px] uppercase tracking-wide mb-3">Emirates Group Roblox</p>
+            <p class="text-gray-600 text-xs leading-relaxed flex-grow">Coordinates executive operations and ensures strategic priorities are delivered.</p>
+            <div class="mt-4 pt-3 border-t border-gray-100 flex justify-center space-x-4">
+              <a href="404.html" class="text-gray-400 hover:text-[#0a66c2] transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
+              <a href="404.html" class="text-gray-400 hover:text-[#001f3f] transition-colors"><i class="fa-solid fa-globe text-lg"></i></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+      <div class="mb-10 border-b-2 border-gray-200 pb-4">
+        <h2 class="text-3xl font-bold text-[#001f3f]">Corporate Alumni</h2>
+        <p class="text-gray-600 mt-2">Honoring the past leaders who helped build our foundation.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <div class="bg-gray-100 rounded-xl shadow-sm overflow-hidden text-center border border-gray-200 flex flex-col h-full opacity-90">
+          <div class="bg-gray-400 h-20 w-full"></div>
+          <div class="flex justify-center -mt-10 relative">
+            <img src="https://img.freepik.com/premium-vector/pretty-young-business-boss-woman-vector-silhouette_1273985-2602.jpg?w=360" alt="Ash Khadija" class="h-20 w-20 bg-gray-200 rounded-full border-4 border-white object-cover shadow-sm grayscale">
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-gray-700">Ash Khadija</h3>
+            <p class="text-gray-500 font-semibold text-xs mb-1">Former President</p>
+            <p class="text-gray-400 text-[10px] uppercase tracking-wide mb-3">Fly Dubai Roblox</p>
+            <p class="text-gray-500 text-xs leading-relaxed flex-grow">Orchestrating executive operations and delivering strategic priorities with institutional precision.</p>
+            <div class="mt-4 pt-3 border-t border-gray-200 flex justify-center space-x-4">
+              <a href="404.html" class="text-gray-400 hover:text-[#0a66c2] transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="bg-[#001f3f] rounded-2xl p-10 md:p-14 text-center text-white shadow-xl relative overflow-hidden mt-12">
+      <i class="fa-solid fa-briefcase absolute -left-10 -top-10 text-[10rem] text-white opacity-5 pointer-events-none"></i>
+      <div class="relative z-10">
+        <h2 class="text-3xl font-bold mb-4">Join Our Global Network</h2>
+        <p class="text-gray-300 mb-8 max-w-2xl mx-auto">Want to work with these brilliant minds? We are always looking for top talent to help us scale the next generation of digital ventures.</p>
+        <a href="../careers/" class="inline-block bg-[#a6192e] hover:bg-red-800 text-white font-bold py-3 px-8 rounded transition-colors shadow-lg">View Open Roles</a>
+      </div>
+    </div>
+
   </main>
 
-  <footer class="bg-[#001f3f] text-white py-12 px-6 md:px-12 mt-auto text-center md:text-left border-t border-blue-900">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center md:items-start">
-      <div class="flex flex-col items-center md:items-start">
-        <h3 class="font-bold text-lg mb-2 uppercase">Tyler Nicholas Group</h3>
-        <p class="text-sm text-gray-300 mb-4">A global holding company headquartered in the Seychelles.</p>
-        <div class="inline-block bg-white text-[#001f3f] px-3 py-1 rounded text-sm font-semibold shadow">Seychelles Local Time: <span id="seychelles-time">Loading...</span></div>
+  <footer class="bg-[#001f3f] text-white py-14 px-6 md:px-12 mt-auto border-t border-blue-900">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 items-start">
+      <div class="flex flex-col items-start lg:col-span-2">
+        <h3 class="font-bold text-xl mb-3 uppercase tracking-wider">Tyler Nicholas Group</h3>
+        <p class="text-sm text-gray-300 mb-5 max-w-md leading-relaxed">A global holding company headquartered in the Seychelles, driving strategic growth and synergy across diverse, high-potential digital and on-site verticals.</p>
+        <div class="inline-block bg-white text-[#001f3f] px-3 py-1.5 rounded text-sm font-semibold shadow-md mb-6">
+          Seychelles Local Time: <span id="seychelles-time">Loading...</span>
+        </div>
+        <a href="https://www.trustpilot.com/review/tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity drop-shadow-lg">
+          <img src="https://www.worcestershirefencing.co.uk/wp-content/uploads/2023/11/trustpilot-logo-snijpunt.1600x680x1.png" alt="Review Tyler Nicholas Group on Trustpilot" class="h-10 object-contain">
+        </a>
       </div>
-      <div class="flex flex-col space-y-2 text-sm items-center">
-        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Explore</h4>
-        <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
-        <a href="../companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
-        <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
+
+      <div class="flex flex-col space-y-3 text-sm">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Corporate</h4>
+        <a href="../culture/" class="hover:text-gray-300 transition-colors">Core Values & Culture</a>
+        <a href="../diversity/" class="hover:text-gray-300 transition-colors">Diversity & Inclusion</a>
+        <a href="../sustainability/" class="hover:text-gray-300 transition-colors">Sustainability & ESG</a>
+        <a href="../our-thoughts/" class="hover:text-gray-300 transition-colors">Our Thoughts</a>
+        <a href="../partnerships/" class="hover:text-gray-300 transition-colors">Global Partnerships</a>
+        <a href="../media-kit/" class="hover:text-gray-300 transition-colors">Brand Guidelines</a>
+      </div>
+
+      <div class="flex flex-col space-y-3 text-sm">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Legal</h4>
+        <a href="../privacy/" class="hover:text-gray-300 transition-colors">Privacy Policy</a>
+        <a href="../terms/" class="hover:text-gray-300 transition-colors">Terms of Use</a>
+        <a href="../cookie-policy/" class="hover:text-gray-300 transition-colors">Cookie Policy</a>
+        <a href="../accessibility/" class="hover:text-gray-300 transition-colors">Accessibility Statement</a>
+        <a href="../modern-slavery/" class="hover:text-gray-300 transition-colors">Modern Slavery Act</a>
+        <a href="../legal-status/" class="hover:text-gray-300 transition-colors">TNG Legal & Copyright</a>
+      </div>
+
+      <div class="flex flex-col space-y-3 text-sm">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Connect</h4>
         <a href="../contact/" class="hover:text-gray-300 transition-colors">Contact Us</a>
-        <a href="https://tyler.tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="text-[#a6192e] font-bold hover:underline pt-2">Meet Tyler Nicholas →</a>
-      </div>
-      <div class="flex flex-col items-center md:items-end">
-         <div class="flex space-x-6 text-2xl text-[#00a8ff] mb-4">
-            <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://x.com/tyler_n_group" target="_blank" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="#" target="_blank" class="social-icon"><i class="fa-brands fa-whatsapp"></i></a>
-         </div>
-         <p class="text-sm mb-2">Contact: <a href="mailto:tylernicholasgroup@gmail.com" class="text-[#00a8ff] hover:underline">tylernicholasgroup@gmail.com</a></p>
-         <p class="text-xs text-gray-400">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
+        <a href="../sitemap/" class="hover:text-gray-300 transition-colors">Site Map</a>
+        <a href="https://tyler.tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="text-[#a6192e] font-bold hover:underline mt-2">Meet Tyler Nicholas →</a>
+        <div class="flex space-x-5 text-2xl text-[#00a8ff] mt-6 mb-2">
+          <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://x.com/tyler_n_group" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+        <p class="text-xs text-gray-400 mt-2">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
       </div>
     </div>
   </footer>
