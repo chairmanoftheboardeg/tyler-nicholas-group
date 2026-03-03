@@ -18,7 +18,7 @@
   </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 </head>
 <body class="bg-gray-100 font-sans text-gray-900 min-h-screen">
@@ -51,20 +51,23 @@
       <button id="logout-btn" class="bg-white text-[#001f3f] px-4 py-2 rounded text-sm font-bold hover:bg-gray-200">Log Out</button>
     </nav>
 
-    <div class="bg-white shadow-sm border-b">
-      <div class="max-w-6xl mx-auto flex space-x-8 px-8">
-        <button class="tab-btn active-tab py-4 font-bold text-[#001f3f] border-b-2 border-[#a6192e]" data-target="section-contacts">Contacts</button>
+    <div class="bg-white shadow-sm border-b overflow-x-auto whitespace-nowrap">
+      <div class="max-w-7xl mx-auto flex space-x-8 px-6">
+        <button class="tab-btn active-tab py-4 font-bold text-[#001f3f] border-b-2 border-[#a6192e]" data-target="section-contacts">Inbox</button>
         <button class="tab-btn py-4 font-bold text-gray-500 hover:text-[#001f3f]" data-target="section-announcements">Announcement</button>
         <button class="tab-btn py-4 font-bold text-gray-500 hover:text-[#001f3f]" data-target="section-jobs">Careers</button>
+        <button class="tab-btn py-4 font-bold text-gray-500 hover:text-[#001f3f]" data-target="section-news">News & PR</button>
+        <button class="tab-btn py-4 font-bold text-gray-500 hover:text-[#001f3f]" data-target="section-status">System Status</button>
+        <button class="tab-btn py-4 font-bold text-gray-500 hover:text-[#001f3f]" data-target="section-stats">Homepage Stats</button>
       </div>
     </div>
 
-    <main class="flex-grow p-8 max-w-6xl mx-auto w-full">
+    <main class="flex-grow p-6 md:p-8 max-w-7xl mx-auto w-full">
       
       <section id="section-contacts" class="admin-section block space-y-6">
         <h2 class="text-2xl font-bold text-[#001f3f]">Recent Contact Inquiries</h2>
-        <div class="bg-white rounded-xl shadow overflow-hidden">
-          <table class="w-full text-left border-collapse">
+        <div class="bg-white rounded-xl shadow overflow-x-auto">
+          <table class="w-full text-left border-collapse min-w-[800px]">
             <thead>
               <tr class="bg-gray-200 text-gray-700 text-sm uppercase">
                 <th class="py-3 px-4 font-semibold">Date</th>
@@ -88,11 +91,11 @@
             <input type="hidden" id="ann-id">
             <div>
               <label class="block text-gray-700 text-sm font-bold mb-2">Announcement Message</label>
-              <input type="text" id="ann-message" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#001f3f]" placeholder="e.g. Welcome to the new website!" required>
+              <input type="text" id="ann-message" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#001f3f]" required>
             </div>
             <div>
               <label class="block text-gray-700 text-sm font-bold mb-2">Link URL (Optional)</label>
-              <input type="url" id="ann-link" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#001f3f]" placeholder="https://...">
+              <input type="url" id="ann-link" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#001f3f]">
             </div>
             <div class="flex items-center">
               <input type="checkbox" id="ann-active" class="w-5 h-5 text-[#a6192e]">
@@ -104,61 +107,96 @@
         </div>
       </section>
 
-      <section id="section-jobs" class="admin-section hidden space-y-8">
+      <section id="section-jobs" class="admin-section hidden space-y-6">
         <div class="flex justify-between items-center">
           <h2 class="text-2xl font-bold text-[#001f3f]">Manage Career Postings</h2>
-          <button id="show-add-job-btn" class="bg-[#a6192e] hover:bg-red-800 text-white font-bold py-2 px-4 rounded"><i class="fa-solid fa-plus mr-2"></i> Add New Job</button>
+          <button id="show-add-job-btn" class="bg-[#a6192e] hover:bg-red-800 text-white font-bold py-2 px-4 rounded"><i class="fa-solid fa-plus mr-2"></i> Add Job</button>
         </div>
 
         <div id="add-job-container" class="hidden bg-white rounded-xl shadow p-8 border-t-4 border-[#001f3f]">
           <h3 class="text-lg font-bold mb-4">Create New Posting</h3>
           <form id="add-job-form" class="space-y-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm font-bold mb-1">Job Title</label>
-                <input type="text" id="job-title" class="w-full px-3 py-2 border rounded" required>
-              </div>
-              <div>
-                <label class="block text-sm font-bold mb-1">Company / Subsidiary</label>
-                <input type="text" id="job-company" class="w-full px-3 py-2 border rounded" placeholder="e.g. Air Seychelles Roblox" required>
-              </div>
-              <div>
-                <label class="block text-sm font-bold mb-1">Location</label>
-                <input type="text" id="job-location" class="w-full px-3 py-2 border rounded" placeholder="e.g. Remote or Seychelles">
-              </div>
-              <div>
-                <label class="block text-sm font-bold mb-1">Employment Type</label>
-                <input type="text" id="job-type" class="w-full px-3 py-2 border rounded" placeholder="e.g. Full-Time, Contract">
-              </div>
+              <div><label class="block text-sm font-bold mb-1">Job Title</label><input type="text" id="job-title" class="w-full px-3 py-2 border rounded" required></div>
+              <div><label class="block text-sm font-bold mb-1">Company / Subsidiary</label><input type="text" id="job-company" class="w-full px-3 py-2 border rounded" required></div>
+              <div><label class="block text-sm font-bold mb-1">Location</label><input type="text" id="job-location" class="w-full px-3 py-2 border rounded"></div>
+              <div><label class="block text-sm font-bold mb-1">Employment Type</label><input type="text" id="job-type" class="w-full px-3 py-2 border rounded"></div>
             </div>
-            <div>
-              <label class="block text-sm font-bold mb-1">External Application Link (Optional)</label>
-              <input type="url" id="job-link" class="w-full px-3 py-2 border rounded" placeholder="Leave blank to direct to Contact form">
-            </div>
-            <div>
-              <label class="block text-sm font-bold mb-1">Description</label>
-              <textarea id="job-desc" class="w-full px-3 py-2 border rounded h-24" required></textarea>
-            </div>
-            <div class="flex items-center space-x-4">
+            <div><label class="block text-sm font-bold mb-1">External Link (Optional)</label><input type="url" id="job-link" class="w-full px-3 py-2 border rounded"></div>
+            <div><label class="block text-sm font-bold mb-1">Description</label><textarea id="job-desc" class="w-full px-3 py-2 border rounded h-24" required></textarea></div>
+            <div class="flex space-x-4">
               <button type="submit" class="bg-[#001f3f] text-white font-bold py-2 px-6 rounded">Post Job</button>
-              <button type="button" id="cancel-job-btn" class="text-gray-500 hover:text-red-500 font-bold">Cancel</button>
+              <button type="button" id="cancel-job-btn" class="text-gray-500 font-bold">Cancel</button>
             </div>
           </form>
         </div>
 
         <div class="bg-white rounded-xl shadow overflow-hidden">
           <table class="w-full text-left border-collapse">
-            <thead>
-              <tr class="bg-gray-200 text-gray-700 text-sm uppercase">
-                <th class="py-3 px-4 font-semibold">Title & Company</th>
-                <th class="py-3 px-4 font-semibold text-center">Active Status</th>
-                <th class="py-3 px-4 font-semibold text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody id="jobs-table-body" class="text-sm">
-              <tr><td colspan="3" class="py-4 px-4 text-center text-gray-500">Loading jobs...</td></tr>
-            </tbody>
+            <tbody id="jobs-table-body" class="text-sm"><tr><td class="py-4 text-center">Loading jobs...</td></tr></tbody>
           </table>
+        </div>
+      </section>
+
+      <section id="section-news" class="admin-section hidden space-y-6">
+        <div class="flex justify-between items-center">
+          <h2 class="text-2xl font-bold text-[#001f3f]">News & Press Releases</h2>
+          <button onclick="document.getElementById('add-news-container').classList.remove('hidden')" class="bg-[#a6192e] text-white font-bold py-2 px-4 rounded"><i class="fa-solid fa-plus mr-2"></i> Post News</button>
+        </div>
+        
+        <div id="add-news-container" class="hidden bg-white rounded-xl shadow p-8 border-t-4 border-[#001f3f]">
+          <form id="add-news-form" class="space-y-4">
+            <input type="text" id="news-title" placeholder="Headline / Title" class="w-full px-3 py-2 border rounded" required>
+            <select id="news-category" class="w-full px-3 py-2 border rounded" required>
+              <option value="Corporate Announcement">Corporate Announcement</option>
+              <option value="Portfolio Update">Portfolio Update</option>
+              <option value="Press Release">Press Release</option>
+            </select>
+            <textarea id="news-snippet" placeholder="Short Description (Appears on Homepage)" class="w-full px-3 py-2 border rounded h-16" required></textarea>
+            <input type="url" id="news-link" placeholder="External Link to full article (Optional)" class="w-full px-3 py-2 border rounded">
+            <div class="flex space-x-4">
+              <button type="submit" class="bg-[#001f3f] text-white font-bold py-2 px-6 rounded">Publish</button>
+              <button type="button" onclick="document.getElementById('add-news-container').classList.add('hidden')" class="text-gray-500 font-bold">Cancel</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="bg-white rounded-xl shadow overflow-hidden">
+          <table class="w-full text-left border-collapse"><tbody id="news-table-body" class="text-sm"><tr><td class="py-4 text-center">Loading news...</td></tr></tbody></table>
+        </div>
+      </section>
+
+      <section id="section-status" class="admin-section hidden space-y-6">
+        <h2 class="text-2xl font-bold text-[#001f3f]">Live System Status</h2>
+        <div class="bg-white rounded-xl shadow p-6 border-t-4 border-[#001f3f]">
+          <div id="status-container" class="space-y-4 text-sm">
+             <p class="text-gray-500 italic">Loading systems...</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="section-stats" class="admin-section hidden space-y-6">
+        <h2 class="text-2xl font-bold text-[#001f3f]">Homepage Statistics</h2>
+        <div class="bg-white rounded-xl shadow p-8 max-w-2xl border-t-4 border-[#a6192e]">
+          <form id="stats-form" class="space-y-6">
+            <input type="hidden" id="stat-id">
+            <div class="grid grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-bold mb-2">Active Subsidiaries</label>
+                <input type="text" id="stat-subs" class="w-full px-4 py-2 border rounded font-bold" required>
+              </div>
+              <div>
+                <label class="block text-sm font-bold mb-2">Core Verticals</label>
+                <input type="text" id="stat-verts" class="w-full px-4 py-2 border rounded font-bold" required>
+              </div>
+              <div class="col-span-2">
+                <label class="block text-sm font-bold mb-2">Funding Status</label>
+                <input type="text" id="stat-fund" class="w-full px-4 py-2 border rounded font-bold" required>
+              </div>
+            </div>
+            <p id="stats-status-msg" class="text-green-600 font-bold hidden">Stats Updated on Live Site!</p>
+            <button type="submit" class="bg-[#001f3f] text-white font-bold py-2 px-6 rounded w-full">Push Update to Public Site</button>
+          </form>
         </div>
       </section>
 
@@ -211,16 +249,9 @@
           
           tabs.forEach(tab => {
             tab.addEventListener('click', () => {
-              // Update active styling
-              tabs.forEach(t => {
-                t.classList.remove('active-tab', 'text-[#001f3f]', 'border-b-2', 'border-[#a6192e]');
-                t.classList.add('text-gray-500');
-              });
-              tab.classList.remove('text-gray-500');
-              tab.classList.add('active-tab', 'text-[#001f3f]', 'border-b-2', 'border-[#a6192e]');
-              
-              // Show correct section
-              sections.forEach(s => s.classList.add('hidden'));
+              tabs.forEach(t => { t.classList.remove('active-tab', 'text-[#001f3f]', 'border-b-2', 'border-[#a6192e]'); t.classList.add('text-gray-500'); });
+              tab.classList.remove('text-gray-500'); tab.classList.add('active-tab', 'text-[#001f3f]', 'border-b-2', 'border-[#a6192e]');
+              sections.forEach(s => s.classList.add('hidden')); 
               document.getElementById(tab.dataset.target).classList.remove('hidden');
             });
           });
@@ -229,34 +260,29 @@
           function loadDashboard() {
             loginScreen.classList.add('hidden');
             dashboardScreen.classList.remove('hidden');
-            fetchContacts();
-            fetchAnnouncement();
-            fetchJobs();
+            fetchContacts(); fetchAnnouncement(); fetchJobs(); fetchNews(); fetchStatus(); fetchStats();
           }
 
-          // ==== 1. CONTACTS LOGIC ====
+          // 1. CONTACTS
           async function fetchContacts() {
             const { data, error } = await supabase.from('contact_submissions').select('*').order('created_at', { ascending: false });
             const tbody = document.getElementById('contacts-table-body');
             if (error) { tbody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-red-500">Error loading data.</td></tr>`; return; }
             if (data.length === 0) { tbody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-gray-500">No messages found.</td></tr>`; return; }
-
             tbody.innerHTML = '';
             data.forEach(msg => {
-              const date = new Date(msg.created_at).toLocaleDateString();
               tbody.innerHTML += `
                 <tr class="border-b hover:bg-gray-50">
-                  <td class="py-3 px-4 whitespace-nowrap">${date}</td>
+                  <td class="py-3 px-4 whitespace-nowrap">${new Date(msg.created_at).toLocaleDateString()}</td>
                   <td class="py-3 px-4 font-semibold">${msg.name}</td>
                   <td class="py-3 px-4 text-blue-600"><a href="mailto:${msg.email}">${msg.email}</a></td>
                   <td class="py-3 px-4">${msg.subject}</td>
                   <td class="py-3 px-4 text-gray-600 max-w-xs truncate" title="${msg.message}">${msg.message}</td>
-                </tr>
-              `;
+                </tr>`;
             });
           }
 
-          // ==== 2. ANNOUNCEMENT LOGIC ====
+          // 2. ANNOUNCEMENTS
           async function fetchAnnouncement() {
             const { data, error } = await supabase.from('announcements').select('*').eq('is_active', true).single();
             if (data && !error) {
@@ -266,108 +292,107 @@
               document.getElementById('ann-active').checked = data.is_active;
             }
           }
-
           document.getElementById('announcement-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const id = document.getElementById('ann-id').value;
-            const message = document.getElementById('ann-message').value;
-            const link = document.getElementById('ann-link').value;
-            const is_active = document.getElementById('ann-active').checked;
-            const statusText = document.getElementById('ann-status');
-
-            // Deactivate all old announcements first just to be safe
             await supabase.from('announcements').update({ is_active: false }).neq('id', 'dummy'); 
-
+            const id = document.getElementById('ann-id').value;
+            const payload = { message: document.getElementById('ann-message').value, link: document.getElementById('ann-link').value, is_active: document.getElementById('ann-active').checked };
             let err;
-            if (id) {
-              const { error } = await supabase.from('announcements').update({ message, link, is_active }).eq('id', id);
-              err = error;
-            } else {
-              const { error } = await supabase.from('announcements').insert([{ message, link, is_active }]);
-              err = error;
-            }
-
-            if (!err) {
-              statusText.classList.remove('hidden');
-              setTimeout(() => statusText.classList.add('hidden'), 3000);
-            } else {
-              alert("Error saving announcement.");
-            }
+            if (id) { const { error } = await supabase.from('announcements').update(payload).eq('id', id); err = error; } 
+            else { const { error } = await supabase.from('announcements').insert([payload]); err = error; }
+            if (!err) { document.getElementById('ann-status').classList.remove('hidden'); setTimeout(() => document.getElementById('ann-status').classList.add('hidden'), 3000); }
           });
 
-          // ==== 3. CAREERS LOGIC ====
+          // 3. CAREERS
           const jobContainer = document.getElementById('add-job-container');
-          document.getElementById('show-add-job-btn').addEventListener('click', () => {
-            jobContainer.classList.remove('hidden');
-          });
-          document.getElementById('cancel-job-btn').addEventListener('click', () => {
-            jobContainer.classList.add('hidden');
-            document.getElementById('add-job-form').reset();
-          });
+          document.getElementById('show-add-job-btn').addEventListener('click', () => jobContainer.classList.remove('hidden'));
+          document.getElementById('cancel-job-btn').addEventListener('click', () => { jobContainer.classList.add('hidden'); document.getElementById('add-job-form').reset(); });
 
           async function fetchJobs() {
             const { data, error } = await supabase.from('job_postings').select('*').order('created_at', { ascending: false });
             const tbody = document.getElementById('jobs-table-body');
             if (error || !data) { tbody.innerHTML = `<tr><td colspan="3" class="py-4 text-center text-red-500">Error loading jobs.</td></tr>`; return; }
             if (data.length === 0) { tbody.innerHTML = `<tr><td colspan="3" class="py-4 text-center text-gray-500">No jobs posted yet.</td></tr>`; return; }
-
             tbody.innerHTML = '';
             data.forEach(job => {
               const badgeClass = job.is_active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800';
-              const badgeText = job.is_active ? 'Active' : 'Inactive';
-              
               tbody.innerHTML += `
                 <tr class="border-b hover:bg-gray-50">
-                  <td class="py-3 px-4">
-                    <div class="font-bold">${job.title}</div>
-                    <div class="text-xs text-gray-500">${job.company} &bull; ${job.location || 'Remote'}</div>
-                  </td>
-                  <td class="py-3 px-4 text-center">
-                    <span class="px-2 py-1 rounded text-xs font-bold ${badgeClass}">${badgeText}</span>
-                  </td>
-                  <td class="py-3 px-4 text-right space-x-3">
-                    <button onclick="toggleJob('${job.id}', ${!job.is_active})" class="text-sm font-bold text-[#001f3f] hover:underline">${job.is_active ? 'Deactivate' : 'Activate'}</button>
-                    <button onclick="deleteJob('${job.id}')" class="text-sm font-bold text-red-600 hover:underline">Delete</button>
-                  </td>
-                </tr>
-              `;
+                  <td class="py-3 px-4"><div class="font-bold">${job.title}</div><div class="text-xs text-gray-500">${job.company}</div></td>
+                  <td class="py-3 px-4 text-center"><span class="px-2 py-1 rounded text-xs font-bold ${badgeClass}">${job.is_active ? 'Active' : 'Inactive'}</span></td>
+                  <td class="py-3 px-4 text-right space-x-3"><button onclick="toggleJob('${job.id}', ${!job.is_active})" class="text-sm font-bold text-[#001f3f] hover:underline">${job.is_active ? 'Deactivate' : 'Activate'}</button><button onclick="deleteJob('${job.id}')" class="text-sm font-bold text-red-600 hover:underline">Delete</button></td>
+                </tr>`;
             });
           }
-
           document.getElementById('add-job-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const jobData = {
-              title: document.getElementById('job-title').value,
-              company: document.getElementById('job-company').value,
-              location: document.getElementById('job-location').value,
-              employment_type: document.getElementById('job-type').value,
-              external_link: document.getElementById('job-link').value,
-              description: document.getElementById('job-desc').value,
-              is_active: true
-            };
-
+            const jobData = { title: document.getElementById('job-title').value, company: document.getElementById('job-company').value, location: document.getElementById('job-location').value, employment_type: document.getElementById('job-type').value, external_link: document.getElementById('job-link').value, description: document.getElementById('job-desc').value, is_active: true };
             const { error } = await supabase.from('job_postings').insert([jobData]);
-            if (!error) {
-              document.getElementById('add-job-form').reset();
-              jobContainer.classList.add('hidden');
-              fetchJobs();
-            } else {
-              alert("Error posting job.");
-            }
+            if (!error) { document.getElementById('add-job-form').reset(); jobContainer.classList.add('hidden'); fetchJobs(); }
           });
+          window.toggleJob = async function(id, newState) { await supabase.from('job_postings').update({ is_active: newState }).eq('id', id); fetchJobs(); };
+          window.deleteJob = async function(id) { if(confirm("Permanently delete this job posting?")) { await supabase.from('job_postings').delete().eq('id', id); fetchJobs(); } };
 
-          // Global functions for inline buttons
-          window.toggleJob = async function(id, newState) {
-            await supabase.from('job_postings').update({ is_active: newState }).eq('id', id);
-            fetchJobs();
-          };
+          // 4. NEWS & PR
+          async function fetchNews() {
+            const { data, error } = await supabase.from('news_releases').select('*').order('created_at', { ascending: false });
+            const tbody = document.getElementById('news-table-body');
+            if (error || !data) { tbody.innerHTML = `<tr><td colspan="2" class="py-4 text-center text-red-500">Error loading news.</td></tr>`; return; }
+            if (data.length === 0) { tbody.innerHTML = `<tr><td colspan="2" class="py-4 text-center text-gray-500">No news posted yet.</td></tr>`; return; }
+            tbody.innerHTML = data.map(n => `
+              <tr class="border-b hover:bg-gray-50">
+                <td class="py-3 px-4"><div class="font-bold text-[#001f3f]">${n.title}</div><div class="text-xs text-gray-500 uppercase tracking-wide mt-1">${n.category}</div></td>
+                <td class="py-3 px-4 text-right"><button onclick="deleteNews('${n.id}')" class="text-sm font-bold text-red-600 hover:underline">Delete</button></td>
+              </tr>
+            `).join('');
+          }
+          document.getElementById('add-news-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payload = { title: document.getElementById('news-title').value, category: document.getElementById('news-category').value, snippet: document.getElementById('news-snippet').value, link: document.getElementById('news-link').value };
+            await supabase.from('news_releases').insert([payload]);
+            document.getElementById('add-news-form').reset(); document.getElementById('add-news-container').classList.add('hidden'); fetchNews();
+          });
+          window.deleteNews = async function(id) { if(confirm("Permanently delete this news post?")) { await supabase.from('news_releases').delete().eq('id', id); fetchNews(); } };
 
-          window.deleteJob = async function(id) {
-            if(confirm("Are you sure you want to permanently delete this job posting?")) {
-              await supabase.from('job_postings').delete().eq('id', id);
-              fetchJobs();
+          // 5. SYSTEM STATUS
+          async function fetchStatus() {
+            const { data } = await supabase.from('system_status').select('*').order('service_name');
+            const container = document.getElementById('status-container');
+            if(data) {
+              container.innerHTML = data.map(s => `
+                <div class="flex justify-between items-center border-b border-gray-200 pb-4">
+                  <span class="font-bold text-gray-800">${s.service_name}</span>
+                  <select onchange="updateStatus('${s.id}', this.value)" class="px-3 py-1 border rounded text-sm font-bold ${s.status==='Operational'?'bg-green-50 text-green-700':(s.status==='Degraded'?'bg-yellow-50 text-yellow-700':'bg-red-50 text-red-700')}">
+                    <option value="Operational" ${s.status==='Operational'?'selected':''}>Operational</option>
+                    <option value="Degraded" ${s.status==='Degraded'?'selected':''}>Degraded</option>
+                    <option value="Outage" ${s.status==='Outage'?'selected':''}>Outage</option>
+                  </select>
+                </div>
+              `).join('');
             }
-          };
+          }
+          window.updateStatus = async function(id, val) { await supabase.from('system_status').update({ status: val, updated_at: new Date().toISOString() }).eq('id', id); fetchStatus(); };
+
+          // 6. HOMEPAGE STATS
+          async function fetchStats() {
+            const { data } = await supabase.from('site_statistics').select('*').single();
+            if(data) {
+              document.getElementById('stat-id').value = data.id;
+              document.getElementById('stat-subs').value = data.subsidiaries_count;
+              document.getElementById('stat-verts').value = data.core_verticals;
+              document.getElementById('stat-fund').value = data.funding_status;
+            }
+          }
+          document.getElementById('stats-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await supabase.from('site_statistics').update({
+              subsidiaries_count: document.getElementById('stat-subs').value,
+              core_verticals: document.getElementById('stat-verts').value,
+              funding_status: document.getElementById('stat-fund').value
+            }).eq('id', document.getElementById('stat-id').value);
+            document.getElementById('stats-status-msg').classList.remove('hidden'); 
+            setTimeout(() => document.getElementById('stats-status-msg').classList.add('hidden'), 3000);
+          });
 
         }
       }, 100);
