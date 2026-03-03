@@ -6,9 +6,11 @@
   <title>Contact Us | Tyler Nicholas Group</title>
   <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
   
+  <style> body { opacity: 0; visibility: hidden; } </style>
+  <script> window.addEventListener('load', function() { document.body.style.transition = 'opacity 0.2s ease-in'; document.body.style.opacity = '1'; document.body.style.visibility = 'visible'; }); </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="../style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 </head>
@@ -16,8 +18,11 @@
 
   <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
 
-  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md">
+  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md relative z-50">
     <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
+    <a href="../sitemap/" class="md:hidden bg-white text-[#001f3f] px-4 py-2 rounded text-sm font-bold shadow hover:bg-gray-200 transition-colors flex items-center">
+      <i class="fa-solid fa-list mr-2"></i> Menu
+    </a>
     <div class="hidden md:flex space-x-6 text-sm items-center">
       <a href="../" class="hover:text-gray-300 transition-colors">Home</a>
       <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
@@ -25,73 +30,135 @@
       <a href="../people/" class="hover:text-gray-300 transition-colors">Our People</a>
       <a href="../governance/" class="hover:text-gray-300 transition-colors">Governance</a>
       <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
-      <a href="#" class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold transition-colors border-2 border-white">Contact</a>
+      <div class="relative group">
+        <button class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors flex items-center cursor-pointer border-b-2 border-[#a6192e] pb-1">
+          Contact <i class="fa-solid fa-chevron-down ml-2 text-[10px]"></i>
+        </button>
+        <div class="absolute right-0 mt-2 w-56 bg-white text-gray-900 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden">
+          <a href="../news/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">News & Press Releases</a>
+          <a href="../trust-security/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Trust & Security</a>
+          <a href="../status/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Live System Status</a>
+          <a href="../alumni/" class="block px-4 py-3 hover:bg-gray-100 text-sm">Corporate Alumni Network</a>
+        </div>
+      </div>
     </div>
   </nav>
 
   <div class="bg-[#001f3f] text-white py-16 px-6 md:px-12 text-center">
-    <h1 class="text-3xl md:text-5xl font-bold mb-4">Contact Us</h1>
-    <p class="text-gray-300 max-w-2xl mx-auto md:text-lg">Get in touch with the Tyler Nicholas Group for corporate inquiries, partnerships, or support.</p>
+    <h1 class="text-3xl md:text-5xl font-bold mb-4">Contact Support</h1>
+    <p class="text-gray-300 max-w-2xl mx-auto md:text-lg">Select the appropriate department below, or submit a general inquiry to our corporate team.</p>
   </div>
 
-  <main class="flex-grow max-w-3xl mx-auto py-16 px-6 md:px-12 w-full">
-    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-[#a6192e]">
-      
-      <div id="form-success" class="hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6" role="alert">
-        <strong class="font-bold">Message Sent!</strong>
-        <span class="block sm:inline"> We have received your inquiry and will be in touch shortly.</span>
+  <main class="flex-grow max-w-6xl mx-auto py-16 px-6 md:px-12 w-full space-y-16">
+    
+    <div>
+      <h2 class="text-2xl font-bold text-[#001f3f] mb-8 border-b border-gray-200 pb-2">Department Directory</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <a href="it/" class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-[#001f3f] transition-all flex flex-col items-center text-center group">
+          <div class="w-12 h-12 bg-blue-50 text-[#001f3f] rounded-full flex items-center justify-center text-xl mb-4 group-hover:bg-[#001f3f] group-hover:text-white transition-colors"><i class="fa-solid fa-server"></i></div>
+          <h3 class="font-bold text-gray-900 mb-1">IT & Technical Support</h3>
+          <p class="text-xs text-gray-500">Bug reports, outages, and server issues.</p>
+        </a>
+        <a href="hr/" class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-[#a6192e] transition-all flex flex-col items-center text-center group">
+          <div class="w-12 h-12 bg-red-50 text-[#a6192e] rounded-full flex items-center justify-center text-xl mb-4 group-hover:bg-[#a6192e] group-hover:text-white transition-colors"><i class="fa-solid fa-users-gear"></i></div>
+          <h3 class="font-bold text-gray-900 mb-1">Human Resources</h3>
+          <p class="text-xs text-gray-500">Application status and employee inquiries.</p>
+        </a>
+        <a href="investors/" class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-[#001f3f] transition-all flex flex-col items-center text-center group">
+          <div class="w-12 h-12 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-xl mb-4 group-hover:bg-[#001f3f] group-hover:text-white transition-colors"><i class="fa-solid fa-chart-line"></i></div>
+          <h3 class="font-bold text-gray-900 mb-1">Investor Relations</h3>
+          <p class="text-xs text-gray-500">Financial partnerships and strategic scaling.</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-[#a6192e]">
+        <h2 class="text-2xl font-bold text-[#001f3f] mb-2">General Inquiry</h2>
+        <p class="text-gray-600 text-sm mb-6">For media, partnerships, or general questions not related to the departments above.</p>
+        
+        <div id="form-success" class="hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6" role="alert">
+          <strong class="font-bold">Message Sent!</strong>
+          <span class="block sm:inline"> We have received your inquiry and will be in touch shortly.</span>
+        </div>
+
+        <form id="contact-form" class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Full Name</label>
+              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[#001f3f]" id="name" type="text" required>
+            </div>
+            <div>
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email Address</label>
+              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[#001f3f]" id="email" type="email" required>
+            </div>
+          </div>
+          <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="subject">Subject</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[#001f3f]" id="subject" type="text" required>
+          </div>
+          <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="message">Message</label>
+            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[#001f3f] h-32" id="message" required></textarea>
+          </div>
+          <button class="bg-[#001f3f] hover:bg-blue-900 text-white font-bold py-3 px-6 rounded w-full transition-colors" type="submit" id="submit-btn">
+            Send Message
+          </button>
+        </form>
       </div>
 
-      <form id="contact-form" class="space-y-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Full Name</label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[#001f3f]" id="name" type="text" required>
+      <div>
+        <h2 class="text-2xl font-bold text-[#001f3f] mb-6">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          
+          <div class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
+            <h4 class="font-bold text-gray-900 mb-2">How quickly can I expect a response?</h4>
+            <p class="text-sm text-gray-600">Our corporate communications team reviews all inquiries within 24-48 business hours. If your inquiry is routed to a specific subsidiary, it may take an additional day.</p>
           </div>
-          <div>
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email Address</label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[#001f3f]" id="email" type="email" required>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
+            <h4 class="font-bold text-gray-900 mb-2">Can I apply for a job through this form?</h4>
+            <p class="text-sm text-gray-600">We prefer that you use the designated application links on our <a href="../careers/" class="text-[#a6192e] font-bold hover:underline">Careers page</a>. If the role you want isn't listed, you may submit a general portfolio here.</p>
           </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm">
+            <h4 class="font-bold text-gray-900 mb-2">I need to report an ethical concern.</h4>
+            <p class="text-sm text-gray-600">Please bypass this form and proceed directly to our <a href="../trust-security/" class="text-[#a6192e] font-bold hover:underline">Trust & Security Center</a> to file a secure report.</p>
+          </div>
+
         </div>
-        <div>
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="subject">Subject</label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[#001f3f]" id="subject" type="text" required>
-        </div>
-        <div>
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="message">Message</label>
-          <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-[#001f3f] h-32" id="message" required></textarea>
-        </div>
-        <button class="bg-[#001f3f] hover:bg-blue-900 text-white font-bold py-3 px-6 rounded w-full transition-colors" type="submit" id="submit-btn">
-          Send Message
-        </button>
-      </form>
+      </div>
     </div>
+
   </main>
 
-  <footer class="bg-[#001f3f] text-white py-12 px-6 md:px-12 mt-auto text-center md:text-left border-t border-blue-900">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center md:items-start">
-      <div class="flex flex-col items-center md:items-start">
-        <h3 class="font-bold text-lg mb-2 uppercase">Tyler Nicholas Group</h3>
-        <p class="text-sm text-gray-300 mb-4">A global holding company headquartered in the Seychelles.</p>
-        <div class="inline-block bg-white text-[#001f3f] px-3 py-1 rounded text-sm font-semibold shadow">Seychelles Local Time: <span id="seychelles-time">Loading...</span></div>
+  <footer class="bg-[#001f3f] text-white py-14 px-6 md:px-12 mt-auto border-t border-blue-900">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 items-start">
+      <div class="flex flex-col items-start lg:col-span-2">
+        <h3 class="font-bold text-xl mb-3 uppercase tracking-wider">Tyler Nicholas Group</h3>
+        <p class="text-sm text-gray-300 mb-5 max-w-md leading-relaxed">A global holding company headquartered in the Seychelles, driving strategic growth and synergy across diverse, high-potential digital and on-site verticals.</p>
+        <div class="inline-block bg-white text-[#001f3f] px-3 py-1.5 rounded text-sm font-semibold shadow-md mb-6">
+          Seychelles Local Time: <span id="seychelles-time">Loading...</span>
+        </div>
       </div>
-      <div class="flex flex-col space-y-2 text-sm items-center">
-        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Explore</h4>
-        <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
-        <a href="../companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
-        <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
-        <a href="#" class="hover:text-gray-300 transition-colors">Contact Us</a>
-        <a href="https://tyler.tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="text-[#a6192e] font-bold hover:underline pt-2">Meet Tyler Nicholas →</a>
+      <div class="flex flex-col space-y-3 text-sm">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Corporate</h4>
+        <a href="../culture/" class="hover:text-gray-300 transition-colors">Core Values & Culture</a>
+        <a href="../diversity/" class="hover:text-gray-300 transition-colors">Diversity & Inclusion</a>
+        <a href="../sustainability/" class="hover:text-gray-300 transition-colors">Sustainability & ESG</a>
+        <a href="../our-thoughts/" class="hover:text-gray-300 transition-colors">Our Thoughts</a>
       </div>
-      <div class="flex flex-col items-center md:items-end">
-         <div class="flex space-x-6 text-2xl text-[#00a8ff] mb-4">
-            <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://x.com/tyler_n_group" target="_blank" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="#" target="_blank" class="social-icon"><i class="fa-brands fa-whatsapp"></i></a>
-         </div>
-         <p class="text-sm mb-2">Contact: <a href="mailto:tylernicholasgroup@gmail.com" class="text-[#00a8ff] hover:underline">tylernicholasgroup@gmail.com</a></p>
-         <p class="text-xs text-gray-400">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
+      <div class="flex flex-col space-y-3 text-sm">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Legal</h4>
+        <a href="../privacy/" class="hover:text-gray-300 transition-colors">Privacy Policy</a>
+        <a href="../terms/" class="hover:text-gray-300 transition-colors">Terms of Use</a>
+        <a href="../cookie-policy/" class="hover:text-gray-300 transition-colors">Cookie Policy</a>
+      </div>
+      <div class="flex flex-col space-y-3 text-sm">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Connect</h4>
+        <a href="../sitemap/" class="hover:text-gray-300 transition-colors">Site Map</a>
+        <a href="https://tyler.tylernicholasgroup.com" target="_blank" class="text-[#a6192e] font-bold hover:underline mt-2">Meet Tyler Nicholas →</a>
+        <p class="text-xs text-gray-400 mt-4">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -101,21 +168,19 @@
     setInterval(updateSeychellesTime, 1000); updateSeychellesTime();
 
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Supabase Announcement Bar
       const checkSupabase = setInterval(async () => {
         if (window.supabase) {
           clearInterval(checkSupabase); 
           const supabase = window.supabase.createClient('https://hicowukbjsbpuebquqbh.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0');
+          
           try {
             const { data, error } = await supabase.from('announcements').select('*').eq('is_active', true).single();
             if (data && !error) {
               const bar = document.getElementById('announcement-bar');
-              bar.classList.remove('hidden'); 
-              bar.innerHTML = data.link ? `<a href="${data.link}" class="hover:underline block w-full py-1">${data.message}</a>` : data.message;
+              bar.classList.remove('hidden'); bar.innerHTML = data.link ? `<a href="${data.link}" class="hover:underline block w-full py-1">${data.message}</a>` : data.message;
             }
           } catch (err) {}
 
-          // 2. Contact Form Submission Logic
           const form = document.getElementById('contact-form');
           form.addEventListener('submit', async (e) => {
             e.preventDefault();
