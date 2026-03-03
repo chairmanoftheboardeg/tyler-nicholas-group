@@ -1,233 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Human Resources Contact | Tyler Nicholas Group (TNG)</title>
-
-    <link rel="icon" type="image/png" href="../../image/logo.png">
-
-    <style>
-        /* Reusing IT Department Contact CSS for consistency */
-        :root {
-            --tng-blue: #001F4C;
-            --tng-maroon: #A81F27;
-            --tng-silver: #C0C0C0;
-            --tng-light-gray: #f4f4f4;
-            --tng-text-dark: #333;
-            --tng-text-light: #ffffff;
-            --transition-speed: 0.8s ease-out;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--tng-text-dark);
-            background-color: var(--tng-light-gray);
-            line-height: 1.6;
-        }
-
-        /* === HEADER & NAVIGATION === */
-        header {
-            background-color: var(--tng-blue);
-            color: var(--tng-text-light);
-            padding: 15px 40px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-        .logo {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: var(--tng-silver);
-            text-decoration: none;
-        }
-        nav a, .more-menu-toggle {
-            color: var(--tng-silver);
-            text-decoration: none;
-            padding: 10px 15px;
-            margin-left: 10px;
-            font-size: 0.95em;
-            font-weight: 500;
-            border-radius: 4px;
-        }
-        nav a:hover {
-            color: var(--tng-text-light);
-            background-color: rgba(168, 31, 39, 0.5); 
-        }
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-content { display: none; position: absolute; right: 0; background-color: var(--tng-blue); min-width: 200px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; border-top: 3px solid var(--tng-maroon); }
-        .dropdown-content a { color: var(--tng-silver); padding: 12px 16px; text-decoration: none; display: block; margin: 0; }
-        .dropdown-content a:hover { background-color: var(--tng-maroon); color: var(--tng-text-light); }
-        .dropdown:hover .dropdown-content { display: block; }
-
-        /* === MAIN CONTENT LAYOUT === */
-        main { max-width: 900px; margin: 40px auto; padding: 20px; }
-        
-        .hero-hr { 
-            background: linear-gradient(135deg, var(--tng-maroon), #C04349); 
-            color: var(--tng-light-gray); 
-            padding: 50px 40px; 
-            text-align: center; 
-            border-radius: 12px; 
-            margin-bottom: 50px; 
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); 
-            border-bottom: 5px solid var(--tng-blue);
-        }
-        .hero-hr h1 { 
-            font-size: 2.5em; 
-            margin-bottom: 5px; 
-            color: var(--tng-text-light);
-        }
-        .hero-hr p { 
-            font-size: 1.1em; 
-            color: var(--tng-light-gray);
-        }
-
-        .contact-card {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
-            border-top: 5px solid var(--tng-blue);
-        }
-        .contact-card h2 {
-            color: var(--tng-maroon);
-            font-size: 1.8em;
-            margin-top: 0;
-            border-bottom: 2px solid var(--tng-light-gray);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        .contact-card ul {
-            list-style: none;
-            padding: 0;
-        }
-        .contact-card li {
-            font-size: 1.1em;
-            margin-bottom: 15px;
-            padding-left: 20px;
-            position: relative;
-        }
-        .contact-card li::before {
-            content: '🧑‍💼'; /* Person Emoji */
-            position: absolute;
-            left: 0;
-            color: var(--tng-blue);
-            font-size: 1.2em;
-        }
-        .contact-card a {
-            color: var(--tng-blue);
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .contact-card a:hover {
-            text-decoration: underline;
-        }
-
-        /* Footer (Standard TNG) */
-        footer { background-color: var(--tng-blue); color: var(--tng-silver); padding: 40px 0 0; font-size: 0.85em; box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); margin-top: 50px; }
-        .footer-content { display: flex; justify-content: space-between; max-width: 1300px; margin: 0 auto; padding: 0 40px 30px; flex-wrap: wrap; }
-        .footer-section { width: 28%; min-width: 250px; margin-bottom: 20px; }
-        .footer-section h4 { color: var(--tng-maroon); font-size: 1.1em; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px; }
-        .footer-section a { color: var(--tng-silver); text-decoration: none; display: block; margin-bottom: 8px; }
-        .footer-bottom { background-color: #00122E; text-align: center; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Human Resources | Tyler Nicholas Group</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../../style.css">
 </head>
-<body>
+<body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen justify-center items-center p-6">
+  
+  <div class="max-w-xl w-full bg-white rounded-2xl shadow-xl p-10 text-center border-t-4 border-[#a6192e]">
+    <i class="fa-solid fa-users-gear text-5xl text-[#a6192e] mb-6"></i>
+    <h1 class="text-3xl font-bold text-gray-900 mb-4">TNG Human Resources</h1>
+    <p class="text-gray-600 mb-6">The HR Department manages application statuses, interview scheduling, employee onboarding, payroll inquiries, and internal staff relations across all subsidiaries.</p>
+    
+    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-8 text-left">
+      <h3 class="font-bold text-yellow-800 mb-2"><i class="fa-solid fa-person-digging mr-2"></i> HR Portal Under Construction</h3>
+      <p class="text-sm text-yellow-700">The centralized Tyler Nicholas Group Employee & Candidate Portal is currently being built. Until this system is live, please submit any critical employment inquiries via the General Inquiry form on the main contact page.</p>
+    </div>
 
-    <header>
-        <div class="navbar">
-            <a href="/" class="logo">TYLER NICHOLAS GROUP</a>
-            <nav>
-                <a href="../../">Home</a>
-                <a href="../../about">About Us</a>
-                <a href="../../companies">Our Companies</a>
-                <a href="../../people">Our People</a>
-                <a href="../../governance">Governance</a>
-                <a href="../../careers">Careers</a>
-                <div class="dropdown">
-                    <a href="../../investors">Investors</a>
-                    <div class="dropdown-content">
-                        <a href="../../governance/board-of-directors.html">Board of Directors</a>
-                        <a href="../../governance/code-of-conduct">Code of Conduct</a>
-                        <a href="../../governance/reports">Financial Reporting</a>
-                    </div>
-                </div>
-                <a href="../" style="color: var(--tng-maroon); border-bottom: 2px solid var(--tng-maroon);">Contact</a>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <section class="hero-hr">
-            <h1>Human Resources & Talent.</h1>
-            <p>Dedicated contact channels for job applicants, vendors, and internal employee support and compliance.</p>
-        </section>
-
-        <section class="contact-card">
-            <h2>Careers & External Recruiting</h2>
-            <p>For job applicants, recruiters, and career-related inquiries, please use the following:</p>
-            <ul>
-                <li>**View Open Roles:** <a href="../../careers">TNG Careers Page</a> (Recommended First Step)</li>
-                <li>**Talent Acquisition:** <a href="mailto:careers@tylernicholasgroup.com">careers@tylernicholasgroup.com</a> (For general recruiting questions)</li>
-                <li>**HR Vendors/Partnerships:** <a href="mailto:hrpartner@tylernicholasgroup.com">hrpartner@tylernicholasgroup.com</a></li>
-            </ul>
-        </section>
-
-        <section class="contact-card">
-            <h2>Internal Employee Support (Current Staff)</h2>
-            <p>For current TNG employees requiring support related to benefits, payroll, or internal policy:</p>
-            <ul>
-                <li>**Employee Support:** <a href="mailto:hrsupport@tylernicholasgroup.com">hrsupport@tylernicholasgroup.com</a></li>
-                <li>**Policy/Compliance:** <a href="mailto:hrcompliance@tylernicholasgroup.com">hrcompliance@tylernicholasgroup.com</a></li>
-                <li>**TNG Main Contact Page:** <a href="../">Return to Main Contact Directory</a></li>
-            </ul>
-        </section>
-        
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>TNG Global Headquarters</h4>
-                <p>Tyler Nicholas Group operates as a remote-first organization.</p>
-                <p>Official Headquarters & Group Communications:<br>
-                <a href="https://discord.gg/3uhMuykwuD" target="_blank" style="color: var(--tng-maroon);">Official TNG Discord Server</a></p>
-                <p>General Inquiries:<br>
-                <a href="mailto:contact@tylernicholasgroup.com">contact@tylernicholasgroup.com</a></p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="../../about">About TNG</a>
-                <a href="../../companies">Our Companies</a>
-                <a href="../../people">Our People</a>
-                <a href="../../governance">Governance</a>
-                <a href="../../careers">Careers</a>
-            </div>
-            <div class="footer-section">
-                <h4>Legal & Policy</h4>
-                <a href="../../privacy">Privacy Policy</a>
-                <a href="../../terms">Terms of Use</a>
-                <a href="../../governance/legal">Legal & Compliance</a>
-                <a href="../../accessibility">Accessibility Statement</a>
-                <a href="../../governance/reports">Financial Reports</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2025 Tyler Nicholas Group. All Rights Reserved. TNG Core is a registered service mark.
-        </div>
-    </footer>
+    <a href="../" class="text-[#001f3f] font-bold hover:underline"><i class="fa-solid fa-arrow-left mr-2"></i> Return to Main Contact Hub</a>
+  </div>
 
 </body>
 </html>
