@@ -6,26 +6,21 @@
   <title>Tyler Nicholas Group | Driving Value, Defining the Future</title>
   <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
   
-  <style>
-    body { opacity: 0; visibility: hidden; }
-  </style>
-  <script>
-    window.addEventListener('load', function() {
-      document.body.style.transition = 'opacity 0.2s ease-in';
-      document.body.style.opacity = '1';
-      document.body.style.visibility = 'visible';
-    });
-  </script>
-
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <link rel="stylesheet" href="style.css">
   
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 </head>
-<body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen" id="body">
+<body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen overflow-hidden" id="body">
+
+  <div id="loading-screen" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#001f3f] text-white transition-opacity duration-500">
+    <div class="loader-spinner"></div>
+    <h2 class="text-xl md:text-2xl font-bold tracking-widest uppercase mb-2">Tyler Nicholas Group</h2>
+    <p class="text-sm text-gray-400 italic">By Tyler Nicholas</p>
+  </div>
 
   <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
 
@@ -57,7 +52,6 @@
   <main class="flex-grow flex flex-col items-center pt-12 pb-24 px-4 md:px-0 w-full space-y-24">
     
     <div class="bg-[#001f3f] text-white w-full max-w-6xl rounded-2xl p-10 md:p-24 text-center shadow-2xl relative overflow-hidden">
-      <img src="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" alt="" class="absolute -right-20 -bottom-20 w-96 opacity-5 pointer-events-none">
       <div class="relative z-10">
         <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight">Driving Value, Defining the Future.</h1>
         <p class="text-sm md:text-xl max-w-3xl mx-auto text-gray-200 leading-relaxed mb-10">
@@ -219,6 +213,18 @@
   </div>
 
   <script>
+    // Loading Screen Logic
+    window.addEventListener('load', function() {
+      const loader = document.getElementById('loading-screen');
+      if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => {
+          loader.style.display = 'none';
+          document.body.classList.remove('overflow-hidden');
+        }, 500);
+      }
+    });
+
     function dismissCookies() {
       const banner = document.getElementById('cookie-banner');
       banner.classList.add('translate-y-full'); 
