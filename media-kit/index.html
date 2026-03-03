@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Guidelines | Tyler Nicholas Group</title>
+  <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
+  
+  <style> body { opacity: 0; visibility: hidden; } </style>
+  <script> window.addEventListener('load', function() { document.body.style.transition = 'opacity 0.2s ease-in'; document.body.style.opacity = '1'; document.body.style.visibility = 'visible'; }); </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen" id="body">
+
+  <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
+
+  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md relative z-50">
+    <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
+    <a href="../sitemap/" class="md:hidden bg-white text-[#001f3f] px-4 py-2 rounded text-sm font-bold shadow hover:bg-gray-200 transition-colors flex items-center">
+      <i class="fa-solid fa-list mr-2"></i> Menu
+    </a>
+    <div class="hidden md:flex space-x-6 text-sm items-center">
+      <a href="../" class="hover:text-gray-300 transition-colors">Home</a>
+      <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
+      <a href="../companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
+      <a href="../people/" class="hover:text-gray-300 transition-colors">Our People</a>
+      <a href="../governance/" class="hover:text-gray-300 transition-colors">Governance</a>
+      <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
+      <div class="relative group">
+        <button class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors flex items-center cursor-pointer border-b-2 border-[#a6192e] pb-1">
+          More <i class="fa-solid fa-chevron-down ml-2 text-[10px]"></i>
+        </button>
+        <div class="absolute right-0 mt-2 w-56 bg-white text-gray-900 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden">
+          <a href="../contact/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b font-semibold">Contact & FAQ</a>
+          <a href="../news/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">News & Press Releases</a>
+          <a href="../trust-security/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Trust & Security</a>
+          <a href="../status/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Live System Status</a>
+          <a href="../alumni/" class="block px-4 py-3 hover:bg-gray-100 text-sm">Corporate Alumni Network</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="bg-[#001f3f] text-white py-16 px-6 md:px-12 text-center relative overflow-hidden">
+    <i class="fa-solid fa-palette absolute -right-10 -bottom-10 text-[12rem] text-white opacity-5 pointer-events-none"></i>
+    <div class="relative z-10">
+      <h1 class="text-3xl md:text-5xl font-bold mb-4 uppercase tracking-tighter">Brand Guidelines</h1>
+      <p class="text-gray-300 max-w-2xl mx-auto md:text-lg">The visual standards for the Tyler Nicholas Group. Ensuring consistent, high-impact representation across the global ecosystem.</p>
+    </div>
+  </div>
+
+  <main class="flex-grow max-w-6xl mx-auto py-16 px-6 md:px-12 w-full space-y-20">
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+      <div>
+        <h2 class="text-2xl font-bold text-[#001f3f] mb-6 border-b-2 border-[#a6192e] pb-2 uppercase tracking-widest">Primary Identity</h2>
+        <p class="text-gray-600 mb-6">The Tyler Nicholas Group logo represents our architectural approach to business—strong, structured, and balanced. It should always be used with sufficient clear space and never distorted.</p>
+        <div class="bg-gray-100 p-12 rounded-2xl flex justify-center border border-gray-200">
+           <img src="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" alt="TNG Logo" class="h-32 object-contain">
+        </div>
+      </div>
+      <div class="space-y-6">
+        <h3 class="text-lg font-bold text-gray-900">Usage Rules</h3>
+        <ul class="space-y-4 text-sm text-gray-600">
+          <li class="flex items-start"><i class="fa-solid fa-circle-check text-green-600 mt-1 mr-3"></i> <span>Maintain a "Clear Zone" equal to the width of the central emblem around all sides.</span></li>
+          <li class="flex items-start"><i class="fa-solid fa-circle-xmark text-[#a6192e] mt-1 mr-3"></i> <span>Do not apply drop shadows, glows, or bevel effects to the primary logo.</span></li>
+          <li class="flex items-start"><i class="fa-solid fa-circle-xmark text-[#a6192e] mt-1 mr-3"></i> <span>Do not change the color of the emblem or the text independently.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="text-2xl font-bold text-[#001f3f] mb-8 uppercase tracking-widest">Corporate Palette</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="group">
+          <div class="h-32 bg-[#001f3f] rounded-t-xl shadow-inner"></div>
+          <div class="bg-white p-4 border border-gray-200 rounded-b-xl">
+            <h4 class="font-bold text-[#001f3f]">TNG Midnight</h4>
+            <p class="text-xs text-gray-400 font-mono mt-1">HEX: #001F3F</p>
+          </div>
+        </div>
+        <div class="group">
+          <div class="h-32 bg-[#a6192e] rounded-t-xl shadow-inner"></div>
+          <div class="bg-white p-4 border border-gray-200 rounded-b-xl">
+            <h4 class="font-bold text-[#a6192e]">Executive Crimson</h4>
+            <p class="text-xs text-gray-400 font-mono mt-1">HEX: #A6192E</p>
+          </div>
+        </div>
+        <div class="group">
+          <div class="h-32 bg-gray-50 border-t rounded-t-xl shadow-inner"></div>
+          <div class="bg-white p-4 border border-gray-200 rounded-b-xl">
+            <h4 class="font-bold text-gray-900">Foundation White</h4>
+            <p class="text-xs text-gray-400 font-mono mt-1">HEX: #F9FAFB</p>
+          </div>
+        </div>
+        <div class="group">
+          <div class="h-32 bg-gray-900 rounded-t-xl shadow-inner"></div>
+          <div class="bg-white p-4 border border-gray-200 rounded-b-xl">
+            <h4 class="font-bold text-gray-900">Obsidian Text</h4>
+            <p class="text-xs text-gray-400 font-mono mt-1">HEX: #111827</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-[#001f3f] text-white rounded-2xl p-10 md:p-14 shadow-2xl relative overflow-hidden">
+      <i class="fa-solid fa-font absolute -right-10 -bottom-10 text-[12rem] text-white opacity-5 pointer-events-none"></i>
+      <h2 class="text-2xl font-bold mb-8 uppercase tracking-widest border-b border-blue-900 pb-2">Typography</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div>
+          <span class="text-[#a6192e] font-bold text-xs uppercase tracking-widest mb-2 block">Primary Typeface</span>
+          <h3 class="text-4xl md:text-5xl font-sans font-bold mb-4">Inter / Sans Serif</h3>
+          <p class="text-gray-300 text-sm leading-relaxed">Used for all corporate communications, web content, and digital interfaces. It provides maximum legibility and a modern, tech-forward aesthetic.</p>
+        </div>
+        <div>
+          <span class="text-[#a6192e] font-bold text-xs uppercase tracking-widest mb-2 block">Type Hierarchy</span>
+          <div class="space-y-4">
+            <div class="text-3xl font-bold">Heading Level One</div>
+            <div class="text-xl font-bold text-gray-300">Heading Level Two</div>
+            <div class="text-sm text-gray-400">Body text should always be set with comfortable leading (line-height) to ensure accessibility and professional polish.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <h2 class="text-2xl font-bold text-[#001f3f] mb-4">Media Kit Download</h2>
+      <p class="text-gray-600 mb-8 max-w-xl mx-auto">Download the official high-resolution assets, including vector logos, color profiles, and social media templates for the Tyler Nicholas Group.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <button class="bg-[#001f3f] hover:bg-blue-900 text-white font-bold py-3 px-8 rounded transition-colors shadow-lg flex items-center justify-center">
+          <i class="fa-solid fa-file-zipper mr-3"></i> Download All Assets (.ZIP)
+        </button>
+        <button class="bg-white border-2 border-[#001f3f] text-[#001f3f] hover:bg-gray-50 font-bold py-3 px-8 rounded transition-colors flex items-center justify-center">
+          <i class="fa-solid fa-file-pdf mr-3"></i> Brand Guidelines (.PDF)
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="bg-[#001f3f] text-white py-14 px-6 md:px-12 mt-auto border-t border-blue-900">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 items-start">
+      <div class="flex flex-col items-start lg:col-span-2">
+        <h3 class="font-bold text-xl mb-3 uppercase tracking-wider">Tyler Nicholas Group</h3>
+        <p class="text-sm text-gray-300 mb-5 max-w-md leading-relaxed">A global holding company headquartered in the Seychelles, driving strategic growth and synergy across diverse digital verticals.</p>
+        <div class="inline-block bg-white text-[#001f3f] px-3 py-1.5 rounded text-sm font-semibold shadow-md mb-6">
+          Seychelles Local Time: <span id="seychelles-time">Loading...</span>
+        </div>
+      </div>
+
+      <div class="flex flex-col space-y-3 text-sm">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Corporate</h4>
+        <a href="../culture/" class="hover:text-gray-300 transition-colors">Core Values & Culture</a>
+        <a href="../diversity/" class="hover:text-gray-300 transition-colors">Diversity & Inclusion</a>
+        <a href="../sustainability/" class="hover:text-gray-300 transition-colors">Sustainability & ESG</a>
+        <a href="../our-thoughts/" class="hover:text-gray-300 transition-colors">Our Thoughts</a>
+        <a href="../partnerships/" class="hover:text-gray-300 transition-colors">Global Partnerships</a>
+        <a href="#" class="text-white font-bold">Brand Guidelines</a>
+      </div>
+
+      <div class="flex flex-col space-y-3 text-sm">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Legal</h4>
+        <a href="../privacy/" class="hover:text-gray-300 transition-colors">Privacy Policy</a>
+        <a href="../terms/" class="hover:text-gray-300 transition-colors">Terms of Use</a>
+        <a href="../cookie-policy/" class="hover:text-gray-300 transition-colors">Cookie Policy</a>
+        <a href="../accessibility/" class="hover:text-gray-300 transition-colors">Accessibility Statement</a>
+        <a href="../modern-slavery/" class="hover:text-gray-300 transition-colors">Modern Slavery Act</a>
+      </div>
+
+      <div class="flex flex-col space-y-3 text-sm">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Connect</h4>
+        <a href="../contact/" class="hover:text-gray-300 transition-colors">Contact Us</a>
+        <a href="../sitemap/" class="hover:text-gray-300 transition-colors">Site Map</a>
+        <div class="flex space-x-5 text-2xl text-[#00a8ff] mt-6">
+          <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://x.com/tyler_n_group" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function updateSeychellesTime() { const e = document.getElementById('seychelles-time'); if(e) e.innerText = new Date().toLocaleTimeString('en-US', { timeZone: 'Indian/Mahe', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }); }
+    setInterval(updateSeychellesTime, 1000); updateSeychellesTime();
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const checkSupabase = setInterval(async () => {
+        if (window.supabase) {
+          clearInterval(checkSupabase); 
+          const supabase = window.supabase.createClient('https://hicowukbjsbpuebquqbh.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0');
+          try {
+            const { data, error } = await supabase.from('announcements').select('*').eq('is_active', true).single();
+            if (data && !error) {
+              const bar = document.getElementById('announcement-bar');
+              bar.classList.remove('hidden'); bar.innerHTML = data.link ? `<a href="${data.link}" class="hover:underline block w-full py-1">${data.message}</a>` : data.message;
+            }
+          } catch (err) {}
+        }
+      }, 100);
+    });
+  </script>
+</body>
+</html>
