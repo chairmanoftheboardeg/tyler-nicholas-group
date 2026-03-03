@@ -52,8 +52,9 @@
     </nav>
 
     <div class="bg-white shadow-sm border-b overflow-x-auto whitespace-nowrap">
-      <div class="max-w-7xl mx-auto flex space-x-8 px-6">
+      <div class="max-w-7xl mx-auto flex space-x-6 px-6">
         <button class="tab-btn active-tab py-4 font-bold text-[#001f3f] border-b-2 border-[#a6192e]" data-target="section-contacts">Inbox</button>
+        <button class="tab-btn py-4 font-bold text-gray-500 hover:text-[#001f3f]" data-target="section-security">Security Reports</button>
         <button class="tab-btn py-4 font-bold text-gray-500 hover:text-[#001f3f]" data-target="section-announcements">Announcement</button>
         <button class="tab-btn py-4 font-bold text-gray-500 hover:text-[#001f3f]" data-target="section-jobs">Careers</button>
         <button class="tab-btn py-4 font-bold text-gray-500 hover:text-[#001f3f]" data-target="section-news">News & PR</button>
@@ -79,6 +80,32 @@
             </thead>
             <tbody id="contacts-table-body" class="text-sm">
               <tr><td colspan="5" class="py-4 px-4 text-center text-gray-500">Loading messages...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="section-security" class="admin-section hidden space-y-6">
+        <div class="flex justify-between items-end border-b-2 border-red-800 pb-2 mb-4">
+          <div>
+            <h2 class="text-2xl font-bold text-red-800"><i class="fa-solid fa-lock mr-2"></i> Confidential Security Reports</h2>
+            <p class="text-sm text-gray-600">Ethics, Whistleblower, and Safety concerns submitted via the Trust Center.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow overflow-x-auto border border-red-100">
+          <table class="w-full text-left border-collapse min-w-[1000px]">
+            <thead>
+              <tr class="bg-red-50 text-red-900 text-sm uppercase border-b border-red-100">
+                <th class="py-3 px-4 font-semibold">Submitted</th>
+                <th class="py-3 px-4 font-semibold">Type & Incident Date</th>
+                <th class="py-3 px-4 font-semibold">Description</th>
+                <th class="py-3 px-4 font-semibold">Details</th>
+                <th class="py-3 px-4 font-semibold text-center">Status</th>
+                <th class="py-3 px-4 font-semibold text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="security-table-body" class="text-sm">
+              <tr><td colspan="6" class="py-4 px-4 text-center text-gray-500">Loading reports...</td></tr>
             </tbody>
           </table>
         </div>
@@ -260,7 +287,13 @@
           function loadDashboard() {
             loginScreen.classList.add('hidden');
             dashboardScreen.classList.remove('hidden');
-            fetchContacts(); fetchAnnouncement(); fetchJobs(); fetchNews(); fetchStatus(); fetchStats();
+            fetchContacts(); 
+            fetchSecurityReports(); // NEW
+            fetchAnnouncement(); 
+            fetchJobs(); 
+            fetchNews(); 
+            fetchStatus(); 
+            fetchStats();
           }
 
           // 1. CONTACTS
@@ -282,14 +315,53 @@
             });
           }
 
+          // 1.5 SECURITY REPORTS (NEW)
+          async function fetchSecurityReports() {
+            const { data, error } = await supabase.from('security_reports').select('*').order('created_at', { ascending: false });
+            const tbody = document.getElementById('security-table-body');
+            if (error) { tbody.innerHTML = `<tr><td colspan="6" class="py-4 text-center text-red-500">Error loading reports.</td></tr>`; return; }
+            if (data.length === 0) { tbody.innerHTML = `<tr><td colspan="6" class="py-4 text-center text-gray-500">No security reports found.</td></tr>`; return; }
+            tbody.innerHTML = '';
+            data.forEach(rep => {
+              let badgeClass = 'bg-red-100 text-red-800 border-red-300';
+              if(rep.status === 'Investigating') badgeClass = 'bg-yellow-100 text-yellow-800 border-yellow-300';
+              if(rep.status === 'Resolved') badgeClass = 'bg-green-100 text-green-800 border-green-300';
+
+              tbody.innerHTML += `
+                <tr class="border-b border-red-50 hover:bg-red-50/50">
+                  <td class="py-3 px-4 whitespace-nowrap text-gray-600">${new Date(rep.created_at).toLocaleDateString()}</td>
+                  <td class="py-3 px-4"><div class="font-bold text-[#001f3f]">${rep.report_type}</div><div class="text-xs text-gray-500 mt-1">Incident: ${rep.incident_date}</div></td>
+                  <td class="py-3 px-4">
+                    <div class="max-w-xs h-10 overflow-y-auto text-xs text-gray-700 bg-white p-2 border border-gray-200 rounded cursor-pointer" onclick="alert('${rep.description.replace(/'/g, "\\'")}')" title="Click to read full text">
+                      ${rep.description}
+                    </div>
+                  </td>
+                  <td class="py-3 px-4 text-xs">
+                    <div class="mb-1"><span class="font-bold text-gray-500">By:</span> ${rep.contact_info || '<i class="text-gray-400">Anonymous</i>'}</div>
+                    <div><span class="font-bold text-gray-500">Involved:</span> ${rep.individuals_involved || '<i class="text-gray-400">None Listed</i>'}</div>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <select onchange="updateSecStatus('${rep.id}', this.value)" class="px-2 py-1 border rounded text-xs font-bold ${badgeClass}">
+                      <option value="Pending" ${rep.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                      <option value="Investigating" ${rep.status === 'Investigating' ? 'selected' : ''}>Investigating</option>
+                      <option value="Resolved" ${rep.status === 'Resolved' ? 'selected' : ''}>Resolved</option>
+                    </select>
+                  </td>
+                  <td class="py-3 px-4 text-right">
+                    <button onclick="deleteSecReport('${rep.id}')" class="text-sm font-bold text-red-600 hover:underline">Delete</button>
+                  </td>
+                </tr>`;
+            });
+          }
+          window.updateSecStatus = async function(id, val) { await supabase.from('security_reports').update({ status: val }).eq('id', id); fetchSecurityReports(); };
+          window.deleteSecReport = async function(id) { if(confirm("Permanently delete this security report? This cannot be undone.")) { await supabase.from('security_reports').delete().eq('id', id); fetchSecurityReports(); } };
+
           // 2. ANNOUNCEMENTS
           async function fetchAnnouncement() {
             const { data, error } = await supabase.from('announcements').select('*').eq('is_active', true).single();
             if (data && !error) {
-              document.getElementById('ann-id').value = data.id;
-              document.getElementById('ann-message').value = data.message;
-              document.getElementById('ann-link').value = data.link || '';
-              document.getElementById('ann-active').checked = data.is_active;
+              document.getElementById('ann-id').value = data.id; document.getElementById('ann-message').value = data.message;
+              document.getElementById('ann-link').value = data.link || ''; document.getElementById('ann-active').checked = data.is_active;
             }
           }
           document.getElementById('announcement-form').addEventListener('submit', async (e) => {
