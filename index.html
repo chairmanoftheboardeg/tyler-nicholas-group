@@ -24,17 +24,28 @@
 
   <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
 
-  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md">
+<nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md relative z-50">
     <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
     <div class="hidden md:flex space-x-6 text-sm items-center">
-      <a href="/" class="hover:text-gray-300 border-b-2 border-[#a6192e] pb-1">Home</a>
+      <a href="index.html" class="hover:text-gray-300 border-b-2 border-[#a6192e] pb-1">Home</a>
       <a href="about/" class="hover:text-gray-300 transition-colors">About Us</a>
       <a href="companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
       <a href="people/" class="hover:text-gray-300 transition-colors">Our People</a>
       <a href="governance/" class="hover:text-gray-300 transition-colors">Governance</a>
       <a href="careers/" class="hover:text-gray-300 transition-colors">Careers</a>
-      <a href="admin/" class="hover:text-gray-300 transition-colors">Staff Login</a>
-      <a href="contact/" class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors">More</a>
+      
+      <div class="relative group">
+        <button class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors flex items-center cursor-pointer">
+          More <i class="fa-solid fa-chevron-down ml-2 text-[10px]"></i>
+        </button>
+        <div class="absolute right-0 mt-2 w-56 bg-white text-gray-900 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden">
+          <a href="contact/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b font-semibold">Contact & FAQ</a>
+          <a href="news/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">News & Press Releases</a>
+          <a href="trust-security/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Trust & Security</a>
+          <a href="status/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Live System Status</a>
+          <a href="alumni/" class="block px-4 py-3 hover:bg-gray-100 text-sm">Corporate Alumni Network</a>
+        </div>
+      </div>
     </div>
   </nav>
 
