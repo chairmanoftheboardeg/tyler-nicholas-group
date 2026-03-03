@@ -18,8 +18,7 @@
   </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="../style.css">
   
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
@@ -28,7 +27,7 @@
 
   <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
 
-  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md">
+  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md relative z-50">
     <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
     <div class="hidden md:flex space-x-6 text-sm items-center">
       <a href="../" class="hover:text-gray-300 transition-colors">Home</a>
@@ -37,7 +36,19 @@
       <a href="../people/" class="hover:text-gray-300 transition-colors">Our People</a>
       <a href="../governance/" class="hover:text-gray-300 transition-colors">Governance</a>
       <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
-      <a href="../contact/" class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors">More</a>
+      
+      <div class="relative group">
+        <button class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors flex items-center cursor-pointer">
+          More <i class="fa-solid fa-chevron-down ml-2 text-[10px]"></i>
+        </button>
+        <div class="absolute right-0 mt-2 w-56 bg-white text-gray-900 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden">
+          <a href="../contact/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b font-semibold">Contact & FAQ</a>
+          <a href="../news/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">News & Press Releases</a>
+          <a href="../trust-security/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Trust & Security</a>
+          <a href="../status/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Live System Status</a>
+          <a href="../alumni/" class="block px-4 py-3 hover:bg-gray-100 text-sm">Corporate Alumni Network</a>
+        </div>
+      </div>
     </div>
   </nav>
 
@@ -65,26 +76,18 @@
     </div>
 
     <div class="rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row bg-white border border-gray-200">
-      
       <div class="md:w-2/5 flex flex-col items-center justify-end relative pt-12 px-6 bg-white">
         <img src="https://i.ibb.co/CpzKPrZG/Gemini-Generated-Image-gei5vxgei5vxgei5.png" alt="Tyler Nicholas" class="w-full max-w-[300px] object-contain drop-shadow-xl z-10 min-h-[300px]">
         <p class="text-[10px] text-gray-400 mt-4 pb-4 z-10 text-center">
           Photo by <a href="https://www.instagram.com/tristan_.belmont?igsh=d2dib2t6OHNlbGRl" target="_blank" class="underline hover:text-gray-600">Tristan Belmont</a>
         </p>
       </div>
-
       <div class="md:w-3/5 p-10 md:p-14 bg-[#001f3f] text-white flex flex-col justify-center">
         <h2 class="text-[#a6192e] text-3xl font-bold mb-6">A Message From Our Founder</h2>
         <div class="space-y-4 text-gray-200 leading-relaxed text-sm md:text-base">
-          <p>
-            When I founded the Tyler Nicholas Group, the vision was simple: build a centralized hub that could empower diverse ideas to scale globally while staying true to our roots in the Seychelles. Today, we manage an incredible portfolio spanning from non-profit initiatives like the Tyler Nicholas Foundation to robust digital storefronts.
-          </p>
-          <p>
-            Our organization is driven by synergy. By providing our subsidiaries with top-tier shared infrastructure—from security to talent acquisition—we allow visionary leaders to focus purely on innovation.
-          </p>
-          <p>
-            Whether you are joining us in a paid executive role, a technical capacity, or as a dedicated volunteer for one of our foundations, working at TNG means becoming part of a forward-thinking family. We value passion, structure, and a relentless drive to redefine the future.
-          </p>
+          <p>When I founded the Tyler Nicholas Group, the vision was simple: build a centralized hub that could empower diverse ideas to scale globally while staying true to our roots in the Seychelles. Today, we manage an incredible portfolio spanning from non-profit initiatives like the Tyler Nicholas Foundation to robust digital storefronts.</p>
+          <p>Our organization is driven by synergy. By providing our subsidiaries with top-tier shared infrastructure—from security to talent acquisition—we allow visionary leaders to focus purely on innovation.</p>
+          <p>Whether you are joining us in a paid executive role, a technical capacity, or as a dedicated volunteer for one of our foundations, working at TNG means becoming part of a forward-thinking family. We value passion, structure, and a relentless drive to redefine the future.</p>
         </div>
         <div class="mt-8">
           <p class="font-bold text-xl tracking-wider">Tyler Nicholas</p>
@@ -96,11 +99,8 @@
     <div>
       <div class="text-center max-w-3xl mx-auto mb-16">
         <h2 class="text-3xl font-bold text-[#001f3f] mb-4">Our Purpose & Story</h2>
-        <p class="text-gray-600 leading-relaxed">
-          The Tyler Nicholas Group was born out of a necessity for structured growth. As individual projects began to scale rapidly, the need for a unified corporate umbrella became clear. Our purpose is to incubate, manage, and elevate ventures by providing them with the executive oversight and capital allocation they need to thrive.
-        </p>
+        <p class="text-gray-600 leading-relaxed">The Tyler Nicholas Group was born out of a necessity for structured growth. As individual projects began to scale rapidly, the need for a unified corporate umbrella became clear. Our purpose is to incubate, manage, and elevate ventures by providing them with the executive oversight and capital allocation they need to thrive.</p>
       </div>
-
       <div class="max-w-3xl mx-auto border-l-4 border-[#001f3f] ml-4 md:mx-auto space-y-12 pb-8">
         <div class="relative pl-8 md:pl-12">
           <div class="absolute left-[-14px] top-1 w-6 h-6 bg-[#a6192e] rounded-full border-4 border-white shadow-md"></div>
@@ -108,14 +108,12 @@
           <h3 class="text-2xl font-bold text-[#001f3f] mt-1 mb-2">The Genesis</h3>
           <p class="text-gray-600 text-sm md:text-base max-w-lg leading-relaxed">The initial launch of our core standalone projects, establishing a strong digital footprint and active user bases in the virtual aviation and gaming sectors.</p>
         </div>
-
         <div class="relative pl-8 md:pl-12">
           <div class="absolute left-[-14px] top-1 w-6 h-6 bg-[#001f3f] rounded-full border-4 border-white shadow-md"></div>
           <span class="text-[#a6192e] font-bold text-sm tracking-widest uppercase">Phase 2</span>
           <h3 class="text-2xl font-bold text-[#001f3f] mt-1 mb-2">Formation of TNG</h3>
           <p class="text-gray-600 text-sm md:text-base max-w-lg leading-relaxed">Tyler Nicholas Group is officially established as a registered LLC to act as the parent company, consolidating governance, security, and shared services.</p>
         </div>
-
         <div class="relative pl-8 md:pl-12">
           <div class="absolute left-[-14px] top-1 w-6 h-6 bg-[#a6192e] rounded-full border-4 border-white shadow-md"></div>
           <span class="text-[#a6192e] font-bold text-sm tracking-widest uppercase">Phase 3</span>
@@ -125,39 +123,129 @@
       </div>
     </div>
 
+    <div class="py-12 border-t border-gray-200">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-[#001f3f] mb-4">Our Core Values</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">The guiding principles that dictate our business strategy and corporate culture.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 mx-auto bg-[#001f3f] text-white rounded-full flex items-center justify-center text-2xl mb-4 shadow-md">
+            <i class="fa-solid fa-scale-balanced"></i>
+          </div>
+          <h4 class="font-bold text-xl text-[#001f3f] mb-2">Unwavering Integrity</h4>
+          <p class="text-gray-600 text-sm">We operate with absolute transparency and ethical standards across all our global entities.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 mx-auto bg-[#a6192e] text-white rounded-full flex items-center justify-center text-2xl mb-4 shadow-md">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <h4 class="font-bold text-xl text-[#001f3f] mb-2">Agile Innovation</h4>
+          <p class="text-gray-600 text-sm">We empower our founders to move fast, adapt to digital trends, and disrupt standard markets.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 mx-auto bg-[#001f3f] text-white rounded-full flex items-center justify-center text-2xl mb-4 shadow-md">
+            <i class="fa-solid fa-handshake-angle"></i>
+          </div>
+          <h4 class="font-bold text-xl text-[#001f3f] mb-2">Synergistic Growth</h4>
+          <p class="text-gray-600 text-sm">We believe the whole is greater than the sum of its parts, leveraging shared resources for mutual success.</p>
+        </div>
+      </div>
+    </div>
+
     <div class="bg-gray-100 rounded-2xl p-10 shadow-inner">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-[#001f3f] mb-4">Senior Leadership Team</h2>
         <p class="text-gray-600">The executive minds steering our global operations and subsidiaries.</p>
       </div>
-      
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
-        <div class="bg-white rounded-xl shadow-md p-8 text-center border-t-4 border-[#001f3f] hover:-translate-y-1 transition-transform">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+        
+        <div class="bg-white rounded-xl shadow-md p-8 text-center border-t-4 border-[#001f3f] hover:-translate-y-1 transition-transform relative">
           <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Tyler Nicholas" class="w-24 h-24 mx-auto rounded-full object-cover border-4 border-gray-100 mb-4 bg-gray-200 shadow-sm">
           <h4 class="font-bold text-lg text-[#001f3f]">Tyler Nicholas</h4>
-          <p class="text-[#a6192e] text-[10px] font-bold uppercase tracking-widest mb-2">Founder & Chairman of the Board</p>
-          <p class="text-gray-500 text-sm">Tyler Nicholas Group</p>
+          <p class="text-[#a6192e] text-[10px] font-bold uppercase tracking-widest mb-1">Founder & Chairman</p>
+          <p class="text-gray-500 text-xs mb-3">Tyler Nicholas Group</p>
+          <a href="#" class="text-[#0a66c2] hover:text-[#001f3f] inline-block transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
         </div>
 
         <div class="bg-white rounded-xl shadow-md p-8 text-center border-t-4 border-[#001f3f] hover:-translate-y-1 transition-transform">
           <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Kareem Malhas" class="w-24 h-24 mx-auto rounded-full object-cover border-4 border-gray-100 mb-4 bg-gray-200 shadow-sm">
           <h4 class="font-bold text-lg text-[#001f3f]">Kareem Malhas</h4>
-          <p class="text-[#a6192e] text-[10px] font-bold uppercase tracking-widest mb-2">Co-Founder & Chairman of the Board</p>
-          <p class="text-gray-500 text-sm">Emirates Group Roblox</p>
+          <p class="text-[#a6192e] text-[10px] font-bold uppercase tracking-widest mb-1">Co-Founder & Chairman</p>
+          <p class="text-gray-500 text-xs mb-3">Emirates Group Roblox</p>
+          <a href="#" class="text-[#0a66c2] hover:text-[#001f3f] inline-block transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
         </div>
 
         <div class="bg-white rounded-xl shadow-md p-8 text-center border-t-4 border-[#001f3f] hover:-translate-y-1 transition-transform">
           <img src="https://thumbs.dreamstime.com/b/unknown-businessman-avatar-profile-picture-black-white-illustration-35616527.jpg" alt="Dearen Porice" class="w-24 h-24 mx-auto rounded-full object-cover border-4 border-gray-100 mb-4 bg-gray-200 shadow-sm">
           <h4 class="font-bold text-lg text-[#001f3f]">Dearen Porice</h4>
-          <p class="text-[#a6192e] text-[10px] font-bold uppercase tracking-widest mb-2">Co-Founder & General Manager</p>
-          <p class="text-gray-500 text-sm">BlueWave Digital</p>
+          <p class="text-[#a6192e] text-[10px] font-bold uppercase tracking-widest mb-1">Co-Founder & GM</p>
+          <p class="text-gray-500 text-xs mb-3">BlueWave Digital</p>
+          <a href="#" class="text-[#0a66c2] hover:text-[#001f3f] inline-block transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
         </div>
 
         <div class="bg-white rounded-xl shadow-md p-8 text-center border-t-4 border-[#001f3f] hover:-translate-y-1 transition-transform">
-          <img src="https://img.freepik.com/premium-vector/pretty-young-business-boss-woman-vector-silhouette_1273985-2602.jpg?w=360" alt="Dearen Porice" class="w-24 h-24 mx-auto rounded-full object-cover border-4 border-gray-100 mb-4 bg-gray-200 shadow-sm">
+          <img src="https://img.freepik.com/premium-vector/pretty-young-business-boss-woman-vector-silhouette_1273985-2602.jpg?w=360" alt="Rosetta Alcindor" class="w-24 h-24 mx-auto rounded-full object-cover border-4 border-gray-100 mb-4 bg-gray-200 shadow-sm">
           <h4 class="font-bold text-lg text-[#001f3f]">Rosetta Alcindor</h4>
-          <p class="text-[#a6192e] text-[10px] font-bold uppercase tracking-widest mb-2">Founder & Administrator</p>
-          <p class="text-gray-500 text-sm">FoodShare-Seychelles</p>
+          <p class="text-[#a6192e] text-[10px] font-bold uppercase tracking-widest mb-1">Founder & Admin</p>
+          <p class="text-gray-500 text-xs mb-3">FoodShare-Seychelles</p>
+          <a href="#" class="text-[#0a66c2] hover:text-[#001f3f] inline-block transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="bg-[#001f3f] rounded-2xl p-10 md:p-16 text-white shadow-xl relative overflow-hidden">
+      <i class="fa-solid fa-quote-right absolute top-8 right-10 text-7xl md:text-9xl opacity-10"></i>
+      <h2 class="text-3xl font-bold mb-10 text-center relative z-10">Life at TNG</h2>
+      
+      <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-8 bg-white/10 p-8 rounded-xl backdrop-blur-sm border border-white/20 relative z-10">
+        <img src="https://emiratesgrouproblox.link/images/williama.png" alt="William Alexander Cross" class="w-24 h-24 rounded-full object-cover border-4 border-[#a6192e] shadow-lg flex-shrink-0 bg-white">
+        <div>
+          <p class="text-base md:text-lg italic leading-relaxed mb-6">"I’ve been with TNG for over five months as Chief Human Resources, and the sense of family here is genuinely exceptional. Everyone looks out for one another and wants you to succeed. Our CoTB, Tyler, is consistently ambitious and always introducing new ideas and initiatives so working at TNG is never boring, not even for a day."</p>
+          <p class="font-bold text-xl tracking-wider">William Alexander Cross</p>
+          <p class="text-[#a6192e] text-xs uppercase tracking-widest font-bold mt-1">Chief Human Resources, Tyler Nicholas Group</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+      <div class="flex flex-col lg:flex-row">
+        <div class="lg:w-1/3 relative min-h-[300px]">
+           <img src="https://st5.depositphotos.com/1128918/67878/i/450/depositphotos_678780986-stock-photo-flag-international-committee-red-cross.jpg" alt="Red Cross Flag" class="absolute inset-0 w-full h-full object-cover">
+           <div class="absolute inset-0 bg-[#001f3f]/85 flex items-center justify-center p-8 text-center">
+             <div>
+               <i class="fa-solid fa-earth-americas text-4xl text-[#a6192e] mb-4"></i>
+               <h3 class="text-2xl font-bold text-white mb-2">Global Impact</h3>
+               <p class="text-gray-300 text-sm">Standing together for peace, love, and humanity.</p>
+             </div>
+           </div>
+        </div>
+        
+        <div class="lg:w-2/3 p-8 md:p-12 flex flex-col justify-center">
+           <h2 class="text-3xl font-bold text-[#001f3f] mb-4">Our Thoughts & Commitments</h2>
+           <p class="text-gray-600 leading-relaxed mb-8">
+             At the Tyler Nicholas Group, we believe in using our platform to support those affected by crises worldwide. We stand in solidarity with global humanitarian initiatives, emergency food programs, and refugee support systems. We are fundamentally for a better world.
+           </p>
+           
+           <h4 class="text-sm font-bold uppercase tracking-wider text-gray-400 mb-3">Causes & Organizations We Support</h4>
+           <div class="flex flex-wrap gap-2 mb-8">
+             <a href="https://www.icrc.org/" target="_blank" class="text-xs font-bold text-gray-600 border border-gray-300 px-3 py-1.5 rounded hover:bg-gray-100 hover:text-[#001f3f] transition-colors">ICRC (Red Cross)</a>
+             <a href="https://www.unhcr.org/" target="_blank" class="text-xs font-bold text-gray-600 border border-gray-300 px-3 py-1.5 rounded hover:bg-gray-100 hover:text-[#001f3f] transition-colors">UN Refugee Agency</a>
+             <a href="https://www.wfp.org/" target="_blank" class="text-xs font-bold text-gray-600 border border-gray-300 px-3 py-1.5 rounded hover:bg-gray-100 hover:text-[#001f3f] transition-colors">WFP</a>
+             <a href="https://www.unicef.org/" target="_blank" class="text-xs font-bold text-gray-600 border border-gray-300 px-3 py-1.5 rounded hover:bg-gray-100 hover:text-[#001f3f] transition-colors">UNICEF</a>
+             <a href="https://www.unrwa.org/" target="_blank" class="text-xs font-bold text-gray-600 border border-gray-300 px-3 py-1.5 rounded hover:bg-gray-100 hover:text-[#001f3f] transition-colors">UNRWA</a>
+             <a href="https://www.unocha.org/" target="_blank" class="text-xs font-bold text-gray-600 border border-gray-300 px-3 py-1.5 rounded hover:bg-gray-100 hover:text-[#001f3f] transition-colors">OCHA</a>
+             <a href="https://www.ohchr.org/en/ohchr_homepage" target="_blank" class="text-xs font-bold text-gray-600 border border-gray-300 px-3 py-1.5 rounded hover:bg-gray-100 hover:text-[#001f3f] transition-colors">OHCHR</a>
+             <a href="https://www.undp.org/" target="_blank" class="text-xs font-bold text-gray-600 border border-gray-300 px-3 py-1.5 rounded hover:bg-gray-100 hover:text-[#001f3f] transition-colors">UNDP</a>
+             <a href="https://www.unwomen.org/en" target="_blank" class="text-xs font-bold text-gray-600 border border-gray-300 px-3 py-1.5 rounded hover:bg-gray-100 hover:text-[#001f3f] transition-colors">UN Women</a>
+           </div>
+           
+           <div>
+             <a href="../our-thoughts/" class="bg-[#a6192e] hover:bg-red-800 text-white font-bold py-3 px-6 rounded transition-colors shadow inline-flex items-center">
+               Read "Our Thoughts" <i class="fa-solid fa-arrow-right ml-2"></i>
+             </a>
+           </div>
         </div>
       </div>
     </div>
@@ -172,7 +260,6 @@
           Become an Investor
         </a>
       </div>
-
       <div class="bg-gray-50 rounded-xl shadow-sm p-10 text-center border-2 border-dashed border-gray-300">
         <i class="fa-solid fa-chart-line text-4xl text-gray-400 mb-4"></i>
         <h4 class="font-bold text-xl text-[#001f3f] mb-2">100% Privately Funded</h4>
@@ -183,32 +270,64 @@
       </div>
     </div>
 
+    <div class="bg-[#001f3f] rounded-2xl p-12 text-center text-white shadow-xl relative overflow-hidden">
+      <i class="fa-solid fa-globe absolute -right-10 -bottom-10 text-[12rem] text-white opacity-5 pointer-events-none"></i>
+      <div class="relative z-10">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Shape the Future?</h2>
+        <p class="text-gray-300 mb-8 max-w-2xl mx-auto text-lg">Explore our diverse portfolio of operating companies or view open career opportunities across our global network.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href="../companies/" class="bg-[#a6192e] hover:bg-red-800 text-white font-bold py-3 px-8 rounded transition-colors shadow">Explore Portfolio</a>
+          <a href="../careers/" class="bg-transparent border-2 border-white hover:bg-white hover:text-[#001f3f] text-white font-bold py-3 px-8 rounded transition-colors">View Careers</a>
+        </div>
+      </div>
+    </div>
+
   </main>
 
-  <footer class="bg-[#001f3f] text-white py-12 px-6 md:px-12 mt-auto text-center md:text-left border-t border-blue-900">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center md:items-start">
-      <div class="flex flex-col items-center md:items-start">
-        <h3 class="font-bold text-lg mb-2 uppercase">Tyler Nicholas Group</h3>
-        <p class="text-sm text-gray-300 mb-4">A global holding company headquartered in the Seychelles.</p>
-        <div class="inline-block bg-white text-[#001f3f] px-3 py-1 rounded text-sm font-semibold shadow">Seychelles Local Time: <span id="seychelles-time">Loading...</span></div>
+  <footer class="bg-[#001f3f] text-white py-14 px-6 md:px-12 mt-auto border-t border-blue-900">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 items-start">
+      <div class="flex flex-col items-start lg:col-span-2">
+        <h3 class="font-bold text-xl mb-3 uppercase tracking-wider">Tyler Nicholas Group</h3>
+        <p class="text-sm text-gray-300 mb-5 max-w-md leading-relaxed">A global holding company headquartered in the Seychelles, driving strategic growth and synergy across diverse, high-potential digital and on-site verticals.</p>
+        <div class="inline-block bg-white text-[#001f3f] px-3 py-1.5 rounded text-sm font-semibold shadow-md mb-6">
+          Seychelles Local Time: <span id="seychelles-time">Loading...</span>
+        </div>
+        <a href="https://www.trustpilot.com/review/tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity drop-shadow-lg">
+          <img src="https://www.worcestershirefencing.co.uk/wp-content/uploads/2023/11/trustpilot-logo-snijpunt.1600x680x1.png" alt="Review Tyler Nicholas Group on Trustpilot" class="h-10 object-contain">
+        </a>
       </div>
-      <div class="flex flex-col space-y-2 text-sm items-center">
-        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Explore</h4>
-        <a href="#" class="hover:text-gray-300 transition-colors">About Us</a>
-        <a href="../companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
-        <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
+
+      <div class="flex flex-col space-y-3 text-sm">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Corporate</h4>
+        <a href="../culture/" class="hover:text-gray-300 transition-colors">Core Values & Culture</a>
+        <a href="../diversity/" class="hover:text-gray-300 transition-colors">Diversity & Inclusion</a>
+        <a href="../sustainability/" class="hover:text-gray-300 transition-colors">Sustainability & ESG</a>
+        <a href="../our-thoughts/" class="hover:text-gray-300 transition-colors">Our Thoughts</a>
+        <a href="../partnerships/" class="hover:text-gray-300 transition-colors">Global Partnerships</a>
+        <a href="../media-kit/" class="hover:text-gray-300 transition-colors">Brand Guidelines</a>
+      </div>
+
+      <div class="flex flex-col space-y-3 text-sm">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Legal</h4>
+        <a href="../privacy/" class="hover:text-gray-300 transition-colors">Privacy Policy</a>
+        <a href="../terms/" class="hover:text-gray-300 transition-colors">Terms of Use</a>
+        <a href="../cookie-policy/" class="hover:text-gray-300 transition-colors">Cookie Policy</a>
+        <a href="../accessibility/" class="hover:text-gray-300 transition-colors">Accessibility Statement</a>
+        <a href="../modern-slavery/" class="hover:text-gray-300 transition-colors">Modern Slavery Act</a>
+        <a href="../legal-status/" class="hover:text-gray-300 transition-colors">TNG Legal & Copyright</a>
+      </div>
+
+      <div class="flex flex-col space-y-3 text-sm">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Connect</h4>
         <a href="../contact/" class="hover:text-gray-300 transition-colors">Contact Us</a>
-        <a href="https://tyler.tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="text-[#a6192e] font-bold hover:underline pt-2">Meet Tyler Nicholas →</a>
-      </div>
-      <div class="flex flex-col items-center md:items-end">
-         <div class="flex space-x-6 text-2xl text-[#00a8ff] mb-4">
-            <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://x.com/tyler_n_group" target="_blank" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="#" target="_blank" class="social-icon"><i class="fa-brands fa-whatsapp"></i></a>
-         </div>
-         <p class="text-sm mb-2">Contact: <a href="mailto:tylernicholasgroup@gmail.com" class="text-[#00a8ff] hover:underline">tylernicholasgroup@gmail.com</a></p>
-         <p class="text-xs text-gray-400">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
+        <a href="../sitemap/" class="hover:text-gray-300 transition-colors">Site Map</a>
+        <a href="https://tyler.tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="text-[#a6192e] font-bold hover:underline mt-2">Meet Tyler Nicholas →</a>
+        <div class="flex space-x-5 text-2xl text-[#00a8ff] mt-6 mb-2">
+          <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://x.com/tyler_n_group" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+        <p class="text-xs text-gray-400 mt-2">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -217,7 +336,8 @@
     function updateSeychellesTime() {
       const timeElement = document.getElementById('seychelles-time');
       if (!timeElement) return;
-      timeElement.innerText = new Date().toLocaleTimeString('en-US', { timeZone: 'Indian/Mahe', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+      const options = { timeZone: 'Indian/Mahe', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+      timeElement.innerText = new Date().toLocaleTimeString('en-US', options);
     }
     setInterval(updateSeychellesTime, 1000); updateSeychellesTime();
 
