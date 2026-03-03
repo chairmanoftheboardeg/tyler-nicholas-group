@@ -6,6 +6,17 @@
   <title>Tyler Nicholas Group | Driving Value, Defining the Future</title>
   <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
   
+  <style>
+    body { opacity: 0; visibility: hidden; }
+  </style>
+  <script>
+    window.addEventListener('load', function() {
+      document.body.style.transition = 'opacity 0.2s ease-in';
+      document.body.style.opacity = '1';
+      document.body.style.visibility = 'visible';
+    });
+  </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,17 +25,11 @@
   
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 </head>
-<body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen overflow-hidden" id="body">
-
-  <div id="loading-screen" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#001f3f] text-white">
-    <div class="loader-spinner"></div>
-    <h2 class="text-xl md:text-2xl font-bold tracking-widest uppercase mb-2">Tyler Nicholas Group</h2>
-    <p class="text-sm text-gray-400 italic">By Tyler Nicholas</p>
-  </div>
+<body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen" id="body">
 
   <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
 
-<nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md relative z-50">
+  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md relative z-50">
     <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
     <div class="hidden md:flex space-x-6 text-sm items-center">
       <a href="index.html" class="hover:text-gray-300 border-b-2 border-[#a6192e] pb-1">Home</a>
@@ -44,12 +49,13 @@
           <a href="trust-security/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Trust & Security</a>
           <a href="status/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Live System Status</a>
           <a href="alumni/" class="block px-4 py-3 hover:bg-gray-100 text-sm">Corporate Alumni Network</a>
+          <a href="admin/" class="block px-4 py-3 hover:bg-gray-100 text-sm">Admin Center</a>
         </div>
       </div>
     </div>
   </nav>
 
-  <main class="flex-grow flex flex-col items-center pt-12 px-4 md:px-0">
+  <main class="flex-grow flex flex-col items-center pt-12 pb-24 px-4 md:px-0 w-full">
     <div class="bg-[#001f3f] text-white w-full max-w-5xl rounded-xl p-10 md:p-20 text-center shadow-lg">
       <h1 class="text-3xl md:text-5xl font-bold mb-6">Driving Value, Defining the Future.</h1>
       <p class="text-sm md:text-lg max-w-3xl mx-auto text-gray-200">
@@ -77,7 +83,7 @@
     </div>
   </main>
 
-<footer class="bg-[#001f3f] text-white py-14 px-6 md:px-12 mt-auto border-t border-blue-900">
+  <footer class="bg-[#001f3f] text-white py-14 px-6 md:px-12 mt-auto border-t border-blue-900">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 items-start">
       
       <div class="flex flex-col items-start lg:col-span-2">
@@ -131,24 +137,26 @@
     </div>
   </footer>
 
-  <script>
-    // 1. Un-stuckable Loading Screen
-    document.addEventListener("DOMContentLoaded", () => {
-      setTimeout(() => {
-        const loader = document.getElementById('loading-screen');
-        const body = document.getElementById('body');
-        
-        if (loader) {
-          loader.classList.add('fade-out');
-          setTimeout(() => loader.remove(), 600); // Wait for CSS transition to finish
-        }
-        if (body) {
-          body.classList.remove('overflow-hidden'); // Re-enable scroll
-        }
-      }, 1500); // 1.5 seconds loading time
-    });
+  <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-white border-t-4 border-[#001f3f] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-[100] px-6 py-4 flex flex-col md:flex-row justify-between items-center transition-transform duration-500 transform translate-y-0">
+    <div class="text-sm text-gray-700 md:max-w-4xl mb-4 md:mb-0">
+      <strong class="text-[#001f3f] font-bold text-base block mb-1">Your Privacy</strong>
+      We use cookies and similar technologies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies as outlined in our <a href="cookie-policy/" class="text-[#a6192e] font-bold hover:underline">Cookie Policy</a> and <a href="privacy/" class="text-[#a6192e] font-bold hover:underline">Privacy Policy</a>.
+    </div>
+    <div class="flex space-x-3 w-full md:w-auto">
+      <button onclick="dismissCookies()" class="flex-1 md:flex-none border-2 border-[#001f3f] text-[#001f3f] font-bold py-2 px-6 rounded hover:bg-gray-100 transition-colors">Decline</button>
+      <button onclick="dismissCookies()" class="flex-1 md:flex-none bg-[#001f3f] hover:bg-blue-900 text-white font-bold py-2 px-6 rounded transition-colors shadow">Accept All</button>
+    </div>
+  </div>
 
-    // 2. Seychelles Live Clock
+  <script>
+    // Cookie Banner Logic
+    function dismissCookies() {
+      const banner = document.getElementById('cookie-banner');
+      banner.classList.add('translate-y-full'); 
+      setTimeout(() => banner.style.display = 'none', 500); 
+    }
+
+    // Seychelles Live Clock Logic
     function updateSeychellesTime() {
       const timeElement = document.getElementById('seychelles-time');
       if (!timeElement) return;
@@ -164,56 +172,36 @@
     setInterval(updateSeychellesTime, 1000);
     updateSeychellesTime();
 
-    // 3. Supabase Announcement Bar Logic
-    const initSupabase = setInterval(async () => {
-      if (window.supabase) {
-        clearInterval(initSupabase);
-        const supabaseUrl = 'https://hicowukbjsbpuebquqbh.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0';
-        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+    // Supabase Integration for Announcement Bar
+    document.addEventListener("DOMContentLoaded", () => {
+      const checkSupabase = setInterval(async () => {
+        if (window.supabase) {
+          clearInterval(checkSupabase); 
+          const supabaseUrl = 'https://hicowukbjsbpuebquqbh.supabase.co';
+          const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0';
+          const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-        try {
-          const { data, error } = await supabaseClient
-            .from('announcements')
-            .select('*')
-            .eq('is_active', true)
-            .single();
+          try {
+            const { data, error } = await supabaseClient
+              .from('announcements')
+              .select('*')
+              .eq('is_active', true)
+              .single();
 
-          if (data && !error) {
-            const bar = document.getElementById('announcement-bar');
-            bar.classList.remove('hidden');
-            
-            if (data.link) {
-              bar.innerHTML = `<a href="${data.link}" class="hover:underline block w-full py-1">${data.message}</a>`;
-            } else {
-              bar.innerText = data.message;
+            if (data && !error) {
+              const bar = document.getElementById('announcement-bar');
+              bar.classList.remove('hidden');
+              
+              if (data.link) {
+                bar.innerHTML = `<a href="${data.link}" class="hover:underline block w-full py-1">${data.message}</a>`;
+              } else {
+                bar.innerText = data.message;
+              }
             }
-          }
-        } catch (err) {
-          console.error("No active announcements.");
+          } catch (err) {}
         }
-      }
-    }, 100); 
-  </script>
-
-  <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-white border-t-4 border-[#001f3f] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-[100] px-6 py-4 flex flex-col md:flex-row justify-between items-center transition-transform duration-500 transform translate-y-0">
-    <div class="text-sm text-gray-700 md:max-w-4xl mb-4 md:mb-0">
-      <strong class="text-[#001f3f] font-bold text-base block mb-1">Your Privacy</strong>
-      We use cookies and similar technologies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies as outlined in our <a href="cookie-policy/" class="text-[#a6192e] font-bold hover:underline">Cookie Policy</a> and <a href="privacy/" class="text-[#a6192e] font-bold hover:underline">Privacy Policy</a>.
-    </div>
-    <div class="flex space-x-3 w-full md:w-auto">
-      <button onclick="dismissCookies()" class="flex-1 md:flex-none border-2 border-[#001f3f] text-[#001f3f] font-bold py-2 px-6 rounded hover:bg-gray-100 transition-colors">Decline</button>
-      <button onclick="dismissCookies()" class="flex-1 md:flex-none bg-[#001f3f] hover:bg-blue-900 text-white font-bold py-2 px-6 rounded transition-colors shadow">Accept All</button>
-    </div>
-  </div>
-
-  <script>
-    // Simple dismiss logic for the cookie banner
-    function dismissCookies() {
-      const banner = document.getElementById('cookie-banner');
-      banner.classList.add('translate-y-full'); // Slides it down off the screen
-      setTimeout(() => banner.style.display = 'none', 500); // Removes it entirely after slide
-    }
+      }, 100); 
+    });
   </script>
 </body>
 </html>
