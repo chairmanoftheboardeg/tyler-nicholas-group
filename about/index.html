@@ -6,6 +6,17 @@
   <title>About Us | Tyler Nicholas Group</title>
   <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
   
+  <style>
+    body { opacity: 0; visibility: hidden; }
+  </style>
+  <script>
+    window.addEventListener('load', function() {
+      document.body.style.transition = 'opacity 0.2s ease-in';
+      document.body.style.opacity = '1';
+      document.body.style.visibility = 'visible';
+    });
+  </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -35,7 +46,7 @@
     <p class="text-gray-300 max-w-3xl mx-auto md:text-lg">A registered LLC and dynamic holding company driving innovation across diverse global and local markets.</p>
   </div>
 
-<main class="flex-grow max-w-6xl mx-auto py-16 px-6 md:px-12 w-full space-y-24">
+  <main class="flex-grow max-w-6xl mx-auto py-16 px-6 md:px-12 w-full space-y-24">
     
     <div class="flex flex-col md:flex-row gap-12 items-center">
       <div class="md:w-1/2">
@@ -53,18 +64,23 @@
       </div>
     </div>
 
-    <div class="bg-[#001f3f] text-white rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
-      <div class="md:w-2/5 bg-gray-300 relative min-h-[400px]">
-        <img src="<a href="https://ibb.co/35n5crTG"><img src="https://i.ibb.co/dsRsDWf1/Tyler-Nicholas-SUIT.png" alt="Tyler Nicholas SUIT" border="0"></a>" alt="Tyler Nicholas Full Profile" class="absolute inset-0 w-full h-full object-cover">
+    <div class="rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row bg-white border border-gray-200">
+      
+      <div class="md:w-2/5 flex flex-col items-center justify-end relative pt-12 px-6 bg-white">
+        <img src="#" alt="Tyler Nicholas" class="w-full max-w-[300px] object-contain drop-shadow-xl z-10 min-h-[300px] bg-gray-50">
+        <p class="text-[10px] text-gray-400 mt-4 pb-4 z-10 text-center">
+          Photo by <a href="https://www.instagram.com/tristan_.belmont?igsh=d2dib2t6OHNlbGRl" target="_blank" class="underline hover:text-gray-600">Tristan Belmont</a>
+        </p>
       </div>
-      <div class="md:w-3/5 p-10 md:p-14 flex flex-col justify-center">
+
+      <div class="md:w-3/5 p-10 md:p-14 bg-[#001f3f] text-white flex flex-col justify-center">
         <h2 class="text-[#a6192e] text-3xl font-bold mb-6">A Message From Our Founder</h2>
-        <div class="space-y-4 text-gray-200 leading-relaxed">
+        <div class="space-y-4 text-gray-200 leading-relaxed text-sm md:text-base">
           <p>
             When I founded the Tyler Nicholas Group, the vision was simple: build a centralized hub that could empower diverse ideas to scale globally while staying true to our roots in the Seychelles. Today, we manage an incredible portfolio spanning from non-profit initiatives like the Tyler Nicholas Foundation to robust digital storefronts.
           </p>
           <p>
-            Our organization is driven by synergy. By providing our subsidiaries with top-tier shared infrastructure—from security to talent acquisition—we allow visionary leaders to focus purely on innovation. 
+            Our organization is driven by synergy. By providing our subsidiaries with top-tier shared infrastructure—from security to talent acquisition—we allow visionary leaders to focus purely on innovation.
           </p>
           <p>
             Whether you are joining us in a paid executive role, a technical capacity, or as a dedicated volunteer for one of our foundations, working at TNG means becoming part of a forward-thinking family. We value passion, structure, and a relentless drive to redefine the future.
@@ -72,7 +88,7 @@
         </div>
         <div class="mt-8">
           <p class="font-bold text-xl tracking-wider">Tyler Nicholas</p>
-          <p class="text-[#a6192e] text-sm uppercase tracking-widest font-semibold mt-1">Founder & CEO, TNG</p>
+          <p class="text-[#a6192e] text-xs uppercase tracking-widest font-bold mt-1">Founder & CEO, TNG</p>
         </div>
       </div>
     </div>
@@ -81,39 +97,31 @@
       <div class="text-center max-w-3xl mx-auto mb-16">
         <h2 class="text-3xl font-bold text-[#001f3f] mb-4">Our Purpose & Story</h2>
         <p class="text-gray-600 leading-relaxed">
-          The Tyler Nicholas Group was born out of a necessity for structured growth. As individual projects like Air Seychelles Roblox began to scale rapidly, the need for a unified corporate umbrella became clear. Our purpose is to incubate, manage, and elevate ventures by providing them with the executive oversight and capital allocation they need to thrive.
+          The Tyler Nicholas Group was born out of a necessity for structured growth. As individual projects began to scale rapidly, the need for a unified corporate umbrella became clear. Our purpose is to incubate, manage, and elevate ventures by providing them with the executive oversight and capital allocation they need to thrive.
         </p>
       </div>
 
-      <div class="relative border-l-4 border-[#001f3f] ml-4 md:ml-1/2 space-y-12">
-        <div class="relative pl-8 md:pl-0">
-          <div class="md:w-1/2 md:pr-12 md:text-right absolute md:relative left-0 md:left-auto top-0 w-full">
-            <div class="hidden md:block absolute right-[-24px] top-1 w-5 h-5 bg-[#a6192e] rounded-full border-4 border-white shadow"></div>
-            <h3 class="text-xl font-bold text-[#001f3f]">The Genesis</h3>
-            <span class="text-[#a6192e] font-bold text-sm">Phase 1</span>
-            <p class="text-gray-600 text-sm mt-2 md:ml-auto max-w-sm">The initial launch of our core standalone projects, establishing a strong digital footprint and active user bases in the virtual aviation and gaming sectors.</p>
-          </div>
-          <div class="md:hidden absolute left-[-14px] top-1 w-5 h-5 bg-[#a6192e] rounded-full border-4 border-white shadow"></div>
+      <div class="max-w-3xl mx-auto border-l-4 border-[#001f3f] ml-4 md:mx-auto space-y-12 pb-8">
+        
+        <div class="relative pl-8 md:pl-12">
+          <div class="absolute left-[-14px] top-1 w-6 h-6 bg-[#a6192e] rounded-full border-4 border-white shadow-md"></div>
+          <span class="text-[#a6192e] font-bold text-sm tracking-widest uppercase">Phase 1</span>
+          <h3 class="text-2xl font-bold text-[#001f3f] mt-1 mb-2">The Genesis</h3>
+          <p class="text-gray-600 text-sm md:text-base max-w-lg leading-relaxed">The initial launch of our core standalone projects, establishing a strong digital footprint and active user bases in the virtual aviation and gaming sectors.</p>
         </div>
 
-        <div class="relative pl-8 md:pl-0 flex justify-end">
-          <div class="md:w-1/2 md:pl-12 text-left">
-            <div class="hidden md:block absolute left-[-14px] top-1 w-5 h-5 bg-[#001f3f] rounded-full border-4 border-white shadow"></div>
-            <h3 class="text-xl font-bold text-[#001f3f]">Formation of TNG</h3>
-            <span class="text-[#a6192e] font-bold text-sm">Phase 2</span>
-            <p class="text-gray-600 text-sm mt-2 max-w-sm">Tyler Nicholas Group is officially established as a registered LLC to act as the parent company, consolidating governance, security, and shared services.</p>
-          </div>
-          <div class="md:hidden absolute left-[-14px] top-1 w-5 h-5 bg-[#001f3f] rounded-full border-4 border-white shadow"></div>
+        <div class="relative pl-8 md:pl-12">
+          <div class="absolute left-[-14px] top-1 w-6 h-6 bg-[#001f3f] rounded-full border-4 border-white shadow-md"></div>
+          <span class="text-[#a6192e] font-bold text-sm tracking-widest uppercase">Phase 2</span>
+          <h3 class="text-2xl font-bold text-[#001f3f] mt-1 mb-2">Formation of TNG</h3>
+          <p class="text-gray-600 text-sm md:text-base max-w-lg leading-relaxed">Tyler Nicholas Group is officially established as a registered LLC to act as the parent company, consolidating governance, security, and shared services.</p>
         </div>
 
-        <div class="relative pl-8 md:pl-0">
-          <div class="md:w-1/2 md:pr-12 md:text-right absolute md:relative left-0 md:left-auto top-0 w-full">
-            <div class="hidden md:block absolute right-[-24px] top-1 w-5 h-5 bg-[#a6192e] rounded-full border-4 border-white shadow"></div>
-            <h3 class="text-xl font-bold text-[#001f3f]">Diversification</h3>
-            <span class="text-[#a6192e] font-bold text-sm">Phase 3</span>
-            <p class="text-gray-600 text-sm mt-2 md:ml-auto max-w-sm">Expansion into e-commerce, digital tools via Falcon Ltd, and social impact initiatives in the Seychelles.</p>
-          </div>
-          <div class="md:hidden absolute left-[-14px] top-1 w-5 h-5 bg-[#a6192e] rounded-full border-4 border-white shadow"></div>
+        <div class="relative pl-8 md:pl-12">
+          <div class="absolute left-[-14px] top-1 w-6 h-6 bg-[#a6192e] rounded-full border-4 border-white shadow-md"></div>
+          <span class="text-[#a6192e] font-bold text-sm tracking-widest uppercase">Phase 3</span>
+          <h3 class="text-2xl font-bold text-[#001f3f] mt-1 mb-2">Diversification</h3>
+          <p class="text-gray-600 text-sm md:text-base max-w-lg leading-relaxed">Expansion into e-commerce, digital tools via Falcon Ltd, and social impact initiatives in the Seychelles.</p>
         </div>
       </div>
     </div>
@@ -124,28 +132,32 @@
         <p class="text-gray-600">The executive minds steering our global operations and subsidiaries.</p>
       </div>
       
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="bg-white rounded-xl shadow p-6 text-center border-t-4 border-[#001f3f]">
-          <img src="https://tyler.tylernicholasgroup.com/image/tyler-nicholas.png" alt="Tyler Nicholas" class="w-24 h-24 mx-auto rounded-full object-cover border-4 border-gray-100 mb-4 bg-gray-200">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+        
+        <div class="bg-white rounded-xl shadow-md p-8 text-center border-t-4 border-[#001f3f] hover:-translate-y-1 transition-transform">
+          <img src="#" alt="Tyler Nicholas" class="w-24 h-24 mx-auto rounded-full object-cover border-4 border-gray-100 mb-4 bg-gray-200 shadow-sm">
           <h4 class="font-bold text-lg text-[#001f3f]">Tyler Nicholas</h4>
-          <p class="text-[#a6192e] text-xs font-bold uppercase mb-2">Founder & Chairman of The Board</p>
+          <p class="text-[#a6192e] text-[10px] font-bold uppercase tracking-widest mb-2">Founder & Chairman of the Board</p>
           <p class="text-gray-500 text-sm">Tyler Nicholas Group</p>
         </div>
 
-        <div class="bg-white rounded-xl shadow p-6 text-center border-t-4 border-[#001f3f]">
-          <img src="https://cdn.discordapp.com/avatars/613893349933318144/b60e0999dee608900f92b4d563f8538a.png?size=256" alt="Kareem Malhas" class="w-24 h-24 mx-auto rounded-full object-cover border-4 border-gray-100 mb-4 bg-gray-200">
+        <div class="bg-white rounded-xl shadow-md p-8 text-center border-t-4 border-[#001f3f] hover:-translate-y-1 transition-transform">
+          <img src="#" alt="Kareem Malhas" class="w-24 h-24 mx-auto rounded-full object-cover border-4 border-gray-100 mb-4 bg-gray-200 shadow-sm">
           <h4 class="font-bold text-lg text-[#001f3f]">Kareem Malhas</h4>
-          <p class="text-[#a6192e] text-xs font-bold uppercase mb-2">CO-Founder & Chairman of The Board</p>
+          <p class="text-[#a6192e] text-[10px] font-bold uppercase tracking-widest mb-2">Co-Founder & Chairman of the Board</p>
           <p class="text-gray-500 text-sm">Emirates Group Roblox</p>
         </div>
 
-        <div class="bg-white rounded-xl shadow p-6 text-center border-t-4 border-[#001f3f]">
-          <img src="https://media.licdn.com/dms/image/v2/D4D03AQGIJY99-_bhjA/profile-displayphoto-crop_800_800/B4DZwslyKzIYAM-/0/1770274631068?e=1773878400&v=beta&t=Mso03uEfj0fwWSIQBCD31gmFl0KtRWMWVix1euJZ8t0" alt="Senior Team Member" class="w-24 h-24 mx-auto rounded-full object-cover border-4 border-gray-100 mb-4 bg-gray-200">
+        <div class="bg-white rounded-xl shadow-md p-8 text-center border-t-4 border-[#001f3f] hover:-translate-y-1 transition-transform">
+          <img src="#" alt="Dearen Porice" class="w-24 h-24 mx-auto rounded-full object-cover border-4 border-gray-100 mb-4 bg-gray-200 shadow-sm">
           <h4 class="font-bold text-lg text-[#001f3f]">Dearen Porice</h4>
-          <p class="text-[#a6192e] text-xs font-bold uppercase mb-2">CO-Founder & General Manager</p>
+          <p class="text-[#a6192e] text-[10px] font-bold uppercase tracking-widest mb-2">Co-Founder & General Manager</p>
           <p class="text-gray-500 text-sm">BlueWave Digital</p>
         </div>
-        
+
+      </div>
+    </div>
+
     <div>
       <div class="flex flex-col md:flex-row justify-between items-end mb-10 border-b-2 border-gray-200 pb-4">
         <div>
@@ -157,7 +169,7 @@
         </a>
       </div>
 
-<div class="bg-gray-50 rounded-xl shadow-sm p-10 text-center border-2 border-dashed border-gray-300">
+      <div class="bg-gray-50 rounded-xl shadow-sm p-10 text-center border-2 border-dashed border-gray-300">
         <i class="fa-solid fa-chart-line text-4xl text-gray-400 mb-4"></i>
         <h4 class="font-bold text-xl text-[#001f3f] mb-2">100% Privately Funded</h4>
         <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">
@@ -165,8 +177,8 @@
         </p>
         <p class="text-[#a6192e] font-bold mt-4">Be the first to secure equity in TNG's future.</p>
       </div>
-      </div>
     </div>
+
   </main>
 
   <footer class="bg-[#001f3f] text-white py-12 px-6 md:px-12 mt-auto text-center md:text-left border-t border-blue-900">
