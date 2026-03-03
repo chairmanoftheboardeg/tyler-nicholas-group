@@ -18,6 +18,7 @@
   </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 </head>
 <body class="bg-gray-100 font-sans text-gray-900 min-h-screen">
@@ -46,14 +47,22 @@
   <div id="dashboard-screen" class="hidden flex flex-col min-h-screen">
     
     <nav class="bg-[#001f3f] text-white py-4 px-6 flex justify-between items-center shadow-md">
-      <div class="font-bold text-xl tracking-wider">TNG Admin Dashboard</div>
+      <div class="font-bold text-xl tracking-wider uppercase">TNG Admin Dashboard</div>
       <button id="logout-btn" class="bg-white text-[#001f3f] px-4 py-2 rounded text-sm font-bold hover:bg-gray-200">Log Out</button>
     </nav>
 
-    <main class="flex-grow p-8 max-w-6xl mx-auto w-full space-y-12">
+    <div class="bg-white shadow-sm border-b">
+      <div class="max-w-6xl mx-auto flex space-x-8 px-8">
+        <button class="tab-btn active-tab py-4 font-bold text-[#001f3f] border-b-2 border-[#a6192e]" data-target="section-contacts">Contacts</button>
+        <button class="tab-btn py-4 font-bold text-gray-500 hover:text-[#001f3f]" data-target="section-announcements">Announcement</button>
+        <button class="tab-btn py-4 font-bold text-gray-500 hover:text-[#001f3f]" data-target="section-jobs">Careers</button>
+      </div>
+    </div>
+
+    <main class="flex-grow p-8 max-w-6xl mx-auto w-full">
       
-      <section>
-        <h2 class="text-2xl font-bold text-[#001f3f] mb-6 border-b pb-2">Recent Contact Inquiries</h2>
+      <section id="section-contacts" class="admin-section block space-y-6">
+        <h2 class="text-2xl font-bold text-[#001f3f]">Recent Contact Inquiries</h2>
         <div class="bg-white rounded-xl shadow overflow-hidden">
           <table class="w-full text-left border-collapse">
             <thead>
@@ -72,7 +81,88 @@
         </div>
       </section>
 
-      </main>
+      <section id="section-announcements" class="admin-section hidden space-y-6">
+        <h2 class="text-2xl font-bold text-[#001f3f]">Manage Homepage Announcement</h2>
+        <div class="bg-white rounded-xl shadow p-8 max-w-2xl border-t-4 border-[#a6192e]">
+          <form id="announcement-form" class="space-y-6">
+            <input type="hidden" id="ann-id">
+            <div>
+              <label class="block text-gray-700 text-sm font-bold mb-2">Announcement Message</label>
+              <input type="text" id="ann-message" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#001f3f]" placeholder="e.g. Welcome to the new website!" required>
+            </div>
+            <div>
+              <label class="block text-gray-700 text-sm font-bold mb-2">Link URL (Optional)</label>
+              <input type="url" id="ann-link" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#001f3f]" placeholder="https://...">
+            </div>
+            <div class="flex items-center">
+              <input type="checkbox" id="ann-active" class="w-5 h-5 text-[#a6192e]">
+              <label for="ann-active" class="ml-2 text-gray-700 font-bold">Display active on website</label>
+            </div>
+            <p id="ann-status" class="text-green-600 font-bold hidden">Saved successfully!</p>
+            <button type="submit" class="bg-[#001f3f] hover:bg-blue-900 text-white font-bold py-2 px-6 rounded">Save Announcement</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="section-jobs" class="admin-section hidden space-y-8">
+        <div class="flex justify-between items-center">
+          <h2 class="text-2xl font-bold text-[#001f3f]">Manage Career Postings</h2>
+          <button id="show-add-job-btn" class="bg-[#a6192e] hover:bg-red-800 text-white font-bold py-2 px-4 rounded"><i class="fa-solid fa-plus mr-2"></i> Add New Job</button>
+        </div>
+
+        <div id="add-job-container" class="hidden bg-white rounded-xl shadow p-8 border-t-4 border-[#001f3f]">
+          <h3 class="text-lg font-bold mb-4">Create New Posting</h3>
+          <form id="add-job-form" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-bold mb-1">Job Title</label>
+                <input type="text" id="job-title" class="w-full px-3 py-2 border rounded" required>
+              </div>
+              <div>
+                <label class="block text-sm font-bold mb-1">Company / Subsidiary</label>
+                <input type="text" id="job-company" class="w-full px-3 py-2 border rounded" placeholder="e.g. Air Seychelles Roblox" required>
+              </div>
+              <div>
+                <label class="block text-sm font-bold mb-1">Location</label>
+                <input type="text" id="job-location" class="w-full px-3 py-2 border rounded" placeholder="e.g. Remote or Seychelles">
+              </div>
+              <div>
+                <label class="block text-sm font-bold mb-1">Employment Type</label>
+                <input type="text" id="job-type" class="w-full px-3 py-2 border rounded" placeholder="e.g. Full-Time, Contract">
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-bold mb-1">External Application Link (Optional)</label>
+              <input type="url" id="job-link" class="w-full px-3 py-2 border rounded" placeholder="Leave blank to direct to Contact form">
+            </div>
+            <div>
+              <label class="block text-sm font-bold mb-1">Description</label>
+              <textarea id="job-desc" class="w-full px-3 py-2 border rounded h-24" required></textarea>
+            </div>
+            <div class="flex items-center space-x-4">
+              <button type="submit" class="bg-[#001f3f] text-white font-bold py-2 px-6 rounded">Post Job</button>
+              <button type="button" id="cancel-job-btn" class="text-gray-500 hover:text-red-500 font-bold">Cancel</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="bg-white rounded-xl shadow overflow-hidden">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-gray-200 text-gray-700 text-sm uppercase">
+                <th class="py-3 px-4 font-semibold">Title & Company</th>
+                <th class="py-3 px-4 font-semibold text-center">Active Status</th>
+                <th class="py-3 px-4 font-semibold text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="jobs-table-body" class="text-sm">
+              <tr><td colspan="3" class="py-4 px-4 text-center text-gray-500">Loading jobs...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
   </div>
 
   <script>
@@ -88,59 +178,68 @@
           const loginScreen = document.getElementById('login-screen');
           const dashboardScreen = document.getElementById('dashboard-screen');
           
-          // Check if already logged in
+          // ==== AUTHENTICATION ====
           supabase.auth.getSession().then(({ data: { session } }) => {
             if (session) { loadDashboard(); }
           });
 
-          // Login Form Handling
           document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('login-btn');
             const errorMsg = document.getElementById('login-error');
-            
-            btn.innerText = "Authenticating...";
-            errorMsg.classList.add('hidden');
+            btn.innerText = "Authenticating..."; errorMsg.classList.add('hidden');
             
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-
-            const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+            const { error } = await supabase.auth.signInWithPassword({ email, password });
 
             if (error) {
-              errorMsg.innerText = error.message;
-              errorMsg.classList.remove('hidden');
-              btn.innerText = "Log In";
+              errorMsg.innerText = error.message; errorMsg.classList.remove('hidden'); btn.innerText = "Log In";
             } else {
               loadDashboard();
             }
           });
 
-          // Logout Handling
           document.getElementById('logout-btn').addEventListener('click', async () => {
             await supabase.auth.signOut();
-            dashboardScreen.classList.add('hidden');
-            loginScreen.classList.remove('hidden');
+            dashboardScreen.classList.add('hidden'); loginScreen.classList.remove('hidden');
           });
 
-          // Load Data
-          async function loadDashboard() {
+          // ==== TAB NAVIGATION ====
+          const tabs = document.querySelectorAll('.tab-btn');
+          const sections = document.querySelectorAll('.admin-section');
+          
+          tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+              // Update active styling
+              tabs.forEach(t => {
+                t.classList.remove('active-tab', 'text-[#001f3f]', 'border-b-2', 'border-[#a6192e]');
+                t.classList.add('text-gray-500');
+              });
+              tab.classList.remove('text-gray-500');
+              tab.classList.add('active-tab', 'text-[#001f3f]', 'border-b-2', 'border-[#a6192e]');
+              
+              // Show correct section
+              sections.forEach(s => s.classList.add('hidden'));
+              document.getElementById(tab.dataset.target).classList.remove('hidden');
+            });
+          });
+
+          // ==== DASHBOARD INITIALIZATION ====
+          function loadDashboard() {
             loginScreen.classList.add('hidden');
             dashboardScreen.classList.remove('hidden');
+            fetchContacts();
+            fetchAnnouncement();
+            fetchJobs();
+          }
 
-            // Fetch Contacts
+          // ==== 1. CONTACTS LOGIC ====
+          async function fetchContacts() {
             const { data, error } = await supabase.from('contact_submissions').select('*').order('created_at', { ascending: false });
             const tbody = document.getElementById('contacts-table-body');
-            
-            if (error) {
-              tbody.innerHTML = `<tr><td colspan="5" class="py-4 px-4 text-center text-red-500">Error loading data.</td></tr>`;
-              return;
-            }
-
-            if (data.length === 0) {
-              tbody.innerHTML = `<tr><td colspan="5" class="py-4 px-4 text-center text-gray-500">No messages found.</td></tr>`;
-              return;
-            }
+            if (error) { tbody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-red-500">Error loading data.</td></tr>`; return; }
+            if (data.length === 0) { tbody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-gray-500">No messages found.</td></tr>`; return; }
 
             tbody.innerHTML = '';
             data.forEach(msg => {
@@ -156,6 +255,120 @@
               `;
             });
           }
+
+          // ==== 2. ANNOUNCEMENT LOGIC ====
+          async function fetchAnnouncement() {
+            const { data, error } = await supabase.from('announcements').select('*').eq('is_active', true).single();
+            if (data && !error) {
+              document.getElementById('ann-id').value = data.id;
+              document.getElementById('ann-message').value = data.message;
+              document.getElementById('ann-link').value = data.link || '';
+              document.getElementById('ann-active').checked = data.is_active;
+            }
+          }
+
+          document.getElementById('announcement-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('ann-id').value;
+            const message = document.getElementById('ann-message').value;
+            const link = document.getElementById('ann-link').value;
+            const is_active = document.getElementById('ann-active').checked;
+            const statusText = document.getElementById('ann-status');
+
+            // Deactivate all old announcements first just to be safe
+            await supabase.from('announcements').update({ is_active: false }).neq('id', 'dummy'); 
+
+            let err;
+            if (id) {
+              const { error } = await supabase.from('announcements').update({ message, link, is_active }).eq('id', id);
+              err = error;
+            } else {
+              const { error } = await supabase.from('announcements').insert([{ message, link, is_active }]);
+              err = error;
+            }
+
+            if (!err) {
+              statusText.classList.remove('hidden');
+              setTimeout(() => statusText.classList.add('hidden'), 3000);
+            } else {
+              alert("Error saving announcement.");
+            }
+          });
+
+          // ==== 3. CAREERS LOGIC ====
+          const jobContainer = document.getElementById('add-job-container');
+          document.getElementById('show-add-job-btn').addEventListener('click', () => {
+            jobContainer.classList.remove('hidden');
+          });
+          document.getElementById('cancel-job-btn').addEventListener('click', () => {
+            jobContainer.classList.add('hidden');
+            document.getElementById('add-job-form').reset();
+          });
+
+          async function fetchJobs() {
+            const { data, error } = await supabase.from('job_postings').select('*').order('created_at', { ascending: false });
+            const tbody = document.getElementById('jobs-table-body');
+            if (error || !data) { tbody.innerHTML = `<tr><td colspan="3" class="py-4 text-center text-red-500">Error loading jobs.</td></tr>`; return; }
+            if (data.length === 0) { tbody.innerHTML = `<tr><td colspan="3" class="py-4 text-center text-gray-500">No jobs posted yet.</td></tr>`; return; }
+
+            tbody.innerHTML = '';
+            data.forEach(job => {
+              const badgeClass = job.is_active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800';
+              const badgeText = job.is_active ? 'Active' : 'Inactive';
+              
+              tbody.innerHTML += `
+                <tr class="border-b hover:bg-gray-50">
+                  <td class="py-3 px-4">
+                    <div class="font-bold">${job.title}</div>
+                    <div class="text-xs text-gray-500">${job.company} &bull; ${job.location || 'Remote'}</div>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <span class="px-2 py-1 rounded text-xs font-bold ${badgeClass}">${badgeText}</span>
+                  </td>
+                  <td class="py-3 px-4 text-right space-x-3">
+                    <button onclick="toggleJob('${job.id}', ${!job.is_active})" class="text-sm font-bold text-[#001f3f] hover:underline">${job.is_active ? 'Deactivate' : 'Activate'}</button>
+                    <button onclick="deleteJob('${job.id}')" class="text-sm font-bold text-red-600 hover:underline">Delete</button>
+                  </td>
+                </tr>
+              `;
+            });
+          }
+
+          document.getElementById('add-job-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const jobData = {
+              title: document.getElementById('job-title').value,
+              company: document.getElementById('job-company').value,
+              location: document.getElementById('job-location').value,
+              employment_type: document.getElementById('job-type').value,
+              external_link: document.getElementById('job-link').value,
+              description: document.getElementById('job-desc').value,
+              is_active: true
+            };
+
+            const { error } = await supabase.from('job_postings').insert([jobData]);
+            if (!error) {
+              document.getElementById('add-job-form').reset();
+              jobContainer.classList.add('hidden');
+              fetchJobs();
+            } else {
+              alert("Error posting job.");
+            }
+          });
+
+          // Global functions for inline buttons
+          window.toggleJob = async function(id, newState) {
+            await supabase.from('job_postings').update({ is_active: newState }).eq('id', id);
+            fetchJobs();
+          };
+
+          window.deleteJob = async function(id) {
+            if(confirm("Are you sure you want to permanently delete this job posting?")) {
+              await supabase.from('job_postings').delete().eq('id', id);
+              fetchJobs();
+            }
+          };
+
         }
       }, 100);
     });
