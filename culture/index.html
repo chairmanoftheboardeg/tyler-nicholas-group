@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Core Values & Culture | Tyler Nicholas Group</title>
+  <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
+  <style> body { opacity: 0; visibility: hidden; } </style>
+  <script> window.addEventListener('load', function() { document.body.style.transition = 'opacity 0.2s ease-in'; document.body.style.opacity = '1'; document.body.style.visibility = 'visible'; }); </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen" id="body">
+
+  <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
+
+  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md relative z-50">
+    <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
+    <a href="../sitemap/" class="md:hidden bg-white text-[#001f3f] px-4 py-2 rounded text-sm font-bold shadow hover:bg-gray-200 transition-colors flex items-center">
+      <i class="fa-solid fa-list mr-2"></i> Menu
+    </a>
+    <div class="hidden md:flex space-x-6 text-sm items-center">
+      <a href="../" class="hover:text-gray-300 transition-colors">Home</a>
+      <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
+      <a href="../companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
+      <a href="../people/" class="hover:text-gray-300 transition-colors">Our People</a>
+      <a href="../governance/" class="hover:text-gray-300 transition-colors">Governance</a>
+      <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
+      <div class="relative group">
+        <button class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors flex items-center cursor-pointer border-b-2 border-[#a6192e] pb-1">
+          More <i class="fa-solid fa-chevron-down ml-2 text-[10px]"></i>
+        </button>
+        <div class="absolute right-0 mt-2 w-56 bg-white text-gray-900 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden">
+          <a href="../contact/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b font-semibold">Contact & FAQ</a>
+          <a href="../news/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">News & Press Releases</a>
+          <a href="../trust-security/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Trust & Security</a>
+          <a href="../status/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Live System Status</a>
+          <a href="../alumni/" class="block px-4 py-3 hover:bg-gray-100 text-sm">Corporate Alumni Network</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="bg-[#001f3f] text-white py-16 px-6 md:px-12 text-center">
+    <h1 class="text-3xl md:text-5xl font-bold mb-4">Core Values & Culture</h1>
+    <p class="text-gray-300 max-w-2xl mx-auto md:text-lg">The foundational principles that drive our innovation, shape our digital communities, and define our global legacy.</p>
+  </div>
+
+  <main class="flex-grow max-w-6xl mx-auto py-16 px-6 md:px-12 w-full space-y-16">
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2 class="text-2xl font-bold text-[#001f3f] mb-4 border-l-4 border-[#a6192e] pl-4">A Culture of Excellence</h2>
+        <p class="text-gray-600 leading-relaxed mb-4">At the Tyler Nicholas Group, our culture is not just a statement on a wall—it is the operational reality of how we build businesses. We operate in fast-paced digital environments where agility, precise execution, and a relentless pursuit of quality are required.</p>
+        <p class="text-gray-600 leading-relaxed">Whether you are developing web infrastructure for BlueWave Digital, managing massive virtual aviation hubs, or organizing on-site philanthropy in the Seychelles, you are united by a shared commitment to these core principles.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center">
+          <i class="fa-solid fa-scale-balanced text-2xl text-[#001f3f] mb-3"></i>
+          <h4 class="font-bold text-[#001f3f] mb-1">Integrity</h4>
+          <p class="text-xs text-gray-500">Unwavering ethical standards in everything we do.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center">
+          <i class="fa-solid fa-bolt text-2xl text-[#a6192e] mb-3"></i>
+          <h4 class="font-bold text-[#001f3f] mb-1">Agility</h4>
+          <p class="text-xs text-gray-500">Moving fast to disrupt and lead digital markets.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center">
+          <i class="fa-solid fa-handshake-angle text-2xl text-[#a6192e] mb-3"></i>
+          <h4 class="font-bold text-[#001f3f] mb-1">Synergy</h4>
+          <p class="text-xs text-gray-500">Collaborating across verticals for shared success.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center">
+          <i class="fa-solid fa-crown text-2xl text-[#001f3f] mb-3"></i>
+          <h4 class="font-bold text-[#001f3f] mb-1">Meritocracy</h4>
+          <p class="text-xs text-gray-500">Rewarding true talent, output, and dedication.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gray-100 rounded-2xl p-10 md:p-14 shadow-inner text-center">
+      <h2 class="text-2xl font-bold text-[#001f3f] mb-6">The TNG Working Environment</h2>
+      <div class="max-w-3xl mx-auto space-y-6 text-gray-700 leading-relaxed text-sm md:text-base">
+        <p><strong>Remote-First Execution:</strong> We believe that top-tier talent isn't restricted by geography. Our digital ecosystem is designed to allow executives, developers, and creators to collaborate seamlessly from anywhere in the world.</p>
+        <p><strong>Continuous Incubation:</strong> No idea is too ambitious. We empower our staff to pitch new subsidiaries, digital tools, and operational improvements directly to the Executive Board.</p>
+        <p><strong>Philanthropic Grounding:</strong> Commercial success is only half the equation. We cultivate a culture that gives back, heavily emphasizing social impact through the Tyler Nicholas Foundation and FoodShare Seychelles.</p>
+      </div>
+      <a href="../careers/" class="inline-block mt-8 bg-[#001f3f] hover:bg-blue-900 text-white font-bold py-3 px-8 rounded transition-colors shadow">Join Our Culture</a>
+    </div>
+
+  </main>
+
+  <footer class="bg-[#001f3f] text-white py-14 px-6 md:px-12 mt-auto border-t border-blue-900">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 items-start">
+      <div class="flex flex-col items-start lg:col-span-2">
+        <h3 class="font-bold text-xl mb-3 uppercase tracking-wider">Tyler Nicholas Group</h3>
+        <p class="text-sm text-gray-300 mb-5 max-w-md leading-relaxed">A global holding company headquartered in the Seychelles.</p>
+        <div class="inline-block bg-white text-[#001f3f] px-3 py-1.5 rounded text-sm font-semibold shadow-md mb-6">Seychelles Local Time: <span id="seychelles-time">Loading...</span></div>
+      </div>
+      <div class="flex flex-col space-y-3 text-sm">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Corporate</h4>
+        <a href="#" class="text-white font-bold">Core Values & Culture</a>
+        <a href="../diversity/" class="hover:text-gray-300 transition-colors">Diversity & Inclusion</a>
+        <a href="../sustainability/" class="hover:text-gray-300 transition-colors">Sustainability & ESG</a>
+        <a href="../our-thoughts/" class="hover:text-gray-300 transition-colors">Our Thoughts</a>
+        <a href="../partnerships/" class="hover:text-gray-300 transition-colors">Global Partnerships</a>
+        <a href="../media-kit/" class="hover:text-gray-300 transition-colors">Brand Guidelines</a>
+      </div>
+      <div class="flex flex-col space-y-3 text-sm">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Legal</h4>
+        <a href="../privacy/" class="hover:text-gray-300 transition-colors">Privacy Policy</a>
+        <a href="../terms/" class="hover:text-gray-300 transition-colors">Terms of Use</a>
+        <a href="../cookie-policy/" class="hover:text-gray-300 transition-colors">Cookie Policy</a>
+        <a href="../accessibility/" class="hover:text-gray-300 transition-colors">Accessibility Statement</a>
+        <a href="../modern-slavery/" class="hover:text-gray-300 transition-colors">Modern Slavery Act</a>
+        <a href="../legal-status/" class="hover:text-gray-300 transition-colors">TNG Legal & Copyright</a>
+      </div>
+      <div class="flex flex-col space-y-3 text-sm">
+        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Connect</h4>
+        <a href="../contact/" class="hover:text-gray-300 transition-colors">Contact Us</a>
+        <a href="../sitemap/" class="hover:text-gray-300 transition-colors">Site Map</a>
+        <p class="text-xs text-gray-400 mt-4">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function updateSeychellesTime() { const e = document.getElementById('seychelles-time'); if(e) e.innerText = new Date().toLocaleTimeString('en-US', { timeZone: 'Indian/Mahe', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }); } setInterval(updateSeychellesTime, 1000); updateSeychellesTime();
+    document.addEventListener("DOMContentLoaded", () => { const checkSupabase = setInterval(async () => { if (window.supabase) { clearInterval(checkSupabase); const supabase = window.supabase.createClient('https://hicowukbjsbpuebquqbh.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0'); try { const { data, error } = await supabase.from('announcements').select('*').eq('is_active', true).single(); if (data && !error) { const bar = document.getElementById('announcement-bar'); bar.classList.remove('hidden'); bar.innerHTML = data.link ? `<a href="${data.link}" class="hover:underline block w-full py-1">${data.message}</a>` : data.message; } } catch (err) {} } }, 100); });
+  </script>
+</body>
+</html>
