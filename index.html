@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,29 +11,91 @@
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
-  <link rel="stylesheet" href="style.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-</head>
-<body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen overflow-hidden" id="body">
 
-  <div id="loading-screen" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#001f3f] text-white transition-opacity duration-500">
-    <div class="loader-spinner"></div>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            tng: {
+              navy: '#001f3f',
+              red: '#a6192e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { background-color: #f8fafc; }
+    body.loading { overflow: hidden; height: 100vh; }
+    
+    /* Clean Corporate Loader */
+    #loading-screen { transition: opacity 0.6s ease-out, visibility 0.6s; }
+    .loader-spinner {
+      border: 4px solid rgba(0, 31, 63, 0.1);
+      border-left-color: #a6192e;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    /* Requested Hero Background */
+    .hero-bg {
+      background: linear-gradient(rgba(0, 31, 63, 0.8), rgba(0, 31, 63, 0.9)), url('https://static.vecteezy.com/system/resources/previews/015/274/044/non_2x/banner-web-template-abstract-black-curved-shapes-with-lighting-on-dark-background-vector.jpg') no-repeat center center;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+
+    /* Trustpilot Logo Fix - Turns any logo pure white to remove backgrounds */
+    .logo-white {
+      filter: brightness(0) invert(1) opacity(0.9);
+      transition: opacity 0.3s;
+    }
+    .logo-white:hover { opacity: 1; }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #001f3f; }
+  </style>
+</head>
+<body class="font-sans text-gray-900 flex flex-col min-h-screen loading">
+
+  <div id="loading-screen" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white text-tng-navy">
+    <div class="loader-spinner mb-6"></div>
     <h2 class="text-xl md:text-2xl font-bold tracking-widest uppercase mb-2">Tyler Nicholas Group</h2>
-    <p class="text-sm text-gray-400 italic">By Tyler Nicholas</p>
+    <p class="text-sm text-gray-500 font-medium">Loading Experience...</p>
   </div>
 
-  <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
+  <div id="announcement-bar" class="hidden bg-tng-red text-white text-center py-2 text-sm md:text-base px-4 font-medium shadow-md z-50 relative transition-all duration-300"></div>
 
-<nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md relative z-50">
-    <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
+  <nav class="bg-tng-navy text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-lg sticky top-0 z-40">
+    <div class="flex items-center space-x-4">
+      <img src="https://i.ibb.co/1tcyLSRN/TNG-Logo.png" alt="TNG Logo" class="h-10">
+      <div class="font-bold text-xl tracking-wider uppercase hidden sm:block">Tyler Nicholas Group</div>
+    </div>
     
-    <a href="sitemap/" class="md:hidden bg-white text-[#001f3f] px-4 py-2 rounded text-sm font-bold shadow hover:bg-gray-200 transition-colors flex items-center">
-      <i class="fa-solid fa-list mr-2"></i> Menu
-    </a>
+    <button id="mobile-menu-btn" class="md:hidden bg-white text-tng-navy px-4 py-2 rounded text-sm font-bold shadow hover:bg-gray-200 transition-colors flex items-center">
+      <i class="fa-solid fa-bars mr-2"></i> Menu
+    </button>
 
-    <div class="hidden md:flex space-x-6 text-sm items-center">
-      <a href="#" class="hover:text-gray-300 border-b-2 border-[#a6192e] pb-1">Home</a>
+    <div class="hidden md:flex space-x-6 text-sm items-center font-medium">
+      <a href="#" class="hover:text-gray-300 border-b-2 border-tng-red pb-1">Home</a>
       <a href="about/" class="hover:text-gray-300 transition-colors">About Us</a>
       <a href="companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
       <a href="people/" class="hover:text-gray-300 transition-colors">Our People</a>
@@ -41,158 +103,133 @@
       <a href="careers/" class="hover:text-gray-300 transition-colors">Careers</a>
       
       <div class="relative group">
-        <button class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors flex items-center cursor-pointer">
+        <button class="bg-white text-tng-navy px-4 py-2 rounded font-bold hover:bg-gray-100 transition-colors flex items-center shadow-sm">
           More <i class="fa-solid fa-chevron-down ml-2 text-[10px]"></i>
         </button>
-        <div class="absolute right-0 mt-2 w-56 bg-white text-gray-900 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden">
-          <a href="contact/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b font-semibold">Contact & FAQ</a>
-          <a href="news/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">News & Press Releases</a>
-          <a href="trust-security/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Trust & Security</a>
-          <a href="status/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Live System Status</a>
-          <a href="alumni/" class="block px-4 py-3 hover:bg-gray-100 text-sm">Corporate Alumni Network</a>
+        <div class="absolute right-0 mt-2 w-56 bg-white text-gray-900 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden transform origin-top group-hover:scale-100 scale-95">
+          <a href="contact/" class="block px-4 py-3 hover:bg-gray-50 text-sm border-b font-semibold">Contact & FAQ</a>
+          <a href="news/" class="block px-4 py-3 hover:bg-gray-50 text-sm border-b">News & Press Releases</a>
+          <a href="trust-security/" class="block px-4 py-3 hover:bg-gray-50 text-sm border-b">Trust & Security</a>
+          <a href="status/" class="block px-4 py-3 hover:bg-gray-50 text-sm border-b">Live System Status</a>
+          <a href="alumni/" class="block px-4 py-3 hover:bg-gray-50 text-sm">Corporate Alumni</a>
         </div>
       </div>
     </div>
   </nav>
 
-  <main class="flex-grow flex flex-col items-center pt-12 pb-24 px-4 md:px-0 w-full space-y-24">
+  <div id="mobile-menu" class="hidden bg-tng-navy border-t border-blue-900 px-6 py-4 flex flex-col space-y-3 text-white text-sm md:hidden sticky top-[72px] z-30 shadow-lg">
+    <a href="about/" class="hover:text-gray-300">About Us</a>
+    <a href="companies/" class="hover:text-gray-300">Our Companies</a>
+    <a href="people/" class="hover:text-gray-300">Our People</a>
+    <a href="governance/" class="hover:text-gray-300">Governance</a>
+    <a href="careers/" class="hover:text-gray-300">Careers</a>
+    <a href="contact/" class="hover:text-gray-300">Contact & FAQ</a>
+  </div>
+
+  <main class="flex-grow w-full flex flex-col items-center">
     
-    <div class="bg-[#001f3f] text-white w-full max-w-6xl rounded-2xl p-10 md:p-24 text-center shadow-2xl relative overflow-hidden">
-      <div class="relative z-10">
-        <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight">Driving Value, Defining the Future.</h1>
-        <p class="text-sm md:text-xl max-w-3xl mx-auto text-gray-200 leading-relaxed mb-10">
-          The Tyler Nicholas Group is a modern holding company focused on strategic growth and synergistic leadership across diverse, high-potential verticals worldwide.
+    <header class="hero-bg w-full py-32 flex items-center justify-center px-4 shadow-inner">
+      <div class="max-w-5xl text-center z-10" data-aos="fade-up" data-aos-duration="1000">
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 tracking-tight text-white leading-tight">
+          Tyler Nicholas Group
+        </h1>
+        <p class="text-lg md:text-2xl text-gray-200 leading-relaxed mb-10 max-w-3xl mx-auto border-l-4 border-tng-red pl-4 text-left sm:text-center sm:border-l-0 sm:border-b-2 sm:pb-4 inline-block">
+          Building stronger enterprises, empowering brighter futures, across Seychelles and beyond.
         </p>
-        <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-          <a href="companies/" class="bg-[#a6192e] hover:bg-red-800 text-white font-bold py-3 px-8 rounded transition-colors shadow-lg">Explore Our Portfolio</a>
-          <a href="about/" class="bg-transparent border-2 border-white hover:bg-white hover:text-[#001f3f] text-white font-bold py-3 px-8 rounded transition-colors">Our Corporate Story</a>
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-4">
+          <a href="companies/" class="bg-tng-red hover:bg-red-800 text-white font-bold py-3 px-8 rounded shadow-lg transition-transform transform hover:-translate-y-1 w-full sm:w-auto">Explore Our Portfolio</a>
+          <a href="about/" class="bg-transparent border-2 border-white hover:bg-white hover:text-tng-navy text-white font-bold py-3 px-8 rounded transition-all w-full sm:w-auto">Our Corporate Story</a>
         </div>
       </div>
-    </div>
+    </header>
 
-    <div class="w-full max-w-6xl bg-white rounded-xl shadow-md border border-gray-100 p-8">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x divide-gray-200">
-        <div>
-          <p id="metric-subs" class="text-4xl font-extrabold text-[#001f3f] mb-1">...</p>
-          <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Active Subsidiaries</p>
-        </div>
-        <div>
-          <p id="metric-verts" class="text-4xl font-extrabold text-[#001f3f] mb-1">...</p>
-          <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Core Verticals</p>
-        </div>
-        <div>
-          <p class="text-4xl font-extrabold text-[#001f3f] mb-1"><i class="fa-solid fa-earth-americas text-3xl"></i></p>
-          <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mt-2">Global Reach</p>
-        </div>
-        <div>
-          <p id="metric-fund" class="text-3xl font-extrabold text-[#001f3f] mb-2 mt-1">...</p>
-          <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Funding Status</p>
-        </div>
+    <section class="w-full max-w-6xl px-4 py-20 text-center">
+      <div data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold text-tng-navy mb-6">Driving Value. Defining the Future.</h2>
+        <p class="text-lg text-gray-600 leading-relaxed max-w-4xl mx-auto">
+          The Tyler Nicholas Group is a dynamic holding company overseeing a diverse portfolio of subsidiaries. From pioneering digital aviation services to fostering community-driven non-profits, we leverage cutting-edge technology and strategic leadership to create lasting value. Our commitment is to operational excellence and sustainable growth.
+        </p>
       </div>
-    </div>
+    </section>
 
-    <div class="w-full max-w-6xl px-4">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-[#001f3f] mb-4">Our Foundation and Vision</h2>
-        <p class="text-gray-600 max-w-2xl mx-auto">Built on a framework of centralized governance and decentralized execution, we empower our companies to lead their respective industries.</p>
+    <section class="w-full bg-white border-y border-gray-200 py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-100">
+          <div data-aos="fade-up" data-aos-delay="100">
+            <p id="metric-subs" class="text-4xl font-extrabold text-tng-navy mb-2 counter" data-target="0">0</p>
+            <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Active Subsidiaries</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="200">
+            <p id="metric-verts" class="text-4xl font-extrabold text-tng-navy mb-2 counter" data-target="0">0</p>
+            <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Core Verticals</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="300">
+            <p class="text-4xl font-extrabold text-tng-navy mb-2"><i class="fa-solid fa-earth-americas text-3xl"></i></p>
+            <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mt-2">Global Reach</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="400">
+            <p id="metric-fund" class="text-2xl font-extrabold text-tng-navy mb-3 mt-2">Loading...</p>
+            <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Funding Status</p>
+          </div>
+        </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-        <div class="bg-gray-50 p-8 rounded-xl border-t-4 border-[#a6192e] shadow-sm hover:shadow-md transition-shadow">
-          <i class="fa-solid fa-bullseye text-3xl text-[#a6192e] mb-4"></i>
-          <h3 class="font-bold text-[#001f3f] text-xl mb-3">Our Purpose</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">To cultivate exceptional value by identifying scalable digital and on-site ventures, providing them with the capital and strategic oversight required to dominate their markets.</p>
-        </div>
-        <div class="bg-gray-50 p-8 rounded-xl border-t-4 border-[#001f3f] shadow-sm hover:shadow-md transition-shadow">
-          <i class="fa-solid fa-network-wired text-3xl text-[#001f3f] mb-4"></i>
-          <h3 class="font-bold text-[#001f3f] text-xl mb-3">Our Approach</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">We leverage synergistic leadership. By offering advanced shared services—including IT infrastructure, legal compliance, and executive talent—we allow our founders to focus entirely on product and user growth.</p>
-        </div>
-        <div class="bg-gray-50 p-8 rounded-xl border-t-4 border-[#a6192e] shadow-sm hover:shadow-md transition-shadow">
-          <i class="fa-solid fa-hands-holding-circle text-3xl text-[#a6192e] mb-4"></i>
-          <h3 class="font-bold text-[#001f3f] text-xl mb-3">Our Impact</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">Beyond commercial success, we are deeply committed to social responsibility. We actively support humanitarian initiatives, food security programs, and community empowerment both globally and within the Seychelles.</p>
-        </div>
-      </div>
-    </div>
+    </section>
 
-    <div class="w-full max-w-6xl px-4 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-      <div class="bg-[#001f3f] p-8 text-center">
-        <h2 class="text-2xl md:text-3xl font-bold text-white">Strategic Operating Verticals</h2>
-      </div>
-      <div class="p-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="text-center group cursor-pointer">
-          <div class="w-16 h-16 mx-auto bg-red-50 text-[#a6192e] rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-[#a6192e] group-hover:text-white transition-colors duration-300">
-            <i class="fa-solid fa-code"></i>
-          </div>
-          <h4 class="font-bold text-lg text-[#001f3f] mb-2">Digital Services & E-Commerce</h4>
-          <p class="text-sm text-gray-500">Premium web development, marketing agencies, and secure digital asset storefronts.</p>
+    <section class="w-full max-w-6xl px-4 py-24">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-10 border-b-2 border-gray-200 pb-4" data-aos="fade-right">
+        <div>
+          <h2 class="text-3xl font-bold text-tng-navy">Latest Updates</h2>
+          <p class="text-gray-500 mt-1">Press releases and corporate announcements.</p>
         </div>
-        <div class="text-center group cursor-pointer">
-          <div class="w-16 h-16 mx-auto bg-blue-50 text-[#001f3f] rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-[#001f3f] group-hover:text-white transition-colors duration-300">
-            <i class="fa-solid fa-plane-departure"></i>
-          </div>
-          <h4 class="font-bold text-lg text-[#001f3f] mb-2">Virtual Simulation</h4>
-          <p class="text-sm text-gray-500">Industry-leading virtual aviation networks and corporate roleplay ecosystems.</p>
-        </div>
-        <div class="text-center group cursor-pointer">
-          <div class="w-16 h-16 mx-auto bg-red-50 text-[#a6192e] rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-[#a6192e] group-hover:text-white transition-colors duration-300">
-            <i class="fa-solid fa-seedling"></i>
-          </div>
-          <h4 class="font-bold text-lg text-[#001f3f] mb-2">Philanthropy</h4>
-          <p class="text-sm text-gray-500">Dedicated non-profit foundations driving sustainable change and community support.</p>
-        </div>
-      </div>
-      <div class="bg-gray-50 p-4 text-center border-t border-gray-100">
-        <a href="companies/" class="text-[#001f3f] font-bold hover:text-[#a6192e] text-sm transition-colors">View All Companies <i class="fa-solid fa-arrow-right ml-1"></i></a>
-      </div>
-    </div>
-
-    <div class="w-full max-w-6xl px-4">
-      <div class="bg-gray-100 rounded-xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between border border-gray-200 shadow-sm">
-        <div class="flex items-center mb-4 md:mb-0 text-center md:text-left">
-          <div class="hidden md:flex w-12 h-12 bg-gray-200 rounded-full items-center justify-center text-gray-400 mr-4 border border-gray-300">
-            <i class="fa-solid fa-shield-halved text-xl"></i>
-          </div>
-          <div>
-            <h3 class="font-bold text-gray-700">TNG System Administration</h3>
-            <p class="text-xs text-gray-500 uppercase tracking-widest mt-1">Authorized Personnel Only</p>
-          </div>
-        </div>
-        <a href="admin/" class="bg-transparent border-2 border-gray-400 text-gray-600 hover:bg-[#001f3f] hover:text-white hover:border-[#001f3f] font-bold py-2 px-6 rounded transition-colors text-sm flex items-center shadow-sm">
-          <i class="fa-solid fa-lock mr-2"></i> Admin Login
+        <a href="news/" class="mt-4 md:mt-0 text-sm font-bold text-tng-red hover:underline flex items-center">
+          View Media Room <i class="fa-solid fa-arrow-right ml-2"></i>
         </a>
-      </div>
-    </div>
-
-    <div class="w-full max-w-6xl px-4">
-      <div class="flex justify-between items-end mb-8 border-b-2 border-gray-200 pb-2">
-        <h2 class="text-2xl font-bold text-[#001f3f]">Latest Updates</h2>
-        <a href="news/" class="text-sm font-bold text-[#a6192e] hover:underline">View Media Room</a>
       </div>
       
       <div id="news-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <p class="text-gray-500 italic col-span-1 md:col-span-2 text-center">Loading latest news...</p>
+        <p class="text-gray-500 italic col-span-1 md:col-span-2 text-center py-10">Loading latest news...</p>
       </div>
-    </div>
+    </section>
+
+    <section class="w-full bg-tng-navy py-24 text-white relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-tng-red rounded-full mix-blend-multiply filter blur-[100px] opacity-30 transform translate-x-1/3 -translate-y-1/3"></div>
+      
+      <div class="max-w-6xl mx-auto px-4 relative z-10">
+        <div class="text-center mb-12" data-aos="fade-up">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Join the Group</h2>
+          <p class="text-gray-300">Discover your next career move across our global network.</p>
+        </div>
+        
+        <div id="jobs-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+           <p class="text-gray-400 italic col-span-1 md:col-span-2 text-center py-5">Loading open positions...</p>
+        </div>
+        
+        <div class="text-center mt-12" data-aos="fade-in" data-aos-delay="200">
+          <a href="https://careers.tylernicholasgroup.com" class="inline-block border border-white text-white font-bold py-3 px-8 rounded hover:bg-white hover:text-tng-navy transition-colors shadow-sm">View All Open Positions</a>
+        </div>
+      </div>
+    </section>
 
   </main>
 
-  <footer class="bg-[#001f3f] text-white py-14 px-6 md:px-12 mt-auto border-t border-blue-900">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 items-start">
+  <footer class="bg-tng-navy text-white py-16 px-6 md:px-12 mt-auto border-t-[8px] border-tng-red">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 items-start mb-12">
+      
       <div class="flex flex-col items-start lg:col-span-2">
-        <h3 class="font-bold text-xl mb-3 uppercase tracking-wider">Tyler Nicholas Group</h3>
-        <p class="text-sm text-gray-300 mb-5 max-w-md leading-relaxed">A global holding company headquartered in the Seychelles, driving strategic growth and synergy across diverse, high-potential digital and on-site verticals.</p>
+        <h3 class="font-bold text-2xl mb-3 uppercase tracking-wider">Tyler Nicholas Group</h3>
+        <p class="text-sm text-gray-300 mb-6 max-w-md leading-relaxed">A global holding company headquartered in the Seychelles, driving strategic growth and synergy across diverse, high-potential verticals.</p>
         
-        <div class="inline-block bg-white text-[#001f3f] px-3 py-1.5 rounded text-sm font-semibold shadow-md mb-6">
-          Seychelles Local Time: <span id="seychelles-time">Loading...</span>
+        <div class="inline-block bg-[#001429] border border-blue-800 px-4 py-2 rounded text-sm font-semibold shadow-inner mb-8 flex items-center">
+          <i class="fa-regular fa-clock mr-2 text-tng-red"></i> Seychelles Time: <span id="seychelles-time" class="ml-1 text-gray-200">Loading...</span>
         </div>
         
-        <a href="https://www.trustpilot.com/review/tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity drop-shadow-lg">
-          <img src="https://www.worcestershirefencing.co.uk/wp-content/uploads/2023/11/trustpilot-logo-snijpunt.1600x680x1.png" alt="Review Tyler Nicholas Group on Trustpilot" class="h-10 object-contain">
+        <a href="https://www.trustpilot.com/review/tylernicholasgroup.com" target="_blank" rel="noopener noreferrer">
+          <img src="https://www.worcestershirefencing.co.uk/wp-content/uploads/2023/11/trustpilot-logo-snijpunt.1600x680x1.png" alt="Trustpilot" class="h-8 object-contain logo-white">
         </a>
       </div>
+      
       <div class="flex flex-col space-y-3 text-sm">
-        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Corporate</h4>
+        <h4 class="font-bold text-lg mb-2 text-tng-red">Corporate</h4>
         <a href="culture/" class="hover:text-gray-300 transition-colors">Core Values & Culture</a>
         <a href="diversity/" class="hover:text-gray-300 transition-colors">Diversity & Inclusion</a>
         <a href="sustainability/" class="hover:text-gray-300 transition-colors">Sustainability & ESG</a>
@@ -200,60 +237,89 @@
         <a href="partnerships/" class="hover:text-gray-300 transition-colors">Global Partnerships</a>
         <a href="media-kit/" class="hover:text-gray-300 transition-colors">Brand Guidelines</a>
       </div>
+      
       <div class="flex flex-col space-y-3 text-sm">
-        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Legal</h4>
+        <h4 class="font-bold text-lg mb-2 text-tng-red">Legal</h4>
         <a href="privacy/" class="hover:text-gray-300 transition-colors">Privacy Policy</a>
         <a href="terms/" class="hover:text-gray-300 transition-colors">Terms of Use</a>
         <a href="cookie-policy/" class="hover:text-gray-300 transition-colors">Cookie Policy</a>
-        <a href="accessibility/" class="hover:text-gray-300 transition-colors">Accessibility Statement</a>
+        <a href="accessibility/" class="hover:text-gray-300 transition-colors">Accessibility</a>
         <a href="modern-slavery/" class="hover:text-gray-300 transition-colors">Modern Slavery Act</a>
-        <a href="legal-status/" class="hover:text-gray-300 transition-colors">TNG Legal & Copyright</a>
+        <a href="legal-status/" class="hover:text-gray-300 transition-colors">Legal & Copyright</a>
       </div>
+      
       <div class="flex flex-col space-y-3 text-sm">
-        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Connect</h4>
+        <h4 class="font-bold text-lg mb-2 text-tng-red">Connect</h4>
         <a href="contact/" class="hover:text-gray-300 transition-colors">Contact Us</a>
         <a href="sitemap/" class="hover:text-gray-300 transition-colors">Site Map</a>
-        <a href="https://tyler.tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="text-[#a6192e] font-bold hover:underline mt-2">Meet Tyler Nicholas →</a>
-        <div class="flex space-x-5 text-2xl text-[#00a8ff] mt-6 mb-2">
-          <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://x.com/tyler_n_group" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://tyler.tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="font-bold hover:underline mt-2 text-white">Meet Tyler Nicholas →</a>
+        
+        <div class="flex space-x-5 text-xl mt-6">
+          <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="text-gray-400 hover:text-white transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="text-gray-400 hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://x.com/tyler_n_group" target="_blank" class="text-gray-400 hover:text-white transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
         </div>
-        <p class="text-xs text-gray-400 mt-2">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
       </div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto border-t border-blue-900 pt-6 text-center text-xs text-gray-400">
+      <p>&copy; <span id="current-year"></span> Tyler Nicholas. All rights reserved.</p>
     </div>
   </footer>
 
-  <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-white border-t-4 border-[#001f3f] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-[100] px-6 py-4 flex flex-col md:flex-row justify-between items-center transition-transform duration-500 transform translate-y-0">
+  <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-white border-t-[3px] border-tng-navy shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-[100] px-6 py-5 flex flex-col md:flex-row justify-between items-center transition-transform duration-500 transform translate-y-full hidden">
     <div class="text-sm text-gray-700 md:max-w-4xl mb-4 md:mb-0">
-      <strong class="text-[#001f3f] font-bold text-base block mb-1">Your Privacy</strong>
-      We use cookies and similar technologies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies as outlined in our <a href="cookie-policy/" class="text-[#a6192e] font-bold hover:underline">Cookie Policy</a> and <a href="privacy/" class="text-[#a6192e] font-bold hover:underline">Privacy Policy</a>.
+      <strong class="text-tng-navy font-bold text-base block mb-1">Your Privacy</strong>
+      We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies as outlined in our <a href="cookie-policy/" class="text-tng-red font-bold hover:underline">Cookie Policy</a>.
     </div>
     <div class="flex space-x-3 w-full md:w-auto">
-      <button onclick="dismissCookies()" class="flex-1 md:flex-none border-2 border-[#001f3f] text-[#001f3f] font-bold py-2 px-6 rounded hover:bg-gray-100 transition-colors">Decline</button>
-      <button onclick="dismissCookies()" class="flex-1 md:flex-none bg-[#001f3f] hover:bg-blue-900 text-white font-bold py-2 px-6 rounded transition-colors shadow">Accept All</button>
+      <button id="accept-cookies" class="flex-1 md:flex-none bg-tng-navy hover:bg-blue-900 text-white font-bold py-2.5 px-8 rounded transition-colors shadow">Accept All</button>
     </div>
   </div>
 
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
   <script>
-    // Loading Screen Logic
+    // 1. Loading Screen & Init
     window.addEventListener('load', function() {
       const loader = document.getElementById('loading-screen');
       if (loader) {
-        loader.style.opacity = '0';
         setTimeout(() => {
-          loader.style.display = 'none';
-          document.body.classList.remove('overflow-hidden');
-        }, 500);
+          loader.style.opacity = '0';
+          loader.style.visibility = 'hidden';
+          document.body.classList.remove('loading');
+          
+          AOS.init({ duration: 800, once: true, offset: 40 });
+          checkCookieConsent();
+        }, 800); 
       }
     });
 
-    function dismissCookies() {
-      const banner = document.getElementById('cookie-banner');
-      banner.classList.add('translate-y-full'); 
-      setTimeout(() => banner.style.display = 'none', 500); 
+    // Mobile Menu Toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+
+    // 2. Cookie Consent
+    function checkCookieConsent() {
+        const banner = document.getElementById('cookie-banner');
+        const acceptBtn = document.getElementById('accept-cookies');
+        
+        if (!localStorage.getItem('tng_cookie_accepted')) {
+            banner.classList.remove('hidden');
+            setTimeout(() => banner.classList.remove('translate-y-full'), 100);
+        }
+
+        acceptBtn.addEventListener('click', () => {
+            localStorage.setItem('tng_cookie_accepted', 'true');
+            banner.classList.add('translate-y-full');
+            setTimeout(() => banner.classList.add('hidden'), 500);
+        });
     }
 
+    // 3. Time & Year
+    document.getElementById('current-year').innerText = new Date().getFullYear();
     function updateSeychellesTime() {
       const timeElement = document.getElementById('seychelles-time');
       if (!timeElement) return;
@@ -263,6 +329,28 @@
     setInterval(updateSeychellesTime, 1000);
     updateSeychellesTime();
 
+    // 4. Number Counters
+    function animateCounters(targetId, targetValue) {
+        const counter = document.getElementById(targetId);
+        if(!counter || isNaN(targetValue)) {
+            if(counter) counter.innerText = targetValue;
+            return;
+        }
+        let c = 0;
+        const increment = targetValue / 40; 
+        const update = () => {
+            if (c < targetValue) {
+                c += increment;
+                counter.innerText = Math.ceil(c);
+                setTimeout(update, 30);
+            } else {
+                counter.innerText = targetValue;
+            }
+        };
+        update();
+    }
+
+    // 5. Supabase Integration
     document.addEventListener("DOMContentLoaded", () => {
       const checkSupabase = setInterval(async () => {
         if (window.supabase) {
@@ -271,42 +359,65 @@
           const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0';
           const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-          // Fetch Announcement
+          // Alert Banner
           try {
-            const { data, error } = await supabaseClient.from('announcements').select('*').eq('is_active', true).single();
+            const { data, error } = await supabaseClient.from('TNG_announcements').select('*').eq('is_active', true).single();
             if (data && !error) {
               const bar = document.getElementById('announcement-bar');
               bar.classList.remove('hidden');
-              bar.innerHTML = data.link ? `<a href="${data.link}" class="hover:underline block w-full py-1">${data.message}</a>` : data.message;
+              bar.innerHTML = data.link ? `<a href="${data.link}" class="hover:underline transition-colors block w-full py-1">${data.message}</a>` : data.message;
             }
           } catch (err) {}
 
-          // Fetch Site Statistics
+          // Stats Counters
           try {
-            const { data: stats, error: statsError } = await supabaseClient.from('site_statistics').select('*').single();
+            const { data: stats, error: statsError } = await supabaseClient.from('TNG_site_statistics').select('*').single();
             if (stats && !statsError) {
-              document.getElementById('metric-subs').innerText = stats.subsidiaries_count;
-              document.getElementById('metric-verts').innerText = stats.core_verticals;
+              animateCounters('metric-subs', stats.subsidiaries_count);
+              animateCounters('metric-verts', stats.core_verticals);
               document.getElementById('metric-fund').innerText = stats.funding_status;
             }
           } catch (err) {}
 
-          // Fetch Latest News (Limit 2)
+          // News (Clean Corporate Cards)
           try {
-            const { data: news, error: newsError } = await supabaseClient.from('news_releases').select('*').eq('is_active', true).order('created_at', { ascending: false }).limit(2);
+            const { data: news, error: newsError } = await supabaseClient.from('TNG_news_releases').select('*').eq('is_active', true).order('created_at', { ascending: false }).limit(2);
             const newsContainer = document.getElementById('news-container');
             
             if (newsError || !news || news.length === 0) {
-              newsContainer.innerHTML = '<p class="text-gray-500 italic col-span-1 md:col-span-2 text-center">No recent news at this time.</p>';
+              newsContainer.innerHTML = '<p class="text-gray-500 italic col-span-1 md:col-span-2 text-center py-10">No recent news found.</p>';
             } else {
-              newsContainer.innerHTML = news.map(item => {
-                const borderColor = item.category.includes('Portfolio') ? 'border-l-[#001f3f]' : 'border-l-[#a6192e]';
+              newsContainer.innerHTML = news.map((item, index) => {
+                const delay = index * 100;
                 return `
-                  <a href="${item.link || 'news/'}" class="block bg-white rounded-xl shadow hover:shadow-lg transition-shadow border border-gray-100 p-6 border-l-4 ${borderColor}">
-                    <p class="text-xs text-gray-400 font-bold mb-2 tracking-wider uppercase">${item.category}</p>
-                    <h3 class="text-lg font-bold text-[#001f3f] mb-2">${item.title}</h3>
-                    <p class="text-gray-600 text-sm">${item.snippet}</p>
+                  <a href="${item.link || 'news/'}" class="block bg-white rounded-xl shadow-sm hover:shadow-lg transition-all border border-gray-100 p-8 border-l-4 border-l-tng-red transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="${delay}">
+                    <p class="text-xs text-gray-500 font-bold mb-3 tracking-wider uppercase">${item.category}</p>
+                    <h3 class="text-xl font-bold text-tng-navy mb-3">${item.title}</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">${item.snippet}</p>
                   </a>
+                `;
+              }).join('');
+            }
+          } catch (err) {}
+
+          // Jobs (Clean Corporate Cards)
+          try {
+            const { data: jobs, error: jobsError } = await supabaseClient.from('TNG_job_postings').select('*').eq('is_active', true).order('created_at', { ascending: false }).limit(2);
+            const jobsContainer = document.getElementById('jobs-container');
+            
+            if (jobsError || !jobs || jobs.length === 0) {
+              jobsContainer.innerHTML = '<p class="text-gray-400 italic col-span-1 md:col-span-2 text-center py-5">No open positions currently available.</p>';
+            } else {
+              jobsContainer.innerHTML = jobs.map((job, index) => {
+                const delay = index * 100;
+                return `
+                  <div class="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center hover:bg-white/20 transition-colors" data-aos="fade-up" data-aos-delay="${delay}">
+                    <div class="mb-4 sm:mb-0">
+                        <h3 class="text-xl font-bold text-white">${job.title}</h3>
+                        <p class="text-gray-300 text-sm mt-2"><i class="fa-solid fa-building mr-1"></i> ${job.company} &nbsp;|&nbsp; <i class="fa-solid fa-location-dot mr-1"></i> ${job.location}</p>
+                    </div>
+                    <a href="https://careers.tylernicholasgroup.com" class="bg-tng-red px-6 py-2.5 rounded text-sm font-bold hover:bg-red-800 transition-colors whitespace-nowrap shadow-md text-center w-full sm:w-auto">Apply Now</a>
+                  </div>
                 `;
               }).join('');
             }
