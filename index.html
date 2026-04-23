@@ -51,28 +51,15 @@
     ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #001f3f; }
 
-    /* Infinite Marquee Slider CSS */
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(calc(-250px * 8)); } /* Scrolls half the track then loops */
+    /* Subsidiary Fading Animation */
+    @keyframes fadeScale {
+      0% { opacity: 0; transform: scale(0.95); }
+      10% { opacity: 1; transform: scale(1); }
+      90% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.05); }
     }
-    .slider {
-      height: 120px; margin: auto; overflow: hidden; position: relative; width: 100%;
-    }
-    .slider::before, .slider::after {
-      background: linear-gradient(to right, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
-      content: ""; height: 120px; position: absolute; width: 100px; z-index: 2;
-    }
-    .slider::after { right: 0; top: 0; transform: rotateZ(180deg); }
-    .slider::before { left: 0; top: 0; }
-    .slide-track {
-      animation: scroll 35s linear infinite;
-      display: flex;
-      width: calc(250px * 16); /* Plenty of width for duplicate cards */
-    }
-    .slide-track:hover { animation-play-state: paused; }
-    .slide {
-      height: 120px; width: 250px; display: flex; align-items: center; justify-content: center;
+    .animate-fade-scale {
+      animation: fadeScale 5s ease-in-out infinite;
     }
   </style>
 </head>
@@ -147,7 +134,7 @@
       </div>
     </section>
 
-    <section class="w-full bg-white border-t border-gray-200 py-20">
+    <section class="w-full bg-white border-y border-gray-200 py-20">
       <div class="max-w-6xl mx-auto px-4">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-100">
           <div data-aos="fade-up" data-aos-delay="100">
@@ -170,13 +157,18 @@
       </div>
     </section>
 
-    <section id="subsidiaries-section" class="w-full bg-white py-12 border-b border-gray-200 overflow-hidden hidden">
-      <div class="max-w-6xl mx-auto px-4 text-center mb-6" data-aos="fade-in">
-        <h3 class="text-xs font-bold text-gray-400 tracking-widest uppercase">Our Core Portfolio</h3>
-      </div>
-      <div class="slider">
-        <div class="slide-track" id="subsidiary-track">
+    <section id="subsidiaries-section" class="w-full bg-gray-50 py-24 border-b border-gray-200 hidden">
+      <div class="max-w-5xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold text-tng-navy mb-12" data-aos="fade-up">Our Core Portfolio</h2>
+        
+        <div id="subsidiary-display" class="min-h-[280px] flex items-center justify-center mb-10">
            </div>
+
+        <div data-aos="fade-up" data-aos-delay="200">
+          <a href="companies/" class="inline-block bg-white border-2 border-tng-navy text-tng-navy font-bold py-3 px-10 rounded-lg shadow-sm hover:bg-tng-navy hover:text-white transition-all text-sm uppercase tracking-wide">
+            View All Companies
+          </a>
+        </div>
       </div>
     </section>
 
@@ -323,20 +315,6 @@
           const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtrdmp3bXpsZXpya3dxaWl6a3dwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5MzY2OTksImV4cCI6MjA5MjUxMjY5OX0.Oa44WwSsEhao79sLfkF4HA-dmDbVV3NeT9txvl83460';
           const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-          // Helper function
-          async function fetchWithFallback(tngTable, oldTable, isSingle = false, queryBuilder = null) {
-              let query = supabaseClient.from(tngTable).select('*');
-              if(queryBuilder) query = queryBuilder(query);
-              let { data, error } = isSingle ? await query.single() : await query;
-              
-              if (error && (error.code === '42P01' || error.message.includes("does not exist"))) {
-                  let fallbackQuery = supabaseClient.from(oldTable).select('*');
-                  if(queryBuilder) fallbackQuery = queryBuilder(fallbackQuery);
-                  return isSingle ? await fallbackQuery.single() : await fallbackQuery;
-              }
-              return { data, error };
-          }
-
           // Fetch Alert
           try {
             const { data, error } = await supabaseClient.from('tng_announcements').select('*').eq('is_active', true).single();
@@ -357,7 +335,7 @@
             } else { document.getElementById('metric-fund').innerText = 'Error'; }
           } catch (err) { }
 
-          // Fetch Subsidiaries for Marquee
+          // Fetch Subsidiaries for Large Fading Display
           try {
             const targetIds = [
               '3354c167-dac9-4d41-8610-c95f9b426274',
@@ -371,22 +349,30 @@
               .eq('is_active', true);
             
             if (!subsError && subs && subs.length > 0) {
-              const track = document.getElementById('subsidiary-track');
               document.getElementById('subsidiaries-section').classList.remove('hidden');
+              const displayContainer = document.getElementById('subsidiary-display');
+              let currentIndex = 0;
+
+              function updateSlide() {
+                const sub = subs[currentIndex];
+                const logoHtml = sub.logo_link 
+                  ? `<img src="${sub.logo_link}" alt="${sub.company_name}" class="h-32 md:h-40 w-auto object-contain mb-8 shadow-sm rounded">` 
+                  : `<div class="h-32 w-32 bg-white rounded-full shadow-sm flex items-center justify-center mb-8 border border-gray-100"><i class="fa-solid fa-building text-gray-300 text-4xl"></i></div>`;
+                
+                displayContainer.innerHTML = `
+                  <div class="animate-fade-scale flex flex-col items-center">
+                    <a href="${sub.website_url || '#'}" target="_blank" class="flex flex-col items-center hover:scale-105 transition-transform duration-300">
+                      ${logoHtml}
+                      <h4 class="text-3xl md:text-4xl font-extrabold text-tng-navy hover:text-tng-red transition-colors uppercase tracking-widest">${sub.company_name}</h4>
+                      ${sub.industry ? `<p class="text-gray-500 mt-3 font-semibold uppercase tracking-widest text-sm border-t-2 border-tng-red pt-2">${sub.industry}</p>` : ''}
+                    </a>
+                  </div>
+                `;
+                currentIndex = (currentIndex + 1) % subs.length;
+              }
               
-              // Duplicate data array multiple times for infinite scrolling effect without gaps
-              const displaySubs = [...subs, ...subs, ...subs, ...subs, ...subs];
-              
-              track.innerHTML = displaySubs.map(sub => `
-                <div class="slide px-4">
-                  <a href="${sub.website_url || '#'}" target="_blank" class="w-full h-full flex flex-col items-center justify-center bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all group p-4 min-w-[200px]">
-                    ${sub.logo_link 
-                      ? `<img src="${sub.logo_link}" alt="${sub.company_name}" class="max-h-12 w-auto object-contain mb-3 grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all">` 
-                      : `<div class="h-10 w-10 bg-gray-50 rounded-full flex items-center justify-center mb-3"><i class="fa-solid fa-building text-gray-300"></i></div>`}
-                    <span class="font-bold text-tng-navy group-hover:text-tng-red transition-colors text-xs uppercase tracking-wider text-center">${sub.company_name}</span>
-                  </a>
-                </div>
-              `).join('');
+              updateSlide(); 
+              setInterval(updateSlide, 5000); 
             }
           } catch (err) {}
 
@@ -402,8 +388,7 @@
             } else {
               newsContainer.innerHTML = news.map((item, index) => {
                 const delay = index * 100;
-                // Including the new image_link feature if available
-                const imgHTML = item.image_link ? `<div class="w-full h-48 mb-4 overflow-hidden rounded-lg"><img src="${item.image_link}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>` : '';
+                const imgHTML = item.image_link ? `<div class="w-full h-48 mb-6 overflow-hidden rounded-lg shadow-sm border border-gray-100"><img src="${item.image_link}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>` : '';
                 
                 return `
                   <a href="${item.link || 'news/'}" class="block bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 p-8 border-l-4 border-l-tng-red transform hover:-translate-y-1 group" data-aos="fade-up" data-aos-delay="${delay}">
