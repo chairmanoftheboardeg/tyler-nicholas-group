@@ -5,16 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tyler Nicholas Group | Driving Value, Defining the Future</title>
   <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
-  <meta name="google-site-verification" content="B0hBtQ3dAMciRKv-HCXQvZqHk8mQu-tvbi0NRnt9oEk" />
   
   <script src="https://cdn.tailwindcss.com"></script>
-  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,15 +19,9 @@
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Plus Jakarta Sans', 'sans-serif'],
-          },
+          fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], },
           colors: {
-            tng: {
-              navy: '#001f3f',
-              navyDark: '#001226',
-              red: '#a6192e',
-            }
+            tng: { navy: '#001f3f', navyDark: '#001226', red: '#a6192e', }
           }
         }
       }
@@ -41,34 +31,21 @@
   <style>
     body { background-color: #f8fafc; }
     body.loading { overflow: hidden; height: 100vh; }
-    
-    /* Clean Corporate Loader */
     #loading-screen { transition: opacity 0.6s ease-out, visibility 0.6s; }
     .loader-spinner {
       border: 4px solid rgba(0, 31, 63, 0.1);
       border-left-color: #a6192e;
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      width: 50px; height: 50px;
       animation: spin 1s linear infinite;
     }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-    /* Requested Hero Background */
     .hero-bg {
       background: linear-gradient(rgba(0, 31, 63, 0.8), rgba(0, 31, 63, 0.9)), url('https://static.vecteezy.com/system/resources/previews/015/274/044/non_2x/banner-web-template-abstract-black-curved-shapes-with-lighting-on-dark-background-vector.jpg') no-repeat center center;
-      background-size: cover;
-      background-attachment: fixed;
+      background-size: cover; background-attachment: fixed;
     }
-
-    /* Trustpilot Logo Fix - Turns logo pure white to remove backgrounds */
-    .logo-white {
-      filter: brightness(0) invert(1) opacity(0.9);
-      transition: opacity 0.3s;
-    }
+    .logo-white { filter: brightness(0) invert(1) opacity(0.9); transition: opacity 0.3s; }
     .logo-white:hover { opacity: 1; }
-
-    /* Custom scrollbar */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #f1f5f9; }
     ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
@@ -96,7 +73,6 @@
 
     <div class="hidden md:flex space-x-8 text-sm items-center font-semibold tracking-wide">
       <a href="#" class="text-white border-b-2 border-tng-red pb-1">Home</a>
-      
       <div class="relative group">
         <button class="text-gray-300 hover:text-white transition-colors flex items-center py-2">
           About Us <i class="fa-solid fa-chevron-down ml-2 text-[10px]"></i>
@@ -106,7 +82,6 @@
           <a href="leadership/" class="block px-5 py-3 hover:bg-gray-50 transition-colors">Our Leadership</a>
         </div>
       </div>
-
       <a href="companies/" class="text-gray-300 hover:text-white transition-colors">Our Companies</a>
       <a href="https://careers.tylernicholasgroup.com" class="text-gray-300 hover:text-white transition-colors">Careers</a>
       <a href="news/" class="bg-tng-red text-white px-5 py-2 rounded-md hover:bg-red-800 transition-all shadow-md transform hover:-translate-y-0.5">News & Press</a>
@@ -183,23 +158,20 @@
       </div>
       
       <div id="news-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <p class="text-gray-500 italic col-span-1 md:col-span-2 text-center py-10" id="news-status">Establishing connection to database...</p>
+        <p class="text-gray-500 italic col-span-1 md:col-span-2 text-center py-10" id="news-status">Loading data...</p>
       </div>
     </section>
 
     <section class="w-full bg-tng-navyDark py-24 text-white relative overflow-hidden">
       <div class="absolute top-0 right-0 w-96 h-96 bg-tng-red rounded-full mix-blend-multiply filter blur-[100px] opacity-20 transform translate-x-1/3 -translate-y-1/3"></div>
-      
       <div class="max-w-6xl mx-auto px-4 relative z-10">
         <div class="text-center mb-16" data-aos="fade-up">
           <h2 class="text-3xl md:text-5xl font-bold mb-4">Join the Group</h2>
           <p class="text-gray-400 font-medium text-lg">Discover your next career move across our global network.</p>
         </div>
-        
         <div id="jobs-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-           <p class="text-gray-400 italic col-span-1 md:col-span-2 text-center py-5" id="jobs-status">Scanning for open positions...</p>
+           <p class="text-gray-400 italic col-span-1 md:col-span-2 text-center py-5" id="jobs-status">Loading data...</p>
         </div>
-        
         <div class="text-center mt-16" data-aos="fade-in" data-aos-delay="200">
           <a href="https://careers.tylernicholasgroup.com" class="inline-block border-2 border-white/30 text-white font-bold py-3.5 px-10 rounded-lg hover:bg-white hover:text-tng-navy transition-all shadow-sm">View All Open Positions</a>
         </div>
@@ -237,11 +209,9 @@
       <div class="flex flex-col space-y-4 text-sm font-medium">
         <h4 class="font-bold text-lg mb-2 text-white tracking-wide">Connect</h4>
         <a href="contact/" class="text-gray-400 hover:text-tng-red transition-colors">Contact Us</a>
-        
         <a href="https://www.trustpilot.com/review/tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="pt-2 block">
           <img src="https://www.worcestershirefencing.co.uk/wp-content/uploads/2023/11/trustpilot-logo-snijpunt.1600x680x1.png" alt="Trustpilot" class="h-6 object-contain logo-white">
         </a>
-        
         <div class="flex space-x-6 mt-4 pt-2">
           <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#0A66C2] hover:scale-110 transition-all">
             <i class="fa-brands fa-linkedin-in text-lg"></i>
@@ -307,62 +277,49 @@
         update();
     }
 
-    // 3. Smart Supabase Fetching 
+    // 3. Supabase Integration
     document.addEventListener("DOMContentLoaded", () => {
       const checkSupabase = setInterval(async () => {
         if (window.supabase) {
           clearInterval(checkSupabase); 
           
-          // NEW PROJECT CREDENTIALS INJECTED HERE
           const supabaseUrl = 'https://kkvjwmzlezrkwqiizkwp.supabase.co';
           const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtrdmp3bXpsZXpya3dxaWl6a3dwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5MzY2OTksImV4cCI6MjA5MjUxMjY5OX0.Oa44WwSsEhao79sLfkF4HA-dmDbVV3NeT9txvl83460';
           const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-          // Helper function for smart fetching (Handles TNG_ prefix or missing tables automatically)
-          async function fetchWithFallback(tngTable, oldTable, isSingle = false, queryBuilder = null) {
-              let query = supabaseClient.from(tngTable).select('*');
-              if(queryBuilder) query = queryBuilder(query);
-              let { data, error } = isSingle ? await query.single() : await query;
-              
-              if (error && (error.code === '42P01' || error.message.includes("does not exist"))) {
-                  let fallbackQuery = supabaseClient.from(oldTable).select('*');
-                  if(queryBuilder) fallbackQuery = queryBuilder(fallbackQuery);
-                  return isSingle ? await fallbackQuery.single() : await fallbackQuery;
-              }
-              return { data, error };
-          }
-
           // Fetch Alert Banner
           try {
-            const { data, error } = await fetchWithFallback('TNG_announcements', 'announcements', true, q => q.eq('is_active', true));
+            const { data, error } = await supabaseClient.from('TNG_announcements').select('*').eq('is_active', true).single();
             if (data && !error) {
               const bar = document.getElementById('announcement-bar');
               bar.classList.remove('hidden');
               bar.innerHTML = data.link ? `<a href="${data.link}" class="hover:underline transition-colors block w-full py-1">${data.message}</a>` : data.message;
             }
-          } catch (err) {}
+          } catch (err) { console.error(err); }
 
           // Fetch Stats
           try {
-            const { data: stats, error: statsError } = await fetchWithFallback('TNG_site_statistics', 'site_statistics', true);
+            const { data: stats, error: statsError } = await supabaseClient.from('TNG_site_statistics').select('*').single();
             if (statsError) {
-              document.getElementById('metric-fund').innerText = 'Data Locked (RLS)';
+              document.getElementById('metric-fund').innerText = 'Error';
+              console.error(statsError);
             } else if (stats) {
               animateCounters('metric-subs', stats.subsidiaries_count);
               animateCounters('metric-verts', stats.core_verticals);
               document.getElementById('metric-fund').innerText = stats.funding_status || 'Secured';
             }
-          } catch (err) {}
+          } catch (err) { console.error(err); }
 
           // Fetch News
           try {
-            const { data: news, error: newsError } = await fetchWithFallback('TNG_news_releases', 'news_releases', false, q => q.eq('is_active', true).order('created_at', { ascending: false }).limit(2));
+            const { data: news, error: newsError } = await supabaseClient.from('TNG_news_releases').select('*').eq('is_active', true).order('created_at', { ascending: false }).limit(2);
             const newsContainer = document.getElementById('news-container');
             
             if (newsError) {
-                document.getElementById('news-status').innerHTML = `<span class="text-red-500 font-bold">Database Locked.</span><br>Please enable "Public Read Access" policy in your Supabase Dashboard.`;
+                document.getElementById('news-status').innerText = `Error loading news. Check console.`;
+                console.error(newsError);
             } else if (!news || news.length === 0) {
-              document.getElementById('news-status').innerText = 'No recent updates available in the database.';
+              document.getElementById('news-status').innerText = 'No recent updates available.';
             } else {
               newsContainer.innerHTML = news.map((item, index) => {
                 const delay = index * 100;
@@ -375,17 +332,18 @@
                 `;
               }).join('');
             }
-          } catch (err) {}
+          } catch (err) { console.error(err); }
 
           // Fetch Jobs
           try {
-            const { data: jobs, error: jobsError } = await fetchWithFallback('TNG_job_postings', 'job_postings', false, q => q.eq('is_active', true).order('created_at', { ascending: false }).limit(2));
+            const { data: jobs, error: jobsError } = await supabaseClient.from('TNG_job_postings').select('*').eq('is_active', true).order('created_at', { ascending: false }).limit(2);
             const jobsContainer = document.getElementById('jobs-container');
             
             if (jobsError) {
-                document.getElementById('jobs-status').innerHTML = `<span class="text-red-400 font-bold">Database Locked.</span><br>Please enable "Public Read Access" policy in your Supabase Dashboard.`;
+                document.getElementById('jobs-status').innerText = `Error loading jobs. Check console.`;
+                console.error(jobsError);
             } else if (!jobs || jobs.length === 0) {
-              document.getElementById('jobs-status').innerText = 'No open positions available in the database at this time.';
+              document.getElementById('jobs-status').innerText = 'No open positions available at this time.';
             } else {
               jobsContainer.innerHTML = jobs.map((job, index) => {
                 const delay = index * 100;
@@ -400,7 +358,7 @@
                 `;
               }).join('');
             }
-          } catch (err) {}
+          } catch (err) { console.error(err); }
 
         }
       }, 100); 
