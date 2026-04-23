@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Support | Tyler Nicholas Group</title>
+  <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], },
+          colors: {
+            tng: { navy: '#001f3f', navyDark: '#001226', red: '#a6192e', }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { background-color: #f8fafc; }
+    body.loading { overflow: hidden; height: 100vh; }
+    #loading-screen { transition: opacity 0.6s ease-out, visibility 0.6s; }
+    .loader-spinner {
+      border: 4px solid rgba(0, 31, 63, 0.1);
+      border-left-color: #a6192e;
+      border-radius: 50%;
+      width: 50px; height: 50px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .hero-bg {
+      background: linear-gradient(rgba(0, 31, 63, 0.85), rgba(0, 31, 63, 0.95)), url('https://static.vecteezy.com/system/resources/previews/015/274/044/non_2x/banner-web-template-abstract-black-curved-shapes-with-lighting-on-dark-background-vector.jpg') no-repeat center center;
+      background-size: cover; background-attachment: fixed;
+    }
+    .logo-white { filter: brightness(0) invert(1) opacity(0.9); transition: opacity 0.3s; }
+    .logo-white:hover { opacity: 1; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #001f3f; }
+    
+    /* Custom Scrollbar for Chat Inbox */
+    .chat-scroll::-webkit-scrollbar { width: 6px; }
+    .chat-scroll::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 8px; }
+    .chat-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
+  </style>
+</head>
+<body class="font-sans text-gray-900 flex flex-col min-h-screen loading">
+
+  <div id="loading-screen" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white text-tng-navy">
+    <div class="loader-spinner mb-6"></div>
+    <h2 class="text-xl md:text-2xl font-bold tracking-widest uppercase mb-2">Tyler Nicholas Group</h2>
+  </div>
+
+  <nav class="bg-tng-navy/95 backdrop-blur-md text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-lg sticky top-0 z-40 border-b border-white/10">
+    <a href="/" class="flex items-center space-x-4">
+      <img src="https://i.ibb.co/1tcyLSRN/TNG-Logo.png" alt="TNG Logo" class="h-10">
+      <div class="font-bold text-xl tracking-wider uppercase hidden sm:block">Tyler Nicholas Group</div>
+    </a>
+    
+    <button id="mobile-menu-btn" class="md:hidden text-white hover:text-tng-red transition-colors text-2xl">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="hidden md:flex space-x-8 text-sm items-center font-semibold tracking-wide">
+      <a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a>
+      
+      <div class="relative group">
+        <button class="text-gray-300 hover:text-white transition-colors flex items-center py-2">
+          About Us <i class="fa-solid fa-chevron-down ml-2 text-[10px]"></i>
+        </button>
+        <div class="absolute left-0 mt-1 w-48 bg-white text-tng-navy rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden transform origin-top group-hover:scale-100 scale-95">
+          <a href="/about/" class="block px-5 py-3 hover:bg-gray-50 border-b border-gray-100 transition-colors">Group Overview</a>
+          <a href="/leadership/" class="block px-5 py-3 hover:bg-gray-50 transition-colors">Our Leadership</a>
+        </div>
+      </div>
+
+      <a href="/companies/" class="text-gray-300 hover:text-white transition-colors">Our Companies</a>
+      <a href="https://careers.tylernicholasgroup.com" class="text-gray-300 hover:text-white transition-colors">Careers</a>
+      <a href="/news/" class="bg-tng-red text-white px-5 py-2 rounded-md hover:bg-red-800 transition-all shadow-md transform hover:-translate-y-0.5">News & Press</a>
+    </div>
+  </nav>
+
+  <div id="mobile-menu" class="hidden bg-tng-navyDark border-t border-white/10 px-6 py-6 flex flex-col space-y-4 text-white text-base font-medium md:hidden sticky top-[73px] z-30 shadow-2xl">
+    <a href="/" class="hover:text-gray-300">Home</a>
+    <a href="/about/" class="hover:text-gray-300">About Us</a>
+    <a href="/leadership/" class="hover:text-gray-300 pl-4 border-l-2 border-white/20 text-sm">Our Leadership</a>
+    <a href="/companies/" class="hover:text-gray-300">Our Companies</a>
+    <a href="https://careers.tylernicholasgroup.com" class="hover:text-gray-300">Careers</a>
+    <a href="/news/" class="hover:text-gray-300">News & Press</a>
+  </div>
+
+  <main class="flex-grow w-full flex flex-col items-center">
+    
+    <header class="hero-bg w-full py-32 flex items-center justify-center px-4 shadow-inner border-b-4 border-tng-red">
+      <div class="max-w-4xl text-center z-10" data-aos="fade-up">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight text-white uppercase drop-shadow-lg">
+          Executive Helpdesk
+        </h1>
+        <p class="text-xl text-gray-200 font-light max-w-2xl mx-auto">Connect directly with our corporate team. Submit an inquiry or track an ongoing conversation via our secure portal.</p>
+      </div>
+    </header>
+
+    <section class="w-full bg-gray-50 py-24">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16">
+            
+            <div data-aos="fade-right">
+                <h2 class="text-3xl font-bold text-tng-navy mb-2 tracking-tight">Submit an Inquiry</h2>
+                <p class="text-gray-500 mb-8 font-light text-sm">All submissions are routed to the appropriate corporate division.</p>
+
+                <form id="contact-form" class="bg-white p-8 rounded-xl shadow-sm border border-gray-200 space-y-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs font-bold text-tng-navy uppercase tracking-widest mb-2">Full Name <span class="text-tng-red">*</span></label>
+                            <input type="text" id="t-name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-tng-navy focus:ring-1 focus:ring-tng-navy outline-none transition-colors bg-gray-50 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-tng-navy uppercase tracking-widest mb-2">Country of Residency <span class="text-tng-red">*</span></label>
+                            <input type="text" id="t-country" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-tng-navy focus:ring-1 focus:ring-tng-navy outline-none transition-colors bg-gray-50 text-sm">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs font-bold text-tng-navy uppercase tracking-widest mb-2">Email Address <span class="text-tng-red">*</span></label>
+                            <input type="email" id="t-email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-tng-navy focus:ring-1 focus:ring-tng-navy outline-none transition-colors bg-gray-50 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-tng-navy uppercase tracking-widest mb-2">Phone Number</label>
+                            <input type="tel" id="t-phone" placeholder="Optional" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-tng-navy focus:ring-1 focus:ring-tng-navy outline-none transition-colors bg-gray-50 text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-tng-navy uppercase tracking-widest mb-2">Subject <span class="text-tng-red">*</span></label>
+                        <input type="text" id="t-subject" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-tng-navy focus:ring-1 focus:ring-tng-navy outline-none transition-colors bg-gray-50 text-sm">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-tng-navy uppercase tracking-widest mb-2">Full Message <span class="text-tng-red">*</span></label>
+                        <textarea id="t-message" required rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-tng-navy focus:ring-1 focus:ring-tng-navy outline-none transition-colors bg-gray-50 text-sm resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="w-full bg-tng-navy hover:bg-tng-navyDark text-white font-bold py-4 rounded-lg shadow-md transition-all uppercase tracking-wide text-sm flex justify-center items-center">
+                        Securely Submit Message
+                    </button>
+                    <p id="submit-error" class="text-red-500 text-xs font-bold text-center hidden mt-2"></p>
+                </form>
+
+                <div id="success-screen" class="bg-white p-10 rounded-xl shadow-lg border-2 border-green-500 text-center hidden">
+                    <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-6">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-tng-navy mb-2">Message Received</h3>
+                    <p class="text-gray-600 text-sm mb-6">Your inquiry has been successfully transmitted to our executive network. Please save your secure tracking reference below.</p>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg border border-gray-200 mb-6 font-mono text-sm break-all font-bold text-gray-800 tracking-wider">
+                        <span id="reference-display">LOADING...</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <button onclick="downloadReference()" class="w-full bg-tng-red hover:bg-red-800 text-white font-bold py-3 rounded-lg shadow transition-colors text-sm flex justify-center items-center">
+                            <i class="fa-solid fa-download mr-2"></i> Save Reference (.txt)
+                        </button>
+                        <button onclick="copyReference()" class="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 font-bold py-3 rounded-lg transition-colors text-sm flex justify-center items-center">
+                            <i class="fa-regular fa-copy mr-2"></i> Copy to Clipboard
+                        </button>
+                    </div>
+                    <p class="text-xs text-red-500 font-bold mt-4">WARNING: Do not lose this reference. It cannot be recovered.</p>
+                </div>
+            </div>
+
+            <div data-aos="fade-left">
+                <h2 class="text-3xl font-bold text-tng-navy mb-2 tracking-tight">Track Your Inquiry</h2>
+                <p class="text-gray-500 mb-8 font-light text-sm">Enter your secure reference number to access the 2-way communication portal.</p>
+
+                <form id="track-form" class="bg-tng-navy p-8 rounded-xl shadow-lg border-b-4 border-tng-red mb-8">
+                    <label class="block text-xs font-bold text-gray-300 uppercase tracking-widest mb-3">Secure Reference Number</label>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input type="text" id="track-ref" required placeholder="e.g. 123e4567-e89b-12d3-a456..." class="flex-grow px-4 py-3 rounded-lg border border-white/20 bg-white/10 text-white focus:outline-none focus:border-tng-red font-mono text-sm placeholder-gray-500">
+                        <button type="submit" id="track-btn" class="bg-tng-red hover:bg-red-800 text-white font-bold py-3 px-6 rounded-lg transition-colors whitespace-nowrap shadow-md">
+                            Open Portal
+                        </button>
+                    </div>
+                    <p id="track-error" class="text-red-400 text-xs font-bold hidden mt-3"></p>
+                </form>
+
+                <div id="inbox-ui" class="bg-white rounded-xl shadow-sm border border-gray-200 hidden flex flex-col overflow-hidden h-[600px]">
+                    
+                    <div class="bg-gray-50 border-b border-gray-200 p-5 flex justify-between items-center">
+                        <div>
+                            <h3 id="inbox-subject" class="font-bold text-tng-navy text-lg truncate w-48 sm:w-64">Subject Line Here</h3>
+                            <p id="inbox-staff" class="text-xs text-gray-500 mt-1"><i class="fa-solid fa-headset mr-1"></i> Awaiting Assignment</p>
+                        </div>
+                        <div id="inbox-status" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-blue-100 text-blue-800 border border-blue-200">
+                            OPEN
+                        </div>
+                    </div>
+
+                    <div id="message-thread" class="flex-grow p-6 overflow-y-auto chat-scroll bg-gray-50/50 space-y-6">
+                        </div>
+
+                    <form id="reply-form" class="border-t border-gray-200 p-4 bg-white">
+                        <div class="relative">
+                            <textarea id="reply-message" required rows="2" placeholder="Type your reply here..." class="w-full px-4 py-3 pr-16 rounded-lg border border-gray-300 focus:border-tng-navy focus:ring-1 focus:ring-tng-navy outline-none transition-colors text-sm resize-none chat-scroll"></textarea>
+                            <button type="submit" id="reply-btn" class="absolute right-2 bottom-2 bg-tng-navy hover:bg-tng-navyDark text-white w-10 h-10 rounded-lg flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-tng-navyDark text-white pt-20 pb-10 px-6 md:px-12 mt-auto border-t-[6px] border-tng-red">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 items-start mb-16">
+      
+      <div class="flex flex-col items-start lg:col-span-1">
+        <a href="/" class="block">
+            <img src="https://i.ibb.co/1tcyLSRN/TNG-Logo.png" alt="TNG Logo" class="h-12 mb-6">
+        </a>
+        <p class="text-sm text-gray-400 mb-8 max-w-sm leading-relaxed font-medium">
+          A global holding company driving strategic growth and synergy across diverse verticals.
+        </p>
+      </div>
+      
+      <div class="flex flex-col space-y-4 text-sm font-medium">
+        <h4 class="font-bold text-lg mb-2 text-white tracking-wide">Corporate</h4>
+        <a href="/about/" class="text-gray-400 hover:text-tng-red transition-colors">About Us</a>
+        <a href="/leadership/" class="text-gray-400 hover:text-tng-red transition-colors">Our Leadership</a>
+        <a href="/companies/" class="text-gray-400 hover:text-tng-red transition-colors">Our Companies</a>
+        <a href="https://careers.tylernicholasgroup.com" class="text-gray-400 hover:text-tng-red transition-colors">Careers</a>
+      </div>
+      
+      <div class="flex flex-col space-y-4 text-sm font-medium">
+        <h4 class="font-bold text-lg mb-2 text-white tracking-wide">Legal</h4>
+        <a href="/privacy/" class="text-gray-400 hover:text-tng-red transition-colors">Privacy Policy</a>
+        <a href="/terms/" class="text-gray-400 hover:text-tng-red transition-colors">Terms of Use</a>
+        <a href="/cookie-policy/" class="text-gray-400 hover:text-tng-red transition-colors">Cookie Policy</a>
+        <a href="/accessibility/" class="text-gray-400 hover:text-tng-red transition-colors">Accessibility Statement</a>
+      </div>
+      
+      <div class="flex flex-col space-y-4 text-sm font-medium">
+        <h4 class="font-bold text-lg mb-2 text-white tracking-wide">Connect</h4>
+        <a href="/contact/" class="text-gray-400 hover:text-tng-red transition-colors">Contact Us</a>
+        <a href="https://www.trustpilot.com/review/tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="pt-2 block">
+          <img src="https://www.worcestershirefencing.co.uk/wp-content/uploads/2023/11/trustpilot-logo-snijpunt.1600x680x1.png" alt="Trustpilot" class="h-6 object-contain logo-white">
+        </a>
+        <div class="flex space-x-4 mt-4 pt-2">
+          <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#0A66C2] hover:scale-110 transition-all">
+            <i class="fa-brands fa-linkedin-in text-lg"></i>
+          </a>
+          <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#E1306C] hover:scale-110 transition-all">
+            <i class="fa-brands fa-instagram text-lg"></i>
+          </a>
+          <a href="https://x.com/tyler_n_group" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-black hover:scale-110 transition-all">
+            <i class="fa-brands fa-x-twitter text-lg"></i>
+          </a>
+          <a href="https://www.youtube.com/@TylerNicholasGroup" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#FF0000] hover:scale-110 transition-all">
+            <i class="fa-brands fa-youtube text-lg"></i>
+          </a>
+          <a href="https://www.facebook.com/tylernicholasgroup" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#1877F2] hover:scale-110 transition-all">
+            <i class="fa-brands fa-facebook-f text-lg"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-medium">
+      <p>&copy; <span id="current-year"></span> Tyler Nicholas Group. All rights reserved.</p>
+      <a href="https://tyler.tylernicholasgroup.com" target="_blank" class="mt-4 md:mt-0 hover:text-white transition-colors">By Tyler Nicholas</a>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    // System Init
+    window.addEventListener('load', function() {
+      const loader = document.getElementById('loading-screen');
+      if (loader) {
+        setTimeout(() => {
+          loader.style.opacity = '0';
+          loader.style.visibility = 'hidden';
+          document.body.classList.remove('loading');
+          AOS.init({ duration: 800, once: true, offset: 40 });
+        }, 800); 
+      }
+    });
+
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+    document.getElementById('current-year').innerText = new Date().getFullYear();
+
+    // Global variable to hold the active tracker ID
+    let currentActiveTrackerRef = null;
+
+    // Helpdesk Backend Logic via Supabase RPC
+    document.addEventListener("DOMContentLoaded", () => {
+      const checkSupabase = setInterval(() => {
+        if (window.supabase) {
+          clearInterval(checkSupabase); 
+          
+          const supabaseUrl = 'https://kkvjwmzlezrkwqiizkwp.supabase.co';
+          const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtrdmp3bXpsZXpya3dxaWl6a3dwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5MzY2OTksImV4cCI6MjA5MjUxMjY5OX0.Oa44WwSsEhao79sLfkF4HA-dmDbVV3NeT9txvl83460';
+          const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+          // 1. CREATE TICKET LOGIC
+          const contactForm = document.getElementById('contact-form');
+          if(contactForm) {
+              contactForm.addEventListener('submit', async (e) => {
+                  e.preventDefault();
+                  const btn = document.getElementById('submit-btn');
+                  const errorMsg = document.getElementById('submit-error');
+                  btn.disabled = true;
+                  btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Transmitting...';
+                  errorMsg.classList.add('hidden');
+
+                  const payload = {
+                      p_name: document.getElementById('t-name').value,
+                      p_country: document.getElementById('t-country').value,
+                      p_phone: document.getElementById('t-phone').value || null,
+                      p_email: document.getElementById('t-email').value,
+                      p_subject: document.getElementById('t-subject').value,
+                      p_message: document.getElementById('t-message').value
+                  };
+
+                  try {
+                      const { data, error } = await supabaseClient.rpc('create_support_ticket', payload);
+                      if (error) throw error;
+                      
+                      // Success: Hide form, show reference
+                      contactForm.classList.add('hidden');
+                      document.getElementById('reference-display').innerText = data;
+                      document.getElementById('success-screen').classList.remove('hidden');
+                      
+                  } catch (err) {
+                      console.error(err);
+                      errorMsg.innerText = "System transmission failed. Please try again later.";
+                      errorMsg.classList.remove('hidden');
+                      btn.disabled = false;
+                      btn.innerHTML = 'Securely Submit Message';
+                  }
+              });
+          }
+
+          // 2. TRACK TICKET / INBOX LOADING LOGIC
+          const trackForm = document.getElementById('track-form');
+          if(trackForm) {
+              trackForm.addEventListener('submit', async (e) => {
+                  e.preventDefault();
+                  const btn = document.getElementById('track-btn');
+                  const errorMsg = document.getElementById('track-error');
+                  const refInput = document.getElementById('track-ref').value.trim();
+                  
+                  btn.disabled = true;
+                  btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i>';
+                  errorMsg.classList.add('hidden');
+
+                  try {
+                      // Fetch Status Headers
+                      const { data: statusData, error: statusErr } = await supabaseClient.rpc('get_ticket_status', { secret_ref: refInput });
+                      if (statusErr) throw statusErr;
+                      
+                      if (!statusData || statusData.length === 0) {
+                          throw new Error("Invalid Reference Number.");
+                      }
+
+                      // Fetch Message History
+                      const { data: msgData, error: msgErr } = await supabaseClient.rpc('get_ticket_inbox', { secret_ref: refInput });
+                      if (msgErr) throw msgErr;
+
+                      // Update Global
+                      currentActiveTrackerRef = refInput;
+
+                      // Render UI
+                      renderInbox(statusData[0], msgData);
+
+                  } catch (err) {
+                      errorMsg.innerText = "Error: " + err.message;
+                      errorMsg.classList.remove('hidden');
+                  } finally {
+                      btn.disabled = false;
+                      btn.innerHTML = 'Open Portal';
+                  }
+              });
+          }
+
+          // 3. REPLY LOGIC
+          const replyForm = document.getElementById('reply-form');
+          if(replyForm) {
+              replyForm.addEventListener('submit', async (e) => {
+                  e.preventDefault();
+                  if (!currentActiveTrackerRef) return;
+
+                  const btn = document.getElementById('reply-btn');
+                  const replyMsg = document.getElementById('reply-message').value;
+                  
+                  btn.disabled = true;
+                  btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i>';
+
+                  try {
+                      const { error } = await supabaseClient.rpc('reply_to_ticket', { 
+                          secret_ref: currentActiveTrackerRef, 
+                          p_message: replyMsg 
+                      });
+                      if (error) throw error;
+                      
+                      // Clear textarea and reload messages
+                      document.getElementById('reply-message').value = '';
+                      
+                      const { data: msgData } = await supabaseClient.rpc('get_ticket_inbox', { secret_ref: currentActiveTrackerRef });
+                      renderMessagesOnly(msgData);
+
+                  } catch (err) {
+                      console.error("Reply failed", err);
+                      alert("Failed to send reply. Please try again.");
+                  } finally {
+                      btn.disabled = false;
+                      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i>';
+                  }
+              });
+          }
+
+        }
+      }, 100); 
+    });
+
+    // RENDER FUNCTIONS
+    function renderInbox(statusObj, messagesArr) {
+        document.getElementById('inbox-ui').classList.remove('hidden');
+        document.getElementById('inbox-subject').innerText = statusObj.subject;
+        
+        // Handle Assigned Staff display
+        const staffEl = document.getElementById('inbox-staff');
+        if (statusObj.assigned_staff) {
+            staffEl.innerHTML = `<i class="fa-solid fa-user-tie mr-1"></i> Assigned to: ${statusObj.assigned_staff}`;
+        } else {
+            staffEl.innerHTML = `<i class="fa-solid fa-headset mr-1"></i> Awaiting Assignment`;
+        }
+
+        // Handle Status Badge formatting
+        const statusBadge = document.getElementById('inbox-status');
+        statusBadge.innerText = statusObj.status;
+        if(statusObj.status === 'Open') {
+            statusBadge.className = "px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-blue-100 text-blue-800 border border-blue-200";
+            document.getElementById('reply-message').disabled = false;
+        } else if (statusObj.status === 'Claimed') {
+            statusBadge.className = "px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-yellow-100 text-yellow-800 border border-yellow-200";
+            document.getElementById('reply-message').disabled = false;
+        } else {
+            statusBadge.className = "px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-gray-200 text-gray-700 border border-gray-300";
+            document.getElementById('reply-message').disabled = true; // Lock reply if closed
+            document.getElementById('reply-message').placeholder = "This ticket has been closed.";
+        }
+
+        renderMessagesOnly(messagesArr);
+    }
+
+    function renderMessagesOnly(messagesArr) {
+        const thread = document.getElementById('message-thread');
+        thread.innerHTML = messagesArr.map(msg => {
+            const isUser = msg.sender_type === 'User';
+            const timeString = new Date(msg.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            const dateString = new Date(msg.created_at).toLocaleDateString([], {day:'numeric', month:'short'});
+            
+            if (isUser) {
+                return `
+                    <div class="flex justify-end mb-4">
+                        <div class="max-w-[85%]">
+                            <div class="bg-tng-navy text-white p-4 rounded-2xl rounded-tr-sm shadow-sm text-sm whitespace-pre-wrap">${msg.message}</div>
+                            <div class="text-[10px] text-gray-400 mt-1 text-right font-medium">${dateString} at ${timeString}</div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="flex justify-start mb-4">
+                        <div class="max-w-[85%]">
+                            <div class="flex items-center mb-1 ml-1">
+                                <div class="w-5 h-5 rounded-full bg-tng-red text-white flex items-center justify-center text-[10px] font-bold mr-2"><i class="fa-solid fa-t"></i></div>
+                                <span class="text-xs font-bold text-gray-600">TNG Support Team</span>
+                            </div>
+                            <div class="bg-white border border-gray-200 text-gray-800 p-4 rounded-2xl rounded-tl-sm shadow-sm text-sm whitespace-pre-wrap">${msg.message}</div>
+                            <div class="text-[10px] text-gray-400 mt-1 text-left font-medium ml-1">${dateString} at ${timeString}</div>
+                        </div>
+                    </div>
+                `;
+            }
+        }).join('');
+        
+        // Auto scroll to bottom
+        thread.scrollTop = thread.scrollHeight;
+    }
+
+    // UTILITY FUNCTIONS FOR REFERENCE DOWNLOAD/COPY
+    function copyReference() {
+        const refText = document.getElementById('reference-display').innerText;
+        navigator.clipboard.writeText(refText).then(() => {
+            alert("Reference number copied to clipboard!");
+        });
+    }
+
+    function downloadReference() {
+        const refText = document.getElementById('reference-display').innerText;
+        const fileContent = `Tyler Nicholas Group - Secure Support Reference\n\nYour Reference Number is: ${refText}\n\nDo not share this code. Enter it in the 'Track Inquiry' portal at tyelrnicholasgroup.com/contact to view staff replies and continue communication.\n\nDate Generated: ${new Date().toLocaleString()}`;
+        
+        const blob = new Blob([fileContent], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "TNG_Support_Reference.txt";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
