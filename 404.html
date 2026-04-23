@@ -3,51 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 - Asset Not Found | Tyler Nicholas Group</title>
+  <title>404 - Resource Not Found | Tyler Nicholas Group</title>
   <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
   
-  <style> body { opacity: 0; visibility: hidden; } </style>
-  <script> window.addEventListener('load', function() { document.body.style.transition = 'opacity 0.2s ease-in'; document.body.style.opacity = '1'; document.body.style.visibility = 'visible'; }); </script>
-
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], },
+          colors: {
+            tng: { navy: '#001f3f', navyDark: '#001226', red: '#a6192e', }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { background-color: #001226; color: white; overflow: hidden; }
+    .error-bg {
+      background: radial-gradient(circle at center, rgba(166, 25, 46, 0.15) 0%, rgba(0, 18, 38, 1) 70%);
+    }
+    .glitch {
+      font-size: 8rem;
+      font-weight: 800;
+      position: relative;
+      text-shadow: 0.05em 0 0 #a6192e, -0.05em -0.025em 0 #001f3f,
+        0.025em 0.05em 0 #a6192e;
+      animation: glitch 725ms infinite;
+    }
+    @keyframes glitch {
+      0% { text-shadow: 0.05em 0 0 #a6192e, -0.05em -0.025em 0 #001f3f, 0.025em 0.05em 0 #a6192e; }
+      14% { text-shadow: 0.05em 0 0 #a6192e, -0.05em -0.025em 0 #001f3f, 0.025em 0.05em 0 #a6192e; }
+      15% { text-shadow: -0.05em -0.025em 0 #a6192e, 0.025em 0.025em 0 #001f3f, -0.05em -0.05em 0 #a6192e; }
+      49% { text-shadow: -0.05em -0.025em 0 #a6192e, 0.025em 0.025em 0 #001f3f, -0.05em -0.05em 0 #a6192e; }
+      50% { text-shadow: 0.025em 0.05em 0 #a6192e, 0.05em 0 0 #001f3f, 0 -0.05em 0 #a6192e; }
+      99% { text-shadow: 0.025em 0.05em 0 #a6192e, 0.05em 0 0 #001f3f, 0 -0.05em 0 #a6192e; }
+      100% { text-shadow: -0.025em 0 0 #a6192e, -0.025em -0.025em 0 #001f3f, -0.025em -0.05em 0 #a6192e; }
+    }
+  </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen">
+<body class="font-sans min-h-screen flex items-center justify-center error-bg">
 
-  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md relative z-50">
-    <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
-    <div class="hidden md:flex space-x-6 text-sm items-center">
-      <a href="/" class="hover:text-gray-300 transition-colors">Home</a>
-      <a href="/about/" class="hover:text-gray-300 transition-colors">About Us</a>
-      <a href="/companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
-      <a href="/contact/" class="hover:text-gray-300 transition-colors">Contact</a>
+  <div class="max-w-2xl text-center px-6" data-aos="zoom-in">
+    <div class="mb-8 inline-block">
+        <div class="w-20 h-20 bg-tng-red/20 rounded-full flex items-center justify-center text-tng-red text-4xl border border-tng-red/30 animate-pulse">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
     </div>
-  </nav>
 
-  <main class="flex-grow flex flex-col items-center justify-center py-20 px-6 text-center relative overflow-hidden bg-white">
-    <i class="fa-solid fa-satellite-dish absolute text-[20rem] text-gray-50 opacity-50 z-0"></i>
+    <h1 class="glitch leading-none mb-4">404</h1>
     
-    <div class="relative z-10 max-w-2xl mx-auto">
-      <div class="text-[#a6192e] font-bold text-9xl mb-2 tracking-tighter">404</div>
-      <h1 class="text-3xl md:text-5xl font-bold text-[#001f3f] mb-6 uppercase tracking-tight">Asset Not Found</h1>
-      <p class="text-gray-600 md:text-lg mb-10 leading-relaxed">
-        The corporate page or digital asset you are looking for has been moved, renamed, or does not exist within the Tyler Nicholas Group global directory.
-      </p>
-      
-      <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-        <a href="/" class="bg-[#001f3f] hover:bg-blue-900 text-white font-bold py-3 px-8 rounded transition-colors shadow-lg flex items-center justify-center w-full sm:w-auto">
-          <i class="fa-solid fa-house mr-3"></i> Return to Headquarters
+    <h2 class="text-2xl md:text-3xl font-bold mb-6 tracking-tight uppercase">Resource Not Found</h2>
+    <p class="text-gray-400 text-lg font-light leading-relaxed mb-12">
+        The requested URL or corporate asset does not exist within the Tyler Nicholas Group digital architecture. It may have been relocated or terminated.
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="/" class="w-full sm:w-auto bg-tng-red hover:bg-red-800 text-white font-bold py-4 px-10 rounded-lg shadow-lg transition-transform transform hover:-translate-y-1 text-sm uppercase tracking-widest flex items-center justify-center">
+            <i class="fa-solid fa-house mr-3"></i> Return to Command
         </a>
-        <a href="/sitemap/" class="bg-white border-2 border-gray-300 hover:border-[#001f3f] text-[#001f3f] font-bold py-3 px-8 rounded transition-colors flex items-center justify-center w-full sm:w-auto">
-          <i class="fa-solid fa-sitemap mr-3"></i> View Site Map
+        <a href="/contact/" class="w-full sm:w-auto bg-white/5 border border-white/20 hover:bg-white/10 text-white font-bold py-4 px-10 rounded-lg transition-all text-sm uppercase tracking-widest flex items-center justify-center">
+            Report Issue
         </a>
-      </div>
     </div>
-  </main>
 
-  <footer class="bg-[#001f3f] text-white py-8 px-6 text-center border-t border-blue-900">
-    <p class="text-sm text-gray-400">&copy; 2026 Tyler Nicholas Group LLC. All rights reserved.</p>
-  </footer>
+    <div class="mt-24 pt-8 border-t border-white/5">
+        <img src="https://i.ibb.co/1tcyLSRN/TNG-Logo.png" alt="TNG Logo" class="h-8 mx-auto opacity-30 grayscale mb-4">
+        <p class="text-[10px] text-gray-600 font-bold uppercase tracking-[0.3em]">Tyler Nicholas Group Global Infrastructure</p>
+    </div>
+  </div>
 
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+  </script>
 </body>
 </html>
