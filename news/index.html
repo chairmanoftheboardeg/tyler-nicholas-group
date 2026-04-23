@@ -1,190 +1,341 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>News & Press Releases | Tyler Nicholas Group</title>
+  <title>News & Press | Tyler Nicholas Group</title>
   <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
   
-  <style>
-    body { opacity: 0; visibility: hidden; }
-  </style>
-  <script>
-    window.addEventListener('load', function() {
-      document.body.style.transition = 'opacity 0.2s ease-in';
-      document.body.style.opacity = '1';
-      document.body.style.visibility = 'visible';
-    });
-  </script>
-
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="../style.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Alex+Brush&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], },
+          colors: {
+            tng: { navy: '#001f3f', navyDark: '#001226', red: '#a6192e', }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { background-color: #f8fafc; }
+    body.loading { overflow: hidden; height: 100vh; }
+    #loading-screen { transition: opacity 0.6s ease-out, visibility 0.6s; }
+    .loader-spinner {
+      border: 4px solid rgba(0, 31, 63, 0.1);
+      border-left-color: #a6192e;
+      border-radius: 50%;
+      width: 50px; height: 50px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .hero-bg {
+      background: linear-gradient(rgba(0, 31, 63, 0.85), rgba(0, 31, 63, 0.95)), url('https://static.vecteezy.com/system/resources/previews/015/274/044/non_2x/banner-web-template-abstract-black-curved-shapes-with-lighting-on-dark-background-vector.jpg') no-repeat center center;
+      background-size: cover; background-attachment: fixed;
+    }
+    .logo-white { filter: brightness(0) invert(1) opacity(0.9); transition: opacity 0.3s; }
+    .logo-white:hover { opacity: 1; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #001f3f; }
+  </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen" id="body">
+<body class="font-sans text-gray-900 flex flex-col min-h-screen loading">
 
-  <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
+  <div id="loading-screen" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white text-tng-navy">
+    <div class="loader-spinner mb-6"></div>
+    <h2 class="text-xl md:text-2xl font-bold tracking-widest uppercase mb-2">Tyler Nicholas Group</h2>
+  </div>
 
-  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md relative z-50">
-    <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
-    
-    <a href="../sitemap/" class="md:hidden bg-white text-[#001f3f] px-4 py-2 rounded text-sm font-bold shadow hover:bg-gray-200 transition-colors flex items-center">
-      <i class="fa-solid fa-list mr-2"></i> Menu
+  <nav class="bg-tng-navy/95 backdrop-blur-md text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-lg sticky top-0 z-40 border-b border-white/10">
+    <a href="/" class="flex items-center space-x-4">
+      <img src="https://i.ibb.co/1tcyLSRN/TNG-Logo.png" alt="TNG Logo" class="h-10">
+      <div class="font-bold text-xl tracking-wider uppercase hidden sm:block">Tyler Nicholas Group</div>
     </a>
+    
+    <button id="mobile-menu-btn" class="md:hidden text-white hover:text-tng-red transition-colors text-2xl">
+      <i class="fa-solid fa-bars"></i>
+    </button>
 
-    <div class="hidden md:flex space-x-6 text-sm items-center">
-      <a href="../" class="hover:text-gray-300 transition-colors">Home</a>
-      <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
-      <a href="../companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
-      <a href="../people/" class="hover:text-gray-300 transition-colors">Our People</a>
-      <a href="../governance/" class="hover:text-gray-300 transition-colors">Governance</a>
-      <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
+    <div class="hidden md:flex space-x-8 text-sm items-center font-semibold tracking-wide">
+      <a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a>
       
       <div class="relative group">
-        <button class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors flex items-center cursor-pointer border-b-2 border-[#a6192e] pb-1">
-          More <i class="fa-solid fa-chevron-down ml-2 text-[10px]"></i>
+        <button class="text-gray-300 hover:text-white transition-colors flex items-center py-2">
+          About Us <i class="fa-solid fa-chevron-down ml-2 text-[10px]"></i>
         </button>
-        <div class="absolute right-0 mt-2 w-56 bg-white text-gray-900 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden">
-          <a href="../contact/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b font-semibold">Contact & FAQ</a>
-          <a href="#" class="block px-4 py-3 bg-gray-50 text-[#a6192e] font-bold text-sm border-b">News & Press Releases</a>
-          <a href="../trust-security/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Trust & Security</a>
-          <a href="../status/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Live System Status</a>
-          <a href="../alumni/" class="block px-4 py-3 hover:bg-gray-100 text-sm">Corporate Alumni Network</a>
+        <div class="absolute left-0 mt-1 w-48 bg-white text-tng-navy rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden transform origin-top group-hover:scale-100 scale-95">
+          <a href="/about/" class="block px-5 py-3 hover:bg-gray-50 border-b border-gray-100 transition-colors">Group Overview</a>
+          <a href="/leadership/" class="block px-5 py-3 hover:bg-gray-50 transition-colors">Our Leadership</a>
         </div>
       </div>
+
+      <a href="/companies/" class="text-gray-300 hover:text-white transition-colors">Our Companies</a>
+      <a href="https://careers.tylernicholasgroup.com" class="text-gray-300 hover:text-white transition-colors">Careers</a>
+      <a href="/news/" class="bg-white text-tng-red px-5 py-2 rounded-md font-bold shadow-md transform hover:-translate-y-0.5 transition-all">News & Press</a>
     </div>
   </nav>
 
-  <div class="bg-[#001f3f] text-white py-16 px-6 md:px-12 text-center">
-    <h1 class="text-3xl md:text-5xl font-bold mb-4">Media Room</h1>
-    <p class="text-gray-300 max-w-2xl mx-auto md:text-lg">The latest corporate announcements, press releases, and portfolio updates from the Tyler Nicholas Group.</p>
+  <div id="mobile-menu" class="hidden bg-tng-navyDark border-t border-white/10 px-6 py-6 flex flex-col space-y-4 text-white text-base font-medium md:hidden sticky top-[73px] z-30 shadow-2xl">
+    <a href="/" class="hover:text-gray-300">Home</a>
+    <a href="/about/" class="hover:text-gray-300">About Us</a>
+    <a href="/leadership/" class="hover:text-gray-300 pl-4 border-l-2 border-white/20 text-sm">Our Leadership</a>
+    <a href="/companies/" class="hover:text-gray-300">Our Companies</a>
+    <a href="https://careers.tylernicholasgroup.com" class="hover:text-gray-300">Careers</a>
+    <a href="/news/" class="text-tng-red font-bold">News & Press</a>
   </div>
 
-  <main class="flex-grow max-w-6xl mx-auto py-16 px-6 md:px-12 w-full">
+  <main class="flex-grow w-full flex flex-col items-center">
     
-    <div id="news-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="col-span-1 md:col-span-2 text-center py-16">
-        <i class="fa-solid fa-circle-notch fa-spin text-4xl text-[#001f3f] mb-4"></i>
-        <p class="text-gray-500 font-bold tracking-widest uppercase text-sm">Fetching latest updates...</p>
+    <header class="hero-bg w-full py-32 flex items-center justify-center px-4 shadow-inner border-b-4 border-tng-red">
+      <div class="max-w-4xl text-center z-10" data-aos="fade-up">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight text-white uppercase drop-shadow-lg">
+          Media Room
+        </h1>
+        <p class="text-xl text-gray-200 font-light max-w-2xl mx-auto">Official announcements, press releases, and corporate updates from across the Tyler Nicholas Group network.</p>
       </div>
-    </div>
+    </header>
+
+    <section class="w-full bg-gray-50 py-24 min-h-[500px]">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b-2 border-gray-200 pb-4" data-aos="fade-right">
+                <div>
+                    <h2 class="text-3xl font-bold text-tng-navy">Latest Releases</h2>
+                    <p class="text-gray-500 mt-2 font-medium">Filtering all global corporate updates.</p>
+                </div>
+            </div>
+
+            <div id="news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <p class="text-gray-500 italic col-span-full text-center py-10" id="news-status">Establishing connection to database...</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="w-full bg-white py-24 border-t border-gray-200 text-center">
+        <div class="max-w-3xl mx-auto px-6" data-aos="fade-up">
+            <i class="fa-regular fa-envelope-open text-4xl text-tng-red mb-6"></i>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-tng-navy mb-4">Stay Informed</h2>
+            <p class="text-lg text-gray-600 mb-10 leading-relaxed font-light">
+                Subscribe to our executive mailing list to receive the latest corporate developments, strategic acquisitions, and philanthropic updates directly to your inbox.
+            </p>
+            
+            <form id="newsletter-form" class="flex flex-col sm:flex-row max-w-lg mx-auto gap-3">
+                <input type="email" id="newsletter-email" required placeholder="Enter your corporate email address" class="flex-grow px-5 py-4 rounded-lg border border-gray-300 focus:outline-none focus:border-tng-navy focus:ring-1 focus:ring-tng-navy shadow-sm text-gray-700">
+                <button type="submit" class="bg-tng-navy hover:bg-tng-navyDark text-white font-bold py-4 px-8 rounded-lg shadow-md transition-all whitespace-nowrap">
+                    Subscribe
+                </button>
+            </form>
+            <p id="newsletter-msg" class="mt-4 text-sm font-semibold hidden"></p>
+        </div>
+    </section>
 
   </main>
 
-  <footer class="bg-[#001f3f] text-white py-14 px-6 md:px-12 mt-auto border-t border-blue-900">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 items-start">
-      <div class="flex flex-col items-start lg:col-span-2">
-        <h3 class="font-bold text-xl mb-3 uppercase tracking-wider">Tyler Nicholas Group</h3>
-        <p class="text-sm text-gray-300 mb-5 max-w-md leading-relaxed">A global holding company headquartered in the Seychelles, driving strategic growth and synergy across diverse, high-potential digital and on-site verticals.</p>
-        <div class="inline-block bg-white text-[#001f3f] px-3 py-1.5 rounded text-sm font-semibold shadow-md mb-6">
-          Seychelles Local Time: <span id="seychelles-time">Loading...</span>
-        </div>
-        <a href="https://www.trustpilot.com/review/tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity drop-shadow-lg">
-          <img src="https://www.worcestershirefencing.co.uk/wp-content/uploads/2023/11/trustpilot-logo-snijpunt.1600x680x1.png" alt="Review Tyler Nicholas Group on Trustpilot" class="h-10 object-contain">
+  <footer class="bg-tng-navyDark text-white pt-20 pb-10 px-6 md:px-12 mt-auto border-t-[6px] border-tng-red">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 items-start mb-16">
+      
+      <div class="flex flex-col items-start lg:col-span-1">
+        <a href="/" class="block">
+            <img src="https://i.ibb.co/1tcyLSRN/TNG-Logo.png" alt="TNG Logo" class="h-12 mb-6">
         </a>
+        <p class="text-sm text-gray-400 mb-8 max-w-sm leading-relaxed font-medium">
+          A global holding company driving strategic growth and synergy across diverse verticals.
+        </p>
       </div>
-
-      <div class="flex flex-col space-y-3 text-sm">
-        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Corporate</h4>
-        <a href="../culture/" class="hover:text-gray-300 transition-colors">Core Values & Culture</a>
-        <a href="../diversity/" class="hover:text-gray-300 transition-colors">Diversity & Inclusion</a>
-        <a href="../sustainability/" class="hover:text-gray-300 transition-colors">Sustainability & ESG</a>
-        <a href="../our-thoughts/" class="hover:text-gray-300 transition-colors">Our Thoughts</a>
-        <a href="../partnerships/" class="hover:text-gray-300 transition-colors">Global Partnerships</a>
-        <a href="../media-kit/" class="hover:text-gray-300 transition-colors">Brand Guidelines</a>
+      
+      <div class="flex flex-col space-y-4 text-sm font-medium">
+        <h4 class="font-bold text-lg mb-2 text-white tracking-wide">Corporate</h4>
+        <a href="/about/" class="text-gray-400 hover:text-tng-red transition-colors">About Us</a>
+        <a href="/leadership/" class="text-gray-400 hover:text-tng-red transition-colors">Our Leadership</a>
+        <a href="/companies/" class="text-gray-400 hover:text-tng-red transition-colors">Our Companies</a>
+        <a href="https://careers.tylernicholasgroup.com" class="text-gray-400 hover:text-tng-red transition-colors">Careers</a>
       </div>
-
-      <div class="flex flex-col space-y-3 text-sm">
-        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Legal</h4>
-        <a href="../privacy/" class="hover:text-gray-300 transition-colors">Privacy Policy</a>
-        <a href="../terms/" class="hover:text-gray-300 transition-colors">Terms of Use</a>
-        <a href="../cookie-policy/" class="hover:text-gray-300 transition-colors">Cookie Policy</a>
-        <a href="../accessibility/" class="hover:text-gray-300 transition-colors">Accessibility Statement</a>
-        <a href="../modern-slavery/" class="hover:text-gray-300 transition-colors">Modern Slavery Act</a>
-        <a href="../legal-status/" class="hover:text-gray-300 transition-colors">TNG Legal & Copyright</a>
+      
+      <div class="flex flex-col space-y-4 text-sm font-medium">
+        <h4 class="font-bold text-lg mb-2 text-white tracking-wide">Legal</h4>
+        <a href="/privacy/" class="text-gray-400 hover:text-tng-red transition-colors">Privacy Policy</a>
+        <a href="/terms/" class="text-gray-400 hover:text-tng-red transition-colors">Terms of Use</a>
+        <a href="/cookie-policy/" class="text-gray-400 hover:text-tng-red transition-colors">Cookie Policy</a>
+        <a href="/accessibility/" class="text-gray-400 hover:text-tng-red transition-colors">Accessibility Statement</a>
       </div>
-
-      <div class="flex flex-col space-y-3 text-sm">
-        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Connect</h4>
-        <a href="../contact/" class="hover:text-gray-300 transition-colors">Contact Us</a>
-        <a href="../sitemap/" class="hover:text-gray-300 transition-colors">Site Map</a>
-        <a href="https://tyler.tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="text-[#a6192e] font-bold hover:underline mt-2">Meet Tyler Nicholas →</a>
-        <div class="flex space-x-5 text-2xl text-[#00a8ff] mt-6 mb-2">
-          <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://x.com/tyler_n_group" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+      
+      <div class="flex flex-col space-y-4 text-sm font-medium">
+        <h4 class="font-bold text-lg mb-2 text-white tracking-wide">Connect</h4>
+        <a href="/contact/" class="text-gray-400 hover:text-tng-red transition-colors">Contact Us</a>
+        <a href="https://www.trustpilot.com/review/tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="pt-2 block">
+          <img src="https://www.worcestershirefencing.co.uk/wp-content/uploads/2023/11/trustpilot-logo-snijpunt.1600x680x1.png" alt="Trustpilot" class="h-6 object-contain logo-white">
+        </a>
+        <div class="flex space-x-4 mt-4 pt-2">
+          <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#0A66C2] hover:scale-110 transition-all">
+            <i class="fa-brands fa-linkedin-in text-lg"></i>
+          </a>
+          <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#E1306C] hover:scale-110 transition-all">
+            <i class="fa-brands fa-instagram text-lg"></i>
+          </a>
+          <a href="https://x.com/tyler_n_group" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-black hover:scale-110 transition-all">
+            <i class="fa-brands fa-x-twitter text-lg"></i>
+          </a>
+          <a href="https://www.youtube.com/@TylerNicholasGroup" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#FF0000] hover:scale-110 transition-all">
+            <i class="fa-brands fa-youtube text-lg"></i>
+          </a>
+          <a href="https://www.facebook.com/tylernicholasgroup" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#1877F2] hover:scale-110 transition-all">
+            <i class="fa-brands fa-facebook-f text-lg"></i>
+          </a>
         </div>
-        <p class="text-xs text-gray-400 mt-2">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
       </div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-medium">
+      <p>&copy; <span id="current-year"></span> Tyler Nicholas Group. All rights reserved.</p>
+      <a href="https://tyler.tylernicholasgroup.com" target="_blank" class="mt-4 md:mt-0 hover:text-white transition-colors">By Tyler Nicholas</a>
     </div>
   </footer>
 
-  <script>
-    function updateSeychellesTime() { const e = document.getElementById('seychelles-time'); if(e) e.innerText = new Date().toLocaleTimeString('en-US', { timeZone: 'Indian/Mahe', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }); }
-    setInterval(updateSeychellesTime, 1000); updateSeychellesTime();
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+  <script>
+    // Animations & Basics
+    window.addEventListener('load', function() {
+      const loader = document.getElementById('loading-screen');
+      if (loader) {
+        setTimeout(() => {
+          loader.style.opacity = '0';
+          loader.style.visibility = 'hidden';
+          document.body.classList.remove('loading');
+          AOS.init({ duration: 800, once: true, offset: 40 });
+        }, 800); 
+      }
+    });
+
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+
+    document.getElementById('current-year').innerText = new Date().getFullYear();
+
+    // Supabase Dynamic Fetch for News & Newsletter Logic
     document.addEventListener("DOMContentLoaded", () => {
       const checkSupabase = setInterval(async () => {
         if (window.supabase) {
           clearInterval(checkSupabase); 
-          const supabase = window.supabase.createClient('https://hicowukbjsbpuebquqbh.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0');
           
-          // 1. Fetch Announcement
+          const supabaseUrl = 'https://kkvjwmzlezrkwqiizkwp.supabase.co';
+          const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtrdmp3bXpsZXpya3dxaWl6a3dwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5MzY2OTksImV4cCI6MjA5MjUxMjY5OX0.Oa44WwSsEhao79sLfkF4HA-dmDbVV3NeT9txvl83460';
+          const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+          // Fetch All News
           try {
-            const { data: annData, error: annError } = await supabase.from('announcements').select('*').eq('is_active', true).single();
-            if (annData && !annError) {
-              const bar = document.getElementById('announcement-bar');
-              bar.classList.remove('hidden'); 
-              bar.innerHTML = annData.link ? `<a href="${annData.link}" class="hover:underline block w-full py-1">${annData.message}</a>` : annData.message;
-            }
-          } catch (err) {}
-
-          // 2. Fetch News Releases
-          try {
-            const { data: newsData, error: newsError } = await supabase.from('news_releases').select('*').eq('is_active', true).order('created_at', { ascending: false });
-            const container = document.getElementById('news-container');
+            const { data: news, error: newsError } = await supabaseClient
+                .from('tng_news_releases')
+                .select('*')
+                .eq('is_active', true)
+                .order('created_at', { ascending: false });
             
-            if (newsError || !newsData || newsData.length === 0) {
-              container.innerHTML = `
-                <div class="col-span-1 md:col-span-2 text-center py-12 bg-white rounded-xl shadow-sm border border-gray-100">
-                  <i class="fa-regular fa-newspaper text-4xl text-gray-300 mb-4"></i>
-                  <p class="text-gray-500 font-bold">No recent announcements.</p>
-                  <p class="text-gray-400 text-sm mt-2">Check back later for updates from the Tyler Nicholas Group.</p>
-                </div>`;
-              return;
-            }
-
-            container.innerHTML = ''; 
+            const gridContainer = document.getElementById('news-grid');
             
-            newsData.forEach(item => {
-              // Format the date beautifully (e.g. March 3, 2026)
-              const formattedDate = new Date(item.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-              
-              // Color code the border based on the category
-              const borderColor = item.category.includes('Portfolio') ? 'border-t-[#001f3f]' : 'border-t-[#a6192e]';
-              const badgeColor = item.category.includes('Portfolio') ? 'text-[#001f3f]' : 'text-[#a6192e]';
-              
-              // Only show the link button if a link exists in the database
-              const linkHTML = item.link ? `<a href="${item.link}" target="_blank" class="mt-auto inline-block text-[#001f3f] font-bold hover:text-[#a6192e] transition-colors text-sm pt-4 border-t border-gray-100">Read Full Release <i class="fa-solid fa-arrow-right ml-1"></i></a>` : '';
+            if (newsError) {
+                document.getElementById('news-status').innerText = `Error loading news. Check console.`;
+                console.error(newsError);
+            } else if (!news || news.length === 0) {
+              document.getElementById('news-status').innerText = 'No recent updates available at this time.';
+            } else {
+              gridContainer.innerHTML = news.map((item, index) => {
+                const delay = (index % 3) * 100;
+                
+                // Format Date safely
+                const dateObj = new Date(item.created_at);
+                const formattedDate = dateObj.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
-              container.innerHTML += `
-                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-all border border-gray-100 border-t-4 ${borderColor} flex flex-col h-full">
-                  <div class="flex justify-between items-start mb-4 border-b border-gray-100 pb-3">
-                    <span class="text-[10px] font-bold uppercase tracking-widest ${badgeColor}">${item.category}</span>
-                    <span class="text-xs text-gray-400 font-semibold"><i class="fa-regular fa-calendar mr-1"></i> ${formattedDate}</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-gray-900 mb-3 leading-snug">${item.title}</h3>
-                  <p class="text-gray-600 text-sm leading-relaxed flex-grow mb-6">${item.snippet}</p>
-                  ${linkHTML}
-                </div>
-              `;
-            });
-          } catch (err) {
-             document.getElementById('news-container').innerHTML = `<p class="col-span-1 md:col-span-2 text-red-500 text-center py-8 font-bold">Failed to load the media room.</p>`;
+                // Construct Image HTML
+                const imageHtml = item.image_link 
+                    ? `<div class="h-48 w-full overflow-hidden bg-gray-100"><img src="${item.image_link}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>` 
+                    : `<div class="h-2 w-full bg-tng-red"></div>`;
+
+                return `
+                  <a href="${item.link || '#'}" class="flex flex-col bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden group h-full transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="${delay}">
+                    ${imageHtml}
+                    <div class="p-8 flex flex-col flex-grow">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-[10px] text-tng-red font-bold tracking-widest uppercase bg-red-50 px-3 py-1 rounded-full">${item.category}</span>
+                            <span class="text-xs text-gray-400 font-medium"><i class="fa-regular fa-clock mr-1"></i> ${formattedDate}</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-tng-navy mb-3 group-hover:text-tng-red transition-colors leading-tight">${item.title}</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed flex-grow">${item.snippet}</p>
+                        
+                        <div class="mt-6 pt-4 border-t border-gray-100 text-sm font-bold text-tng-navy group-hover:text-tng-red transition-colors flex items-center">
+                            Read Full Release <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                  </a>
+                `;
+              }).join('');
+            }
+          } catch (err) { console.error(err); }
+
+          // Newsletter Form Submission Logic
+          const form = document.getElementById('newsletter-form');
+          const msg = document.getElementById('newsletter-msg');
+          
+          if(form) {
+              form.addEventListener('submit', async (e) => {
+                  e.preventDefault();
+                  const emailInput = document.getElementById('newsletter-email').value;
+                  const btn = form.querySelector('button');
+                  
+                  // Simple UI state change
+                  btn.disabled = true;
+                  btn.innerText = "Submitting...";
+                  msg.classList.add('hidden');
+
+                  try {
+                      // Insert into the secure table created earlier
+                      const { error } = await supabaseClient
+                          .from('tng_newsletter_subscribers')
+                          .insert([{ email: emailInput }]);
+
+                      msg.classList.remove('hidden');
+                      
+                      if (error) {
+                          // Handle duplicate email gracefully
+                          if (error.code === '23505') {
+                              msg.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> This email is already on our executive mailing list.`;
+                              msg.className = "mt-4 text-sm font-semibold text-tng-navy";
+                          } else {
+                              msg.innerHTML = `<i class="fa-solid fa-circle-exclamation mr-1"></i> An error occurred. Please try again.`;
+                              msg.className = "mt-4 text-sm font-semibold text-red-500";
+                              console.error(error);
+                          }
+                      } else {
+                          msg.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> Successfully subscribed. Welcome to the network.`;
+                          msg.className = "mt-4 text-sm font-semibold text-green-600";
+                          form.reset();
+                      }
+                  } catch (err) {
+                      console.error(err);
+                  } finally {
+                      btn.disabled = false;
+                      btn.innerText = "Subscribe";
+                  }
+              });
           }
+
         }
-      }, 100);
+      }, 100); 
     });
   </script>
 </body>
