@@ -287,9 +287,9 @@
           const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtrdmp3bXpsZXpya3dxaWl6a3dwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5MzY2OTksImV4cCI6MjA5MjUxMjY5OX0.Oa44WwSsEhao79sLfkF4HA-dmDbVV3NeT9txvl83460';
           const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-          // Fetch Alert Banner
+          // Fetch Alert Banner - CHANGED TO LOWERCASE
           try {
-            const { data, error } = await supabaseClient.from('TNG_announcements').select('*').eq('is_active', true).single();
+            const { data, error } = await supabaseClient.from('tng_announcements').select('*').eq('is_active', true).single();
             if (data && !error) {
               const bar = document.getElementById('announcement-bar');
               bar.classList.remove('hidden');
@@ -297,9 +297,9 @@
             }
           } catch (err) { console.error(err); }
 
-          // Fetch Stats
+          // Fetch Stats - CHANGED TO LOWERCASE
           try {
-            const { data: stats, error: statsError } = await supabaseClient.from('TNG_site_statistics').select('*').single();
+            const { data: stats, error: statsError } = await supabaseClient.from('tng_site_statistics').select('*').single();
             if (statsError) {
               document.getElementById('metric-fund').innerText = 'Error';
               console.error(statsError);
@@ -310,9 +310,9 @@
             }
           } catch (err) { console.error(err); }
 
-          // Fetch News
+          // Fetch News - CHANGED TO LOWERCASE
           try {
-            const { data: news, error: newsError } = await supabaseClient.from('TNG_news_releases').select('*').eq('is_active', true).order('created_at', { ascending: false }).limit(2);
+            const { data: news, error: newsError } = await supabaseClient.from('tng_news_releases').select('*').eq('is_active', true).order('created_at', { ascending: false }).limit(2);
             const newsContainer = document.getElementById('news-container');
             
             if (newsError) {
@@ -334,9 +334,9 @@
             }
           } catch (err) { console.error(err); }
 
-          // Fetch Jobs
+          // Fetch Jobs - CHANGED TO LOWERCASE
           try {
-            const { data: jobs, error: jobsError } = await supabaseClient.from('TNG_job_postings').select('*').eq('is_active', true).order('created_at', { ascending: false }).limit(2);
+            const { data: jobs, error: jobsError } = await supabaseClient.from('tng_job_postings').select('*').eq('is_active', true).order('created_at', { ascending: false }).limit(2);
             const jobsContainer = document.getElementById('jobs-container');
             
             if (jobsError) {
