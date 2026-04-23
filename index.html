@@ -50,6 +50,30 @@
     ::-webkit-scrollbar-track { background: #f1f5f9; }
     ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #001f3f; }
+
+    /* Infinite Marquee Slider CSS */
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(calc(-250px * 8)); } /* Scrolls half the track then loops */
+    }
+    .slider {
+      height: 120px; margin: auto; overflow: hidden; position: relative; width: 100%;
+    }
+    .slider::before, .slider::after {
+      background: linear-gradient(to right, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+      content: ""; height: 120px; position: absolute; width: 100px; z-index: 2;
+    }
+    .slider::after { right: 0; top: 0; transform: rotateZ(180deg); }
+    .slider::before { left: 0; top: 0; }
+    .slide-track {
+      animation: scroll 35s linear infinite;
+      display: flex;
+      width: calc(250px * 16); /* Plenty of width for duplicate cards */
+    }
+    .slide-track:hover { animation-play-state: paused; }
+    .slide {
+      height: 120px; width: 250px; display: flex; align-items: center; justify-content: center;
+    }
   </style>
 </head>
 <body class="font-sans text-gray-900 flex flex-col min-h-screen loading">
@@ -123,7 +147,7 @@
       </div>
     </section>
 
-    <section class="w-full bg-white border-y border-gray-200 py-20">
+    <section class="w-full bg-white border-t border-gray-200 py-20">
       <div class="max-w-6xl mx-auto px-4">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-100">
           <div data-aos="fade-up" data-aos-delay="100">
@@ -143,6 +167,16 @@
             <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Funding Status</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section id="subsidiaries-section" class="w-full bg-white py-12 border-b border-gray-200 overflow-hidden hidden">
+      <div class="max-w-6xl mx-auto px-4 text-center mb-6" data-aos="fade-in">
+        <h3 class="text-xs font-bold text-gray-400 tracking-widest uppercase">Our Core Portfolio</h3>
+      </div>
+      <div class="slider">
+        <div class="slide-track" id="subsidiary-track">
+           </div>
       </div>
     </section>
 
@@ -212,7 +246,7 @@
         <a href="https://www.trustpilot.com/review/tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="pt-2 block">
           <img src="https://www.worcestershirefencing.co.uk/wp-content/uploads/2023/11/trustpilot-logo-snijpunt.1600x680x1.png" alt="Trustpilot" class="h-6 object-contain logo-white">
         </a>
-        <div class="flex space-x-6 mt-4 pt-2">
+        <div class="flex space-x-4 mt-4 pt-2">
           <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#0A66C2] hover:scale-110 transition-all">
             <i class="fa-brands fa-linkedin-in text-lg"></i>
           </a>
@@ -221,6 +255,12 @@
           </a>
           <a href="https://x.com/tyler_n_group" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-black hover:scale-110 transition-all">
             <i class="fa-brands fa-x-twitter text-lg"></i>
+          </a>
+          <a href="https://www.youtube.com/@TylerNicholasGroup" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#FF0000] hover:scale-110 transition-all">
+            <i class="fa-brands fa-youtube text-lg"></i>
+          </a>
+          <a href="https://www.facebook.com/tylernicholasgroup" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#1877F2] hover:scale-110 transition-all">
+            <i class="fa-brands fa-facebook-f text-lg"></i>
           </a>
         </div>
       </div>
@@ -235,7 +275,6 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
   <script>
-    // 1. Loading Screen
     window.addEventListener('load', function() {
       const loader = document.getElementById('loading-screen');
       if (loader) {
@@ -248,7 +287,6 @@
       }
     });
 
-    // Mobile Menu Toggle
     document.getElementById('mobile-menu-btn').addEventListener('click', function() {
       const menu = document.getElementById('mobile-menu');
       menu.classList.toggle('hidden');
@@ -256,7 +294,6 @@
 
     document.getElementById('current-year').innerText = new Date().getFullYear();
 
-    // 2. Number Counters
     function animateCounters(targetId, targetValue) {
         const counter = document.getElementById(targetId);
         if(!counter || isNaN(targetValue)) {
@@ -277,7 +314,6 @@
         update();
     }
 
-    // 3. Supabase Integration
     document.addEventListener("DOMContentLoaded", () => {
       const checkSupabase = setInterval(async () => {
         if (window.supabase) {
@@ -287,7 +323,21 @@
           const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtrdmp3bXpsZXpya3dxaWl6a3dwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5MzY2OTksImV4cCI6MjA5MjUxMjY5OX0.Oa44WwSsEhao79sLfkF4HA-dmDbVV3NeT9txvl83460';
           const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-          // Fetch Alert Banner - CHANGED TO LOWERCASE
+          // Helper function
+          async function fetchWithFallback(tngTable, oldTable, isSingle = false, queryBuilder = null) {
+              let query = supabaseClient.from(tngTable).select('*');
+              if(queryBuilder) query = queryBuilder(query);
+              let { data, error } = isSingle ? await query.single() : await query;
+              
+              if (error && (error.code === '42P01' || error.message.includes("does not exist"))) {
+                  let fallbackQuery = supabaseClient.from(oldTable).select('*');
+                  if(queryBuilder) fallbackQuery = queryBuilder(fallbackQuery);
+                  return isSingle ? await fallbackQuery.single() : await fallbackQuery;
+              }
+              return { data, error };
+          }
+
+          // Fetch Alert
           try {
             const { data, error } = await supabaseClient.from('tng_announcements').select('*').eq('is_active', true).single();
             if (data && !error) {
@@ -295,53 +345,85 @@
               bar.classList.remove('hidden');
               bar.innerHTML = data.link ? `<a href="${data.link}" class="hover:underline transition-colors block w-full py-1">${data.message}</a>` : data.message;
             }
-          } catch (err) { console.error(err); }
+          } catch (err) { }
 
-          // Fetch Stats - CHANGED TO LOWERCASE
+          // Fetch Stats
           try {
             const { data: stats, error: statsError } = await supabaseClient.from('tng_site_statistics').select('*').single();
-            if (statsError) {
-              document.getElementById('metric-fund').innerText = 'Error';
-              console.error(statsError);
-            } else if (stats) {
+            if (!statsError && stats) {
               animateCounters('metric-subs', stats.subsidiaries_count);
               animateCounters('metric-verts', stats.core_verticals);
               document.getElementById('metric-fund').innerText = stats.funding_status || 'Secured';
-            }
-          } catch (err) { console.error(err); }
+            } else { document.getElementById('metric-fund').innerText = 'Error'; }
+          } catch (err) { }
 
-          // Fetch News - CHANGED TO LOWERCASE
+          // Fetch Subsidiaries for Marquee
+          try {
+            const targetIds = [
+              '3354c167-dac9-4d41-8610-c95f9b426274',
+              'd644e817-2ee7-4b73-9fee-1ff88a9d3f95',
+              '16ecfe77-2d79-4a0e-a733-0fe6d80d817b',
+              'cfb0c56a-020f-41cd-b2c9-b6f8d32a3520'
+            ];
+            const { data: subs, error: subsError } = await supabaseClient.from('tng_subsidiaries')
+              .select('*')
+              .in('id', targetIds)
+              .eq('is_active', true);
+            
+            if (!subsError && subs && subs.length > 0) {
+              const track = document.getElementById('subsidiary-track');
+              document.getElementById('subsidiaries-section').classList.remove('hidden');
+              
+              // Duplicate data array multiple times for infinite scrolling effect without gaps
+              const displaySubs = [...subs, ...subs, ...subs, ...subs, ...subs];
+              
+              track.innerHTML = displaySubs.map(sub => `
+                <div class="slide px-4">
+                  <a href="${sub.website_url || '#'}" target="_blank" class="w-full h-full flex flex-col items-center justify-center bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all group p-4 min-w-[200px]">
+                    ${sub.logo_link 
+                      ? `<img src="${sub.logo_link}" alt="${sub.company_name}" class="max-h-12 w-auto object-contain mb-3 grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all">` 
+                      : `<div class="h-10 w-10 bg-gray-50 rounded-full flex items-center justify-center mb-3"><i class="fa-solid fa-building text-gray-300"></i></div>`}
+                    <span class="font-bold text-tng-navy group-hover:text-tng-red transition-colors text-xs uppercase tracking-wider text-center">${sub.company_name}</span>
+                  </a>
+                </div>
+              `).join('');
+            }
+          } catch (err) {}
+
+          // Fetch News
           try {
             const { data: news, error: newsError } = await supabaseClient.from('tng_news_releases').select('*').eq('is_active', true).order('created_at', { ascending: false }).limit(2);
             const newsContainer = document.getElementById('news-container');
             
             if (newsError) {
                 document.getElementById('news-status').innerText = `Error loading news. Check console.`;
-                console.error(newsError);
             } else if (!news || news.length === 0) {
               document.getElementById('news-status').innerText = 'No recent updates available.';
             } else {
               newsContainer.innerHTML = news.map((item, index) => {
                 const delay = index * 100;
+                // Including the new image_link feature if available
+                const imgHTML = item.image_link ? `<div class="w-full h-48 mb-4 overflow-hidden rounded-lg"><img src="${item.image_link}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>` : '';
+                
                 return `
-                  <a href="${item.link || 'news/'}" class="block bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 p-8 border-l-4 border-l-tng-red transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="${delay}">
+                  <a href="${item.link || 'news/'}" class="block bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 p-8 border-l-4 border-l-tng-red transform hover:-translate-y-1 group" data-aos="fade-up" data-aos-delay="${delay}">
+                    ${imgHTML}
                     <p class="text-xs text-tng-red font-bold mb-3 tracking-wider uppercase">${item.category}</p>
-                    <h3 class="text-xl font-bold text-tng-navy mb-3">${item.title}</h3>
+                    <h3 class="text-xl font-bold text-tng-navy mb-3 group-hover:text-tng-red transition-colors">${item.title}</h3>
                     <p class="text-gray-600 text-sm leading-relaxed">${item.snippet}</p>
                   </a>
                 `;
               }).join('');
             }
-          } catch (err) { console.error(err); }
+          } catch (err) { }
 
-          // Fetch Jobs - CHANGED TO LOWERCASE
+          // Fetch Jobs
           try {
             const { data: jobs, error: jobsError } = await supabaseClient.from('tng_job_postings').select('*').eq('is_active', true).order('created_at', { ascending: false }).limit(2);
             const jobsContainer = document.getElementById('jobs-container');
             
             if (jobsError) {
                 document.getElementById('jobs-status').innerText = `Error loading jobs. Check console.`;
-                console.error(jobsError);
             } else if (!jobs || jobs.length === 0) {
               document.getElementById('jobs-status').innerText = 'No open positions available at this time.';
             } else {
@@ -358,7 +440,7 @@
                 `;
               }).join('');
             }
-          } catch (err) { console.error(err); }
+          } catch (err) { }
 
         }
       }, 100); 
