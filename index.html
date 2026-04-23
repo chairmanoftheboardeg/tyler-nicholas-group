@@ -23,9 +23,15 @@
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
           colors: {
-            tng: { navy: '#001f3f', navyDark: '#001226', red: '#a6192e', }
+            tng: {
+              navy: '#001f3f',
+              navyDark: '#001226',
+              red: '#a6192e',
+            }
           }
         }
       }
@@ -55,7 +61,7 @@
       background-attachment: fixed;
     }
 
-    /* Trustpilot Pure White Logo Filter */
+    /* Trustpilot Logo Fix - Turns logo pure white to remove backgrounds */
     .logo-white {
       filter: brightness(0) invert(1) opacity(0.9);
       transition: opacity 0.3s;
@@ -95,7 +101,7 @@
         <button class="text-gray-300 hover:text-white transition-colors flex items-center py-2">
           About Us <i class="fa-solid fa-chevron-down ml-2 text-[10px]"></i>
         </button>
-        <div class="absolute left-0 mt-1 w-48 bg-white text-tng-navy rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden">
+        <div class="absolute left-0 mt-1 w-48 bg-white text-tng-navy rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden transform origin-top group-hover:scale-100 scale-95">
           <a href="about/" class="block px-5 py-3 hover:bg-gray-50 border-b border-gray-100 transition-colors">Group Overview</a>
           <a href="leadership/" class="block px-5 py-3 hover:bg-gray-50 transition-colors">Our Leadership</a>
         </div>
@@ -158,7 +164,7 @@
             <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mt-2">Global Reach</p>
           </div>
           <div data-aos="fade-up" data-aos-delay="400">
-            <p id="metric-fund" class="text-2xl font-extrabold text-tng-navy mb-4 mt-3">--</p>
+            <p id="metric-fund" class="text-2xl font-extrabold text-tng-navy mb-4 mt-3">Loading</p>
             <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Funding Status</p>
           </div>
         </div>
@@ -177,7 +183,7 @@
       </div>
       
       <div id="news-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <p class="text-gray-500 italic col-span-1 md:col-span-2 text-center py-10" id="news-status">Connecting to network...</p>
+        <p class="text-gray-500 italic col-span-1 md:col-span-2 text-center py-10" id="news-status">Establishing connection to database...</p>
       </div>
     </section>
 
@@ -231,11 +237,12 @@
       <div class="flex flex-col space-y-4 text-sm font-medium">
         <h4 class="font-bold text-lg mb-2 text-white tracking-wide">Connect</h4>
         <a href="contact/" class="text-gray-400 hover:text-tng-red transition-colors">Contact Us</a>
-        <a href="status/" class="text-gray-400 hover:text-white transition-colors flex items-center">
-           System Status <span class="w-2 h-2 rounded-full bg-green-500 ml-2 animate-pulse"></span>
+        
+        <a href="https://www.trustpilot.com/review/tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="pt-2 block">
+          <img src="https://www.worcestershirefencing.co.uk/wp-content/uploads/2023/11/trustpilot-logo-snijpunt.1600x680x1.png" alt="Trustpilot" class="h-6 object-contain logo-white">
         </a>
         
-        <div class="flex space-x-6 mt-6 pt-2">
+        <div class="flex space-x-6 mt-4 pt-2">
           <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#0A66C2] hover:scale-110 transition-all">
             <i class="fa-brands fa-linkedin-in text-lg"></i>
           </a>
@@ -300,26 +307,24 @@
         update();
     }
 
-    // 3. Smart Supabase Fetching (Automatically handles TNG_ prefix or missing tables)
+    // 3. Smart Supabase Fetching 
     document.addEventListener("DOMContentLoaded", () => {
       const checkSupabase = setInterval(async () => {
         if (window.supabase) {
           clearInterval(checkSupabase); 
           
-          // Ensure we use the base URL without /rest/v1/
-          const supabaseUrl = 'https://hicowukbjsbpuebquqbh.supabase.co';
-          const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0';
+          // NEW PROJECT CREDENTIALS INJECTED HERE
+          const supabaseUrl = 'https://kkvjwmzlezrkwqiizkwp.supabase.co';
+          const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtrdmp3bXpsZXpya3dxaWl6a3dwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5MzY2OTksImV4cCI6MjA5MjUxMjY5OX0.Oa44WwSsEhao79sLfkF4HA-dmDbVV3NeT9txvl83460';
           const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-          // Helper function for smart fetching
+          // Helper function for smart fetching (Handles TNG_ prefix or missing tables automatically)
           async function fetchWithFallback(tngTable, oldTable, isSingle = false, queryBuilder = null) {
               let query = supabaseClient.from(tngTable).select('*');
               if(queryBuilder) query = queryBuilder(query);
               let { data, error } = isSingle ? await query.single() : await query;
               
-              // If the TNG_ table doesn't exist, try the old table name automatically
               if (error && (error.code === '42P01' || error.message.includes("does not exist"))) {
-                  console.warn(`[TNG Data Sync] ${tngTable} not found. Falling back to ${oldTable}...`);
                   let fallbackQuery = supabaseClient.from(oldTable).select('*');
                   if(queryBuilder) fallbackQuery = queryBuilder(fallbackQuery);
                   return isSingle ? await fallbackQuery.single() : await fallbackQuery;
@@ -342,7 +347,6 @@
             const { data: stats, error: statsError } = await fetchWithFallback('TNG_site_statistics', 'site_statistics', true);
             if (statsError) {
               document.getElementById('metric-fund').innerText = 'Data Locked (RLS)';
-              console.error("Supabase Error [Stats]: Check RLS Policies in Supabase!", statsError.message);
             } else if (stats) {
               animateCounters('metric-subs', stats.subsidiaries_count);
               animateCounters('metric-verts', stats.core_verticals);
