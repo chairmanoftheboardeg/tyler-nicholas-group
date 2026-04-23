@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tyler Nicholas Group | Driving Value, Defining the Future</title>
   <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
+  <meta name="google-site-verification" content="B0hBtQ3dAMciRKv-HCXQvZqHk8mQu-tvbi0NRnt9oEk" />
   
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -22,15 +23,9 @@
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Plus Jakarta Sans', 'sans-serif'],
-          },
+          fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], },
           colors: {
-            tng: {
-              navy: '#001f3f',
-              navyDark: '#001226',
-              red: '#a6192e',
-            }
+            tng: { navy: '#001f3f', navyDark: '#001226', red: '#a6192e', }
           }
         }
       }
@@ -59,6 +54,13 @@
       background-size: cover;
       background-attachment: fixed;
     }
+
+    /* Trustpilot Pure White Logo Filter */
+    .logo-white {
+      filter: brightness(0) invert(1) opacity(0.9);
+      transition: opacity 0.3s;
+    }
+    .logo-white:hover { opacity: 1; }
 
     /* Custom scrollbar */
     ::-webkit-scrollbar { width: 8px; }
@@ -93,7 +95,7 @@
         <button class="text-gray-300 hover:text-white transition-colors flex items-center py-2">
           About Us <i class="fa-solid fa-chevron-down ml-2 text-[10px]"></i>
         </button>
-        <div class="absolute left-0 mt-1 w-48 bg-white text-tng-navy rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden transform origin-top group-hover:scale-100 scale-95">
+        <div class="absolute left-0 mt-1 w-48 bg-white text-tng-navy rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden">
           <a href="about/" class="block px-5 py-3 hover:bg-gray-50 border-b border-gray-100 transition-colors">Group Overview</a>
           <a href="leadership/" class="block px-5 py-3 hover:bg-gray-50 transition-colors">Our Leadership</a>
         </div>
@@ -156,7 +158,7 @@
             <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mt-2">Global Reach</p>
           </div>
           <div data-aos="fade-up" data-aos-delay="400">
-            <p id="metric-fund" class="text-2xl font-extrabold text-tng-navy mb-4 mt-3">Loading</p>
+            <p id="metric-fund" class="text-2xl font-extrabold text-tng-navy mb-4 mt-3">--</p>
             <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Funding Status</p>
           </div>
         </div>
@@ -175,7 +177,7 @@
       </div>
       
       <div id="news-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <p class="text-gray-500 italic col-span-1 md:col-span-2 text-center py-10" id="news-status">Establishing connection to database...</p>
+        <p class="text-gray-500 italic col-span-1 md:col-span-2 text-center py-10" id="news-status">Connecting to network...</p>
       </div>
     </section>
 
@@ -201,12 +203,12 @@
   </main>
 
   <footer class="bg-tng-navyDark text-white pt-20 pb-10 px-6 md:px-12 mt-auto border-t-[6px] border-tng-red">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 items-start mb-16">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 items-start mb-16">
       
-      <div class="flex flex-col items-start lg:col-span-2">
+      <div class="flex flex-col items-start lg:col-span-1">
         <img src="https://i.ibb.co/1tcyLSRN/TNG-Logo.png" alt="TNG Logo" class="h-12 mb-6">
         <p class="text-sm text-gray-400 mb-8 max-w-sm leading-relaxed font-medium">
-          A global holding company headquartered in the Seychelles, driving strategic growth and synergy across diverse, high-potential verticals.
+          A global holding company driving strategic growth and synergy across diverse verticals.
         </p>
       </div>
       
@@ -275,10 +277,9 @@
       menu.classList.toggle('hidden');
     });
 
-    // 2. Footer Year
     document.getElementById('current-year').innerText = new Date().getFullYear();
 
-    // 3. Number Counters
+    // 2. Number Counters
     function animateCounters(targetId, targetValue) {
         const counter = document.getElementById(targetId);
         if(!counter || isNaN(targetValue)) {
@@ -299,53 +300,70 @@
         update();
     }
 
-    // 4. Supabase Integration (WITH DEBUGGING)
+    // 3. Smart Supabase Fetching (Automatically handles TNG_ prefix or missing tables)
     document.addEventListener("DOMContentLoaded", () => {
       const checkSupabase = setInterval(async () => {
         if (window.supabase) {
           clearInterval(checkSupabase); 
+          
+          // Ensure we use the base URL without /rest/v1/
           const supabaseUrl = 'https://hicowukbjsbpuebquqbh.supabase.co';
           const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0';
           const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-          console.log("Supabase Client Initialized. Attempting to fetch data...");
+          // Helper function for smart fetching
+          async function fetchWithFallback(tngTable, oldTable, isSingle = false, queryBuilder = null) {
+              let query = supabaseClient.from(tngTable).select('*');
+              if(queryBuilder) query = queryBuilder(query);
+              let { data, error } = isSingle ? await query.single() : await query;
+              
+              // If the TNG_ table doesn't exist, try the old table name automatically
+              if (error && (error.code === '42P01' || error.message.includes("does not exist"))) {
+                  console.warn(`[TNG Data Sync] ${tngTable} not found. Falling back to ${oldTable}...`);
+                  let fallbackQuery = supabaseClient.from(oldTable).select('*');
+                  if(queryBuilder) fallbackQuery = queryBuilder(fallbackQuery);
+                  return isSingle ? await fallbackQuery.single() : await fallbackQuery;
+              }
+              return { data, error };
+          }
 
           // Fetch Alert Banner
           try {
-            const { data, error } = await supabaseClient.from('TNG_announcements').select('*').eq('is_active', true).single();
-            if (error) console.error("Supabase Error [Announcements]:", error.message);
-            if (data) {
+            const { data, error } = await fetchWithFallback('TNG_announcements', 'announcements', true, q => q.eq('is_active', true));
+            if (data && !error) {
               const bar = document.getElementById('announcement-bar');
               bar.classList.remove('hidden');
               bar.innerHTML = data.link ? `<a href="${data.link}" class="hover:underline transition-colors block w-full py-1">${data.message}</a>` : data.message;
             }
-          } catch (err) { console.error("Catch Error [Announcements]:", err); }
+          } catch (err) {}
 
           // Fetch Stats
           try {
-            const { data: stats, error: statsError } = await supabaseClient.from('TNG_site_statistics').select('*').single();
-            if (statsError) console.error("Supabase Error [Stats]: Check RLS Policies!", statsError.message);
-            if (stats) {
+            const { data: stats, error: statsError } = await fetchWithFallback('TNG_site_statistics', 'site_statistics', true);
+            if (statsError) {
+              document.getElementById('metric-fund').innerText = 'Data Locked (RLS)';
+              console.error("Supabase Error [Stats]: Check RLS Policies in Supabase!", statsError.message);
+            } else if (stats) {
               animateCounters('metric-subs', stats.subsidiaries_count);
               animateCounters('metric-verts', stats.core_verticals);
-              document.getElementById('metric-fund').innerText = stats.funding_status;
+              document.getElementById('metric-fund').innerText = stats.funding_status || 'Secured';
             }
-          } catch (err) { console.error("Catch Error [Stats]:", err); }
+          } catch (err) {}
 
           // Fetch News
           try {
-            const { data: news, error: newsError } = await supabaseClient.from('TNG_news_releases').select('*').eq('is_active', true).order('created_at', { ascending: false }).limit(2);
-            if (newsError) console.error("Supabase Error [News]: Check RLS Policies!", newsError.message);
-            
+            const { data: news, error: newsError } = await fetchWithFallback('TNG_news_releases', 'news_releases', false, q => q.eq('is_active', true).order('created_at', { ascending: false }).limit(2));
             const newsContainer = document.getElementById('news-container');
             
-            if (newsError || !news || news.length === 0) {
-              document.getElementById('news-status').innerText = 'No recent updates available. (Check Supabase data/RLS)';
+            if (newsError) {
+                document.getElementById('news-status').innerHTML = `<span class="text-red-500 font-bold">Database Locked.</span><br>Please enable "Public Read Access" policy in your Supabase Dashboard.`;
+            } else if (!news || news.length === 0) {
+              document.getElementById('news-status').innerText = 'No recent updates available in the database.';
             } else {
               newsContainer.innerHTML = news.map((item, index) => {
                 const delay = index * 100;
                 return `
-                  <a href="${item.link || 'news/'}" class="block bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 p-8 border-l-4 border-l-tng-red transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="${delay}">
+                  <a href="${item.link || 'news/'}" class="block bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 p-8 border-l-4 border-l-tng-red transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="${delay}">
                     <p class="text-xs text-tng-red font-bold mb-3 tracking-wider uppercase">${item.category}</p>
                     <h3 class="text-xl font-bold text-tng-navy mb-3">${item.title}</h3>
                     <p class="text-gray-600 text-sm leading-relaxed">${item.snippet}</p>
@@ -353,17 +371,17 @@
                 `;
               }).join('');
             }
-          } catch (err) { console.error("Catch Error [News]:", err); }
+          } catch (err) {}
 
           // Fetch Jobs
           try {
-            const { data: jobs, error: jobsError } = await supabaseClient.from('TNG_job_postings').select('*').eq('is_active', true).order('created_at', { ascending: false }).limit(2);
-            if (jobsError) console.error("Supabase Error [Jobs]: Check RLS Policies!", jobsError.message);
-            
+            const { data: jobs, error: jobsError } = await fetchWithFallback('TNG_job_postings', 'job_postings', false, q => q.eq('is_active', true).order('created_at', { ascending: false }).limit(2));
             const jobsContainer = document.getElementById('jobs-container');
             
-            if (jobsError || !jobs || jobs.length === 0) {
-              document.getElementById('jobs-status').innerText = 'No open positions currently available. (Check Supabase data/RLS)';
+            if (jobsError) {
+                document.getElementById('jobs-status').innerHTML = `<span class="text-red-400 font-bold">Database Locked.</span><br>Please enable "Public Read Access" policy in your Supabase Dashboard.`;
+            } else if (!jobs || jobs.length === 0) {
+              document.getElementById('jobs-status').innerText = 'No open positions available in the database at this time.';
             } else {
               jobsContainer.innerHTML = jobs.map((job, index) => {
                 const delay = index * 100;
@@ -378,7 +396,7 @@
                 `;
               }).join('');
             }
-          } catch (err) { console.error("Catch Error [Jobs]:", err); }
+          } catch (err) {}
 
         }
       }, 100); 
