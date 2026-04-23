@@ -1,180 +1,283 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Accessibility Statement | Tyler Nicholas Group</title>
   <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
   
-  <style> body { opacity: 0; visibility: hidden; } </style>
-  <script> window.addEventListener('load', function() { document.body.style.transition = 'opacity 0.2s ease-in'; document.body.style.opacity = '1'; document.body.style.visibility = 'visible'; }); </script>
-
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="../style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'], },
+          colors: {
+            tng: { navy: '#001f3f', navyDark: '#001226', red: '#a6192e', }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { background-color: #f8fafc; }
+    .hero-bg {
+      background: linear-gradient(rgba(0, 31, 63, 0.9), rgba(0, 31, 63, 0.98)), url('https://static.vecteezy.com/system/resources/previews/015/274/044/non_2x/banner-web-template-abstract-black-curved-shapes-with-lighting-on-dark-background-vector.jpg') no-repeat center center;
+      background-size: cover; background-attachment: fixed;
+    }
+    .logo-white { filter: brightness(0) invert(1) opacity(0.9); transition: opacity 0.3s; }
+    .logo-white:hover { opacity: 1; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #001f3f; }
+  </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-900 flex flex-col min-h-screen" id="body">
+<body class="font-sans text-gray-900 flex flex-col min-h-screen">
 
-  <div id="announcement-bar" class="hidden bg-[#a6192e] text-white text-center py-2 text-sm md:text-base px-4 transition-all duration-300"></div>
-
-  <nav class="bg-[#001f3f] text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-md relative z-50">
-    <div class="font-bold text-xl tracking-wider uppercase">Tyler Nicholas Group</div>
-    <a href="../sitemap/" class="md:hidden bg-white text-[#001f3f] px-4 py-2 rounded text-sm font-bold shadow hover:bg-gray-200 transition-colors flex items-center">
-      <i class="fa-solid fa-list mr-2"></i> Menu
+  <nav class="bg-tng-navy/95 backdrop-blur-md text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-lg sticky top-0 z-40 border-b border-white/10">
+    <a href="/" class="flex items-center space-x-4">
+      <img src="https://i.ibb.co/1tcyLSRN/TNG-Logo.png" alt="TNG Logo" class="h-10">
+      <div class="font-bold text-xl tracking-wider uppercase hidden sm:block">Tyler Nicholas Group</div>
     </a>
-    <div class="hidden md:flex space-x-6 text-sm items-center">
-      <a href="../" class="hover:text-gray-300 transition-colors">Home</a>
-      <a href="../about/" class="hover:text-gray-300 transition-colors">About Us</a>
-      <a href="../companies/" class="hover:text-gray-300 transition-colors">Our Companies</a>
-      <a href="../people/" class="hover:text-gray-300 transition-colors">Our People</a>
-      <a href="../governance/" class="hover:text-gray-300 transition-colors">Governance</a>
-      <a href="../careers/" class="hover:text-gray-300 transition-colors">Careers</a>
+    
+    <button id="mobile-menu-btn" class="md:hidden text-white hover:text-tng-red transition-colors text-2xl">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="hidden md:flex space-x-8 text-sm items-center font-semibold tracking-wide">
+      <a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a>
+      
       <div class="relative group">
-        <button class="bg-white text-[#001f3f] px-4 py-2 rounded font-semibold hover:bg-gray-200 transition-colors flex items-center cursor-pointer border-b-2 border-[#a6192e] pb-1">
-          More <i class="fa-solid fa-chevron-down ml-2 text-[10px]"></i>
+        <button class="text-gray-300 hover:text-white transition-colors flex items-center py-2">
+          About Us <i class="fa-solid fa-chevron-down ml-2 text-[10px]"></i>
         </button>
-        <div class="absolute right-0 mt-2 w-56 bg-white text-gray-900 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden">
-          <a href="../contact/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b font-semibold">Contact & FAQ</a>
-          <a href="../news/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">News & Press Releases</a>
-          <a href="../trust-security/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Trust & Security</a>
-          <a href="../status/" class="block px-4 py-3 hover:bg-gray-100 text-sm border-b">Live System Status</a>
-          <a href="../alumni/" class="block px-4 py-3 hover:bg-gray-100 text-sm">Corporate Alumni Network</a>
+        <div class="absolute left-0 mt-1 w-48 bg-white text-tng-navy rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden transform origin-top group-hover:scale-100 scale-95">
+          <a href="/about/" class="block px-5 py-3 hover:bg-gray-50 border-b border-gray-100 transition-colors">Group Overview</a>
+          <a href="/leadership/" class="block px-5 py-3 hover:bg-gray-50 transition-colors">Our Leadership</a>
         </div>
       </div>
+
+      <a href="/companies/" class="text-gray-300 hover:text-white transition-colors">Our Companies</a>
+      <a href="https://careers.tylernicholasgroup.com" class="text-gray-300 hover:text-white transition-colors">Careers</a>
+      <a href="/news/" class="bg-tng-red text-white px-5 py-2 rounded-md hover:bg-red-800 transition-all shadow-md transform hover:-translate-y-0.5">News & Press</a>
     </div>
   </nav>
 
-  <div class="bg-[#001f3f] text-white py-16 px-6 md:px-12 border-b-4 border-[#a6192e] text-center md:text-left">
-    <div class="max-w-4xl mx-auto">
-      <h1 class="text-3xl md:text-5xl font-bold mb-4">Accessibility Statement</h1>
-      <p class="text-gray-300 text-sm md:text-base tracking-widest uppercase font-semibold">Current as of: March 2026 &bull; Tyler Nicholas Group LLC</p>
-    </div>
+  <div id="mobile-menu" class="hidden bg-tng-navyDark border-t border-white/10 px-6 py-6 flex flex-col space-y-4 text-white text-base font-medium md:hidden sticky top-[73px] z-30 shadow-2xl">
+    <a href="/" class="hover:text-gray-300">Home</a>
+    <a href="/about/" class="hover:text-gray-300">About Us</a>
+    <a href="/leadership/" class="hover:text-gray-300 pl-4 border-l-2 border-white/20 text-sm">Our Leadership</a>
+    <a href="/companies/" class="hover:text-gray-300">Our Companies</a>
+    <a href="https://careers.tylernicholasgroup.com" class="hover:text-gray-300">Careers</a>
+    <a href="/news/" class="hover:text-gray-300">News & Press</a>
   </div>
 
-  <main class="flex-grow w-full bg-white">
-    <div class="max-w-4xl mx-auto py-16 px-6 md:px-12 space-y-10 text-gray-700 leading-relaxed">
-      
-      <div>
-        <h2 class="text-2xl font-bold text-[#001f3f] mb-4">Our Commitment</h2>
-        <p class="text-lg">The Tyler Nicholas Group is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone and applying the relevant accessibility standards across our global web presence.</p>
+  <main class="flex-grow w-full flex flex-col items-center">
+    
+    <header class="hero-bg w-full py-24 flex items-center justify-center px-4 shadow-inner border-b-4 border-tng-red">
+      <div class="max-w-4xl text-center z-10" data-aos="fade-up">
+        <p class="text-tng-red font-bold tracking-widest uppercase mb-3 text-sm">Legal & Compliance</p>
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white uppercase drop-shadow-lg">
+          Accessibility Statement
+        </h1>
       </div>
+    </header>
 
-      <div>
-        <h3 class="text-xl font-bold text-[#001f3f] mb-4 border-b border-gray-200 pb-2">Conformance Status</h3>
-        <p>The Web Content Accessibility Guidelines (WCAG) defines requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA. The Tyler Nicholas Group Site is partially conformant with WCAG 2.1 level AA.</p>
-      </div>
+    <section class="w-full bg-white py-16 lg:py-24">
+        <div class="max-w-4xl mx-auto px-6 md:px-12">
+            
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 pb-6 border-b border-gray-200" data-aos="fade-up">
+                <div>
+                    <p class="text-sm text-gray-500 font-bold uppercase tracking-wider">Last Updated</p>
+                    <p class="text-lg text-tng-navy font-semibold">April 23, 2026</p>
+                </div>
+                <button onclick="downloadAccessibility()" class="mt-4 sm:mt-0 bg-white border-2 border-gray-200 text-tng-navy hover:border-tng-red hover:text-tng-red font-bold py-2.5 px-6 rounded-lg shadow-sm transition-all flex items-center text-sm uppercase tracking-wide group">
+                    <i class="fa-solid fa-download mr-3 group-hover:animate-bounce"></i> Download Statement (.txt)
+                </button>
+            </div>
 
-      <div>
-        <h3 class="text-xl font-bold text-[#001f3f] mb-4 border-b border-gray-200 pb-2">Feedback & Contact</h3>
-        <p class="mb-4">We welcome your feedback on the accessibility of the Tyler Nicholas Group website. Please let us know if you encounter accessibility barriers while navigating our corporate site or subsidiary platforms:</p>
-        <ul class="list-disc pl-6 space-y-2 text-sm md:text-base font-semibold">
-          <li>Email: <a href="mailto:tylernicholasgroup@gmail.com" class="text-[#a6192e] hover:underline">tylernicholasgroup@gmail.com</a></li>
-          <li>Phone: <a href="tel:+2482544788" class="text-[#a6192e] hover:underline">+248 2544788</a></li>
-          <li>Corporate Address: Mahe, Seychelles</li>
-        </ul>
-        <p class="mt-4">We try to respond to feedback within 5 business days.</p>
-      </div>
+            <article class="prose prose-lg max-w-none text-gray-600 font-light leading-relaxed space-y-8" data-aos="fade-up" data-aos-delay="100">
+                
+                <div>
+                    <h2 class="text-2xl font-bold text-tng-navy mb-4 tracking-tight">1. Our Commitment</h2>
+                    <p>
+                        The Tyler Nicholas Group ("TNG") is firmly committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone across our holding company platforms and subsidiary networks, and we actively apply the relevant accessibility standards to achieve this goal.
+                    </p>
+                    <p class="mt-4">
+                        We believe that the internet should be available and accessible to anyone, and we are committed to providing a website that is accessible to the widest possible audience, regardless of circumstance and ability.
+                    </p>
+                </div>
 
-      <div>
-        <h3 class="text-xl font-bold text-[#001f3f] mb-4 border-b border-gray-200 pb-2">Compatibility with Browsers and Assistive Technology</h3>
-        <p>The Tyler Nicholas Group website is designed to be compatible with the following assistive technologies:</p>
-        <ul class="list-disc pl-6 space-y-2 text-sm md:text-base">
-          <li>Modern web browsers (Chrome, Firefox, Safari, Edge) on current operating systems.</li>
-          <li>Standard screen readers utilized across Windows, macOS, and mobile environments.</li>
-        </ul>
-      </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-tng-navy mb-4 tracking-tight">2. Conformance Status</h2>
+                    <p>
+                        The Web Content Accessibility Guidelines (WCAG) define requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA. 
+                    </p>
+                    <p class="mt-4">
+                        The Tyler Nicholas Group corporate website is actively targeting partial conformance with WCAG 2.1 Level AA. We are currently auditing our backend UI frameworks, interactive data components, and executive portals to ensure they meet these rigorous standards.
+                    </p>
+                </div>
 
-      <div>
-        <h3 class="text-xl font-bold text-[#001f3f] mb-4 border-b border-gray-200 pb-2">Technical Specifications</h3>
-        <p>Accessibility of the Tyler Nicholas Group website relies on the following technologies to work with the particular combination of web browser and any assistive technologies or plugins installed on your computer:</p>
-        <ul class="list-disc pl-6 space-y-2 text-sm md:text-base">
-          <li>HTML</li>
-          <li>CSS</li>
-          <li>JavaScript</li>
-        </ul>
-      </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-tng-navy mb-4 tracking-tight">3. Accessibility Measures</h2>
+                    <p>TNG takes the following measures to ensure the accessibility of our digital infrastructure:</p>
+                    <ul class="list-disc pl-6 mt-4 space-y-2">
+                        <li><strong class="text-gray-800">Clear Navigation:</strong> Ensuring our digital architecture provides a consistent, predictable, and keyboard-navigable structure.</li>
+                        <li><strong class="text-gray-800">Visual Contrast:</strong> Utilizing high-contrast color palettes (such as TNG Navy and White) to improve readability for users with visual impairments.</li>
+                        <li><strong class="text-gray-800">Text Alternatives:</strong> Providing descriptive alt-text for corporate imagery and subsidiary portfolio logos.</li>
+                        <li><strong class="text-gray-800">Continuous Review:</strong> Integrating accessibility checks into our standard Web deployment protocols.</li>
+                    </ul>
+                </div>
 
-      <div class="bg-gray-50 rounded-xl p-8 border-l-4 border-[#a6192e] shadow-sm mt-12 flex flex-col md:flex-row justify-between items-center">
-        <div class="mb-6 md:mb-0">
-          <h4 class="text-xl font-bold text-[#001f3f] mb-2">Technical Accessibility Issues?</h4>
-          <p class="text-sm text-gray-600 max-w-lg">If you are a developer or user experiencing a specific technical barrier, please reach out to our IT Department.</p>
+                <div>
+                    <h2 class="text-2xl font-bold text-tng-navy mb-4 tracking-tight">4. Known Limitations</h2>
+                    <p>
+                        Despite our best efforts to ensure accessibility of the Tyler Nicholas Group website, there may be some limitations. Below is a description of known limitations. Please contact us if you observe an issue not listed below.
+                    </p>
+                    <ul class="list-disc pl-6 mt-4 space-y-2">
+                        <li><strong>Third-Party Integrations:</strong> Some of our subsidiary portals or external funding links may rely on third-party frameworks that we do not directly control. We cannot guarantee full WCAG compliance on external domains.</li>
+                        <li><strong>Archived Documents:</strong> Older PDF press releases or text documents may not yet be fully optimized for screen readers.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 mt-12">
+                    <h2 class="text-xl font-bold text-tng-navy mb-3">5. Feedback & Support</h2>
+                    <p class="mb-4">We welcome your feedback on the accessibility of the Tyler Nicholas Group website. If you encounter accessibility barriers on our digital platforms, please let us know immediately so our technical team can address the issue.</p>
+                    <p class="font-bold text-gray-800">Tyler Nicholas Group</p>
+                    <p>Digital Infrastructure Division</p>
+                    <p>Victoria, Mahé, Seychelles</p>
+                    <p class="mt-4 text-sm font-semibold text-tng-red hover:underline cursor-pointer"><a href="/contact/">Submit a formal accessibility inquiry via our Executive Helpdesk</a></p>
+                </div>
+
+            </article>
+
         </div>
-        <div class="flex-shrink-0">
-          <a href="../contact/it/" class="inline-block bg-[#001f3f] hover:bg-blue-900 text-white font-bold py-3 px-6 rounded transition-colors shadow">Contact IT Support</a>
-        </div>
-      </div>
+    </section>
 
-    </div>
   </main>
 
-  <footer class="bg-[#001f3f] text-white py-14 px-6 md:px-12 mt-auto border-t border-blue-900">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 items-start">
-      <div class="flex flex-col items-start lg:col-span-2">
-        <h3 class="font-bold text-xl mb-3 uppercase tracking-wider">Tyler Nicholas Group</h3>
-        <p class="text-sm text-gray-300 mb-5 max-w-md leading-relaxed">A global holding company headquartered in the Seychelles, driving strategic growth and synergy across diverse, high-potential digital and on-site verticals.</p>
-        <div class="inline-block bg-white text-[#001f3f] px-3 py-1.5 rounded text-sm font-semibold shadow-md mb-6">
-          Seychelles Local Time: <span id="seychelles-time">Loading...</span>
-        </div>
-        <a href="https://www.trustpilot.com/review/tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity drop-shadow-lg">
-          <img src="https://www.worcestershirefencing.co.uk/wp-content/uploads/2023/11/trustpilot-logo-snijpunt.1600x680x1.png" alt="Review Tyler Nicholas Group on Trustpilot" class="h-10 object-contain">
+  <footer class="bg-tng-navyDark text-white pt-20 pb-10 px-6 md:px-12 mt-auto border-t-[6px] border-tng-red">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 items-start mb-16">
+      
+      <div class="flex flex-col items-start lg:col-span-1">
+        <a href="/" class="block">
+            <img src="https://i.ibb.co/1tcyLSRN/TNG-Logo.png" alt="TNG Logo" class="h-12 mb-6">
         </a>
+        <p class="text-sm text-gray-400 mb-8 max-w-sm leading-relaxed font-medium">
+          A global holding company driving strategic growth and synergy across diverse verticals.
+        </p>
       </div>
-
-      <div class="flex flex-col space-y-3 text-sm">
-        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Corporate</h4>
-        <a href="../culture/" class="hover:text-gray-300 transition-colors">Core Values & Culture</a>
-        <a href="../diversity/" class="hover:text-gray-300 transition-colors">Diversity & Inclusion</a>
-        <a href="../sustainability/" class="hover:text-gray-300 transition-colors">Sustainability & ESG</a>
-        <a href="../our-thoughts/" class="hover:text-gray-300 transition-colors">Our Thoughts</a>
-        <a href="../partnerships/" class="hover:text-gray-300 transition-colors">Global Partnerships</a>
-        <a href="../media-kit/" class="hover:text-gray-300 transition-colors">Brand Guidelines</a>
+      
+      <div class="flex flex-col space-y-4 text-sm font-medium">
+        <h4 class="font-bold text-lg mb-2 text-white tracking-wide">Corporate</h4>
+        <a href="/about/" class="text-gray-400 hover:text-tng-red transition-colors">About Us</a>
+        <a href="/leadership/" class="text-gray-400 hover:text-tng-red transition-colors">Our Leadership</a>
+        <a href="/companies/" class="text-gray-400 hover:text-tng-red transition-colors">Our Companies</a>
+        <a href="https://careers.tylernicholasgroup.com" class="text-gray-400 hover:text-tng-red transition-colors">Careers</a>
       </div>
-
-      <div class="flex flex-col space-y-3 text-sm">
-        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Legal</h4>
-        <a href="../privacy/" class="hover:text-gray-300 transition-colors">Privacy Policy</a>
-        <a href="../terms/" class="hover:text-gray-300 transition-colors">Terms of Use</a>
-        <a href="../cookie-policy/" class="hover:text-gray-300 transition-colors">Cookie Policy</a>
-        <a href="#" class="text-white font-bold">Accessibility Statement</a>
-        <a href="../modern-slavery/" class="hover:text-gray-300 transition-colors">Modern Slavery Act</a>
-        <a href="../legal-status/" class="hover:text-gray-300 transition-colors">TNG Legal & Copyright</a>
+      
+      <div class="flex flex-col space-y-4 text-sm font-medium">
+        <h4 class="font-bold text-lg mb-2 text-white tracking-wide">Legal</h4>
+        <a href="/privacy/" class="text-gray-400 hover:text-tng-red transition-colors">Privacy Policy</a>
+        <a href="/terms/" class="text-gray-400 hover:text-tng-red transition-colors">Terms of Use</a>
+        <a href="/cookie-policy/" class="text-gray-400 hover:text-tng-red transition-colors">Cookie Policy</a>
+        <a href="/accessibility/" class="text-white hover:text-tng-red transition-colors font-bold">Accessibility Statement</a>
       </div>
-
-      <div class="flex flex-col space-y-3 text-sm">
-        <h4 class="font-bold text-lg mb-2 text-[#a6192e]">Connect</h4>
-        <a href="../contact/" class="hover:text-gray-300 transition-colors">Contact Us</a>
-        <a href="../sitemap/" class="hover:text-gray-300 transition-colors">Site Map</a>
-        <a href="https://tyler.tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="text-[#a6192e] font-bold hover:underline mt-2">Meet Tyler Nicholas →</a>
-        <div class="flex space-x-5 text-2xl text-[#00a8ff] mt-6 mb-2">
-          <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://x.com/tyler_n_group" target="_blank" class="social-icon hover:text-white transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+      
+      <div class="flex flex-col space-y-4 text-sm font-medium">
+        <h4 class="font-bold text-lg mb-2 text-white tracking-wide">Connect</h4>
+        <a href="/contact/" class="text-gray-400 hover:text-tng-red transition-colors">Contact Us</a>
+        <a href="https://www.trustpilot.com/review/tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="pt-2 block">
+          <img src="https://www.worcestershirefencing.co.uk/wp-content/uploads/2023/11/trustpilot-logo-snijpunt.1600x680x1.png" alt="Trustpilot" class="h-6 object-contain logo-white">
+        </a>
+        <div class="flex space-x-4 mt-4 pt-2">
+          <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#0A66C2] hover:scale-110 transition-all">
+            <i class="fa-brands fa-linkedin-in text-lg"></i>
+          </a>
+          <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#E1306C] hover:scale-110 transition-all">
+            <i class="fa-brands fa-instagram text-lg"></i>
+          </a>
+          <a href="https://x.com/tyler_n_group" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-black hover:scale-110 transition-all">
+            <i class="fa-brands fa-x-twitter text-lg"></i>
+          </a>
+          <a href="https://www.youtube.com/@TylerNicholasGroup" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#FF0000] hover:scale-110 transition-all">
+            <i class="fa-brands fa-youtube text-lg"></i>
+          </a>
+          <a href="https://www.facebook.com/tylernicholasgroup" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#1877F2] hover:scale-110 transition-all">
+            <i class="fa-brands fa-facebook-f text-lg"></i>
+          </a>
         </div>
-        <p class="text-xs text-gray-400 mt-2">&copy; 2026 Tyler Nicholas. All rights reserved.</p>
       </div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-medium">
+      <p>&copy; <span id="current-year"></span> Tyler Nicholas Group. All rights reserved.</p>
+      <a href="https://tyler.tylernicholasgroup.com" target="_blank" class="mt-4 md:mt-0 hover:text-white transition-colors">By Tyler Nicholas</a>
     </div>
   </footer>
 
-  <script>
-    function updateSeychellesTime() { const e = document.getElementById('seychelles-time'); if(e) e.innerText = new Date().toLocaleTimeString('en-US', { timeZone: 'Indian/Mahe', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }); }
-    setInterval(updateSeychellesTime, 1000); updateSeychellesTime();
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const checkSupabase = setInterval(async () => {
-        if (window.supabase) {
-          clearInterval(checkSupabase); 
-          const supabase = window.supabase.createClient('https://hicowukbjsbpuebquqbh.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpY293dWtianNicHVlYnF1cWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NzgyNzQsImV4cCI6MjA4NzU1NDI3NH0.sz7ZNU3-WcsskIaHC5Cjs_-WVmXLtYR15Iy8VGi8ch0');
-          try {
-            const { data, error } = await supabase.from('announcements').select('*').eq('is_active', true).single();
-            if (data && !error) {
-              const bar = document.getElementById('announcement-bar');
-              bar.classList.remove('hidden'); bar.innerHTML = data.link ? `<a href="${data.link}" class="hover:underline block w-full py-1">${data.message}</a>` : data.message;
-            }
-          } catch (err) {}
-        }
-      }, 100);
+  <script>
+    window.addEventListener('load', function() {
+      AOS.init({ duration: 800, once: true, offset: 40 });
     });
+
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+
+    document.getElementById('current-year').innerText = new Date().getFullYear();
+
+    function downloadAccessibility() {
+        const statementText = `TYLER NICHOLAS GROUP - ACCESSIBILITY STATEMENT
+Last Updated: April 23, 2026
+
+1. OUR COMMITMENT
+The Tyler Nicholas Group ("TNG") is firmly committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone across our holding company platforms and subsidiary networks.
+
+2. CONFORMANCE STATUS
+The Tyler Nicholas Group corporate website is actively targeting partial conformance with WCAG 2.1 Level AA. We are currently auditing our backend UI frameworks, interactive data components, and executive portals to ensure they meet these rigorous standards.
+
+3. ACCESSIBILITY MEASURES
+TNG takes the following measures to ensure accessibility:
+- Clear Navigation: Consistent and predictable keyboard-navigable structure.
+- Visual Contrast: High-contrast color palettes to improve readability.
+- Text Alternatives: Descriptive alt-text for corporate imagery.
+- Continuous Review: Integrating accessibility checks into deployment protocols.
+
+4. KNOWN LIMITATIONS
+- Third-Party Integrations: We cannot guarantee full WCAG compliance on external domains or subsidiary portals built on external frameworks.
+- Archived Documents: Older PDF files may not yet be fully optimized for screen readers.
+
+5. FEEDBACK & SUPPORT
+We welcome your feedback. If you encounter accessibility barriers on our digital platforms, please let us know immediately.
+
+Tyler Nicholas Group
+Digital Infrastructure Division
+Victoria, Mahé, Seychelles
+Submit a formal accessibility inquiry via our Executive Helpdesk at tylernicholasgroup.com/contact.`;
+        
+        const blob = new Blob([statementText], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "TNG_Accessibility_Statement_April_2026.txt";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
   </script>
 </body>
 </html>
