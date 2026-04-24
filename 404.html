@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 - Resource Not Found | Tyler Nicholas Group</title>
+  <title>Page Not Found | Tyler Nicholas Group</title>
   <link rel="icon" href="https://i.ibb.co/TDz4dgVp/TNG-Logo.png" />
   
   <script src="https://cdn.tailwindcss.com"></script>
@@ -28,63 +28,166 @@
   </script>
 
   <style>
-    body { background-color: #001226; color: white; overflow: hidden; }
-    .error-bg {
-      background: radial-gradient(circle at center, rgba(166, 25, 46, 0.15) 0%, rgba(0, 18, 38, 1) 70%);
+    body { background-color: #f8fafc; }
+    .hero-bg {
+      background: linear-gradient(rgba(0, 31, 63, 0.9), rgba(0, 31, 63, 0.95)), url('https://static.vecteezy.com/system/resources/previews/015/274/044/non_2x/banner-web-template-abstract-black-curved-shapes-with-lighting-on-dark-background-vector.jpg') no-repeat center center;
+      background-size: cover; background-attachment: fixed;
     }
-    .glitch {
-      font-size: 8rem;
-      font-weight: 800;
-      position: relative;
-      text-shadow: 0.05em 0 0 #a6192e, -0.05em -0.025em 0 #001f3f,
-        0.025em 0.05em 0 #a6192e;
-      animation: glitch 725ms infinite;
-    }
-    @keyframes glitch {
-      0% { text-shadow: 0.05em 0 0 #a6192e, -0.05em -0.025em 0 #001f3f, 0.025em 0.05em 0 #a6192e; }
-      14% { text-shadow: 0.05em 0 0 #a6192e, -0.05em -0.025em 0 #001f3f, 0.025em 0.05em 0 #a6192e; }
-      15% { text-shadow: -0.05em -0.025em 0 #a6192e, 0.025em 0.025em 0 #001f3f, -0.05em -0.05em 0 #a6192e; }
-      49% { text-shadow: -0.05em -0.025em 0 #a6192e, 0.025em 0.025em 0 #001f3f, -0.05em -0.05em 0 #a6192e; }
-      50% { text-shadow: 0.025em 0.05em 0 #a6192e, 0.05em 0 0 #001f3f, 0 -0.05em 0 #a6192e; }
-      99% { text-shadow: 0.025em 0.05em 0 #a6192e, 0.05em 0 0 #001f3f, 0 -0.05em 0 #a6192e; }
-      100% { text-shadow: -0.025em 0 0 #a6192e, -0.025em -0.025em 0 #001f3f, -0.025em -0.05em 0 #a6192e; }
-    }
+    .logo-white { filter: brightness(0) invert(1) opacity(0.9); transition: opacity 0.3s; }
+    .logo-white:hover { opacity: 1; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #001f3f; }
   </style>
 </head>
-<body class="font-sans min-h-screen flex items-center justify-center error-bg">
+<body class="font-sans text-gray-900 flex flex-col min-h-screen">
 
-  <div class="max-w-2xl text-center px-6" data-aos="zoom-in">
-    <div class="mb-8 inline-block">
-        <div class="w-20 h-20 bg-tng-red/20 rounded-full flex items-center justify-center text-tng-red text-4xl border border-tng-red/30 animate-pulse">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-        </div>
-    </div>
-
-    <h1 class="glitch leading-none mb-4">404</h1>
+  <nav class="bg-tng-navy/95 backdrop-blur-md text-white py-4 px-6 md:px-12 flex justify-between items-center shadow-lg sticky top-0 z-40 border-b border-white/10">
+    <a href="/" class="flex items-center space-x-4">
+      <img src="https://i.ibb.co/1tcyLSRN/TNG-Logo.png" alt="TNG Logo" class="h-10">
+      <div class="font-bold text-xl tracking-wider uppercase hidden sm:block">Tyler Nicholas Group</div>
+    </a>
     
-    <h2 class="text-2xl md:text-3xl font-bold mb-6 tracking-tight uppercase">Resource Not Found</h2>
-    <p class="text-gray-400 text-lg font-light leading-relaxed mb-12">
-        The requested URL or corporate asset does not exist within the Tyler Nicholas Group digital architecture. It may have been relocated or terminated.
-    </p>
+    <button id="mobile-menu-btn" class="md:hidden text-white hover:text-tng-red transition-colors text-2xl">
+      <i class="fa-solid fa-bars"></i>
+    </button>
 
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="/" class="w-full sm:w-auto bg-tng-red hover:bg-red-800 text-white font-bold py-4 px-10 rounded-lg shadow-lg transition-transform transform hover:-translate-y-1 text-sm uppercase tracking-widest flex items-center justify-center">
-            <i class="fa-solid fa-house mr-3"></i> Return to Command
-        </a>
-        <a href="/contact/" class="w-full sm:w-auto bg-white/5 border border-white/20 hover:bg-white/10 text-white font-bold py-4 px-10 rounded-lg transition-all text-sm uppercase tracking-widest flex items-center justify-center">
-            Report Issue
-        </a>
-    </div>
+    <div class="hidden md:flex space-x-8 text-sm items-center font-semibold tracking-wide">
+      <a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a>
+      
+      <div class="relative group">
+        <button class="text-gray-300 hover:text-white transition-colors flex items-center py-2">
+          About Us <i class="fa-solid fa-chevron-down ml-2 text-[10px]"></i>
+        </button>
+        <div class="absolute left-0 mt-1 w-48 bg-white text-tng-navy rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden transform origin-top group-hover:scale-100 scale-95">
+          <a href="/about/" class="block px-5 py-3 hover:bg-gray-50 border-b border-gray-100 transition-colors">Group Overview</a>
+          <a href="/leadership/" class="block px-5 py-3 hover:bg-gray-50 transition-colors">Our Leadership</a>
+        </div>
+      </div>
 
-    <div class="mt-24 pt-8 border-t border-white/5">
-        <img src="https://i.ibb.co/1tcyLSRN/TNG-Logo.png" alt="TNG Logo" class="h-8 mx-auto opacity-30 grayscale mb-4">
-        <p class="text-[10px] text-gray-600 font-bold uppercase tracking-[0.3em]">Tyler Nicholas Group Global Infrastructure</p>
+      <a href="/companies/" class="text-gray-300 hover:text-white transition-colors">Our Companies</a>
+      <a href="https://careers.tylernicholasgroup.com" class="text-gray-300 hover:text-white transition-colors">Careers</a>
+      <a href="/news/" class="bg-tng-red text-white px-5 py-2 rounded-md hover:bg-red-800 transition-all shadow-md transform hover:-translate-y-0.5">News & Press</a>
     </div>
+  </nav>
+
+  <div id="mobile-menu" class="hidden bg-tng-navyDark border-t border-white/10 px-6 py-6 flex flex-col space-y-4 text-white text-base font-medium md:hidden sticky top-[73px] z-30 shadow-2xl">
+    <a href="/" class="hover:text-gray-300">Home</a>
+    <a href="/about/" class="hover:text-gray-300">About Us</a>
+    <a href="/leadership/" class="hover:text-gray-300 pl-4 border-l-2 border-white/20 text-sm">Our Leadership</a>
+    <a href="/companies/" class="hover:text-gray-300">Our Companies</a>
+    <a href="https://careers.tylernicholasgroup.com" class="hover:text-gray-300">Careers</a>
+    <a href="/news/" class="hover:text-gray-300">News & Press</a>
   </div>
 
+  <main class="flex-grow w-full flex flex-col items-center">
+    
+    <header class="hero-bg w-full py-32 flex-grow flex items-center justify-center px-4 shadow-inner border-b-4 border-tng-red">
+      <div class="max-w-3xl text-center z-10" data-aos="fade-up">
+        
+        <div class="w-20 h-20 bg-tng-red/10 rounded-full flex items-center justify-center text-tng-red text-4xl border border-tng-red/20 mx-auto mb-8">
+            <i class="fa-solid fa-link-slash"></i>
+        </div>
+
+        <h1 class="text-7xl md:text-8xl font-extrabold mb-2 tracking-tight text-white drop-shadow-lg font-mono">
+          404
+        </h1>
+        <h2 class="text-2xl md:text-3xl font-bold mb-6 tracking-wide text-white uppercase border-b border-white/20 pb-6 inline-block">
+          Corporate Asset Not Found
+        </h2>
+        
+        <p class="text-lg text-gray-300 font-light max-w-xl mx-auto leading-relaxed mb-12">
+          The requested page or directory does not exist within the Tyler Nicholas Group infrastructure. It may have been relocated or securely archived.
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-5">
+            <a href="/" class="w-full sm:w-auto bg-tng-red hover:bg-red-800 text-white font-bold py-3.5 px-8 rounded-lg shadow-lg transition-transform transform hover:-translate-y-1 text-sm uppercase tracking-wider flex items-center justify-center">
+                <i class="fa-solid fa-house mr-3"></i> Return to Homepage
+            </a>
+            <a href="/contact/" class="w-full sm:w-auto bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white hover:text-tng-navy text-white font-bold py-3.5 px-8 rounded-lg transition-all text-sm uppercase tracking-wider flex items-center justify-center">
+                Contact Helpdesk
+            </a>
+        </div>
+
+      </div>
+    </header>
+
+  </main>
+
+  <footer class="bg-tng-navyDark text-white pt-20 pb-10 px-6 md:px-12 mt-auto border-t-[6px] border-tng-red">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 items-start mb-16">
+      
+      <div class="flex flex-col items-start lg:col-span-1">
+        <a href="/" class="block">
+            <img src="https://i.ibb.co/1tcyLSRN/TNG-Logo.png" alt="TNG Logo" class="h-12 mb-6">
+        </a>
+        <p class="text-sm text-gray-400 mb-8 max-w-sm leading-relaxed font-medium">
+          A global holding company driving strategic growth and synergy across diverse verticals.
+        </p>
+      </div>
+      
+      <div class="flex flex-col space-y-4 text-sm font-medium">
+        <h4 class="font-bold text-lg mb-2 text-white tracking-wide">Corporate</h4>
+        <a href="/about/" class="text-gray-400 hover:text-tng-red transition-colors">About Us</a>
+        <a href="/leadership/" class="text-gray-400 hover:text-tng-red transition-colors">Our Leadership</a>
+        <a href="/companies/" class="text-gray-400 hover:text-tng-red transition-colors">Our Companies</a>
+        <a href="https://careers.tylernicholasgroup.com" class="text-gray-400 hover:text-tng-red transition-colors">Careers</a>
+      </div>
+      
+      <div class="flex flex-col space-y-4 text-sm font-medium">
+        <h4 class="font-bold text-lg mb-2 text-white tracking-wide">Legal</h4>
+        <a href="/privacy/" class="text-gray-400 hover:text-tng-red transition-colors">Privacy Policy</a>
+        <a href="/terms/" class="text-gray-400 hover:text-tng-red transition-colors">Terms of Use</a>
+        <a href="/cookie-policy/" class="text-gray-400 hover:text-tng-red transition-colors">Cookie Policy</a>
+        <a href="/accessibility/" class="text-gray-400 hover:text-tng-red transition-colors">Accessibility Statement</a>
+      </div>
+      
+      <div class="flex flex-col space-y-4 text-sm font-medium">
+        <h4 class="font-bold text-lg mb-2 text-white tracking-wide">Connect</h4>
+        <a href="/contact/" class="text-gray-400 hover:text-tng-red transition-colors">Contact Us</a>
+        <a href="https://www.trustpilot.com/review/tylernicholasgroup.com" target="_blank" rel="noopener noreferrer" class="pt-2 block">
+          <img src="https://www.worcestershirefencing.co.uk/wp-content/uploads/2023/11/trustpilot-logo-snijpunt.1600x680x1.png" alt="Trustpilot" class="h-6 object-contain logo-white">
+        </a>
+        <div class="flex space-x-4 mt-4 pt-2">
+          <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#0A66C2] hover:scale-110 transition-all">
+            <i class="fa-brands fa-linkedin-in text-lg"></i>
+          </a>
+          <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#E1306C] hover:scale-110 transition-all">
+            <i class="fa-brands fa-instagram text-lg"></i>
+          </a>
+          <a href="https://x.com/tyler_n_group" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-black hover:scale-110 transition-all">
+            <i class="fa-brands fa-x-twitter text-lg"></i>
+          </a>
+          <a href="https://www.youtube.com/@TylerNicholasGroup" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#FF0000] hover:scale-110 transition-all">
+            <i class="fa-brands fa-youtube text-lg"></i>
+          </a>
+          <a href="https://www.facebook.com/tylernicholasgroup" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#1877F2] hover:scale-110 transition-all">
+            <i class="fa-brands fa-facebook-f text-lg"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-medium">
+      <p>&copy; <span id="current-year"></span> Tyler Nicholas Group. All rights reserved.</p>
+      <a href="https://tyler.tylernicholasgroup.com" target="_blank" class="mt-4 md:mt-0 hover:text-white transition-colors">By Tyler Nicholas</a>
+    </div>
+  </footer>
+
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
   <script>
-    AOS.init({ duration: 1000, once: true });
+    window.addEventListener('load', function() {
+      AOS.init({ duration: 800, once: true, offset: 40 });
+    });
+
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+
+    document.getElementById('current-year').innerText = new Date().getFullYear();
   </script>
 </body>
 </html>
