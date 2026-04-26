@@ -31,6 +31,7 @@
   <style>
     body { background-color: #f8fafc; }
     body.loading { overflow: hidden; height: 100vh; }
+    body.modal-open { overflow: hidden; }
     #loading-screen { transition: opacity 0.6s ease-out, visibility 0.6s; }
     .loader-spinner {
       border: 4px solid rgba(0, 31, 63, 0.1);
@@ -46,10 +47,29 @@
     }
     .logo-white { filter: brightness(0) invert(1) opacity(0.9); transition: opacity 0.3s; }
     .logo-white:hover { opacity: 1; }
+    
+    /* Custom Scrollbars */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #f1f5f9; }
     ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #001f3f; }
+    .custom-scroll::-webkit-scrollbar { width: 6px; }
+
+    /* Text Truncation */
+    .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+    /* Modal Transitions */
+    .modal-overlay { transition: opacity 0.3s ease, visibility 0.3s ease; }
+    .modal-content-slide { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .modal-content-fade { transition: opacity 0.3s ease, transform 0.3s ease; }
+    
+    .modal-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .modal-hidden .modal-content-slide { transform: translateX(100%); }
+    .modal-hidden .modal-content-fade { opacity: 0; transform: scale(0.95) translateY(10px); }
+    
+    .modal-visible { opacity: 1; visibility: visible; pointer-events: auto; }
+    .modal-visible .modal-content-slide { transform: translateX(0); }
+    .modal-visible .modal-content-fade { opacity: 1; transform: scale(1) translateY(0); }
   </style>
 </head>
 <body class="font-sans text-gray-900 flex flex-col min-h-screen loading">
@@ -108,7 +128,7 @@
       </div>
     </header>
 
-    <section class="w-full bg-gray-50 py-24">
+    <section class="w-full bg-gray-50 py-24 min-h-[600px]">
         <div class="max-w-7xl mx-auto px-6 md:px-12">
             
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b-2 border-gray-200 pb-4" data-aos="fade-right">
@@ -138,12 +158,8 @@
                     <h2 class="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight leading-tight">Launch Your Vision.<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-tng-red">Zero Upfront Capital.</span></h2>
                     
                     <div class="space-y-6 text-gray-300 text-lg font-light leading-relaxed mb-10">
-                        <p>
-                            At the Tyler Nicholas Group, we don't just acquire businesses—we build them. If you have the drive and the vision for a remote or on-site venture, we provide the ultimate launchpad.
-                        </p>
-                        <p>
-                            For <strong class="text-white font-bold">0 USD</strong>, we provide the backend infrastructure, legal framing, and executive mentorship you need to launch. You execute the vision, and in exchange, your business becomes an official subsidiary of TNG under a strategic equity-sharing partnership for a set duration.
-                        </p>
+                        <p>At the Tyler Nicholas Group, we don't just acquire businesses—we build them. If you have the drive and the vision for a remote or on-site venture, we provide the ultimate launchpad.</p>
+                        <p>For <strong class="text-white font-bold">0 USD</strong>, we provide the backend infrastructure, legal framing, and executive mentorship you need to launch. You execute the vision, and in exchange, your business becomes an official subsidiary of TNG under a strategic equity-sharing partnership for a set duration.</p>
                     </div>
 
                     <a href="/contact/" class="inline-block bg-tng-red hover:bg-red-800 text-white font-bold py-4 px-8 rounded-lg shadow-lg transition-transform transform hover:-translate-y-1 text-lg">
@@ -197,14 +213,9 @@
 
   <footer class="bg-tng-navyDark text-white pt-20 pb-10 px-6 md:px-12 mt-auto border-t-[6px] border-tng-red">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 items-start mb-16">
-      
       <div class="flex flex-col items-start lg:col-span-1">
-        <a href="/" class="block">
-            <img src="https://i.ibb.co/1tcyLSRN/TNG-Logo.png" alt="TNG Logo" class="h-12 mb-6">
-        </a>
-        <p class="text-sm text-gray-400 mb-8 max-w-sm leading-relaxed font-medium">
-          A global holding company driving strategic growth and synergy across diverse verticals.
-        </p>
+        <a href="/" class="block"><img src="https://i.ibb.co/1tcyLSRN/TNG-Logo.png" alt="TNG Logo" class="h-12 mb-6"></a>
+        <p class="text-sm text-gray-400 mb-8 max-w-sm leading-relaxed font-medium">A global holding company driving strategic growth and synergy across diverse verticals.</p>
       </div>
       
       <div class="flex flex-col space-y-4 text-sm font-medium">
@@ -230,35 +241,54 @@
           <img src="https://www.worcestershirefencing.co.uk/wp-content/uploads/2023/11/trustpilot-logo-snijpunt.1600x680x1.png" alt="Trustpilot" class="h-6 object-contain logo-white">
         </a>
         <div class="flex space-x-4 mt-4 pt-2">
-          <a href="https://www.linkedin.com/company/tylernicholas-group/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#0A66C2] hover:scale-110 transition-all">
-            <i class="fa-brands fa-linkedin-in text-lg"></i>
-          </a>
-          <a href="https://www.instagram.com/tylernicholasgroup/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#E1306C] hover:scale-110 transition-all">
-            <i class="fa-brands fa-instagram text-lg"></i>
-          </a>
-          <a href="https://x.com/tyler_n_group" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-black hover:scale-110 transition-all">
-            <i class="fa-brands fa-x-twitter text-lg"></i>
-          </a>
-          <a href="https://www.youtube.com/@TylerNicholasGroup" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#FF0000] hover:scale-110 transition-all">
-            <i class="fa-brands fa-youtube text-lg"></i>
-          </a>
-          <a href="https://www.facebook.com/tylernicholasgroup" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#1877F2] hover:scale-110 transition-all">
-            <i class="fa-brands fa-facebook-f text-lg"></i>
-          </a>
+          <a href="#" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#0A66C2] hover:scale-110 transition-all"><i class="fa-brands fa-linkedin-in text-lg"></i></a>
+          <a href="#" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-black hover:scale-110 transition-all"><i class="fa-brands fa-x-twitter text-lg"></i></a>
         </div>
       </div>
     </div>
     
     <div class="max-w-7xl mx-auto border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-medium">
       <p>&copy; <span id="current-year"></span> Tyler Nicholas Group. All rights reserved.</p>
-      <a href="https://tyler.tylernicholasgroup.com" target="_blank" class="mt-4 md:mt-0 hover:text-white transition-colors">By Tyler Nicholas</a>
     </div>
   </footer>
+
+
+  <div id="company-modal" class="fixed inset-0 z-[90000] bg-tng-navyDark/80 backdrop-blur-sm modal-overlay modal-hidden flex items-center justify-center p-4 sm:p-6">
+      <div class="modal-content-fade bg-white w-full max-w-2xl max-h-[90vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden relative">
+          
+          <div class="bg-gray-50 border-b border-gray-200 p-6 sm:p-8 flex-shrink-0 relative flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left">
+              <button onclick="closeCompanyModal()" class="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 bg-gray-200 hover:bg-gray-300 text-gray-600 rounded-full flex items-center justify-center transition-colors focus:outline-none">
+                  <i class="fa-solid fa-xmark text-lg"></i>
+              </button>
+              
+              <div id="modal-logo-container" class="w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center mb-4 sm:mb-0 sm:mr-6 flex-shrink-0 p-2">
+                  </div>
+
+              <div>
+                  <span id="modal-badge" class="inline-block bg-blue-50 text-tng-navy text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-2 border border-blue-100">Industry</span>
+                  <h2 id="modal-title" class="text-2xl sm:text-3xl font-extrabold text-tng-navy tracking-tight leading-tight">Company Name</h2>
+              </div>
+          </div>
+
+          <div class="flex-grow overflow-y-auto px-6 py-6 sm:px-8 sm:py-8 bg-white custom-scroll">
+              <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">Executive Overview</h3>
+              <div id="modal-description" class="prose prose-sm sm:prose-base max-w-none text-gray-700 font-light leading-relaxed whitespace-pre-wrap">
+                  Loading description...
+              </div>
+          </div>
+
+          <div class="bg-gray-50 border-t border-gray-200 p-6 flex-shrink-0 flex justify-end" id="modal-footer-action">
+              </div>
+      </div>
+  </div>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
   <script>
-    // Animations & Basics
+    // Global State for Subsidiaries
+    let allSubsList = [];
+
+    // System Basics & Animations
     window.addEventListener('load', function() {
       const loader = document.getElementById('loading-screen');
       if (loader) {
@@ -272,11 +302,48 @@
     });
 
     document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
+      document.getElementById('mobile-menu').classList.toggle('hidden');
     });
 
     document.getElementById('current-year').innerText = new Date().getFullYear();
+
+    // Modal Control Functions
+    function openCompanyModal(index) {
+        const sub = allSubsList[index];
+        if (!sub) return;
+
+        // Populate Modal Data
+        document.getElementById('modal-title').innerText = sub.company_name;
+        document.getElementById('modal-badge').innerText = sub.industry || 'Subsidiary';
+        document.getElementById('modal-description').innerText = sub.description || 'No detailed overview available.';
+        
+        const logoContainer = document.getElementById('modal-logo-container');
+        if (sub.logo_link) {
+            logoContainer.innerHTML = `<img src="${sub.logo_link}" alt="${sub.company_name}" class="max-h-full max-w-full object-contain">`;
+        } else {
+            logoContainer.innerHTML = `<i class="fa-solid fa-building text-gray-300 text-4xl"></i>`;
+        }
+
+        const footerAction = document.getElementById('modal-footer-action');
+        if (sub.website_url) {
+            footerAction.innerHTML = `<a href="${sub.website_url}" target="_blank" class="w-full sm:w-auto bg-tng-navy hover:bg-tng-navyDark text-white font-bold py-3.5 px-8 rounded-lg shadow-md transition-all uppercase tracking-wide text-sm flex justify-center items-center">Visit External Website <i class="fa-solid fa-arrow-up-right-from-square ml-3"></i></a>`;
+        } else {
+            footerAction.innerHTML = `<span class="w-full sm:w-auto bg-gray-200 text-gray-500 font-bold py-3.5 px-8 rounded-lg uppercase tracking-wide text-sm flex justify-center items-center cursor-not-allowed">Internal Operations</span>`;
+        }
+
+        // Display Modal
+        document.body.classList.add('modal-open');
+        const modal = document.getElementById('company-modal');
+        modal.classList.remove('modal-hidden');
+        modal.classList.add('modal-visible');
+    }
+
+    function closeCompanyModal() {
+        document.body.classList.remove('modal-open');
+        const modal = document.getElementById('company-modal');
+        modal.classList.remove('modal-visible');
+        modal.classList.add('modal-hidden');
+    }
 
     // Supabase Dynamic Fetch for Subsidiaries
     document.addEventListener("DOMContentLoaded", () => {
@@ -304,6 +371,8 @@
             } else if (!subs || subs.length === 0) {
               document.getElementById('portfolio-status').innerText = 'Portfolio data is currently being updated.';
             } else {
+              allSubsList = subs; // Store globally for the modal
+              
               gridContainer.innerHTML = subs.map((sub, index) => {
                 const delay = (index % 3) * 100;
                 
@@ -317,17 +386,15 @@
                     ? `<span class="inline-block bg-blue-50 text-tng-navy text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-4 border border-blue-100">${sub.industry}</span>` 
                     : '';
 
-                // Construct Link Button HTML
-                const linkButton = sub.website_url 
-                    ? `<a href="${sub.website_url}" target="_blank" class="mt-6 w-full text-center block border border-gray-200 hover:border-tng-red text-tng-navy hover:text-tng-red hover:bg-red-50 font-bold py-3 rounded transition-colors text-sm uppercase tracking-wide">Visit Website</a>`
-                    : `<span class="mt-6 w-full text-center block border border-gray-100 text-gray-400 font-bold py-3 rounded bg-gray-50 text-sm uppercase tracking-wide cursor-not-allowed">Internal Operations</span>`;
+                // Construct Link Button HTML (Now opens Modal)
+                const linkButton = `<button onclick="openCompanyModal(${index})" class="mt-6 w-full text-center block border-2 border-transparent hover:border-tng-red text-tng-red bg-red-50 hover:bg-tng-red hover:text-white font-bold py-3 rounded-lg transition-all text-sm uppercase tracking-wide">Read Overview</button>`;
 
                 return `
-                  <div class="bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 p-8 flex flex-col group h-full" data-aos="fade-up" data-aos-delay="${delay}">
+                  <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 p-8 flex flex-col group h-full" data-aos="fade-up" data-aos-delay="${delay}">
                     ${industryBadge}
                     ${logoHtml}
                     <h3 class="text-2xl font-extrabold text-tng-navy mb-3 text-center group-hover:text-tng-red transition-colors tracking-tight">${sub.company_name}</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed text-center flex-grow">${sub.description || 'A strategic subsidiary of the Tyler Nicholas Group.'}</p>
+                    <p class="text-gray-600 text-sm font-light leading-relaxed text-center line-clamp-3 flex-grow">${sub.description || 'A strategic subsidiary of the Tyler Nicholas Group.'}</p>
                     ${linkButton}
                   </div>
                 `;
