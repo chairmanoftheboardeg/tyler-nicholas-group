@@ -60,15 +60,12 @@
 
     /* Modal Transitions */
     .modal-overlay { transition: opacity 0.3s ease, visibility 0.3s ease; }
-    .modal-content-slide { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
     .modal-content-fade { transition: opacity 0.3s ease, transform 0.3s ease; }
     
     .modal-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-    .modal-hidden .modal-content-slide { transform: translateX(100%); }
     .modal-hidden .modal-content-fade { opacity: 0; transform: scale(0.95) translateY(10px); }
     
     .modal-visible { opacity: 1; visibility: visible; pointer-events: auto; }
-    .modal-visible .modal-content-slide { transform: translateX(0); }
     .modal-visible .modal-content-fade { opacity: 1; transform: scale(1) translateY(0); }
   </style>
 </head>
@@ -128,7 +125,7 @@
       </div>
     </header>
 
-    <section class="w-full bg-gray-50 py-24 min-h-[600px]">
+    <section class="w-full bg-[#f8fafc] py-24 min-h-[600px]">
         <div class="max-w-7xl mx-auto px-6 md:px-12">
             
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b-2 border-gray-200 pb-4" data-aos="fade-right">
@@ -252,32 +249,33 @@
     </div>
   </footer>
 
-
   <div id="company-modal" class="fixed inset-0 z-[90000] bg-tng-navyDark/80 backdrop-blur-sm modal-overlay modal-hidden flex items-center justify-center p-4 sm:p-6">
-      <div class="modal-content-fade bg-white w-full max-w-2xl max-h-[90vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden relative">
+      <div class="modal-content-fade bg-white w-full max-w-3xl rounded-3xl shadow-2xl flex flex-col relative">
           
-          <div class="bg-gray-50 border-b border-gray-200 p-6 sm:p-8 flex-shrink-0 relative flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left">
-              <button onclick="closeCompanyModal()" class="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 bg-gray-200 hover:bg-gray-300 text-gray-600 rounded-full flex items-center justify-center transition-colors focus:outline-none">
-                  <i class="fa-solid fa-xmark text-lg"></i>
-              </button>
-              
-              <div id="modal-logo-container" class="w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center mb-4 sm:mb-0 sm:mr-6 flex-shrink-0 p-2">
+          <button onclick="closeCompanyModal()" class="absolute top-6 right-6 w-10 h-10 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-full flex items-center justify-center transition-colors focus:outline-none z-10">
+              <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+          
+          <div class="p-10 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left">
+              <div id="modal-logo-container" class="w-28 h-28 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-6 sm:mb-0 sm:mr-8 flex-shrink-0 p-3">
                   </div>
 
-              <div>
-                  <span id="modal-badge" class="inline-block bg-blue-50 text-tng-navy text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-2 border border-blue-100">Industry</span>
-                  <h2 id="modal-title" class="text-2xl sm:text-3xl font-extrabold text-tng-navy tracking-tight leading-tight">Company Name</h2>
+              <div class="mt-2">
+                  <div id="modal-badge" class="inline-block bg-[#eff6ff] text-[#1e3a8a] text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-[0.15em] mb-4">
+                      INDUSTRY
+                  </div>
+                  <h2 id="modal-title" class="text-3xl sm:text-4xl font-extrabold text-tng-navy tracking-tight leading-tight">Company Name</h2>
               </div>
           </div>
 
-          <div class="flex-grow overflow-y-auto px-6 py-6 sm:px-8 sm:py-8 bg-white custom-scroll">
-              <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">Executive Overview</h3>
-              <div id="modal-description" class="prose prose-sm sm:prose-base max-w-none text-gray-700 font-light leading-relaxed whitespace-pre-wrap">
+          <div class="px-10 pb-6 border-t border-gray-100 pt-8">
+              <h3 class="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4">Executive Overview</h3>
+              <div id="modal-description" class="text-gray-600 font-light leading-relaxed whitespace-pre-wrap text-sm md:text-base">
                   Loading description...
               </div>
           </div>
 
-          <div class="bg-gray-50 border-t border-gray-200 p-6 flex-shrink-0 flex justify-end" id="modal-footer-action">
+          <div class="bg-gray-50 border-t border-gray-100 p-8 flex-shrink-0 flex justify-end rounded-b-3xl" id="modal-footer-action">
               </div>
       </div>
   </div>
@@ -285,10 +283,8 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
   <script>
-    // Global State for Subsidiaries
     let allSubsList = [];
 
-    // System Basics & Animations
     window.addEventListener('load', function() {
       const loader = document.getElementById('loading-screen');
       if (loader) {
@@ -312,7 +308,6 @@
         const sub = allSubsList[index];
         if (!sub) return;
 
-        // Populate Modal Data
         document.getElementById('modal-title').innerText = sub.company_name;
         document.getElementById('modal-badge').innerText = sub.industry || 'Subsidiary';
         document.getElementById('modal-description').innerText = sub.description || 'No detailed overview available.';
@@ -326,12 +321,11 @@
 
         const footerAction = document.getElementById('modal-footer-action');
         if (sub.website_url) {
-            footerAction.innerHTML = `<a href="${sub.website_url}" target="_blank" class="w-full sm:w-auto bg-tng-navy hover:bg-tng-navyDark text-white font-bold py-3.5 px-8 rounded-lg shadow-md transition-all uppercase tracking-wide text-sm flex justify-center items-center">Visit External Website <i class="fa-solid fa-arrow-up-right-from-square ml-3"></i></a>`;
+            footerAction.innerHTML = `<a href="${sub.website_url}" target="_blank" class="bg-tng-navy hover:bg-blue-900 text-white font-bold py-3.5 px-8 rounded-xl shadow-md transition-all uppercase tracking-[0.1em] text-[11px] flex justify-center items-center">Visit External Website <i class="fa-solid fa-arrow-up-right-from-square ml-3"></i></a>`;
         } else {
-            footerAction.innerHTML = `<span class="w-full sm:w-auto bg-gray-200 text-gray-500 font-bold py-3.5 px-8 rounded-lg uppercase tracking-wide text-sm flex justify-center items-center cursor-not-allowed">Internal Operations</span>`;
+            footerAction.innerHTML = `<span class="bg-gray-200 text-gray-500 font-bold py-3.5 px-8 rounded-xl uppercase tracking-[0.1em] text-[11px] flex justify-center items-center cursor-not-allowed">Internal Operations</span>`;
         }
 
-        // Display Modal
         document.body.classList.add('modal-open');
         const modal = document.getElementById('company-modal');
         modal.classList.remove('modal-hidden');
@@ -345,6 +339,11 @@
         modal.classList.add('modal-hidden');
     }
 
+    // Close modal if clicking outside the white box
+    document.getElementById('company-modal').addEventListener('click', function(e) {
+      if(e.target === this) { closeCompanyModal(); }
+    });
+
     // Supabase Dynamic Fetch for Subsidiaries
     document.addEventListener("DOMContentLoaded", () => {
       const checkSupabase = setInterval(async () => {
@@ -356,7 +355,6 @@
           const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
           try {
-            // Fetch all active subsidiaries
             const { data: subs, error: subsError } = await supabaseClient
                 .from('tng_subsidiaries')
                 .select('*')
@@ -371,31 +369,37 @@
             } else if (!subs || subs.length === 0) {
               document.getElementById('portfolio-status').innerText = 'Portfolio data is currently being updated.';
             } else {
-              allSubsList = subs; // Store globally for the modal
+              allSubsList = subs; 
               
               gridContainer.innerHTML = subs.map((sub, index) => {
                 const delay = (index % 3) * 100;
                 
-                // Construct Logo HTML
-                const logoHtml = sub.logo_link 
-                  ? `<div class="h-16 flex items-center justify-center mb-6"><img src="${sub.logo_link}" alt="${sub.company_name}" class="max-h-full max-w-full object-contain"></div>` 
-                  : `<div class="h-16 w-16 bg-gray-50 rounded-full flex items-center justify-center mb-6 border border-gray-100 mx-auto"><i class="fa-solid fa-building text-gray-300 text-2xl"></i></div>`;
+                const imgSrc = sub.logo_link || 'https://i.ibb.co/TDz4dgVp/TNG-Logo.png';
                 
-                // Construct Industry Badge HTML
-                const industryBadge = sub.industry 
-                    ? `<span class="inline-block bg-blue-50 text-tng-navy text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-4 border border-blue-100">${sub.industry}</span>` 
-                    : '';
-
-                // NEW: Sleek, corporate outlined button
-                const linkButton = `<button onclick="openCompanyModal(${index})" class="mt-6 w-full text-center block border border-gray-300 text-tng-navy hover:border-tng-navy hover:bg-tng-navy hover:text-white font-bold py-3 rounded-lg shadow-sm transition-all text-xs uppercase tracking-widest">Read Overview</button>`;
-
+                // Matches the exact requested screenshot UI
                 return `
-                  <div class="bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 p-8 flex flex-col group h-full" data-aos="fade-up" data-aos-delay="${delay}">
-                    ${industryBadge}
-                    ${logoHtml}
-                    <h3 class="text-2xl font-extrabold text-tng-navy mb-3 text-center group-hover:text-tng-red transition-colors tracking-tight">${sub.company_name}</h3>
-                    <p class="text-gray-600 text-sm font-light leading-relaxed text-center line-clamp-3 flex-grow">${sub.description || 'A strategic subsidiary of the Tyler Nicholas Group.'}</p>
-                    ${linkButton}
+                  <div class="bg-white rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-gray-100 p-8 flex flex-col items-center hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.1)] transition-all duration-300 h-full" data-aos="fade-up" data-aos-delay="${delay}">
+                    
+                    <div class="w-full flex justify-start">
+                        <span class="bg-[#eff6ff] text-[#1e3a8a] text-[10px] font-extrabold px-4 py-1.5 rounded-full uppercase tracking-[0.15em] mb-6 block w-full text-left">
+                            ${sub.industry || 'COMPANY'}
+                        </span>
+                    </div>
+                    
+                    <div class="h-20 flex items-center justify-center mb-6">
+                        <img src="${imgSrc}" alt="${sub.company_name}" class="max-h-full max-w-full object-contain">
+                    </div>
+                    
+                    <h3 class="text-2xl font-extrabold text-tng-navy mb-4 tracking-tight text-center">${sub.company_name}</h3>
+                    
+                    <p class="text-gray-500 text-sm leading-relaxed text-center mb-8 line-clamp-3 flex-grow">
+                      ${sub.description || 'A strategic subsidiary of the Tyler Nicholas Group.'}
+                    </p>
+                    
+                    <button onclick="openCompanyModal(${index})" class="mt-auto w-full border border-gray-200 rounded-xl py-3.5 text-[11px] font-bold tracking-[0.2em] text-tng-navy hover:bg-gray-50 hover:border-gray-300 transition-colors uppercase block text-center">
+                      Read Overview
+                    </button>
+                    
                   </div>
                 `;
               }).join('');
